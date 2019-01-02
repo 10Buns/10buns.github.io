@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="default">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-Spring-Security-Oauth2-入门" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/02/Spring-Security-Oauth2-入门/" class="article-date">
+  <time datetime="2019-01-02T03:35:29.000Z" itemprop="datePublished">2019-01-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/02/Spring-Security-Oauth2-入门/">Spring Security Oauth2 入门</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>当我们提供对外的<code>HTTP</code>服务时，需要有一套机制来保证服务的安全。此时可以选择使用<code>aouth2</code>作为一种方案。</p>
+<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>使用<code>Spring Security Oauth2</code>主要包含三个步骤:</p>
+<ol>
+<li>配置 <code>Security</code></li>
+<li>配置认证服务器</li>
+<li>配置资源服务器</li>
+</ol>
+<p><code>oauth2</code>提供了四种模式来应对不同的使用场景:</p>
+<ul>
+<li>授权码模式（Authorization Code） </li>
+<li>授权码简化模式（Implicit） </li>
+<li>密码模式（Resource Owner Password Credentials） </li>
+<li>客户端模式（Client Credentials） </li>
+<li>扩展模式（Extension）</li>
+</ul>
+<p>不论哪种模式，都是通过从认证服务器获取<code>Access Token</code>，以用来访问资源服务器。<br>而申请<code>Access Token</code>，需要提交相应信息。例如<code>Client_ID(我是谁)</code>，<code>response_type</code>或<code>grant_typt</code>(申请哪种模式)，<code>scope</code>(申请哪些权限，由授权服务器定义)，<code>redirect_uri</code>(申请结果跳转至哪儿)等。</p>
+<h2 id="客户端模式"><a href="#客户端模式" class="headerlink" title="客户端模式"></a>客户端模式</h2><p><img src="https://github.com/10Buns/pictureForMarkDown/raw/master/%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%A8%A1%E5%BC%8F.png" alt="客户端模式"><br>该模式并不是对个体用户授权，而是被授权的主体为client</p>
+<h2 id="密码模式"><a href="#密码模式" class="headerlink" title="密码模式"></a>密码模式</h2><p><img src="https://github.com/10Buns/pictureForMarkDown/raw/master/%E5%AF%86%E7%A0%81%E6%A8%A1%E5%BC%8F.png" alt="密码模式"></p>
+<blockquote>
+<p>需要用户将自身的<code>account id</code> 和<code>password</code>交由<code>client</code>，<code>client</code>将使用它们来申请<code>access token</code>，整个过程会将用户信息暴露。除非<code>client</code>十分可靠(例如自有应用)，否则不推荐使用。</p>
+</blockquote>
+<h2 id="授权码模式"><a href="#授权码模式" class="headerlink" title="授权码模式"></a>授权码模式</h2><p><img src="https://github.com/10Buns/pictureForMarkDown/raw/master/%E6%8E%88%E6%9D%83%E7%A0%81%E6%A8%A1%E5%BC%8F.png" alt="授权码模式"></p>
+<p>流程:</p>
+<ol>
+<li>网站向用户展示，支持QQ、微信、支付宝等第三方式登录。用户选择其中一种，例如QQ，则跳转至QQ界面（User-Agent），通常为WEB界面。此时，若用户未登录，则要求用户登录，若已登录，则询问是否授权，以及展示授权后会获得哪些权限。 </li>
+<li>用户点击授权，触发申请。 </li>
+<li>假设授权通过，QQ认证服务器将用户导向网站事先指定的”重定向URI”（redirection URI），同时附上一个Authorization Code。 </li>
+<li>网站收到授权码，附上之前的”重定向URI”，向认证服务器申请Access Token。这一步是在网站的后台的服务器上完成的，对用户不可见。 </li>
+<li>认证服务器核对了授权码和重定向URI，确认无误后，向网站发送访问令牌（access token）和更新令牌（refresh token)</li>
+</ol>
+<h2 id="授权码简化模式"><a href="#授权码简化模式" class="headerlink" title="授权码简化模式"></a>授权码简化模式</h2><p>在授权码模式中<code>authorization code</code>和<code>access token</code>都由授权服务器生成和验证，但只使用了<code>access token</code>，使得<code>authorization code</code>多余。因此在授权码简化模式，舍弃<code>authorization code</code>，直接通过<code>user-agent</code>直接申请<code>access token</code></p>
+<h2 id="扩展模式"><a href="#扩展模式" class="headerlink" title="扩展模式"></a>扩展模式</h2><p>是一种自定义模式，规范中仅对<code>grant type</code>参数提出了必须是<code>URI</code>的要求，对于其他申请数据，可以自行定义。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/01/02/Spring-Security-Oauth2-入门/" data-id="cjqes8nss0000hconqa71zw5e" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/01/02/Spring-Security-Oauth2-入门/">Spring Security Oauth2 入门</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
