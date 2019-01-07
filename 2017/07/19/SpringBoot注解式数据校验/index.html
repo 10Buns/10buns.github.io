@@ -79,21 +79,17 @@
 
 
 
-<meta name="description" content="前言当我们提供对外的HTTP服务时，需要有一套机制来保证服务的安全。此时可以选择使用aouth2作为一种方案。 概述使用Spring Security Oauth2主要包含三个步骤:  配置 Security 配置认证服务器 配置资源服务器  oauth2提供了四种模式来应对不同的使用场景:  授权码模式（Authorization Code）  授权码简化模式（Implicit）  密码模式（R">
+<meta name="description" content="本文将介绍如何在Controller的方法里面，利用注解 ( @NotEmpty @Pattern @Size…等)，对基本类型的数据进行校验。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Spring Security Oauth2 入门">
-<meta property="og:url" content="http://10buns.com/2019/01/02/Spring-Security-Oauth2-入门/index.html">
+<meta property="og:title" content="SpringBoot注解式数据校验">
+<meta property="og:url" content="http://10buns.com/2017/07/19/SpringBoot注解式数据校验/index.html">
 <meta property="og:site_name" content="10buns">
-<meta property="og:description" content="前言当我们提供对外的HTTP服务时，需要有一套机制来保证服务的安全。此时可以选择使用aouth2作为一种方案。 概述使用Spring Security Oauth2主要包含三个步骤:  配置 Security 配置认证服务器 配置资源服务器  oauth2提供了四种模式来应对不同的使用场景:  授权码模式（Authorization Code）  授权码简化模式（Implicit）  密码模式（R">
+<meta property="og:description" content="本文将介绍如何在Controller的方法里面，利用注解 ( @NotEmpty @Pattern @Size…等)，对基本类型的数据进行校验。">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://github.com/10Buns/pictureForMarkDown/raw/master/%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%A8%A1%E5%BC%8F.png">
-<meta property="og:image" content="https://github.com/10Buns/pictureForMarkDown/raw/master/%E5%AF%86%E7%A0%81%E6%A8%A1%E5%BC%8F.png">
-<meta property="og:image" content="https://github.com/10Buns/pictureForMarkDown/raw/master/%E6%8E%88%E6%9D%83%E7%A0%81%E6%A8%A1%E5%BC%8F.png">
-<meta property="og:updated_time" content="2019-01-02T06:02:54.153Z">
+<meta property="og:updated_time" content="2018-02-11T06:40:19.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Spring Security Oauth2 入门">
-<meta name="twitter:description" content="前言当我们提供对外的HTTP服务时，需要有一套机制来保证服务的安全。此时可以选择使用aouth2作为一种方案。 概述使用Spring Security Oauth2主要包含三个步骤:  配置 Security 配置认证服务器 配置资源服务器  oauth2提供了四种模式来应对不同的使用场景:  授权码模式（Authorization Code）  授权码简化模式（Implicit）  密码模式（R">
-<meta name="twitter:image" content="https://github.com/10Buns/pictureForMarkDown/raw/master/%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%A8%A1%E5%BC%8F.png">
+<meta name="twitter:title" content="SpringBoot注解式数据校验">
+<meta name="twitter:description" content="本文将介绍如何在Controller的方法里面，利用注解 ( @NotEmpty @Pattern @Size…等)，对基本类型的数据进行校验。">
 
 
 
@@ -123,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://10buns.com/2019/01/02/Spring-Security-Oauth2-入门/">
+  <link rel="canonical" href="http://10buns.com/2017/07/19/SpringBoot注解式数据校验/">
 
 
 
 
 
-  <title>Spring Security Oauth2 入门 | 10buns</title>
+  <title>SpringBoot注解式数据校验 | 10buns</title>
   
 
 
@@ -256,7 +252,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://10buns.com/2019/01/02/Spring-Security-Oauth2-入门/">
+    <link itemprop="mainEntityOfPage" href="http://10buns.com/2017/07/19/SpringBoot注解式数据校验/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="10buns">
@@ -273,7 +269,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Spring Security Oauth2 入门</h1>
+          <h1 class="post-title" itemprop="name headline">SpringBoot注解式数据校验</h1>
         
 
         <div class="post-meta">
@@ -285,8 +281,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-02T11:35:29+08:00">
-                2019-01-02
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-19T00:09:16+08:00">
+                2017-07-19
               </time>
             
 
@@ -295,6 +291,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/spring-boot/" itemprop="url" rel="index">
+                    <span itemprop="name">spring boot</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -323,38 +341,11 @@
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>当我们提供对外的<code>HTTP</code>服务时，需要有一套机制来保证服务的安全。此时可以选择使用<code>aouth2</code>作为一种方案。</p>
-<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>使用<code>Spring Security Oauth2</code>主要包含三个步骤:</p>
-<ol>
-<li>配置 <code>Security</code></li>
-<li>配置认证服务器</li>
-<li>配置资源服务器</li>
-</ol>
-<p><code>oauth2</code>提供了四种模式来应对不同的使用场景:</p>
-<ul>
-<li>授权码模式（Authorization Code） </li>
-<li>授权码简化模式（Implicit） </li>
-<li>密码模式（Resource Owner Password Credentials） </li>
-<li>客户端模式（Client Credentials） </li>
-<li>扩展模式（Extension）</li>
-</ul>
-<p>不论哪种模式，都是通过从认证服务器获取<code>Access Token</code>，以用来访问资源服务器。<br>而申请<code>Access Token</code>，需要提交相应信息。例如<code>Client_ID(我是谁)</code>，<code>response_type</code>或<code>grant_typt</code>(申请哪种模式)，<code>scope</code>(申请哪些权限，由授权服务器定义)，<code>redirect_uri</code>(申请结果跳转至哪儿)等。</p>
-<h2 id="客户端模式"><a href="#客户端模式" class="headerlink" title="客户端模式"></a>客户端模式</h2><p><img src="https://github.com/10Buns/pictureForMarkDown/raw/master/%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%A8%A1%E5%BC%8F.png" alt="客户端模式"><br>该模式并不是对个体用户授权，而是被授权的主体为client</p>
-<h2 id="密码模式"><a href="#密码模式" class="headerlink" title="密码模式"></a>密码模式</h2><p><img src="https://github.com/10Buns/pictureForMarkDown/raw/master/%E5%AF%86%E7%A0%81%E6%A8%A1%E5%BC%8F.png" alt="密码模式"></p>
-<blockquote>
-<p>需要用户将自身的<code>account id</code> 和<code>password</code>交由<code>client</code>，<code>client</code>将使用它们来申请<code>access token</code>，整个过程会将用户信息暴露。除非<code>client</code>十分可靠(例如自有应用)，否则不推荐使用。</p>
+        <blockquote>
+<p>本文将介绍如何在<code>Controller</code>的方法里面，利用注解 ( @NotEmpty @Pattern @Size…等)，对基本类型的数据进行校验。<br><a id="more"></a></p>
 </blockquote>
-<h2 id="授权码模式"><a href="#授权码模式" class="headerlink" title="授权码模式"></a>授权码模式</h2><p><img src="https://github.com/10Buns/pictureForMarkDown/raw/master/%E6%8E%88%E6%9D%83%E7%A0%81%E6%A8%A1%E5%BC%8F.png" alt="授权码模式"></p>
-<p>流程:</p>
-<ol>
-<li>网站向用户展示，支持QQ、微信、支付宝等第三方式登录。用户选择其中一种，例如QQ，则跳转至QQ界面（User-Agent），通常为WEB界面。此时，若用户未登录，则要求用户登录，若已登录，则询问是否授权，以及展示授权后会获得哪些权限。 </li>
-<li>用户点击授权，触发申请。 </li>
-<li>假设授权通过，QQ认证服务器将用户导向网站事先指定的”重定向URI”（redirection URI），同时附上一个Authorization Code。 </li>
-<li>网站收到授权码，附上之前的”重定向URI”，向认证服务器申请Access Token。这一步是在网站的后台的服务器上完成的，对用户不可见。 </li>
-<li>认证服务器核对了授权码和重定向URI，确认无误后，向网站发送访问令牌（access token）和更新令牌（refresh token)</li>
-</ol>
-<h2 id="授权码简化模式"><a href="#授权码简化模式" class="headerlink" title="授权码简化模式"></a>授权码简化模式</h2><p>在授权码模式中<code>authorization code</code>和<code>access token</code>都由授权服务器生成和验证，但只使用了<code>access token</code>，使得<code>authorization code</code>多余。因此在授权码简化模式，舍弃<code>authorization code</code>，直接通过<code>user-agent</code>直接申请<code>access token</code></p>
-<h2 id="扩展模式"><a href="#扩展模式" class="headerlink" title="扩展模式"></a>扩展模式</h2><p>是一种自定义模式，规范中仅对<code>grant type</code>参数提出了必须是<code>URI</code>的要求，对于其他申请数据，可以自行定义。</p>
+<h3 id="常用注解"><a href="#常用注解" class="headerlink" title="常用注解"></a>常用注解</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">@Null   被注释的元素必须为 null    </span><br><span class="line">@NotNull    被注释的元素必须不为 null    </span><br><span class="line">@AssertTrue     被注释的元素必须为 true    </span><br><span class="line">@AssertFalse    被注释的元素必须为 false    </span><br><span class="line">@Min(value)     被注释的元素必须是一个数字，其值必须大于等于指定的最小值    </span><br><span class="line">@Max(value)     被注释的元素必须是一个数字，其值必须小于等于指定的最大值    </span><br><span class="line">@DecimalMin(value)  被注释的元素必须是一个数字，其值必须大于等于指定的最小值    </span><br><span class="line">@DecimalMax(value)  被注释的元素必须是一个数字，其值必须小于等于指定的最大值    </span><br><span class="line">@Size(max=, min=)   被注释的元素的大小必须在指定的范围内    </span><br><span class="line">@Digits (integer, fraction)     被注释的元素必须是一个数字，其值必须在可接受的范围内    </span><br><span class="line">@Past   被注释的元素必须是一个过去的日期    </span><br><span class="line">@Future     被注释的元素必须是一个将来的日期    </span><br><span class="line">@Pattern(regex=,flag=)  被注释的元素必须符合指定的正则表达式</span><br><span class="line">@NotBlank(message =)   验证字符串非null，且长度必须大于0    </span><br><span class="line">@Email  被注释的元素必须是电子邮箱地址    </span><br><span class="line">@Length(min=,max=)  被注释的字符串的大小必须在指定的范围内    </span><br><span class="line">@NotEmpty   被注释的字符串的必须非空    </span><br><span class="line">@Range(min=,max=,message=)  被注释的元素必须在合适的范围内</span><br></pre></td></tr></table></figure>
+<h3 id="自定义正则"><a href="#自定义正则" class="headerlink" title="自定义正则"></a>自定义正则</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 纯数字</span><br><span class="line"> */</span><br><span class="line">public static final String REGEX_NUMBER = &quot;^\\d&#123;1,30&#125;$&quot;;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 正则表达式：验证验证码</span><br><span class="line"> */</span><br><span class="line">public static final String REGEX_CODE = &quot;^[a-zA-Z0-9]&#123;4,8&#125;$&quot;;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 正则表达式：验证手机号</span><br><span class="line"> */</span><br><span class="line">public static final String REGEX_MOBILE = &quot;^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d&#123;8&#125;$&quot;;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 正则表达式：验证邮箱</span><br><span class="line"> */</span><br><span class="line">public static final String REGEX_EMAIL = &quot;^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]&#123;2,&#125;$&quot;;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 正则表达式：验证身份证</span><br><span class="line"> */</span><br><span class="line">public static final String REGEX_ID_CARD = &quot;(^[1-9]\\d&#123;5&#125;(18|19|([23]\\d))\\d&#123;2&#125;((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\\d&#123;3&#125;[0-9Xx]$)|(^\\d&#123;15&#125;$)&quot;;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 正则表达式：验证URL</span><br><span class="line"> */</span><br><span class="line">public static final String REGEX_URL = &quot;http(s)?://([\\w-]+\\.)+[\\w-]+(/[\\w- ./?%&amp;=]*)?&quot;;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 正则表达式：验证IP地址</span><br><span class="line"> */</span><br><span class="line">public static final String REGEX_IP_ADDR = &quot;(25[0-5]|2[0-4]\\d|[0-1]\\d&#123;2&#125;|[1-9]?\\d)&quot;;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -379,8 +370,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/09/01/浅说java集合框架/" rel="next" title="浅说java集合框架">
-                <i class="fa fa-chevron-left"></i> 浅说java集合框架
+              <a href="/2017/06/20/Git使用问题及解决/" rel="next" title="Git使用问题及解决">
+                <i class="fa fa-chevron-left"></i> Git使用问题及解决
               </a>
             
           </div>
@@ -389,8 +380,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/01/03/Docker-安装-Redis-Mysql-portainer/" rel="prev" title="Docker 安装 Redis&Mysql&portainer">
-                Docker 安装 Redis&Mysql&portainer <i class="fa fa-chevron-right"></i>
+              <a href="/2017/12/25/java 程序执行顺序/" rel="prev" title="java 程序执行顺序">
+                java 程序执行顺序 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -523,7 +514,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#概述"><span class="nav-number">2.</span> <span class="nav-text">概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#客户端模式"><span class="nav-number">2.1.</span> <span class="nav-text">客户端模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#密码模式"><span class="nav-number">2.2.</span> <span class="nav-text">密码模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#授权码模式"><span class="nav-number">2.3.</span> <span class="nav-text">授权码模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#授权码简化模式"><span class="nav-number">2.4.</span> <span class="nav-text">授权码简化模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#扩展模式"><span class="nav-number">2.5.</span> <span class="nav-text">扩展模式</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#常用注解"><span class="nav-number">1.</span> <span class="nav-text">常用注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义正则"><span class="nav-number">2.</span> <span class="nav-text">自定义正则</span></a></li></ol></div>
             
 
           </div>

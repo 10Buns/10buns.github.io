@@ -79,21 +79,19 @@
 
 
 
-<meta name="description" content="前言当我们提供对外的HTTP服务时，需要有一套机制来保证服务的安全。此时可以选择使用aouth2作为一种方案。 概述使用Spring Security Oauth2主要包含三个步骤:  配置 Security 配置认证服务器 配置资源服务器  oauth2提供了四种模式来应对不同的使用场景:  授权码模式（Authorization Code）  授权码简化模式（Implicit）  密码模式（R">
+<meta name="description" content="Spring 配置文件中关于事务配置总是由三个组成部分，分别是 DataSource 、TransactionManager 和代理机制这三部分，无论哪种配置方式，一般变化的只是代理机制这部分 。  Spring 声明式事务让我们从复杂的事务处理中得到解脱 。使得无需要去处理获得连接、关闭连接、事务提交和回滚等这些操作 ，更不需要在与事务相关的方法中处理大量的 try…catch…finall">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Spring Security Oauth2 入门">
-<meta property="og:url" content="http://10buns.com/2019/01/02/Spring-Security-Oauth2-入门/index.html">
+<meta property="og:title" content="Spring事务配置">
+<meta property="og:url" content="http://10buns.com/2018/07/18/Spring事务配置/index.html">
 <meta property="og:site_name" content="10buns">
-<meta property="og:description" content="前言当我们提供对外的HTTP服务时，需要有一套机制来保证服务的安全。此时可以选择使用aouth2作为一种方案。 概述使用Spring Security Oauth2主要包含三个步骤:  配置 Security 配置认证服务器 配置资源服务器  oauth2提供了四种模式来应对不同的使用场景:  授权码模式（Authorization Code）  授权码简化模式（Implicit）  密码模式（R">
+<meta property="og:description" content="Spring 配置文件中关于事务配置总是由三个组成部分，分别是 DataSource 、TransactionManager 和代理机制这三部分，无论哪种配置方式，一般变化的只是代理机制这部分 。  Spring 声明式事务让我们从复杂的事务处理中得到解脱 。使得无需要去处理获得连接、关闭连接、事务提交和回滚等这些操作 ，更不需要在与事务相关的方法中处理大量的 try…catch…finall">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://github.com/10Buns/pictureForMarkDown/raw/master/%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%A8%A1%E5%BC%8F.png">
-<meta property="og:image" content="https://github.com/10Buns/pictureForMarkDown/raw/master/%E5%AF%86%E7%A0%81%E6%A8%A1%E5%BC%8F.png">
-<meta property="og:image" content="https://github.com/10Buns/pictureForMarkDown/raw/master/%E6%8E%88%E6%9D%83%E7%A0%81%E6%A8%A1%E5%BC%8F.png">
-<meta property="og:updated_time" content="2019-01-02T06:02:54.153Z">
+<meta property="og:image" content="http://olt1b0ecs.bkt.clouddn.com/Spring 事务配置-1.png">
+<meta property="og:updated_time" content="2018-07-18T09:04:09.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Spring Security Oauth2 入门">
-<meta name="twitter:description" content="前言当我们提供对外的HTTP服务时，需要有一套机制来保证服务的安全。此时可以选择使用aouth2作为一种方案。 概述使用Spring Security Oauth2主要包含三个步骤:  配置 Security 配置认证服务器 配置资源服务器  oauth2提供了四种模式来应对不同的使用场景:  授权码模式（Authorization Code）  授权码简化模式（Implicit）  密码模式（R">
-<meta name="twitter:image" content="https://github.com/10Buns/pictureForMarkDown/raw/master/%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%A8%A1%E5%BC%8F.png">
+<meta name="twitter:title" content="Spring事务配置">
+<meta name="twitter:description" content="Spring 配置文件中关于事务配置总是由三个组成部分，分别是 DataSource 、TransactionManager 和代理机制这三部分，无论哪种配置方式，一般变化的只是代理机制这部分 。  Spring 声明式事务让我们从复杂的事务处理中得到解脱 。使得无需要去处理获得连接、关闭连接、事务提交和回滚等这些操作 ，更不需要在与事务相关的方法中处理大量的 try…catch…finall">
+<meta name="twitter:image" content="http://olt1b0ecs.bkt.clouddn.com/Spring 事务配置-1.png">
 
 
 
@@ -123,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://10buns.com/2019/01/02/Spring-Security-Oauth2-入门/">
+  <link rel="canonical" href="http://10buns.com/2018/07/18/Spring事务配置/">
 
 
 
 
 
-  <title>Spring Security Oauth2 入门 | 10buns</title>
+  <title>Spring事务配置 | 10buns</title>
   
 
 
@@ -256,7 +254,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://10buns.com/2019/01/02/Spring-Security-Oauth2-入门/">
+    <link itemprop="mainEntityOfPage" href="http://10buns.com/2018/07/18/Spring事务配置/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="10buns">
@@ -273,7 +271,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Spring Security Oauth2 入门</h1>
+          <h1 class="post-title" itemprop="name headline">Spring事务配置</h1>
         
 
         <div class="post-meta">
@@ -285,8 +283,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-02T11:35:29+08:00">
-                2019-01-02
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-18T15:49:53+08:00">
+                2018-07-18
               </time>
             
 
@@ -323,38 +321,47 @@
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>当我们提供对外的<code>HTTP</code>服务时，需要有一套机制来保证服务的安全。此时可以选择使用<code>aouth2</code>作为一种方案。</p>
-<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>使用<code>Spring Security Oauth2</code>主要包含三个步骤:</p>
-<ol>
-<li>配置 <code>Security</code></li>
-<li>配置认证服务器</li>
-<li>配置资源服务器</li>
-</ol>
-<p><code>oauth2</code>提供了四种模式来应对不同的使用场景:</p>
-<ul>
-<li>授权码模式（Authorization Code） </li>
-<li>授权码简化模式（Implicit） </li>
-<li>密码模式（Resource Owner Password Credentials） </li>
-<li>客户端模式（Client Credentials） </li>
-<li>扩展模式（Extension）</li>
-</ul>
-<p>不论哪种模式，都是通过从认证服务器获取<code>Access Token</code>，以用来访问资源服务器。<br>而申请<code>Access Token</code>，需要提交相应信息。例如<code>Client_ID(我是谁)</code>，<code>response_type</code>或<code>grant_typt</code>(申请哪种模式)，<code>scope</code>(申请哪些权限，由授权服务器定义)，<code>redirect_uri</code>(申请结果跳转至哪儿)等。</p>
-<h2 id="客户端模式"><a href="#客户端模式" class="headerlink" title="客户端模式"></a>客户端模式</h2><p><img src="https://github.com/10Buns/pictureForMarkDown/raw/master/%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%A8%A1%E5%BC%8F.png" alt="客户端模式"><br>该模式并不是对个体用户授权，而是被授权的主体为client</p>
-<h2 id="密码模式"><a href="#密码模式" class="headerlink" title="密码模式"></a>密码模式</h2><p><img src="https://github.com/10Buns/pictureForMarkDown/raw/master/%E5%AF%86%E7%A0%81%E6%A8%A1%E5%BC%8F.png" alt="密码模式"></p>
+        <p><img src="http://olt1b0ecs.bkt.clouddn.com/Spring 事务配置-1.png" alt="Spring 事务配置"></p>
 <blockquote>
-<p>需要用户将自身的<code>account id</code> 和<code>password</code>交由<code>client</code>，<code>client</code>将使用它们来申请<code>access token</code>，整个过程会将用户信息暴露。除非<code>client</code>十分可靠(例如自有应用)，否则不推荐使用。</p>
+<p>Spring 配置文件中关于事务配置总是由三个组成部分，分别是 DataSource 、TransactionManager 和代理机制这三部分，无论哪种配置方式，一般变化的只是代理机制这部分 。</p>
 </blockquote>
-<h2 id="授权码模式"><a href="#授权码模式" class="headerlink" title="授权码模式"></a>授权码模式</h2><p><img src="https://github.com/10Buns/pictureForMarkDown/raw/master/%E6%8E%88%E6%9D%83%E7%A0%81%E6%A8%A1%E5%BC%8F.png" alt="授权码模式"></p>
-<p>流程:</p>
-<ol>
-<li>网站向用户展示，支持QQ、微信、支付宝等第三方式登录。用户选择其中一种，例如QQ，则跳转至QQ界面（User-Agent），通常为WEB界面。此时，若用户未登录，则要求用户登录，若已登录，则询问是否授权，以及展示授权后会获得哪些权限。 </li>
-<li>用户点击授权，触发申请。 </li>
-<li>假设授权通过，QQ认证服务器将用户导向网站事先指定的”重定向URI”（redirection URI），同时附上一个Authorization Code。 </li>
-<li>网站收到授权码，附上之前的”重定向URI”，向认证服务器申请Access Token。这一步是在网站的后台的服务器上完成的，对用户不可见。 </li>
-<li>认证服务器核对了授权码和重定向URI，确认无误后，向网站发送访问令牌（access token）和更新令牌（refresh token)</li>
-</ol>
-<h2 id="授权码简化模式"><a href="#授权码简化模式" class="headerlink" title="授权码简化模式"></a>授权码简化模式</h2><p>在授权码模式中<code>authorization code</code>和<code>access token</code>都由授权服务器生成和验证，但只使用了<code>access token</code>，使得<code>authorization code</code>多余。因此在授权码简化模式，舍弃<code>authorization code</code>，直接通过<code>user-agent</code>直接申请<code>access token</code></p>
-<h2 id="扩展模式"><a href="#扩展模式" class="headerlink" title="扩展模式"></a>扩展模式</h2><p>是一种自定义模式，规范中仅对<code>grant type</code>参数提出了必须是<code>URI</code>的要求，对于其他申请数据，可以自行定义。</p>
+<p>Spring 声明式事务让我们从复杂的事务处理中得到解脱 。使得无需要去处理获得连接、关闭连接、事务提交和回滚等这些操作 ，更不需要在与事务相关的方法中处理大量的 try…catch…finally 代码 。 </p>
+<p>在使用 Spring 声明式事务时 ，有一个非常重要的概念就是事务属性 。事务属性通常由事务的传播行为 、事务的隔离级别 、事务的超时值和事务只读标志组成 。在进行事务划分时 ，需要进行事务定义 ，也就是配置事务的属性 。 </p>
+<p>Spring 在 TransactionDefinition 接口中定义这些属性 ，以供PlatformTransactionManager 使用 ， PlatformTransactionManager 是 spring 事务管理的核心接口 。</p>
+<p><strong>PlatformTransactionManager接口定义如下：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public interface PlatformTransactionManager &#123;  </span><br><span class="line">    TransactionStatus getTransaction(TransactionDefinition definition) throws TransactionException;  </span><br><span class="line">    void commit(TransactionStatus status) throws TransactionException;  </span><br><span class="line">    void rollback(TransactionStatus status) throws TransactionException;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>getTransaction(): 返回一个已经激活的事务或创建一个新的事务（根据给定的 TransactionDefinition 类型参数定义的事务属性），返回的是 TransactionStatus 对象代表了当前事务的状态，其中该方法抛出 TransactionException（未检查异常）表示事务由于某种原因失败。</li>
+<li>commit(): 用于提交 TransactionStatus 参数代表的事务</li>
+<li>rollback(): 用于回滚 TransactionStatus 参数代表的事务</li>
+</ul>
+</blockquote>
+<p><strong>TransactionDefinition接口定义如下：</strong></p>
+<pre><code>public interface TransactionDefinition {  
+    int getPropagationBehavior();  
+    int getIsolationLevel();  
+    int getTimeout();  
+    boolean isReadOnly();  
+}  
+</code></pre><blockquote>
+<ul>
+<li>getPropagationBehavior(): 返回定义的事务传播行为</li>
+<li>getIsolationLevel(): 返回定义的事务隔离级别</li>
+<li>getTimeout(): 返回定义的事务超时时间</li>
+<li>isReadOnly(): 返回定义的事务是否是只读的</li>
+<li>getName(): 返回定义的事务名字</li>
+</ul>
+</blockquote>
+<p>在TransactionDefinition接口中定义了五个不同的事务隔离级别:</p>
+<p><strong>ISOLATION_DEFAULT</strong> 这是一个 PlatformTransactionManager 默认的隔离级别 ，使用数据库默认的事务隔离级别 。另外四个与JDBC的隔离级别相对应<br><strong>ISOLATION_READ_UNCOMMITTED</strong> 这是事务最低的隔离级别 ，它充许别外一个事务可以看到这个事务未提交的数据 。这种隔离级别会产生脏读 ，不可重复读和幻像读</p>
+<blockquote>
+<p>举个例子 ，别人通过支付宝转账 1W , 但未提交事务 。 此时我们查询支付宝余额 ，看到账户多了 1W 很开心 。这时支付宝发现转账账号错了回滚事务 ，此时余额变为 0 。这个读取的 1W 就是产生的脏数据</p>
+</blockquote>
+<p><strong>ISOLATION_READ_COMMITTED</strong> 保证一个事务修改的数据提交后才能被另外一个事务读取 。另外一个事务不能读取该事务未提交的数据。这种事务隔离级别可以避免脏读出现，但是可能会出现不可重复读和幻像读</p>
+<blockquote>
+</blockquote>
+<p><strong>ISOLATION_REPEATABLE_READ</strong>  这种事务隔离级别可以防止脏读，不可重复读。但是可能出现幻像读。它除了保证一个事务不能读取另一个事务未提交的数据外，还保证了避免下面的情况产生(不可重复读)<br><strong>ISOLATION_SERIALIZABLE</strong> 这是花费最高代价但是最可靠的事务隔离级别。事务被处理为顺序执行。除了防止脏读，不可重复读外，还避免了幻像读</p>
 
       
     </div>
@@ -379,8 +386,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/09/01/浅说java集合框架/" rel="next" title="浅说java集合框架">
-                <i class="fa fa-chevron-left"></i> 浅说java集合框架
+              <a href="/2018/07/18/SpringMVC请求处理流程/" rel="next" title="SpringMVC请求处理流程">
+                <i class="fa fa-chevron-left"></i> SpringMVC请求处理流程
               </a>
             
           </div>
@@ -389,8 +396,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/01/03/Docker-安装-Redis-Mysql-portainer/" rel="prev" title="Docker 安装 Redis&Mysql&portainer">
-                Docker 安装 Redis&Mysql&portainer <i class="fa fa-chevron-right"></i>
+              <a href="/2018/08/07/什么是响应式编程/" rel="prev" title="【 浅析 Spring WebFlux 】什么是响应式编程 ( 一 )">
+                【 浅析 Spring WebFlux 】什么是响应式编程 ( 一 ) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -443,17 +450,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -513,22 +511,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#概述"><span class="nav-number">2.</span> <span class="nav-text">概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#客户端模式"><span class="nav-number">2.1.</span> <span class="nav-text">客户端模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#密码模式"><span class="nav-number">2.2.</span> <span class="nav-text">密码模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#授权码模式"><span class="nav-number">2.3.</span> <span class="nav-text">授权码模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#授权码简化模式"><span class="nav-number">2.4.</span> <span class="nav-text">授权码简化模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#扩展模式"><span class="nav-number">2.5.</span> <span class="nav-text">扩展模式</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
