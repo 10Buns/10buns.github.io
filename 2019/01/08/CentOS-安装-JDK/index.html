@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="上传 jdk 压缩包  1$ scp ~/Downloads/jdk-8u191-linux-x64.tar.gz root@ip:/var/local  服务器操作  1234$ tar -zxvf jdk-8u152-linux-x64.tar.gz # 在/etc/profile.d/路径下新建一个文件，名为java.sh$ touch java.sh $ vim java.sh 内容如下">
+<meta name="description" content="上传 jdk 压缩包  1$ scp ~/Downloads/jdk-8u191-linux-x64.tar.gz root@ip:/var/local  服务器操作  1234$ tar -zxvf jdk-8u152-linux-x64.tar.gz # 在/etc/profile.d/路径下新建一个文件，名为java.sh$ touch java.sh $ vim java.sh  内容如">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CentOS 安装 JDK">
 <meta property="og:url" content="http://10buns.com/2019/01/08/CentOS-安装-JDK/index.html">
 <meta property="og:site_name" content="10buns">
-<meta property="og:description" content="上传 jdk 压缩包  1$ scp ~/Downloads/jdk-8u191-linux-x64.tar.gz root@ip:/var/local  服务器操作  1234$ tar -zxvf jdk-8u152-linux-x64.tar.gz # 在/etc/profile.d/路径下新建一个文件，名为java.sh$ touch java.sh $ vim java.sh 内容如下">
+<meta property="og:description" content="上传 jdk 压缩包  1$ scp ~/Downloads/jdk-8u191-linux-x64.tar.gz root@ip:/var/local  服务器操作  1234$ tar -zxvf jdk-8u152-linux-x64.tar.gz # 在/etc/profile.d/路径下新建一个文件，名为java.sh$ touch java.sh $ vim java.sh  内容如">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-01-08T14:21:02.059Z">
+<meta property="og:updated_time" content="2019-01-08T14:23:36.736Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CentOS 安装 JDK">
-<meta name="twitter:description" content="上传 jdk 压缩包  1$ scp ~/Downloads/jdk-8u191-linux-x64.tar.gz root@ip:/var/local  服务器操作  1234$ tar -zxvf jdk-8u152-linux-x64.tar.gz # 在/etc/profile.d/路径下新建一个文件，名为java.sh$ touch java.sh $ vim java.sh 内容如下">
+<meta name="twitter:description" content="上传 jdk 压缩包  1$ scp ~/Downloads/jdk-8u191-linux-x64.tar.gz root@ip:/var/local  服务器操作  1234$ tar -zxvf jdk-8u152-linux-x64.tar.gz # 在/etc/profile.d/路径下新建一个文件，名为java.sh$ touch java.sh $ vim java.sh  内容如">
 
 
 
@@ -327,9 +327,13 @@
 <li>服务器操作</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ tar -zxvf jdk-8u152-linux-x64.tar.gz </span><br><span class="line"># 在/etc/profile.d/路径下新建一个文件，名为java.sh</span><br><span class="line">$ touch java.sh </span><br><span class="line">$ vim java.sh</span><br></pre></td></tr></table></figure>
+<blockquote>
 <p>内容如下</p>
+</blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">JAVA_HOME=/usr/java/jdk1.8.0_102/</span><br><span class="line">PATH=$JAVA_HOME/bin:$PATH</span><br><span class="line">export PATH JAVA_HOME</span><br><span class="line">export CLASSPATH=.</span><br></pre></td></tr></table></figure>
-<p>保存并刷新</p>
+<ul>
+<li>保存并刷新</li>
+</ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ chmod +x /etc/profile.d/java.sh</span><br><span class="line">$ source /etc/profile.d/java.sh</span><br><span class="line">$ java -version</span><br></pre></td></tr></table></figure>
 
       
