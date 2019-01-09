@@ -252,6 +252,126 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://10buns.com/2019/01/09/解决-ignored-tracked-with-git/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="10buns">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="10buns">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/09/解决-ignored-tracked-with-git/" itemprop="url">解决 .ignored tracked with git</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-09T15:07:02+08:00">
+                2019-01-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git rm -r --cached . </span><br><span class="line">$ git add .</span><br><span class="line">$ git commit -am &quot;Remove ignored files&quot;</span><br><span class="line">$ git push -u origin master</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://10buns.com/2019/01/08/CentOS-安装-JDK/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1577,145 +1697,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://10buns.com/2018/06/29/Swagger聚合微服务的API接口文档/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="10buns">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="10buns">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/29/Swagger聚合微服务的API接口文档/" itemprop="url">Swagger聚合微服务的API接口文档</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-29T16:55:07+08:00">
-                2018-06-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>团队中大量使用 Swagger 为项目中的接口生成 API 文档，但这些 API 文档都分散在各个微服务中，是否可以通过聚合这些 API 文档在一起呢？<br>在阅读 Swagger 源码后, 发现可以通过 SwaggerResourcesProvider 接口实现添加多个资源文档来源</p>
-</blockquote>
-<h2 id="0x01-基础环境搭建"><a href="#0x01-基础环境搭建" class="headerlink" title="0x01 基础环境搭建"></a>0x01 基础环境搭建</h2><ul>
-<li>第一步 构建注册中心、测试服务、zuul 网关</li>
-</ul>
-<p><img src="http://olt1b0ecs.bkt.clouddn.com/屏幕快照 2018-06-29 22.06.06.png" alt="项目结构"></p>
-<blockquote>
-<p>discovery 注册中心<br>gaetway zuul 网关<br>ms-product 测试服务<br>ms-user 测试服务</p>
-</blockquote>
-<ul>
-<li>第二步 完善服务</li>
-</ul>
-<p><img src="http://olt1b0ecs.bkt.clouddn.com/屏幕快照 2018-06-29 22.08.30.png" alt="测试服务接口"></p>
-<p><img src="http://olt1b0ecs.bkt.clouddn.com/屏幕快照 2018-06-29 22.08.37.png" alt="测试服务 swagger 配置"></p>
-<h2 id="0x02-zuul-网关整合-Swagger"><a href="#0x02-zuul-网关整合-Swagger" class="headerlink" title="0x02 zuul 网关整合 Swagger"></a>0x02 zuul 网关整合 Swagger</h2><p>核心是对 <code>SwaggerResourcesProvider</code> 的接口实现，通过<code>SwaggerResource</code> 添加多个文档来源。网关上 Swagger 会通过访问 <code>/ms-product/v2/api-docs</code> 和 <code>ms-user/v2/api-docs</code> 来加载两个文档内容，这两个请求会转发到 <code>ms-product</code> 和 <code>ms-user</code> 服务上的 <code>/v2/api-docs</code> 接口获得到 Swagger 的 JSON 文档，来达到文档聚合目的。</p>
-<p><img src="http://olt1b0ecs.bkt.clouddn.com/屏幕快照 2018-06-29 22.11.31.png" alt="重写接口实现"></p>
-<h2 id="0x03-测试"><a href="#0x03-测试" class="headerlink" title="0x03 测试"></a>0x03 测试</h2><p>将微服务、网关以及注册中心启动之后，访问 zuul 的 Swagger 页面<code>http://localhost:9090/swagger-ui.html</code>，可以看到下图内容</p>
-<p><img src="http://olt1b0ecs.bkt.clouddn.com/屏幕快照 2018-06-29 21.51.25.png" alt="swagger"></p>
-<p><img src="http://olt1b0ecs.bkt.clouddn.com/屏幕快照 2018-06-29 21.51.38.png" alt="eureka"></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1766,7 +1747,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
