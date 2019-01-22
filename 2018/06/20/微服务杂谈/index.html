@@ -1,0 +1,26 @@
+<!DOCTYPE html><html><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 微服务杂谈 · 10buns</title><meta name="description" content="微服务杂谈 - 10buns"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://10buns.com/atom.xml" title="10buns"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/sunchongsheng" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/pinggod" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">微服务杂谈</h1><div class="post-info">Jun 20, 2018</div><div class="post-content"><h3 id="微服务与分布式"><a href="#微服务与分布式" class="headerlink" title="微服务与分布式"></a>微服务与分布式</h3><blockquote>
+<p>微服务目前这么火，很多的文章拿它和分布式系统比较，但其实之间还是有很多的相同点</p>
+</blockquote>
+<ul>
+<li>相同点<ol>
+<li>都需要来实现动态的服务注册发现机制</li>
+<li>都需要考虑分布式下面的事务一致性，CAP原则下两段式提交不能保证性能，还需要考虑事务补偿机制</li>
+<li>如何保证消息可靠性</li>
+<li>都需要统一的网关来聚合、编排接口，实现统一认证机制，对外提供 <code>API</code> 使用的接口</li>
+<li>需要解决分布式下定位系统问题，如何日志跟踪，例如支付系统的交易跟踪</li>
+</ol>
+</li>
+</ul>
+<h3 id="切分微服务"><a href="#切分微服务" class="headerlink" title="切分微服务"></a>切分微服务</h3><ul>
+<li><p>服务的切分上有比较大的区别，SOA原本是以一种<code>集成</code>技术出现的，很多技术方案是将原有内部服务封装为一个独立进程，这样新的业务开发就可重用这些服务，这些服务很可能是类似 CRM 这样的非常大的维度；而微服务这个<code>微</code>，就说明了在切分上是有讲究的。如果是错误的切分，那么得到微服务将没有 <code>低耦合、无缝升级、高可用</code> 之类的优势，而会比使用 <code>Monolithic</code> 有更多的麻烦</p>
+</li>
+<li><p>不拆分数据存储的微服务是伪服务：日常接触最多的一种服务拆分方案是后端存储是全在单库中，仅仅把前端的业务逻辑拆分到不同的服务进程中，本质上和一个 <code>Monolithic</code> 一样，只是把模块之间的进程内调用改为进程间调用，这种切分违反了 <code>分布式第一原则</code> ，不仅没有解决模块耦合问题也影响了系统性能</p>
+</li>
+<li><p>微服务并不是越小越好，而是相对 <code>SOA</code> 那种粗粒度的服务，只是需要更小更合适的粒度，但不是无限小</p>
+</li>
+</ul>
+<h3 id="如何拆分服务"><a href="#如何拆分服务" class="headerlink" title="如何拆分服务"></a>如何拆分服务</h3><blockquote>
+<p>在《领域驱动设计》这本书中提出了一个能将一个大问题空间拆解分为领域和实体之间的关系和行为的技术。目前来说，这是一个最合理的解决拆分问题的方案，透过限界上下文（Bounded Context，下文简称为BC）这个概念，我们可以将实现细节封装起来，让BC都能够实现SRP（单一职责）原则</p>
+</blockquote>
+<p>以会员系统的的积分与会员举例，按照 DDD 拆解，他们应该是两个独立的界限上下文，但积分服务中肯定包含会员的，如果直接拆为两个 BC, 那么查询、调用关系就耦合在一起了，甚至不知不觉引入了棘手的分布式问题，这个关联如何拆解？BC 理论认为在不同的 BC 中，即使是一个术语，它的关注点也不一样。在会员中关注的是会员信息、积分、储值等，而在积分中更关注的是积分与会员。所以实际开发中会员服务往往把积分、储值等冗余在会员中，这个设计解脱和积分 BC 的强关联，两个 BC 可以独立提供服务和存储数据。</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2018/06/26/Spring-MyBatis-动态数据源切换/" class="prev">PREV</a><a href="/2018/03/19/Proxy 代理模式/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2019 <a href="http://10buns.com">10buns</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>

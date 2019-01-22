@@ -1,0 +1,21 @@
+<!DOCTYPE html><html><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Swagger聚合微服务的API接口文档 · 10buns</title><meta name="description" content="Swagger聚合微服务的API接口文档 - 10buns"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://10buns.com/atom.xml" title="10buns"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/sunchongsheng" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/pinggod" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">Swagger聚合微服务的API接口文档</h1><div class="post-info">Jun 29, 2018</div><div class="post-content"><blockquote>
+<p>团队中大量使用 Swagger 为项目中的接口生成 API 文档，但这些 API 文档都分散在各个微服务中，是否可以通过聚合这些 API 文档在一起呢？<br>在阅读 Swagger 源码后, 发现可以通过 SwaggerResourcesProvider 接口实现添加多个资源文档来源</p>
+</blockquote>
+<h2 id="0x01-基础环境搭建"><a href="#0x01-基础环境搭建" class="headerlink" title="0x01 基础环境搭建"></a>0x01 基础环境搭建</h2><ul>
+<li>第一步 构建注册中心、测试服务、zuul 网关</li>
+</ul>
+<p><img src="http://olt1b0ecs.bkt.clouddn.com/屏幕快照 2018-06-29 22.06.06.png" alt="项目结构"></p>
+<blockquote>
+<p>discovery 注册中心<br>gaetway zuul 网关<br>ms-product 测试服务<br>ms-user 测试服务</p>
+</blockquote>
+<ul>
+<li>第二步 完善服务</li>
+</ul>
+<p><img src="http://olt1b0ecs.bkt.clouddn.com/屏幕快照 2018-06-29 22.08.30.png" alt="测试服务接口"></p>
+<p><img src="http://olt1b0ecs.bkt.clouddn.com/屏幕快照 2018-06-29 22.08.37.png" alt="测试服务 swagger 配置"></p>
+<h2 id="0x02-zuul-网关整合-Swagger"><a href="#0x02-zuul-网关整合-Swagger" class="headerlink" title="0x02 zuul 网关整合 Swagger"></a>0x02 zuul 网关整合 Swagger</h2><p>核心是对 <code>SwaggerResourcesProvider</code> 的接口实现，通过<code>SwaggerResource</code> 添加多个文档来源。网关上 Swagger 会通过访问 <code>/ms-product/v2/api-docs</code> 和 <code>ms-user/v2/api-docs</code> 来加载两个文档内容，这两个请求会转发到 <code>ms-product</code> 和 <code>ms-user</code> 服务上的 <code>/v2/api-docs</code> 接口获得到 Swagger 的 JSON 文档，来达到文档聚合目的。</p>
+<p><img src="http://olt1b0ecs.bkt.clouddn.com/屏幕快照 2018-06-29 22.11.31.png" alt="重写接口实现"></p>
+<h2 id="0x03-测试"><a href="#0x03-测试" class="headerlink" title="0x03 测试"></a>0x03 测试</h2><p>将微服务、网关以及注册中心启动之后，访问 zuul 的 Swagger 页面<code>http://localhost:9090/swagger-ui.html</code>，可以看到下图内容</p>
+<p><img src="http://olt1b0ecs.bkt.clouddn.com/屏幕快照 2018-06-29 21.51.25.png" alt="swagger"></p>
+<p><img src="http://olt1b0ecs.bkt.clouddn.com/屏幕快照 2018-06-29 21.51.38.png" alt="eureka"></p>
+</div></article></div></main><footer><div class="paginator"><a href="/2018/07/02/文案排版规范/" class="prev">PREV</a><a href="/2018/06/28/解决-ignored-tracked-with-git/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2019 <a href="http://10buns.com">10buns</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>
