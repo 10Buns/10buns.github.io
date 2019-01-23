@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="">
+<html class="theme-next mist use-motion" lang="">
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -98,7 +98,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Mist',
     version: '5.1.4',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -305,28 +305,18 @@
       
         
           
-            <blockquote>
-<p>团队中大量使用 Swagger 为项目中的接口生成 API 文档，但这些 API 文档都分散在各个微服务中，是否可以通过聚合这些 API 文档在一起呢？<br>在阅读 Swagger 源码后, 发现可以通过 SwaggerResourcesProvider 接口实现添加多个资源文档来源</p>
-</blockquote>
-<h2 id="0x01-基础环境搭建"><a href="#0x01-基础环境搭建" class="headerlink" title="0x01 基础环境搭建"></a>0x01 基础环境搭建</h2><ul>
-<li>第一步 构建注册中心、测试服务、zuul 网关</li>
-</ul>
-<p><img src="http://olt1b0ecs.bkt.clouddn.com/屏幕快照 2018-06-29 22.06.06.png" alt="项目结构"></p>
-<blockquote>
-<p>discovery 注册中心<br>gaetway zuul 网关<br>ms-product 测试服务<br>ms-user 测试服务</p>
-</blockquote>
-<ul>
-<li>第二步 完善服务</li>
-</ul>
-<p><img src="http://olt1b0ecs.bkt.clouddn.com/屏幕快照 2018-06-29 22.08.30.png" alt="测试服务接口"></p>
-<p><img src="http://olt1b0ecs.bkt.clouddn.com/屏幕快照 2018-06-29 22.08.37.png" alt="测试服务 swagger 配置"></p>
-<h2 id="0x02-zuul-网关整合-Swagger"><a href="#0x02-zuul-网关整合-Swagger" class="headerlink" title="0x02 zuul 网关整合 Swagger"></a>0x02 zuul 网关整合 Swagger</h2><p>核心是对 <code>SwaggerResourcesProvider</code> 的接口实现，通过<code>SwaggerResource</code> 添加多个文档来源。网关上 Swagger 会通过访问 <code>/ms-product/v2/api-docs</code> 和 <code>ms-user/v2/api-docs</code> 来加载两个文档内容，这两个请求会转发到 <code>ms-product</code> 和 <code>ms-user</code> 服务上的 <code>/v2/api-docs</code> 接口获得到 Swagger 的 JSON 文档，来达到文档聚合目的。</p>
-<p><img src="http://olt1b0ecs.bkt.clouddn.com/屏幕快照 2018-06-29 22.11.31.png" alt="重写接口实现"></p>
-<h2 id="0x03-测试"><a href="#0x03-测试" class="headerlink" title="0x03 测试"></a>0x03 测试</h2><p>将微服务、网关以及注册中心启动之后，访问 zuul 的 Swagger 页面<code>http://localhost:9090/swagger-ui.html</code>，可以看到下图内容</p>
-<p><img src="http://olt1b0ecs.bkt.clouddn.com/屏幕快照 2018-06-29 21.51.25.png" alt="swagger"></p>
-<p><img src="http://olt1b0ecs.bkt.clouddn.com/屏幕快照 2018-06-29 21.51.38.png" alt="eureka"></p>
-
           
+团队中大量使用 Swagger 为项目中的接口生成 API 文档，但这些 API 文档都分散在各个微服务中，是否可以通过聚合这些 API 文档在一起呢？在阅读 Swagger 源码后, 发现可以通过 SwaggerResourcesProvider 接口实现添加多个资源文档来源
+
+0x01 基础环
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/06/29/Swagger聚合微服务的API接口文档/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -444,9 +434,16 @@
       
         
           
-            <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git rm -r --cached . </span><br><span class="line">$ git add .</span><br><span class="line">$ git commit -am &quot;Remove ignored files&quot;</span><br><span class="line">$ git push -u origin master</span><br></pre></td></tr></table></figure>
+          1234$ git rm -r --cached . $ git add .$ git commit -am &quot;Remove ignored files&quot;$ git push -u origin master
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/06/28/解决-ignored-tracked-with-git/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -564,14 +561,16 @@
       
         
           
-            <p>项目开发中有一个需求，需要根据商户类型决定是否使用独立的数据库，即要动态的切换数据源。系统技术栈是 spring boot + mybatis, 常见的思路是基于不同的数据库创建不同的 bean 。</p>
-<p>大体流程: 创建多个 <code>Configuration</code> 以及多个<code>Bean</code>,因为设为 <code>@Configuration</code>，所以在启动的时候 <code>Bean</code> 都会创建，默认走 <code>@Primary</code> 中的数据库连接，如果需要走其他的，只要在数据库 DAO中加上<code>@@qualifier(&quot;bean名&quot;)</code>即可。</p>
-<p>但数据库可能是动态实时修改的，例如后台配置修改数据源，或者分库的场景。显然这种方法是走不通的。</p>
-<p>在 Mybatis 中， <code>SqlSessionFactory</code> 负责创建SqlSession。虽然在初始化中相关 bean 已经创建完毕， 但是 bean 的一些属性是可以修改的。所以事先动态数据源切换，只需要修改对应的属性就可以了。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public SqlSessionFactory changeSqlSessionFactory() throws Exception&#123;</span><br><span class="line">        SqlSessionFactory bean = SVCAppContextAware.getBean(SqlSessionFactory.class);</span><br><span class="line">        DruidDataSource druidDataSource = new DruidDataSource();</span><br><span class="line">        //ds初始化</span><br><span class="line">        TransactionFactory transactionFactory =  new JdbcTransactionFactory();</span><br><span class="line">        Environment environment = new Environment(&quot;数据库名称&quot;, transactionFactory, druidDataSource);</span><br><span class="line">        bean.getConfiguration().setEnvironment(environment);</span><br><span class="line">        return bean;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>获取 bean 的 configuration，然后修改Environment 的数据库连接。在需要对数据库变更的时候，只要重新调用<code>changeSqlSessionFactory</code>方法即可。</p>
-
-          
+          项目开发中有一个需求，需要根据商户类型决定是否使用独立的数据库，即要动态的切换数据源。系统技术栈是 spring boot + mybatis, 常见的思路是基于不同的数据库创建不同的 bean 。
+大体流程: 创建多个 Configuration 以及多个Bean,因为设为 @Configurat
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/06/26/Spring-MyBatis-动态数据源切换/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -689,33 +688,23 @@
       
         
           
-            <h3 id="微服务与分布式"><a href="#微服务与分布式" class="headerlink" title="微服务与分布式"></a>微服务与分布式</h3><blockquote>
-<p>微服务目前这么火，很多的文章拿它和分布式系统比较，但其实之间还是有很多的相同点</p>
-</blockquote>
-<ul>
-<li>相同点<ol>
-<li>都需要来实现动态的服务注册发现机制</li>
-<li>都需要考虑分布式下面的事务一致性，CAP原则下两段式提交不能保证性能，还需要考虑事务补偿机制</li>
-<li>如何保证消息可靠性</li>
-<li>都需要统一的网关来聚合、编排接口，实现统一认证机制，对外提供 <code>API</code> 使用的接口</li>
-<li>需要解决分布式下定位系统问题，如何日志跟踪，例如支付系统的交易跟踪</li>
-</ol>
-</li>
-</ul>
-<h3 id="切分微服务"><a href="#切分微服务" class="headerlink" title="切分微服务"></a>切分微服务</h3><ul>
-<li><p>服务的切分上有比较大的区别，SOA原本是以一种<code>集成</code>技术出现的，很多技术方案是将原有内部服务封装为一个独立进程，这样新的业务开发就可重用这些服务，这些服务很可能是类似 CRM 这样的非常大的维度；而微服务这个<code>微</code>，就说明了在切分上是有讲究的。如果是错误的切分，那么得到微服务将没有 <code>低耦合、无缝升级、高可用</code> 之类的优势，而会比使用 <code>Monolithic</code> 有更多的麻烦</p>
-</li>
-<li><p>不拆分数据存储的微服务是伪服务：日常接触最多的一种服务拆分方案是后端存储是全在单库中，仅仅把前端的业务逻辑拆分到不同的服务进程中，本质上和一个 <code>Monolithic</code> 一样，只是把模块之间的进程内调用改为进程间调用，这种切分违反了 <code>分布式第一原则</code> ，不仅没有解决模块耦合问题也影响了系统性能</p>
-</li>
-<li><p>微服务并不是越小越好，而是相对 <code>SOA</code> 那种粗粒度的服务，只是需要更小更合适的粒度，但不是无限小</p>
-</li>
-</ul>
-<h3 id="如何拆分服务"><a href="#如何拆分服务" class="headerlink" title="如何拆分服务"></a>如何拆分服务</h3><blockquote>
-<p>在《领域驱动设计》这本书中提出了一个能将一个大问题空间拆解分为领域和实体之间的关系和行为的技术。目前来说，这是一个最合理的解决拆分问题的方案，透过限界上下文（Bounded Context，下文简称为BC）这个概念，我们可以将实现细节封装起来，让BC都能够实现SRP（单一职责）原则</p>
-</blockquote>
-<p>以会员系统的的积分与会员举例，按照 DDD 拆解，他们应该是两个独立的界限上下文，但积分服务中肯定包含会员的，如果直接拆为两个 BC, 那么查询、调用关系就耦合在一起了，甚至不知不觉引入了棘手的分布式问题，这个关联如何拆解？BC 理论认为在不同的 BC 中，即使是一个术语，它的关注点也不一样。在会员中关注的是会员信息、积分、储值等，而在积分中更关注的是积分与会员。所以实际开发中会员服务往往把积分、储值等冗余在会员中，这个设计解脱和积分 BC 的强关联，两个 BC 可以独立提供服务和存储数据。</p>
+          微服务与分布式
+微服务目前这么火，很多的文章拿它和分布式系统比较，但其实之间还是有很多的相同点
 
-          
+
+相同点
+都需要来实现动态的服务注册发现机制
+都需要考虑分布式下面的事务一致性，CAP原则下两段式提交不能保证性能，还需要考虑事务补偿机制
+如何保证消息可靠性
+都需要统一的网关来聚合、编排接口，实现统一
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/06/20/微服务杂谈/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -855,20 +844,17 @@
       
         
           
-            <blockquote>
-<p>代理模式给某一个对象提供一个代理对象，并由代理对象控制对原对象的引用。<br>所谓代理，就是一个人或者一个机构代表另一个人或者另一个机构采取行动。在一些情况下，一个客户不想或者不能够直接引用一个对象，而代理对象可以在客户端和目标对象之间起到中介的作用。</p>
-<p>代理模式和适配器模式的区别：适配器模式的用意是要改变所考虑的对象的接口，而代理模式并不能改变所代理对象的接口。</p>
-<p>代理模式和装饰模式的区别：装饰模式应当为所装饰的对象提供增强功能，而代理模式对对象的使用施加控制，并不提供对象本身的增强功能。</p>
-</blockquote>
-<h4 id="类图"><a href="#类图" class="headerlink" title="类图"></a>类图</h4><p><img src="http://olt1b0ecs.bkt.clouddn.com/代理模式-类图.png" alt="代理模式-类图"></p>
-<p>**#### 时序图</p>
-<p><img src="http://olt1b0ecs.bkt.clouddn.com/代理模式-时序图.png" alt="代理模式-时序图"></p>
-<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Searcher</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function">String <span class="title">doSearch</span><span class="params">(String userId,String searchType)</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RealSearcher</span> <span class="keyword">implements</span> <span class="title">Searcher</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">RealSearcher</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">doSearch</span><span class="params">(String userId, String searchType)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"UserId:"</span> + userId +<span class="string">", type:"</span> + searchType;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProxySearcher</span> <span class="keyword">implements</span> <span class="title">Searcher</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> RealSearcher searcher;</span><br><span class="line">    <span class="keyword">private</span> UserLogger userLogger;</span><br><span class="line">    <span class="keyword">private</span> AccessValidator accessValidator;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ProxySearcher</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        searcher = <span class="keyword">new</span> RealSearcher();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">doSearch</span><span class="params">(String userId, String searchType)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(checkAccess(userId))</span><br><span class="line">        &#123;</span><br><span class="line">            String result = searcher.doSearch(userId,searchType);</span><br><span class="line">            logUsage(userId);</span><br><span class="line">            <span class="keyword">return</span> result;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 查询前的授权操作</span></span><br><span class="line"><span class="comment">      * <span class="doctag">@param</span> userId</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">checkAccess</span><span class="params">(String userId)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        accessValidator = <span class="keyword">new</span> AccessValidator();</span><br><span class="line">        <span class="keyword">return</span> accessValidator.validateUser(userId);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 查询后的日志操作</span></span><br><span class="line"><span class="comment">      * <span class="doctag">@param</span> userId</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">logUsage</span><span class="params">(String userId)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        userLogger = <span class="keyword">new</span> UserLogger();</span><br><span class="line">        userLogger.setUserId(userId);</span><br><span class="line">        userLogger.save();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Searcher searcher;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        searcher = <span class="keyword">new</span> ProxySearcher();</span><br><span class="line">        String userId = <span class="string">"admin"</span>;</span><br><span class="line">        String searchType = <span class="string">"SEARCH_BY_USER_ID"</span>;</span><br><span class="line">        String result = searcher.doSearch(userId,searchType);</span><br><span class="line">        System.out.println(result);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
           
+代理模式给某一个对象提供一个代理对象，并由代理对象控制对原对象的引用。所谓代理，就是一个人或者一个机构代表另一个人或者另一个机构采取行动。在一些情况下，一个客户不想或者不能够直接引用一个对象，而代理对象可以在客户端和目标对象之间起到中介的作用。
+代理模式和适配器模式的区别：适配器模式的用意是要改变
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/03/19/Proxy 代理模式/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1133,24 +1119,22 @@
       
         
           
-            <ul>
-<li>上传 jdk 压缩包</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ scp ~/Downloads/jdk-8u191-linux-x64.tar.gz root@ip:/var/local</span><br></pre></td></tr></table></figure>
-<ul>
-<li>服务器操作</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ tar -zxvf jdk-8u152-linux-x64.tar.gz </span><br><span class="line"># 在/etc/profile.d/路径下新建一个文件，名为java.sh</span><br><span class="line">$ touch java.sh </span><br><span class="line">$ vim java.sh</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>内容如下</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">JAVA_HOME=/usr/java/jdk1.8.0_102/</span><br><span class="line">PATH=$JAVA_HOME/bin:$PATH</span><br><span class="line">export PATH JAVA_HOME</span><br><span class="line">export CLASSPATH=.</span><br></pre></td></tr></table></figure>
-<ul>
-<li>保存并刷新</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ chmod +x /etc/profile.d/java.sh</span><br><span class="line">$ source /etc/profile.d/java.sh</span><br><span class="line">$ java -version</span><br></pre></td></tr></table></figure>
-
           
+上传 jdk 压缩包
+
+1$ scp ~/Downloads/jdk-8u191-linux-x64.tar.gz root@ip:/var/local
+
+服务器操作
+
+1234$ tar -zxvf jdk-8u152-linux-x64.tar.gz # 在/etc/profile.d/路径下
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/02/08/CentOS-安装-JDK/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1290,10 +1274,15 @@
       
         
           
-            <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ ruby -e &quot;$(curl --insecure -fsSL</span><br><span class="line">https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</span><br><span class="line"></span><br><span class="line">$ brew --help #简洁命令帮助</span><br><span class="line">$ man brew #完整命令帮助</span><br><span class="line">$ brew install python #安装软件包</span><br><span class="line">$ brew uninstall python #卸载软件包</span><br><span class="line">$ brew search python #搜索软件包</span><br><span class="line">$ brew list #显示已经安装的所有软件包</span><br><span class="line">$ brew update #同步远程最新更新情况，对本机已经安装并有更新的软件用*标明</span><br><span class="line">$ brew outdated #查看已安装的哪些软件包需要更新</span><br><span class="line">$ brew upgrade python #更新单个软件包</span><br><span class="line">$ brew info python #查看软件包信息</span><br><span class="line">$ brew home python #访问软件包官方站</span><br><span class="line">$ brew cleanup #清理所有已安装软件包的历史老版本</span><br><span class="line">$ brew cleanup python #清理单个已安装软件包的历史版本</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-bin #用于存放所安装程序的启动链接（相当于快捷方式）</span><br><span class="line">-Cellar #所有brew安装的程序，都将以[程序名/版本号]存放于本目录下</span><br><span class="line">-etc #brew安装程序的配置文件默认存放路径</span><br><span class="line">-Library #Homebrew 系统自身文件夹</span><br><span class="line">+–Formula #程序的下载路径和编译参数及安装路径等配置文件存放地</span><br><span class="line">+–Homebrew #brew程序自身命令集</span><br></pre></td></tr></table></figure>
-
-          
+          12345678910111213141516$ ruby -e &quot;$(curl --insecure -fsSLhttps://raw.githubusercontent.com/Homebrew/install/master/install)&quot;$ brew --help #简
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/01/04/Homebrew 常用命令/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1433,11 +1422,15 @@
       
         
           
-            <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Son parent = <span class="keyword">new</span> Son();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Parent</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> ParentStaticParam staticParam = <span class="keyword">new</span> ParentStaticParam();</span><br><span class="line">    <span class="keyword">public</span> ParentParam parentParam = <span class="keyword">new</span> ParentParam();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">"执行父类静态代码块"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(<span class="string">"执行父类代码块"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Parent</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"执行父类构造器"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Son</span> <span class="keyword">extends</span> <span class="title">Parent</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> SonStaticParam sonStaticParam = <span class="keyword">new</span> SonStaticParam();</span><br><span class="line">    <span class="keyword">public</span> SonParam sonParam = <span class="keyword">new</span> SonParam();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">"执行子类静态代码块"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(<span class="string">"执行子类代码块"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Son</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"执行子类构造函数"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ParentStaticParam</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ParentStaticParam</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"执行父类静态变量初始化"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ParentParam</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ParentParam</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"执行父类变量初始化"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SonStaticParam</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SonStaticParam</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"执行子类静态变量初始化"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SonParam</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SonParam</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"执行子类变量初始化"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>执行结果:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">执行父类静态变量初始化</span><br><span class="line">执行父类静态代码块</span><br><span class="line">执行子类静态变量初始化</span><br><span class="line">执行子类静态代码块</span><br><span class="line">执行父类变量初始化</span><br><span class="line">执行父类代码块</span><br><span class="line">执行父类构造器</span><br><span class="line">执行子类变量初始化</span><br><span class="line">执行子类代码块</span><br><span class="line">执行子类构造函数</span><br></pre></td></tr></table></figure>
-
-          
+          12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364public class ClassTest &#123;  
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/12/25/java 程序执行顺序/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1752,7 +1745,7 @@
 
 
 
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
 
 
 
