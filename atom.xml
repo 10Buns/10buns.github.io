@@ -105,32 +105,11 @@
   </entry>
   
   <entry>
-    <title>java 基础(一)</title>
-    <link href="http://10buns.com/2018/09/01/java-%E5%9F%BA%E7%A1%80-%E4%B8%80/"/>
-    <id>http://10buns.com/2018/09/01/java-基础-一/</id>
-    <published>2018-09-01T14:38:59.000Z</published>
-    <updated>2019-01-22T15:13:41.762Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="1-java-中如何跳出当前多重循环"><a href="#1-java-中如何跳出当前多重循环" class="headerlink" title="1. java 中如何跳出当前多重循环"></a>1. java 中如何跳出当前多重循环</h3><p>使用标签语法， 循环前定义 <code>tag:</code> ，循环中 <code>break tag;</code></p><h3 id="2-写-clone-方法时，通常都有一行代码，为什么？"><a href="#2-写-clone-方法时，通常都有一行代码，为什么？" class="headerlink" title="2. 写 clone() 方法时，通常都有一行代码，为什么？"></a>2. 写 clone() 方法时，通常都有一行代码，为什么？</h3><p>clone 有缺省行为，<code>super.clone()</code>; 因此首先要把父类成员复制结束，然后才能复制自己的成员</p><h3 id="3-java-实现多态的机制？"><a href="#3-java-实现多态的机制？" class="headerlink" title="3. java 实现多态的机制？"></a>3. java 实现多态的机制？</h3><p>靠的是父类或接口定义的饮用变量可以指向子类或者实现类的实例对象，而程序调用的方法在运行期才动态绑定</p><h3 id="4-基本数据类型"><a href="#4-基本数据类型" class="headerlink" title="4. 基本数据类型"></a>4. 基本数据类型</h3><p>byte, int, char, long, float, boolean, short, double</p><h3 id="5-多线程有几种实现方法？同步有几种？"><a href="#5-多线程有几种实现方法？同步有几种？" class="headerlink" title="5. 多线程有几种实现方法？同步有几种？"></a>5. 多线程有几种实现方法？同步有几种？</h3><p>多线程: thread ,实现 Runnable 接口, 使用ExecutorService、Callable、Future实现有返回结果的多线程</p><p>同步: synchronized, wait, notify</p><h3 id="6-synchronized-与-Lock-区别"><a href="#6-synchronized-与-Lock-区别" class="headerlink" title="6. synchronized 与 Lock 区别"></a>6. synchronized 与 Lock 区别</h3><p>相同点: Lock 可以完成 synchronized 所有的功能</p><p>异同点: Lock 比 synchronized 更为精确的线程语义和性能</p><p>synchronized 会自动释放锁， Lock 必须手动释放</p><h1 id="7-heap-与-stack-区别"><a href="#7-heap-与-stack-区别" class="headerlink" title="7. heap 与 stack 区别"></a>7. heap 与 stack 区别</h1><p>java 内存分为<code>栈内存</code>和<code>堆内存</code> </p><p>栈内存指程序进入一个方法时，会位这个方法单独分配一块私属存储，用于存储这个方法私有变量，方法结束时会回收内存。</p><p>堆一般用于存放不放在当前方法栈中的数据，比如对象，所以不会随方法结束而回收。final修饰的局部变量放在堆中。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;1-java-中如何跳出当前多重循环&quot;&gt;&lt;a href=&quot;#1-java-中如何跳出当前多重循环&quot; class=&quot;headerlink&quot; title=&quot;1. java 中如何跳出当前多重循环&quot;&gt;&lt;/a&gt;1. java 中如何跳出当前多重循环&lt;/h3&gt;&lt;p&gt;使用标签
-      
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
     <title>java 基础(二)</title>
     <link href="http://10buns.com/2018/08/11/java-%E5%9F%BA%E7%A1%80-%E4%BA%8C/"/>
     <id>http://10buns.com/2018/08/11/java-基础-二/</id>
     <published>2018-08-10T16:40:46.000Z</published>
-    <updated>2019-01-23T17:04:59.470Z</updated>
+    <updated>2019-01-23T17:07:16.072Z</updated>
     
     <content type="html"><![CDATA[<h3 id="Object有哪些公用方法"><a href="#Object有哪些公用方法" class="headerlink" title="Object有哪些公用方法"></a>Object有哪些公用方法</h3><ul><li><p>clone 保护方法，实现对象的浅复制，只有实现了Cloneable接口才可以调用该方法，否则抛出CloneNotSupportedException异常。</p></li><li><p>equals 在Object中与==是一样的，子类一般需要重写该方法。</p></li><li><p>hashCode 该方法用于哈希查找，重写了equals方法一般都要重写hashCode方法。这个方法在一些具有哈希功能的Collection中用到。</p></li><li><p>getClass final方法，获得运行时类型</p></li><li><p>wait 使当前线程等待该对象的锁，当前线程必须是该对象的拥有者，也就是具有该对象的锁。 wait() 方法一直等待，直到获得锁或者被中断。 wait(long timeout) 设定一个超时间隔，如果在规定时间内没有获得锁就返回。</p></li><li><p>notify 唤醒在该对象上等待的某个线程。</p></li><li><p>notifyAll 唤醒在该对象上等待的所有线程。</p></li><li><p>toString 转换成字符串，一般子类都有重写，否则打印句柄。</p></li></ul><h3 id="Java的四种引用，强弱软虚，用到的场景"><a href="#Java的四种引用，强弱软虚，用到的场景" class="headerlink" title="Java的四种引用，强弱软虚，用到的场景"></a>Java的四种引用，强弱软虚，用到的场景</h3><ol><li>强引用</li></ol><p>最普遍的一种引用方式，如String s = “abc”，变量s就是字符串“abc”的强引用，只要强引用存在，则垃圾回收器就不会回收这个对象。</p><ol start="2"><li>软引用（SoftReference）</li></ol><p>用于描述还有用但非必须的对象，如果内存足够，不回收，如果内存不足，则回收。一般用于实现内存敏感的高速缓存，软引用可以和引用队列ReferenceQueue联合使用，如果软引用的对象被垃圾回收，JVM就会把这个软引用加入到与之关联的引用队列中。</p><ol start="3"><li>弱引用（WeakReference）</li></ol><p>弱引用和软引用大致相同，弱引用与软引用的区别在于：只具有弱引用的对象拥有更短暂的生命周期。在垃圾回收器线程扫描它所管辖的内存区域的过程中，一旦发现了只具有弱引用的对象，不管当前内存空间足够与否，都会回收它的内存。</p><ol start="4"><li>虚引用（PhantomReference）</li></ol><p>就是形同虚设，与其他几种引用都不同，虚引用并不会决定对象的生命周期。如果一个对象仅持有虚引用，那么它就和没有任何引用一样，在任何时候都可能被垃圾回收器回收。 虚引用主要用来跟踪对象被垃圾回收器回收的活动。</p><blockquote><p>虚引用必须和引用队列 （ReferenceQueue）联合使用。当垃圾回收器准备回收一个对象时，如果发现它还有虚引，就会在回收对象的内存之前，把这个虚引用加入到与之关联的引用队列中。</p></blockquote>]]></content>
     
@@ -172,10 +151,10 @@
   
   <entry>
     <title>Spring事务配置</title>
-    <link href="http://10buns.com/2018/07/18/Spring%E4%BA%8B%E5%8A%A1%E9%85%8D%E7%BD%AE/"/>
-    <id>http://10buns.com/2018/07/18/Spring事务配置/</id>
-    <published>2018-07-18T07:49:53.000Z</published>
-    <updated>2018-07-18T09:04:09.000Z</updated>
+    <link href="http://10buns.com/2018/07/23/Spring%E4%BA%8B%E5%8A%A1%E9%85%8D%E7%BD%AE/"/>
+    <id>http://10buns.com/2018/07/23/Spring事务配置/</id>
+    <published>2018-07-23T07:49:53.000Z</published>
+    <updated>2019-01-23T17:07:45.357Z</updated>
     
     <content type="html"><![CDATA[<p><img src="http://olt1b0ecs.bkt.clouddn.com/Spring 事务配置-1.png" alt="Spring 事务配置"></p><blockquote><p>Spring 配置文件中关于事务配置总是由三个组成部分，分别是 DataSource 、TransactionManager 和代理机制这三部分，无论哪种配置方式，一般变化的只是代理机制这部分 。</p></blockquote><p>Spring 声明式事务让我们从复杂的事务处理中得到解脱 。使得无需要去处理获得连接、关闭连接、事务提交和回滚等这些操作 ，更不需要在与事务相关的方法中处理大量的 try…catch…finally 代码 。 </p><p>在使用 Spring 声明式事务时 ，有一个非常重要的概念就是事务属性 。事务属性通常由事务的传播行为 、事务的隔离级别 、事务的超时值和事务只读标志组成 。在进行事务划分时 ，需要进行事务定义 ，也就是配置事务的属性 。 </p><p>Spring 在 TransactionDefinition 接口中定义这些属性 ，以供PlatformTransactionManager 使用 ， PlatformTransactionManager 是 spring 事务管理的核心接口 。</p><p><strong>PlatformTransactionManager接口定义如下：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public interface PlatformTransactionManager &#123;  </span><br><span class="line">    TransactionStatus getTransaction(TransactionDefinition definition) throws TransactionException;  </span><br><span class="line">    void commit(TransactionStatus status) throws TransactionException;  </span><br><span class="line">    void rollback(TransactionStatus status) throws TransactionException;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><blockquote><ul><li>getTransaction(): 返回一个已经激活的事务或创建一个新的事务（根据给定的 TransactionDefinition 类型参数定义的事务属性），返回的是 TransactionStatus 对象代表了当前事务的状态，其中该方法抛出 TransactionException（未检查异常）表示事务由于某种原因失败。</li><li>commit(): 用于提交 TransactionStatus 参数代表的事务</li><li>rollback(): 用于回滚 TransactionStatus 参数代表的事务</li></ul></blockquote><p><strong>TransactionDefinition接口定义如下：</strong></p><pre><code>public interface TransactionDefinition {      int getPropagationBehavior();      int getIsolationLevel();      int getTimeout();      boolean isReadOnly();  }  </code></pre><blockquote><ul><li>getPropagationBehavior(): 返回定义的事务传播行为</li><li>getIsolationLevel(): 返回定义的事务隔离级别</li><li>getTimeout(): 返回定义的事务超时时间</li><li>isReadOnly(): 返回定义的事务是否是只读的</li><li>getName(): 返回定义的事务名字</li></ul></blockquote><p>在TransactionDefinition接口中定义了五个不同的事务隔离级别:</p><p><strong>ISOLATION_DEFAULT</strong> 这是一个 PlatformTransactionManager 默认的隔离级别 ，使用数据库默认的事务隔离级别 。另外四个与JDBC的隔离级别相对应<br><strong>ISOLATION_READ_UNCOMMITTED</strong> 这是事务最低的隔离级别 ，它充许别外一个事务可以看到这个事务未提交的数据 。这种隔离级别会产生脏读 ，不可重复读和幻像读</p><blockquote><p>举个例子 ，别人通过支付宝转账 1W , 但未提交事务 。 此时我们查询支付宝余额 ，看到账户多了 1W 很开心 。这时支付宝发现转账账号错了回滚事务 ，此时余额变为 0 。这个读取的 1W 就是产生的脏数据</p></blockquote><p><strong>ISOLATION_READ_COMMITTED</strong> 保证一个事务修改的数据提交后才能被另外一个事务读取 。另外一个事务不能读取该事务未提交的数据。这种事务隔离级别可以避免脏读出现，但是可能会出现不可重复读和幻像读</p><blockquote></blockquote><p><strong>ISOLATION_REPEATABLE_READ</strong>  这种事务隔离级别可以防止脏读，不可重复读。但是可能出现幻像读。它除了保证一个事务不能读取另一个事务未提交的数据外，还保证了避免下面的情况产生(不可重复读)<br><strong>ISOLATION_SERIALIZABLE</strong> 这是花费最高代价但是最可靠的事务隔离级别。事务被处理为顺序执行。除了防止脏读，不可重复读外，还避免了幻像读</p>]]></content>
     
@@ -240,22 +219,19 @@
   </entry>
   
   <entry>
-    <title>文案排版规范</title>
-    <link href="http://10buns.com/2018/07/02/%E6%96%87%E6%A1%88%E6%8E%92%E7%89%88%E8%A7%84%E8%8C%83/"/>
-    <id>http://10buns.com/2018/07/02/文案排版规范/</id>
-    <published>2018-07-02T07:00:28.000Z</published>
-    <updated>2018-07-02T07:17:13.000Z</updated>
+    <title>java 基础(一)</title>
+    <link href="http://10buns.com/2018/07/01/java-%E5%9F%BA%E7%A1%80-%E4%B8%80/"/>
+    <id>http://10buns.com/2018/07/01/java-基础-一/</id>
+    <published>2018-07-01T14:38:59.000Z</published>
+    <updated>2019-01-23T17:07:21.267Z</updated>
     
-    <content type="html"><![CDATA[<blockquote><p>手机现在成了信息获取的主要来源。</p></blockquote>]]></content>
+    <content type="html"><![CDATA[<h3 id="1-java-中如何跳出当前多重循环"><a href="#1-java-中如何跳出当前多重循环" class="headerlink" title="1. java 中如何跳出当前多重循环"></a>1. java 中如何跳出当前多重循环</h3><p>使用标签语法， 循环前定义 <code>tag:</code> ，循环中 <code>break tag;</code></p><h3 id="2-写-clone-方法时，通常都有一行代码，为什么？"><a href="#2-写-clone-方法时，通常都有一行代码，为什么？" class="headerlink" title="2. 写 clone() 方法时，通常都有一行代码，为什么？"></a>2. 写 clone() 方法时，通常都有一行代码，为什么？</h3><p>clone 有缺省行为，<code>super.clone()</code>; 因此首先要把父类成员复制结束，然后才能复制自己的成员</p><h3 id="3-java-实现多态的机制？"><a href="#3-java-实现多态的机制？" class="headerlink" title="3. java 实现多态的机制？"></a>3. java 实现多态的机制？</h3><p>靠的是父类或接口定义的饮用变量可以指向子类或者实现类的实例对象，而程序调用的方法在运行期才动态绑定</p><h3 id="4-基本数据类型"><a href="#4-基本数据类型" class="headerlink" title="4. 基本数据类型"></a>4. 基本数据类型</h3><p>byte, int, char, long, float, boolean, short, double</p><h3 id="5-多线程有几种实现方法？同步有几种？"><a href="#5-多线程有几种实现方法？同步有几种？" class="headerlink" title="5. 多线程有几种实现方法？同步有几种？"></a>5. 多线程有几种实现方法？同步有几种？</h3><p>多线程: thread ,实现 Runnable 接口, 使用ExecutorService、Callable、Future实现有返回结果的多线程</p><p>同步: synchronized, wait, notify</p><h3 id="6-synchronized-与-Lock-区别"><a href="#6-synchronized-与-Lock-区别" class="headerlink" title="6. synchronized 与 Lock 区别"></a>6. synchronized 与 Lock 区别</h3><p>相同点: Lock 可以完成 synchronized 所有的功能</p><p>异同点: Lock 比 synchronized 更为精确的线程语义和性能</p><p>synchronized 会自动释放锁， Lock 必须手动释放</p><h1 id="7-heap-与-stack-区别"><a href="#7-heap-与-stack-区别" class="headerlink" title="7. heap 与 stack 区别"></a>7. heap 与 stack 区别</h1><p>java 内存分为<code>栈内存</code>和<code>堆内存</code> </p><p>栈内存指程序进入一个方法时，会位这个方法单独分配一块私属存储，用于存储这个方法私有变量，方法结束时会回收内存。</p><p>堆一般用于存放不放在当前方法栈中的数据，比如对象，所以不会随方法结束而回收。final修饰的局部变量放在堆中。</p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;blockquote&gt;
-&lt;p&gt;手机现在成了信息获取的主要来源。&lt;/p&gt;
-&lt;/blockquote&gt;
-
+        &lt;h3 id=&quot;1-java-中如何跳出当前多重循环&quot;&gt;&lt;a href=&quot;#1-java-中如何跳出当前多重循环&quot; class=&quot;headerlink&quot; title=&quot;1. java 中如何跳出当前多重循环&quot;&gt;&lt;/a&gt;1. java 中如何跳出当前多重循环&lt;/h3&gt;&lt;p&gt;使用标签
       
     
     </summary>
@@ -458,6 +434,29 @@
       
     
     </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Homebrew 常用命令</title>
+    <link href="http://10buns.com/2018/01/04/Homebrew%20%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
+    <id>http://10buns.com/2018/01/04/Homebrew 常用命令/</id>
+    <published>2018-01-04T15:11:28.000Z</published>
+    <updated>2018-01-04T16:51:02.000Z</updated>
+    
+    <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ ruby -e &quot;$(curl --insecure -fsSL</span><br><span class="line">https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</span><br><span class="line"></span><br><span class="line">$ brew --help #简洁命令帮助</span><br><span class="line">$ man brew #完整命令帮助</span><br><span class="line">$ brew install python #安装软件包</span><br><span class="line">$ brew uninstall python #卸载软件包</span><br><span class="line">$ brew search python #搜索软件包</span><br><span class="line">$ brew list #显示已经安装的所有软件包</span><br><span class="line">$ brew update #同步远程最新更新情况，对本机已经安装并有更新的软件用*标明</span><br><span class="line">$ brew outdated #查看已安装的哪些软件包需要更新</span><br><span class="line">$ brew upgrade python #更新单个软件包</span><br><span class="line">$ brew info python #查看软件包信息</span><br><span class="line">$ brew home python #访问软件包官方站</span><br><span class="line">$ brew cleanup #清理所有已安装软件包的历史老版本</span><br><span class="line">$ brew cleanup python #清理单个已安装软件包的历史版本</span><br></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-bin #用于存放所安装程序的启动链接（相当于快捷方式）</span><br><span class="line">-Cellar #所有brew安装的程序，都将以[程序名/版本号]存放于本目录下</span><br><span class="line">-etc #brew安装程序的配置文件默认存放路径</span><br><span class="line">-Library #Homebrew 系统自身文件夹</span><br><span class="line">+–Formula #程序的下载路径和编译参数及安装路径等配置文件存放地</span><br><span class="line">+–Homebrew #brew程序自身命令集</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class
+      
+    
+    </summary>
+    
+      <category term="工作" scheme="http://10buns.com/categories/%E5%B7%A5%E4%BD%9C/"/>
     
     
   </entry>

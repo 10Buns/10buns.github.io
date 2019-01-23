@@ -81,16 +81,19 @@
 
 
 
-<meta name="description" content="Study hard and make progress every day">
-<meta property="og:type" content="website">
-<meta property="og:title" content="10buns">
-<meta property="og:url" content="http://10buns.com/categories/Git/index.html">
+<meta name="description" content="Spring 配置文件中关于事务配置总是由三个组成部分，分别是 DataSource 、TransactionManager 和代理机制这三部分，无论哪种配置方式，一般变化的只是代理机制这部分 。  Spring 声明式事务让我们从复杂的事务处理中得到解脱 。使得无需要去处理获得连接、关闭连接、事务提交和回滚等这些操作 ，更不需要在与事务相关的方法中处理大量的 try…catch…finall">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring事务配置">
+<meta property="og:url" content="http://10buns.com/2018/07/23/Spring事务配置/index.html">
 <meta property="og:site_name" content="10buns">
-<meta property="og:description" content="Study hard and make progress every day">
+<meta property="og:description" content="Spring 配置文件中关于事务配置总是由三个组成部分，分别是 DataSource 、TransactionManager 和代理机制这三部分，无论哪种配置方式，一般变化的只是代理机制这部分 。  Spring 声明式事务让我们从复杂的事务处理中得到解脱 。使得无需要去处理获得连接、关闭连接、事务提交和回滚等这些操作 ，更不需要在与事务相关的方法中处理大量的 try…catch…finall">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://olt1b0ecs.bkt.clouddn.com/Spring 事务配置-1.png">
+<meta property="og:updated_time" content="2019-01-23T17:07:45.357Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="10buns">
-<meta name="twitter:description" content="Study hard and make progress every day">
+<meta name="twitter:title" content="Spring事务配置">
+<meta name="twitter:description" content="Spring 配置文件中关于事务配置总是由三个组成部分，分别是 DataSource 、TransactionManager 和代理机制这三部分，无论哪种配置方式，一般变化的只是代理机制这部分 。  Spring 声明式事务让我们从复杂的事务处理中得到解脱 。使得无需要去处理获得连接、关闭连接、事务提交和回滚等这些操作 ，更不需要在与事务相关的方法中处理大量的 try…catch…finall">
+<meta name="twitter:image" content="http://olt1b0ecs.bkt.clouddn.com/Spring 事务配置-1.png">
 
 
 
@@ -120,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="http://10buns.com/categories/Git/">
+  <link rel="canonical" href="http://10buns.com/2018/07/23/Spring事务配置/">
 
 
 
 
 
-  <title>Category: Git | 10buns</title>
+  <title>Spring事务配置 | 10buns</title>
   
 
 
@@ -155,7 +158,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -249,53 +252,185 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block category">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>Git<small>Category</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://10buns.com/2018/07/23/Spring事务配置/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="10buns">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="10buns">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2017/06/20/Git使用问题及解决/" itemprop="url">
-              
-                <span itemprop="name">Git使用问题及解决</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">Spring事务配置</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2017-06-20T16:51:21+08:00" content="2017-06-20">
-          06-20
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-23T15:49:53+08:00">
+                2018-07-23
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="http://olt1b0ecs.bkt.clouddn.com/Spring 事务配置-1.png" alt="Spring 事务配置"></p>
+<blockquote>
+<p>Spring 配置文件中关于事务配置总是由三个组成部分，分别是 DataSource 、TransactionManager 和代理机制这三部分，无论哪种配置方式，一般变化的只是代理机制这部分 。</p>
+</blockquote>
+<p>Spring 声明式事务让我们从复杂的事务处理中得到解脱 。使得无需要去处理获得连接、关闭连接、事务提交和回滚等这些操作 ，更不需要在与事务相关的方法中处理大量的 try…catch…finally 代码 。 </p>
+<p>在使用 Spring 声明式事务时 ，有一个非常重要的概念就是事务属性 。事务属性通常由事务的传播行为 、事务的隔离级别 、事务的超时值和事务只读标志组成 。在进行事务划分时 ，需要进行事务定义 ，也就是配置事务的属性 。 </p>
+<p>Spring 在 TransactionDefinition 接口中定义这些属性 ，以供PlatformTransactionManager 使用 ， PlatformTransactionManager 是 spring 事务管理的核心接口 。</p>
+<p><strong>PlatformTransactionManager接口定义如下：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public interface PlatformTransactionManager &#123;  </span><br><span class="line">    TransactionStatus getTransaction(TransactionDefinition definition) throws TransactionException;  </span><br><span class="line">    void commit(TransactionStatus status) throws TransactionException;  </span><br><span class="line">    void rollback(TransactionStatus status) throws TransactionException;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>getTransaction(): 返回一个已经激活的事务或创建一个新的事务（根据给定的 TransactionDefinition 类型参数定义的事务属性），返回的是 TransactionStatus 对象代表了当前事务的状态，其中该方法抛出 TransactionException（未检查异常）表示事务由于某种原因失败。</li>
+<li>commit(): 用于提交 TransactionStatus 参数代表的事务</li>
+<li>rollback(): 用于回滚 TransactionStatus 参数代表的事务</li>
+</ul>
+</blockquote>
+<p><strong>TransactionDefinition接口定义如下：</strong></p>
+<pre><code>public interface TransactionDefinition {  
+    int getPropagationBehavior();  
+    int getIsolationLevel();  
+    int getTimeout();  
+    boolean isReadOnly();  
+}  
+</code></pre><blockquote>
+<ul>
+<li>getPropagationBehavior(): 返回定义的事务传播行为</li>
+<li>getIsolationLevel(): 返回定义的事务隔离级别</li>
+<li>getTimeout(): 返回定义的事务超时时间</li>
+<li>isReadOnly(): 返回定义的事务是否是只读的</li>
+<li>getName(): 返回定义的事务名字</li>
+</ul>
+</blockquote>
+<p>在TransactionDefinition接口中定义了五个不同的事务隔离级别:</p>
+<p><strong>ISOLATION_DEFAULT</strong> 这是一个 PlatformTransactionManager 默认的隔离级别 ，使用数据库默认的事务隔离级别 。另外四个与JDBC的隔离级别相对应<br><strong>ISOLATION_READ_UNCOMMITTED</strong> 这是事务最低的隔离级别 ，它充许别外一个事务可以看到这个事务未提交的数据 。这种隔离级别会产生脏读 ，不可重复读和幻像读</p>
+<blockquote>
+<p>举个例子 ，别人通过支付宝转账 1W , 但未提交事务 。 此时我们查询支付宝余额 ，看到账户多了 1W 很开心 。这时支付宝发现转账账号错了回滚事务 ，此时余额变为 0 。这个读取的 1W 就是产生的脏数据</p>
+</blockquote>
+<p><strong>ISOLATION_READ_COMMITTED</strong> 保证一个事务修改的数据提交后才能被另外一个事务读取 。另外一个事务不能读取该事务未提交的数据。这种事务隔离级别可以避免脏读出现，但是可能会出现不可重复读和幻像读</p>
+<blockquote>
+</blockquote>
+<p><strong>ISOLATION_REPEATABLE_READ</strong>  这种事务隔离级别可以防止脏读，不可重复读。但是可能出现幻像读。它除了保证一个事务不能读取另一个事务未提交的数据外，还保证了避免下面的情况产生(不可重复读)<br><strong>ISOLATION_SERIALIZABLE</strong> 这是花费最高代价但是最可靠的事务隔离级别。事务被处理为顺序执行。除了防止脏读，不可重复读外，还避免了幻像读</p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/18/SpringMVC请求处理流程/" rel="next" title="SpringMVC请求处理流程">
+                <i class="fa fa-chevron-left"></i> SpringMVC请求处理流程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/07/什么是响应式编程/" rel="prev" title="【 浅析 Spring WebFlux 】什么是响应式编程 ( 一 )">
+                【 浅析 Spring WebFlux 】什么是响应式编程 ( 一 ) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -303,6 +438,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -555,6 +694,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
