@@ -73,8 +73,6 @@
 
 
 
-  
-
 
   <link rel="alternate" href="/atom.xml" title="10buns" type="application/atom+xml">
 
@@ -83,17 +81,17 @@
 
 
 
-<meta name="description" content="Study hard and make progress every day">
-<meta property="og:type" content="website">
-<meta property="og:title" content="about">
-<meta property="og:url" content="http://10buns.com/about/index.html">
+<meta name="description" content="Object有哪些公用方法 clone 保护方法，实现对象的浅复制，只有实现了Cloneable接口才可以调用该方法，否则抛出CloneNotSupportedException异常。  equals 在Object中与==是一样的，子类一般需要重写该方法。  hashCode 该方法用于哈希查找，重写了equals方法一般都要重写hashCode方法。这个方法在一些具有哈希功能的Collecti">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java 基础(二)">
+<meta property="og:url" content="http://10buns.com/2018/08/11/java-基础-二/index.html">
 <meta property="og:site_name" content="10buns">
-<meta property="og:description" content="Study hard and make progress every day">
+<meta property="og:description" content="Object有哪些公用方法 clone 保护方法，实现对象的浅复制，只有实现了Cloneable接口才可以调用该方法，否则抛出CloneNotSupportedException异常。  equals 在Object中与==是一样的，子类一般需要重写该方法。  hashCode 该方法用于哈希查找，重写了equals方法一般都要重写hashCode方法。这个方法在一些具有哈希功能的Collecti">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-01-23T16:57:01.259Z">
+<meta property="og:updated_time" content="2019-01-23T17:04:59.470Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="about">
-<meta name="twitter:description" content="Study hard and make progress every day">
+<meta name="twitter:title" content="java 基础(二)">
+<meta name="twitter:description" content="Object有哪些公用方法 clone 保护方法，实现对象的浅复制，只有实现了Cloneable接口才可以调用该方法，否则抛出CloneNotSupportedException异常。  equals 在Object中与==是一样的，子类一般需要重写该方法。  hashCode 该方法用于哈希查找，重写了equals方法一般都要重写hashCode方法。这个方法在一些具有哈希功能的Collecti">
 
 
 
@@ -123,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://10buns.com/about/">
+  <link rel="canonical" href="http://10buns.com/2018/08/11/java-基础-二/">
 
 
 
 
 
-  <title>about | 10buns</title>
+  <title>java 基础(二) | 10buns</title>
   
 
 
@@ -254,33 +252,178 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://10buns.com/2018/08/11/java-基础-二/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="10buns">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="10buns">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">about</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
+          <h1 class="post-title" itemprop="name headline">java 基础(二)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-11T00:40:46+08:00">
+                2018-08-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-      </div>
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <h3 id="Object有哪些公用方法"><a href="#Object有哪些公用方法" class="headerlink" title="Object有哪些公用方法"></a>Object有哪些公用方法</h3><ul>
+<li><p>clone 保护方法，实现对象的浅复制，只有实现了Cloneable接口才可以调用该方法，否则抛出CloneNotSupportedException异常。</p>
+</li>
+<li><p>equals 在Object中与==是一样的，子类一般需要重写该方法。</p>
+</li>
+<li><p>hashCode 该方法用于哈希查找，重写了equals方法一般都要重写hashCode方法。这个方法在一些具有哈希功能的Collection中用到。</p>
+</li>
+<li><p>getClass final方法，获得运行时类型</p>
+</li>
+<li><p>wait 使当前线程等待该对象的锁，当前线程必须是该对象的拥有者，也就是具有该对象的锁。 wait() 方法一直等待，直到获得锁或者被中断。 wait(long timeout) 设定一个超时间隔，如果在规定时间内没有获得锁就返回。</p>
+</li>
+<li><p>notify 唤醒在该对象上等待的某个线程。</p>
+</li>
+<li><p>notifyAll 唤醒在该对象上等待的所有线程。</p>
+</li>
+<li><p>toString 转换成字符串，一般子类都有重写，否则打印句柄。</p>
+</li>
+</ul>
+<h3 id="Java的四种引用，强弱软虚，用到的场景"><a href="#Java的四种引用，强弱软虚，用到的场景" class="headerlink" title="Java的四种引用，强弱软虚，用到的场景"></a>Java的四种引用，强弱软虚，用到的场景</h3><ol>
+<li>强引用</li>
+</ol>
+<p>最普遍的一种引用方式，如String s = “abc”，变量s就是字符串“abc”的强引用，只要强引用存在，则垃圾回收器就不会回收这个对象。</p>
+<ol start="2">
+<li>软引用（SoftReference）</li>
+</ol>
+<p>用于描述还有用但非必须的对象，如果内存足够，不回收，如果内存不足，则回收。一般用于实现内存敏感的高速缓存，软引用可以和引用队列ReferenceQueue联合使用，如果软引用的对象被垃圾回收，JVM就会把这个软引用加入到与之关联的引用队列中。</p>
+<ol start="3">
+<li>弱引用（WeakReference）</li>
+</ol>
+<p>弱引用和软引用大致相同，弱引用与软引用的区别在于：只具有弱引用的对象拥有更短暂的生命周期。在垃圾回收器线程扫描它所管辖的内存区域的过程中，一旦发现了只具有弱引用的对象，不管当前内存空间足够与否，都会回收它的内存。</p>
+<ol start="4">
+<li>虚引用（PhantomReference）</li>
+</ol>
+<p>就是形同虚设，与其他几种引用都不同，虚引用并不会决定对象的生命周期。如果一个对象仅持有虚引用，那么它就和没有任何引用一样，在任何时候都可能被垃圾回收器回收。 虚引用主要用来跟踪对象被垃圾回收器回收的活动。</p>
+<blockquote>
+<p>虚引用必须和引用队列 （ReferenceQueue）联合使用。当垃圾回收器准备回收一个对象时，如果发现它还有虚引，就会在回收对象的内存之前，把这个虚引用加入到与之关联的引用队列中。</p>
+</blockquote>
+
       
     </div>
     
     
     
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/07/什么是响应式编程/" rel="next" title="【 浅析 Spring WebFlux 】什么是响应式编程 ( 一 )">
+                <i class="fa fa-chevron-left"></i> 【 浅析 Spring WebFlux 】什么是响应式编程 ( 一 )
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/01/java-基础-一/" rel="prev" title="java 基础(一)">
+                java 基础(一) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -313,8 +456,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -399,6 +551,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Object有哪些公用方法"><span class="nav-number">1.</span> <span class="nav-text">Object有哪些公用方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java的四种引用，强弱软虚，用到的场景"><span class="nav-number">2.</span> <span class="nav-text">Java的四种引用，强弱软虚，用到的场景</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
