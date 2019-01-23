@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="10buns" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="1. 什么是线程线程是操作系统能够执行运算调度的最小单位，被包含在进程中，是进程的实际执行单位。 2. 什么是线程安全和不安全线程安不安全主要区别就是是否加锁 线程安全问题都是由全局变量及静态变量引起的。 若每个线程中对全局变量、静态变量只有读操作，而无写操作，一般来说，这个全局变量是线程安全的；若有多个线程同时执行写操作，一般都需要考虑线程同步，否则的话就可能影响线程安全。 3. 什么是自旋锁自">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java 多线程(一)">
+<meta property="og:url" content="http://10buns.com/2018/05/03/java-多线程-一/index.html">
+<meta property="og:site_name" content="10buns">
+<meta property="og:description" content="1. 什么是线程线程是操作系统能够执行运算调度的最小单位，被包含在进程中，是进程的实际执行单位。 2. 什么是线程安全和不安全线程安不安全主要区别就是是否加锁 线程安全问题都是由全局变量及静态变量引起的。 若每个线程中对全局变量、静态变量只有读操作，而无写操作，一般来说，这个全局变量是线程安全的；若有多个线程同时执行写操作，一般都需要考虑线程同步，否则的话就可能影响线程安全。 3. 什么是自旋锁自">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-01-23T16:14:40.979Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java 多线程(一)">
+<meta name="twitter:description" content="1. 什么是线程线程是操作系统能够执行运算调度的最小单位，被包含在进程中，是进程的实际执行单位。 2. 什么是线程安全和不安全线程安不安全主要区别就是是否加锁 线程安全问题都是由全局变量及静态变量引起的。 若每个线程中对全局变量、静态变量只有读操作，而无写操作，一般来说，这个全局变量是线程安全的；若有多个线程同时执行写操作，一般都需要考虑线程同步，否则的话就可能影响线程安全。 3. 什么是自旋锁自">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://10buns.com/2018/05/03/java-多线程-一/">
+
+
+
+
+
+  <title>java 多线程(一) | 10buns</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c873067502e43c16757b0901e5bb26c2";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">10buns</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://10buns.com/2018/05/03/java-多线程-一/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="10buns">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="10buns">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">java 多线程(一)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-03T22:57:16+08:00">
+                2018-05-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="1-什么是线程"><a href="#1-什么是线程" class="headerlink" title="1. 什么是线程"></a>1. 什么是线程</h3><p>线程是操作系统能够执行运算调度的最小单位，被包含在进程中，是进程的实际执行单位。</p>
+<h3 id="2-什么是线程安全和不安全"><a href="#2-什么是线程安全和不安全" class="headerlink" title="2. 什么是线程安全和不安全"></a>2. 什么是线程安全和不安全</h3><p>线程安不安全主要区别就是是否加锁</p>
+<p>线程安全问题都是由全局变量及静态变量引起的。 若每个线程中对全局变量、静态变量只有读操作，而无写操作，一般来说，这个全局变量是线程安全的；若有多个线程同时执行写操作，一般都需要考虑线程同步，否则的话就可能影响线程安全。</p>
+<h3 id="3-什么是自旋锁"><a href="#3-什么是自旋锁" class="headerlink" title="3. 什么是自旋锁"></a>3. 什么是自旋锁</h3><p>自旋锁是<code>SMP</code>架构中一种<code>low-level</code>同步机制</p>
+<p>当<code>线程1</code>想要获取一把自选锁而该锁又被其它线程锁持有时，<code>线程1</code>会在一个循环中自选以检测锁是不是已经可用了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">public class MyWaitNotify3</span><br><span class="line">&#123;</span><br><span class="line">    MonitorObject myMonitorObject = new MonitorObject();</span><br><span class="line">    boolean wasSignalled = false;</span><br><span class="line">    public void doWait()&#123;</span><br><span class="line">        synchronized(myMonitorObject)&#123;</span><br><span class="line">            while(!wasSignalled)&#123;        </span><br><span class="line">                try&#123;</span><br><span class="line">                  myMonitorObject.wait();         </span><br><span class="line">                &#125;</span><br><span class="line">                catch(InterruptedException ex)&#123;...&#125;      </span><br><span class="line">            &#125;</span><br><span class="line">            //clear signal and continue running.</span><br><span class="line">            wasSignalled = false;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">      </span><br><span class="line">    public void doNotify()&#123;</span><br><span class="line">        synchronized(myMonitorObject)&#123;</span><br><span class="line">            wasSignalled = true;</span><br><span class="line">            myMonitorObject.notify();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4-什么是Java内存模型"><a href="#4-什么是Java内存模型" class="headerlink" title="4. 什么是Java内存模型"></a>4. 什么是Java内存模型</h3><p>Java内存模型描述了在多线程代码中哪些行为是合法的，以及线程如何通过内存进行交互。它描述了<code>程序中的变量</code> 和 <code>从内存或者寄存器获取或存储它们的底层细节</code>之间的关系。Java内存模型通过使用各种各样的硬件和编译器的优化来正确实现以上事情。</p>
+<p>JVM内存结构主要有三大块：<code>堆内存</code>、<code>方法区</code>和<code>栈</code></p>
+<p><code>堆内存</code>:是JVM中最大的一块由年轻代和老年代组成，而年轻代内存又被分成三部分，<code>Eden空间</code>、<code>From Survivor空间</code>、<code>To Survivor空间</code>,默认情况下年轻代按照8:1:1的比例来分配。堆的唯一的目的是存放对象实例</p>
+<p><code>方法区</code>:存储类信息、常量、静态变量等数据，是线程共享的区域，为与Java堆区分，方法区还有一个别名Non-Heap(非堆)</p>
+<p><code>栈</code>:分为java虚拟机栈和本地方法栈主要用于方法的执行</p>
+<h3 id="5-什么是CAS"><a href="#5-什么是CAS" class="headerlink" title="5. 什么是CAS"></a>5. 什么是CAS</h3><p>CAS（compare and swap）的缩写，中文翻译成比较并交换。</p>
+<p>利用CPU的CAS指令，同时借助JNI来完成Java的非阻塞算法,实现原子操作。其它原子操作都是利用类似的特性完成的。</p>
+<p>CAS是项乐观锁技术，当多个线程尝试使用CAS同时更新同一个变量时，只有其中一个线程能更新变量的值，而其它线程都失败，失败的线程并不会被挂起，而是被告知这次竞争中失败，并可以再次尝试。</p>
+<p>使用CAS在线程冲突严重时，会大幅降低程序性能；CAS只适合于线程冲突较少的情况使用。</p>
+<p>synchronized在jdk1.6之后，已经改进优化。synchronized的底层实现主要依靠Lock-Free的队列，基本思路是自旋后阻塞，竞争切换后继续竞争锁，稍微牺牲了公平性，但获得了高吞吐量。在线程冲突较少的情况下，可以获得和CAS类似的性能；而线程冲突严重的情况下，性能远高于CAS。</p>
+<h3 id="6-什么是乐观锁和悲观锁"><a href="#6-什么是乐观锁和悲观锁" class="headerlink" title="6. 什么是乐观锁和悲观锁"></a>6. 什么是乐观锁和悲观锁</h3><p><code>悲观锁</code>: Java在JDK1.5之前都是靠synchronized关键字保证同步的，这种通过使用一致的锁定协议来协调对共享状态的访问，可以确保无论哪个线程持有共享变量的锁，都采用独占的方式来访问这些变量。独占锁其实就是一种悲观锁，所以可以说synchronized是悲观锁。</p>
+<p><code>乐观锁</code>: 相对悲观锁而言，乐观锁假设认为数据一般情况下不会造成冲突，所以在数据进行提交更新的时候，才会正式对数据的冲突与否进行检测，如果发现冲突了，则让返回用户错误的信息，让用户决定如何去做。</p>
+<h3 id="7-什么是AQS"><a href="#7-什么是AQS" class="headerlink" title="7. 什么是AQS"></a>7. 什么是AQS</h3><p>AbstractQueuedSynchronizer简称AQS，是一个用于构建锁和同步容器的框架。事实上concurrent包内许多类都是基于AQS构建，例如ReentrantLock，Semaphore，CountDownLatch，ReentrantReadWriteLock，FutureTask等。AQS解决了在实现同步容器时设计的大量细节问题。</p>
+<p>AQS使用一个FIFO的队列表示排队等待锁的线程，队列头节点称作“哨兵节点”或者“哑节点”，它不与任何线程关联。其他的节点与等待线程关联，每个节点维护一个等待状态waitStatus。</p>
+<h3 id="8-什么是原子操作"><a href="#8-什么是原子操作" class="headerlink" title="8. 什么是原子操作"></a>8. 什么是原子操作</h3><p>原子操作是指一个不受其他操作影响的操作任务单元。原子操作是在多线程环境下避免数据不一致必须的手段。</p>
+<h3 id="9-什么是Executors框架"><a href="#9-什么是Executors框架" class="headerlink" title="9. 什么是Executors框架"></a>9. 什么是Executors框架</h3><p>是一个根据一组执行策略调用、调度、执行和控制的异步任务的框架。利用Executors框架可以非常方便的创建一个线程池。</p>
+<p>Java通过Executors提供四种线程池，分别为：</p>
+<ul>
+<li><p><code>newCachedThreadPool</code>:创建一个可缓存线程池，如果线程池长度超过处理需要，可灵活回收空闲线程，若无可回收，则新建线程。</p>
+</li>
+<li><p><code>newFixedThreadPool</code>:创建一个定长线程池，可控制线程最大并发数，超出的线程会在队列中等待。</p>
+</li>
+<li><p><code>newScheduledThreadPool</code>:创建一个定长线程池，支持定时及周期性任务执行。</p>
+</li>
+<li><p><code>newSingleThreadExecutor</code>:创建一个单线程化的线程池，它只会用唯一的工作线程来执行任务，保证所有任务按照指定顺序(FIFO, LIFO, 优先级)执行</p>
+</li>
+</ul>
+<h3 id="10-什么是阻塞队列？如何使用阻塞队列来实现生产者-消费者模型？"><a href="#10-什么是阻塞队列？如何使用阻塞队列来实现生产者-消费者模型？" class="headerlink" title="10. 什么是阻塞队列？如何使用阻塞队列来实现生产者-消费者模型？"></a>10. 什么是阻塞队列？如何使用阻塞队列来实现生产者-消费者模型？</h3><p>阻塞队列是一个在队列基础上支持两个附加操作的队列。</p>
+<ul>
+<li><code>支持阻塞的插入方法</code>: 队列满时，队列会阻塞插入元素的线程，直到队列不满。 </li>
+<li><code>支持阻塞的移除方法</code>: 队列空时，获取元素的线程会等待队列变为非空。</li>
+</ul>
+<p>BlockingQueue是一种数据结构，支持一个线程往里存资源，另一个线程从里取资源。这正是解决生产者消费者问题所需要的。</p>
+<h3 id="11-什么是Callable和Future"><a href="#11-什么是Callable和Future" class="headerlink" title="11. 什么是Callable和Future?"></a>11. 什么是Callable和Future?</h3><p>当我们需要获取线程的执行结果时，就需要用到它们。Callable用于产生结果，Future用于获取结果。</p>
+<p>Callable接口使用泛型去定义它的返回类型。Executors类提供了一些有用的方法去在线程池中执行Callable内的任务。由于Callable任务是并行的，必须等待它返回的结果。java.util.concurrent.Future对象解决了这个问题。</p>
+<p>在线程池提交Callable任务后返回了一个Future对象，使用它可以知道Callable任务的状态和得到Callable返回的执行结果。Future提供了get()方法，等待Callable结束并获取它的执行结果。</p>
+<h3 id="12-什么是FutureTask"><a href="#12-什么是FutureTask" class="headerlink" title="12. 什么是FutureTask"></a>12. 什么是FutureTask</h3><p>FutureTask可用于异步获取执行结果或取消执行任务的场景。通过传入Runnable或者Callable的任务给FutureTask，直接调用其run方法或者放入线程池执行，之后可以在外部通过FutureTask的get方法异步获取执行结果，因此，FutureTask非常适合用于耗时的计算，主线程可以在完成自己的任务后，再去获取结果。另外，FutureTask还可以确保即使调用了多次run方法，它都只会执行一次Runnable或者Callable任务，或者通过cancel取消FutureTask的执行等。</p>
+<h3 id="13-Condition接口及其实现原理"><a href="#13-Condition接口及其实现原理" class="headerlink" title="13. Condition接口及其实现原理"></a>13. Condition接口及其实现原理</h3><p>Condition是一个多线程间协调通信的工具类，使得某个或某些线程一起等待某个条件（Condition）,只有当该条件具备( signal 或者 signalAll方法被带调用)时 ，这些等待线程才会被唤醒，从而重新争夺锁。</p>
+<p>Condition自己也维护了一个队列，该队列的作用是维护一个等待signal信号的队列，两个队列的作用是不同，事实上，每个线程也仅仅会同时存在以上两个队列中的一个，流程如下:</p>
+<ol>
+<li>线程1调用reentrantLock.lock时，线程被加入到AQS的等待队列中。</li>
+<li>线程1调用await方法被调用时，该线程从AQS中移除，对应操作是锁的释放。</li>
+<li>接着马上被加入到Condition的等待队列中，以为着该线程需要signal信号。</li>
+<li>线程2，因为线程1释放锁的关系，被唤醒，并判断可以获取锁，于是线程2获取锁，并被加入到AQS的等待队列中。</li>
+<li>线程2调用signal方法，这个时候Condition的等待队列中只有线程1一个节点，于是它被取出来，并被加入到AQS的等待队列中。 注意，这个时候，线程1 并没有被唤醒。</li>
+<li>signal方法执行完毕，线程2调用reentrantLock.unLock()方法，释放锁。这个时候因为AQS中只有线程1，于是，AQS释放锁后按从头到尾的顺序唤醒线程时，线程1被唤醒，于是线程1回复执行。</li>
+<li>直到释放所整个过程执行完毕。</li>
+</ol>
+<p>整个协作过程是靠结点在AQS的等待队列和Condition的等待队列中来回移动实现的，Condition作为一个条件类，很好的自己维护了一个等待信号的队列，并在适时的时候将结点加入到AQS的等待队列中来实现的唤醒操作。</p>
+<h3 id="14-Fork-Join框架的理解"><a href="#14-Fork-Join框架的理解" class="headerlink" title="14. Fork/Join框架的理解"></a>14. Fork/Join框架的理解</h3><p>Fork/Join框架是一个实现了ExecutorService接口的多线程处理器。它可以把一个大的任务划分为若干个小的任务并发执行，充分利用可用的资源，进而提高应用的执行效率。</p>
+<h3 id="15-wait-和sleep-的区别"><a href="#15-wait-和sleep-的区别" class="headerlink" title="15. wait()和sleep()的区别"></a>15. wait()和sleep()的区别</h3><p><code>sleep()方法</code>: 是线程类（Thread）的静态方法，让调用线程进入睡眠状态，让出执行机会给其他线程，等到休眠时间结束后，线程进入就绪状态和其他线程一起竞争cpu的执行时间。</p>
+<p>因为sleep() 是static静态的方法，他不能改变对象的机锁，当一个synchronized块中调用了sleep() 方法，线程虽然进入休眠，但是对象的机锁没有被释放，其他线程依然无法访问这个对象。</p>
+<p><code>wait()方法</code>:是Object类的方法，当一个线程执行到wait方法时，它就进入到一个和该对象相关的等待池，同时释放对象的机锁，使得其他线程能够访问，可以通过notify，notifyAll方法来唤醒等待的线程</p>
+<h3 id="16-线程的五个状态"><a href="#16-线程的五个状态" class="headerlink" title="16. 线程的五个状态"></a>16. 线程的五个状态</h3><ul>
+<li>创建状态:在生成线程对象，并没有调用该对象的start方法，这是线程处于创建状态。</li>
+<li>就绪状态:当调用了线程对象的start方法之后，该线程就进入了就绪状态，但是此时线程调度程序还没有把该线程设置为当前线程，此时处于就绪状态。在线程运行之后，从等待或者睡眠中回来之后:也会处于就绪状态。</li>
+<li>运行状态:线程调度程序将处于就绪状态的线程设置为当前线程，此时线程就进入了运行状态，开始运行run函数当中的代码。</li>
+<li>阻塞状态:线程正在运行的时候，被暂停，通常是为了等待某个时间的发生(比如说某项资源就绪)之后再继续运行。sleep,suspend，wait等方法都可以导致线程阻塞。</li>
+<li>死亡状态:如果一个线程的run方法执行结束或者调用stop方法后，该线程就会死亡。对于已经死亡的线程，无法再使用start方法令其进入就绪</li>
+</ul>
+<h3 id="17-start-方法和run-方法的区别"><a href="#17-start-方法和run-方法的区别" class="headerlink" title="17. start()方法和run()方法的区别"></a>17. start()方法和run()方法的区别</h3><p>每个线程都是通过某个特定Thread对象所对应的方法run()来完成其操作的，方法run()称为线程体。通过调用Thread类的start()方法来启动一个线程。</p>
+<p>start()方法来启动一个线程，真正实现了多线程运行。这时无需等待run方法体代码执行完毕，可以直接继续执行下面的代码；</p>
+<p>run()方法是在本线程里的，只是线程里的一个函数,而不是多线程的。</p>
+<h3 id="18-Runnable接口和Callable接口的区别"><a href="#18-Runnable接口和Callable接口的区别" class="headerlink" title="18. Runnable接口和Callable接口的区别"></a>18. Runnable接口和Callable接口的区别</h3><ul>
+<li>Runnable接口中的run()方法的返回值是void，它做的事情只是纯粹地去执行run()方法中的代码而已</li>
+<li>Callable接口中的call()方法是有返回值的，是一个泛型，和Future、FutureTask配合可以用来获取异步执行的结果</li>
+</ul>
+<h3 id="19-volatile关键字的作用"><a href="#19-volatile关键字的作用" class="headerlink" title="19. volatile关键字的作用"></a>19. volatile关键字的作用</h3><p>多线程主要围绕可见性和原子性两个特性而展开，使用volatile关键字修饰的变量，保证了其在多线程之间的可见性，即每次读取到volatile变量，一定是最新的数据</p>
+<h3 id="20-线程实现的方式有几种"><a href="#20-线程实现的方式有几种" class="headerlink" title="20. 线程实现的方式有几种"></a>20. 线程实现的方式有几种</h3><ul>
+<li>继承Thread类，重写run方法</li>
+<li>实现Runnable接口，重写run方法，实现Runnable接口的实现类的实例对象作为Thread构造函数的target</li>
+<li>实现Callable接口通过FutureTask包装器来创建Thread线程</li>
+<li>通过线程池创建线程</li>
+</ul>
+<h3 id="21-高并发、任务执行时间短的业务怎样使用线程池？并发不高、任务执行时间长的业务怎样使用线程池？并发高、业务执行时间长的业务怎样使用线程池？"><a href="#21-高并发、任务执行时间短的业务怎样使用线程池？并发不高、任务执行时间长的业务怎样使用线程池？并发高、业务执行时间长的业务怎样使用线程池？" class="headerlink" title="21. 高并发、任务执行时间短的业务怎样使用线程池？并发不高、任务执行时间长的业务怎样使用线程池？并发高、业务执行时间长的业务怎样使用线程池？"></a>21. 高并发、任务执行时间短的业务怎样使用线程池？并发不高、任务执行时间长的业务怎样使用线程池？并发高、业务执行时间长的业务怎样使用线程池？</h3><ol>
+<li><p>高并发、任务执行时间短的业务，线程池线程数可以设置为CPU核数+1，减少线程上下文的切换</p>
+</li>
+<li><p>并发不高、任务执行时间长的业务要区分开看：</p>
+<ul>
+<li>假如是业务时间长集中在IO操作上，也就是IO密集型的任务，因为IO操作并不占用CPU，所以不要让所有的CPU闲下来，可以加大线程池中的线程数目，让CPU处理更多的业务</li>
+<li>假如是业务时间长集中在计算操作上，也就是计算密集型任务，这个就没办法了，和（1）一样吧，线程池中的线程数设置得少一些，减少线程上下文的切换</li>
+</ul>
+</li>
+<li><p>并发高、业务执行时间长，解决这种类型任务的关键不在于线程池而在于整体架构的设计，看看这些业务里面某些数据是否能做缓存是第一步，增加服务器是第二步。最后，业务执行时间长的问题，也可能需要分析一下，看看能不能使用中间件对任务进行拆分和解耦。</p>
+</li>
+</ol>
+<h3 id="22-生产者消费者模型的作用是什么"><a href="#22-生产者消费者模型的作用是什么" class="headerlink" title="22. 生产者消费者模型的作用是什么"></a>22. 生产者消费者模型的作用是什么</h3><ul>
+<li><p>通过平衡生产者的生产能力和消费者的消费能力来提升整个系统的运行效率，这是生产者消费者模型最重要的作用</p>
+</li>
+<li><p>解耦，这是生产者消费者模型附带的作用，解耦意味着生产者和消费者之间的联系少，联系越少越可以独自发展而不需要收到相互的制约</p>
+</li>
+</ul>
+<h3 id="23-怎么唤醒一个阻塞的线程"><a href="#23-怎么唤醒一个阻塞的线程" class="headerlink" title="23. 怎么唤醒一个阻塞的线程"></a>23. 怎么唤醒一个阻塞的线程</h3><p>如果线程是因为调用了wait()、sleep()或者join()方法而导致的阻塞，可以中断线程，并且通过抛出InterruptedException来唤醒它；如果线程遇到了IO阻塞，就无法唤醒。</p>
+<h3 id="24-线程类的构造方法、静态块是被哪个线程调用的"><a href="#24-线程类的构造方法、静态块是被哪个线程调用的" class="headerlink" title="24. 线程类的构造方法、静态块是被哪个线程调用的"></a>24. 线程类的构造方法、静态块是被哪个线程调用的</h3><p>线程类的构造方法、静态块是被new这个线程类所在的线程所调用的，而run方法里面的代码才是被线程自身所调用的。</p>
+<p>如果说上面的说法让你感到困惑，那么我举个例子，假设Thread2中new了Thread1，main函数中new了Thread2，那么：</p>
+<ul>
+<li>Thread2的构造方法、静态块是main线程调用的，Thread2的run()方法是Thread2自己调用的</li>
+<li>Thread1的构造方法、静态块是Thread2调用的，Thread1的run()方法是Thread1自己调用的</li>
+</ul>
+<h3 id="25-同步方法和同步块，哪个是更好的选择"><a href="#25-同步方法和同步块，哪个是更好的选择" class="headerlink" title="25. 同步方法和同步块，哪个是更好的选择"></a>25. 同步方法和同步块，哪个是更好的选择</h3><p>同步块是更好的选择，因为它不会锁住整个对象（当然也可以让它锁住整个对象）。同步方法会锁住整个对象，哪怕这个类中有多个不相关联的同步块，这通常会导致他们停止执行并需要等待获得这个对象上的锁。</p>
+<h3 id="26-如何检测死锁？怎么预防死锁？"><a href="#26-如何检测死锁？怎么预防死锁？" class="headerlink" title="26. 如何检测死锁？怎么预防死锁？"></a>26. 如何检测死锁？怎么预防死锁？</h3><p>死锁是指两个或两个以上的进程在执行过程中，因争夺资源而造成的一种互相等待的现象，若无外力作用，它们都将无法推进下去。</p>
+<ol>
+<li><code>互斥条件</code>:进程对所分配到的资源不允许其他进程进行访问，若其他进程访问该资源，只能等待，直至占有该资源的进程使用完成后释放该资源</li>
+<li><code>请求和保持条件</code>:进程获得一定的资源之后，又对其他资源发出请求，但是该资源可能被其他进程占有，此事请求阻塞，但又对自己获得的资源保持不放</li>
+<li><code>不可剥夺条件</code>:是指进程已获得的资源，在未完成使用之前，不可被剥夺，只能在使用完后自己释放</li>
+<li><code>环路等待条件</code>:是指进程发生死锁后，若干进程之间形成一种头尾相接的循环等待资源关系</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/19/Proxy 代理模式/" rel="next" title="Proxy 代理模式">
+                <i class="fa fa-chevron-left"></i> Proxy 代理模式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/20/微服务杂谈/" rel="prev" title="微服务杂谈">
+                微服务杂谈 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">10buns</p>
+              <p class="site-description motion-element" itemprop="description">Study hard and make progress every day</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">categories</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-什么是线程"><span class="nav-number">1.</span> <span class="nav-text">1. 什么是线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-什么是线程安全和不安全"><span class="nav-number">2.</span> <span class="nav-text">2. 什么是线程安全和不安全</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-什么是自旋锁"><span class="nav-number">3.</span> <span class="nav-text">3. 什么是自旋锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-什么是Java内存模型"><span class="nav-number">4.</span> <span class="nav-text">4. 什么是Java内存模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-什么是CAS"><span class="nav-number">5.</span> <span class="nav-text">5. 什么是CAS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-什么是乐观锁和悲观锁"><span class="nav-number">6.</span> <span class="nav-text">6. 什么是乐观锁和悲观锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-什么是AQS"><span class="nav-number">7.</span> <span class="nav-text">7. 什么是AQS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-什么是原子操作"><span class="nav-number">8.</span> <span class="nav-text">8. 什么是原子操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-什么是Executors框架"><span class="nav-number">9.</span> <span class="nav-text">9. 什么是Executors框架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-什么是阻塞队列？如何使用阻塞队列来实现生产者-消费者模型？"><span class="nav-number">10.</span> <span class="nav-text">10. 什么是阻塞队列？如何使用阻塞队列来实现生产者-消费者模型？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-什么是Callable和Future"><span class="nav-number">11.</span> <span class="nav-text">11. 什么是Callable和Future?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-什么是FutureTask"><span class="nav-number">12.</span> <span class="nav-text">12. 什么是FutureTask</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-Condition接口及其实现原理"><span class="nav-number">13.</span> <span class="nav-text">13. Condition接口及其实现原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14-Fork-Join框架的理解"><span class="nav-number">14.</span> <span class="nav-text">14. Fork/Join框架的理解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-wait-和sleep-的区别"><span class="nav-number">15.</span> <span class="nav-text">15. wait()和sleep()的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16-线程的五个状态"><span class="nav-number">16.</span> <span class="nav-text">16. 线程的五个状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17-start-方法和run-方法的区别"><span class="nav-number">17.</span> <span class="nav-text">17. start()方法和run()方法的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#18-Runnable接口和Callable接口的区别"><span class="nav-number">18.</span> <span class="nav-text">18. Runnable接口和Callable接口的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#19-volatile关键字的作用"><span class="nav-number">19.</span> <span class="nav-text">19. volatile关键字的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#20-线程实现的方式有几种"><span class="nav-number">20.</span> <span class="nav-text">20. 线程实现的方式有几种</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#21-高并发、任务执行时间短的业务怎样使用线程池？并发不高、任务执行时间长的业务怎样使用线程池？并发高、业务执行时间长的业务怎样使用线程池？"><span class="nav-number">21.</span> <span class="nav-text">21. 高并发、任务执行时间短的业务怎样使用线程池？并发不高、任务执行时间长的业务怎样使用线程池？并发高、业务执行时间长的业务怎样使用线程池？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#22-生产者消费者模型的作用是什么"><span class="nav-number">22.</span> <span class="nav-text">22. 生产者消费者模型的作用是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#23-怎么唤醒一个阻塞的线程"><span class="nav-number">23.</span> <span class="nav-text">23. 怎么唤醒一个阻塞的线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#24-线程类的构造方法、静态块是被哪个线程调用的"><span class="nav-number">24.</span> <span class="nav-text">24. 线程类的构造方法、静态块是被哪个线程调用的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#25-同步方法和同步块，哪个是更好的选择"><span class="nav-number">25.</span> <span class="nav-text">25. 同步方法和同步块，哪个是更好的选择</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#26-如何检测死锁？怎么预防死锁？"><span class="nav-number">26.</span> <span class="nav-text">26. 如何检测死锁？怎么预防死锁？</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">10buns</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
