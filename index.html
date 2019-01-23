@@ -305,11 +305,15 @@
       
         
           
-            <h2 id="Portainer"><a href="#Portainer" class="headerlink" title="Portainer"></a>Portainer</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ docker pull portainer</span><br><span class="line">$ docker volume create ~/dev/docker_volume/data</span><br><span class="line">$ docker run -d -p 9000:9000 \</span><br><span class="line">    --restart=always \</span><br><span class="line">    -v /var/run/docker.sock:/var/run/docker.sock \</span><br><span class="line">    -v portainer_data:/data \</span><br><span class="line">    --name prtainer\</span><br><span class="line">    portainer</span><br></pre></td></tr></table></figure>
-<h2 id="redis"><a href="#redis" class="headerlink" title="redis"></a>redis</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ docker pull redis:3.2</span><br><span class="line">$ docker run -p 6379:6379 --restart=always \</span><br><span class="line">    -v ~/dev/docker_volume/redis/redis.conf:/etc/redis/redis.conf \</span><br><span class="line">    -v ~/dev/docker_volume/redis:/data \</span><br><span class="line">    --name redis\</span><br><span class="line">    -d redis redis-server /data/redis.conf</span><br></pre></td></tr></table></figure>
-<h2 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ docker run --name mysql \</span><br><span class="line">    -v /dev/docker_volume/mysql/data:/var/lib/mysql \</span><br><span class="line">    -e MYSQL_ROOT_PASSWORD=123456 \</span><br><span class="line">    -p 6630:3306 \</span><br><span class="line">    -d mysql.5.7</span><br></pre></td></tr></table></figure>
-
-          
+          Portainer12345678$ docker pull portainer$ docker volume create ~/dev/docker_volume/data$ docker run -d -p 9000:9000 \    --restart=always \    -v /var
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/01/01/Docker-安装-Redis-Mysql-portainer/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -427,40 +431,24 @@
       
         
           
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>当我们提供对外的<code>HTTP</code>服务时，需要有一套机制来保证服务的安全。此时可以选择使用<code>aouth2</code>作为一种方案。</p>
-<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>使用<code>Spring Security Oauth2</code>主要包含三个步骤:</p>
-<ol>
-<li>配置 <code>Security</code></li>
-<li>配置认证服务器</li>
-<li>配置资源服务器</li>
-</ol>
-<p><code>oauth2</code>提供了四种模式来应对不同的使用场景:</p>
-<ul>
-<li>授权码模式（Authorization Code） </li>
-<li>授权码简化模式（Implicit） </li>
-<li>密码模式（Resource Owner Password Credentials） </li>
-<li>客户端模式（Client Credentials） </li>
-<li>扩展模式（Extension）</li>
-</ul>
-<p>不论哪种模式，都是通过从认证服务器获取<code>Access Token</code>，以用来访问资源服务器。<br>而申请<code>Access Token</code>，需要提交相应信息。例如<code>Client_ID(我是谁)</code>，<code>response_type</code>或<code>grant_typt</code>(申请哪种模式)，<code>scope</code>(申请哪些权限，由授权服务器定义)，<code>redirect_uri</code>(申请结果跳转至哪儿)等。</p>
-<h2 id="客户端模式"><a href="#客户端模式" class="headerlink" title="客户端模式"></a>客户端模式</h2><p><img src="https://github.com/10Buns/pictureForMarkDown/raw/master/%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%A8%A1%E5%BC%8F.png" alt="客户端模式"><br>该模式并不是对个体用户授权，而是被授权的主体为client</p>
-<h2 id="密码模式"><a href="#密码模式" class="headerlink" title="密码模式"></a>密码模式</h2><p><img src="https://github.com/10Buns/pictureForMarkDown/raw/master/%E5%AF%86%E7%A0%81%E6%A8%A1%E5%BC%8F.png" alt="密码模式"></p>
-<blockquote>
-<p>需要用户将自身的<code>account id</code> 和<code>password</code>交由<code>client</code>，<code>client</code>将使用它们来申请<code>access token</code>，整个过程会将用户信息暴露。除非<code>client</code>十分可靠(例如自有应用)，否则不推荐使用。</p>
-</blockquote>
-<h2 id="授权码模式"><a href="#授权码模式" class="headerlink" title="授权码模式"></a>授权码模式</h2><p><img src="https://github.com/10Buns/pictureForMarkDown/raw/master/%E6%8E%88%E6%9D%83%E7%A0%81%E6%A8%A1%E5%BC%8F.png" alt="授权码模式"></p>
-<p>流程:</p>
-<ol>
-<li>网站向用户展示，支持QQ、微信、支付宝等第三方式登录。用户选择其中一种，例如QQ，则跳转至QQ界面（User-Agent），通常为WEB界面。此时，若用户未登录，则要求用户登录，若已登录，则询问是否授权，以及展示授权后会获得哪些权限。 </li>
-<li>用户点击授权，触发申请。 </li>
-<li>假设授权通过，QQ认证服务器将用户导向网站事先指定的”重定向URI”（redirection URI），同时附上一个Authorization Code。 </li>
-<li>网站收到授权码，附上之前的”重定向URI”，向认证服务器申请Access Token。这一步是在网站的后台的服务器上完成的，对用户不可见。 </li>
-<li>认证服务器核对了授权码和重定向URI，确认无误后，向网站发送访问令牌（access token）和更新令牌（refresh token)</li>
-</ol>
-<h2 id="授权码简化模式"><a href="#授权码简化模式" class="headerlink" title="授权码简化模式"></a>授权码简化模式</h2><p>在授权码模式中<code>authorization code</code>和<code>access token</code>都由授权服务器生成和验证，但只使用了<code>access token</code>，使得<code>authorization code</code>多余。因此在授权码简化模式，舍弃<code>authorization code</code>，直接通过<code>user-agent</code>直接申请<code>access token</code></p>
-<h2 id="扩展模式"><a href="#扩展模式" class="headerlink" title="扩展模式"></a>扩展模式</h2><p>是一种自定义模式，规范中仅对<code>grant type</code>参数提出了必须是<code>URI</code>的要求，对于其他申请数据，可以自行定义。</p>
+          前言当我们提供对外的HTTP服务时，需要有一套机制来保证服务的安全。此时可以选择使用aouth2作为一种方案。
+概述使用Spring Security Oauth2主要包含三个步骤:
 
-          
+配置 Security
+配置认证服务器
+配置资源服务器
+
+oauth2提供了四种模式来应对不同的使用场景:
+
+授权
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/12/15/Spring-Security-Oauth2-入门/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -578,30 +566,20 @@
       
         
           
-            <p>安装 gcc 和 make</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yum install gcc make</span><br></pre></td></tr></table></figure>
-<p>下载压缩包</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ curl http://download.redis.io/releases/redis-3.0.4.tar.gz -o </span><br><span class="line">redis-3.0.4.tar.gz</span><br></pre></td></tr></table></figure>
-<p>解压缩</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tar zxvf redis-3.0.4.tar.gz</span><br></pre></td></tr></table></figure>
-<p>编译 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ d redis-3.0.4</span><br><span class="line">$ make</span><br></pre></td></tr></table></figure>
-<p>安装 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ cd src</span><br><span class="line">$ cp redis-server redis-cli /usr/local/bin</span><br><span class="line">$ cp redis-sentinel redis-benchmark redis-check-aof redis-check-dump /usr/local/bin</span><br><span class="line">$ mkdir /etc/redis</span><br><span class="line">$ mkdir -p /var/lib/redis/6379</span><br></pre></td></tr></table></figure>
-<p>配置 vm.overcommit_memory 为1，这可以避免数据被截断</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sysctl -w vm.overcommit_memory=1</span><br></pre></td></tr></table></figure>
-<p>修改 backlog 连接数的最大值超过 redis.conf 中的 tcp-backlog 值，即默认值511</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sysctl -w net.core.somaxconn=512</span><br></pre></td></tr></table></figure>
-<p>取消对透明巨页内存（transparent huge pages）的支持，因为这会造成 redis 使用过程产生延时和内存访问问题</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ echo never &gt; /sys/kernel/mm/transparent_hugepage/enabled</span><br></pre></td></tr></table></figure>
-<p>复制示例的 redis.conf 到 /etc/redis/6379.conf</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cp redis.conf /etc/redis/6379.conf</span><br></pre></td></tr></table></figure>
-<p>修改参数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ vi /etc/redis/6379.conf</span><br><span class="line">daemonize no</span><br><span class="line">pidfile /var/run/redis_6379.pid </span><br><span class="line">port 6379 #修改端口</span><br><span class="line">dir /var/lib/redis/6379 #设置目录</span><br><span class="line">requirepass &quot;123456&quot; # 修改密码</span><br></pre></td></tr></table></figure>
-<p>启动</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ /usr/local/bin/redis-server /etc/redis/6379.conf</span><br><span class="line">$ /usr/local/bin/redis-cli # 访问</span><br></pre></td></tr></table></figure>
-
-          
+          安装 gcc 和 make
+1$ yum install gcc make
+下载压缩包
+12$ curl http://download.redis.io/releases/redis-3.0.4.tar.gz -o redis-3.0.4.tar.gz
+解压缩
+1$ tar zxvf redis-
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/10/05/centos-安装-redis/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -719,62 +697,21 @@
       
         
           
-            <blockquote>
-<p>Java 集合框架也称为容器 ，本文主要对如下部分进行源码分析，并讲解面试中常见问题 。</p>
-</blockquote>
-<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>Java 集合框架位于<code>java.util</code>包下 ，主要有三个大类 : Collection(接口) 、Map(接口) 、集合工具类。提供了数据持有对象的方式 、对数据集合的操作。</p>
-<p><img src="http://olt1b0ecs.bkt.clouddn.com/java 集合框架图.gif" alt="java 集合框架图"></p>
-<h2 id="Collection"><a href="#Collection" class="headerlink" title="Collection"></a>Collection</h2><ul>
-<li><p>ArrayList：线程不同步。默认初始容量为 10，当数组大小不足时容量扩大为 1.5 倍。为追求效率，没有实现同步（synchronized），若需要并发访问，只能可动同步，也可使用 Vector 替代。</p>
-</li>
-<li><p>LinkedList：线程不同步。双向链接实现。LinkedList 同时实现了 List 接口和 Deque 接口，既可以看作一个顺序容器，又可以看作一个队列，还可以看作一个栈。</p>
-</li>
-<li><p>Stack &amp; Queue：Java 有 Stack 类，但并没有叫做 Queue 的类，只有 Queue 接口，他。当需要使用栈时，推荐使用更高效的 ArrayDeque；当需要使用队列时也就首选 ArrayDeque。</p>
-</li>
-<li><p>Vector：线程同步。默认初始容量为 10，当数组大小不足时容量扩大为 2 倍。它的同步是通过 Iterator 方法加 synchronized 实现的。</p>
-</li>
-<li><p>TreeSet：线程不同步，内部使用 NavigableMap 操作。默认元素 <code>自然顺序</code> 排列，可以通过 Comparator 改变排序。TreeSet 里面有一个 TreeMap（适配器模式）。</p>
-</li>
-<li><p>HashSet：线程不同步，内部使用 HashMap 进行数据存储，提供的方法基本都是调用 HashMap 的方法，所以两者本质是一样的。集合元素可以为 NULL。</p>
-</li>
-<li><p>Set：Set 是一种不包含重复元素的 Collection，Set 最多只有一个 null 元素。Set 集合通常可以通过 Map 集合通过适配器模式得到。</p>
-</li>
-<li><p>PriorityQueue：Java 中 PriorityQueue 实现了 Queue 接口，不允许放入 null 元素；其通过堆实现，具体说是通过完全二叉树（complete binary tree）实现的小顶堆（任意一个非叶子节点的权值，都不大于其左右子节点的权值），也就意味着可以通过数组来作为 PriorityQueue 的底层实现。</p>
-<h2 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h2></li>
-<li><p>TreeMap：线程不同步，基于<code>红黑树（Red-Black tree）</code>的 NavigableMap 实现，能够把它保存的记录根据键排序，默认是按键值的升序排序，也可以指定排序的比较器，当用 Iterator 遍历 TreeMap 时，得到的记录是排过序的。</p>
-</li>
-<li><p>HashTable：线程安全，HashMap 的迭代器 (Iterator) 是 fail-fast 迭代器。HashTable 不能存储 NULL 的 key 和 value。</p>
-</li>
-<li><p>HashMap：线程不同步。根据 key 的 hashcode 进行存储，内部使用静态内部类 Node 的数组进行存储，默认初始大小为 16，每次扩大一倍。当发生 Hash 冲突时，采用拉链法（链表）。JDK 1.8中：当单个桶中元素个数大于等于8时，链表实现改为红黑树实现；当元素个数小于6时，变回链表实现。由此来防止hashCode攻击。HashMap 是 Hashtable 的轻量级实现，可以接受为 null 的键值 (key) 和值 (value)，而 Hashtable 不允许。</p>
-</li>
-<li><p>LinkedHashMap：保存了记录的插入顺序，在用 Iterator 遍历 LinkedHashMap 时，先得到的记录肯定是先插入的。也可以在构造时用带参数，按照应用次数排序。在遍历的时候会比 HashMap 慢，不过有种情况例外，当 HashMap 容量很大，实际数据较少时，遍历起来可能会比 LinkedHashMap 慢，因为 LinkedHashMap 的遍历速度只和实际数据有关，和容量无关，而 HashMap 的遍历速度和他的容量有关。</p>
-</li>
-<li><p>WeakHashMap：在 WeakHashMap 里的 entry 可能会被 GC 自动删除，即使没有手动调用 remove() 或者 clear() 方法。 WeakHashMap 的存储结构类似于HashMap。</p>
-</li>
-</ul>
-<h2 id="容器实现"><a href="#容器实现" class="headerlink" title="容器实现"></a>容器实现</h2><p><img src="http://olt1b0ecs.bkt.clouddn.com/java 容器通用实现.png" alt="java 容器通用实现"></p>
-<h1 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h1><h2 id="ArryList"><a href="#ArryList" class="headerlink" title="ArryList"></a>ArryList</h2><p>实现 List、RandomAccess 接口 , 可以插入空数据 , 也支持随机访问。</p>
-<p>ArrayList相当于动态数据，其中最重要的两个属性分别是: elementData 数组 , 以及 size 大小 。在调用 add() 方法的时候 : </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public boolean add(E e) &#123;</span><br><span class="line">    ensureCapacityInternal(size + 1);  // Increments modCount!!</span><br><span class="line">    elementData[size++] = e;</span><br><span class="line">    return true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ol>
-<li>先进行扩容校验</li>
-<li>将插入的值放到尾部，并将 size + 1 。</li>
-</ol>
-<p>如果调用 add(index , e) 指定位置添加:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public void add(int index, E element) &#123;</span><br><span class="line">    rangeCheckForAdd(index);</span><br><span class="line">    ensureCapacityInternal(size + 1);  // Increments modCount!!</span><br><span class="line">    //复制，向后移动</span><br><span class="line">    System.arraycopy(elementData, index, elementData, index + 1, size - index);</span><br><span class="line">    elementData[index] = element;</span><br><span class="line">    size++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ol>
-<li>先扩容校验</li>
-<li>然后进行数据复制 , 把 index 位置空出存放本次插入的数据 , 并将其后数据后移 。</li>
-</ol>
-<p>扩容最终调用 grow(int minCapacity) , 也就是数据复制:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">private void grow(int minCapacity) &#123;</span><br><span class="line">    // overflow-conscious code</span><br><span class="line">    int oldCapacity = elementData.length;</span><br><span class="line">    int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</span><br><span class="line">    if (newCapacity - minCapacity &lt; 0)</span><br><span class="line">        newCapacity = minCapacity;</span><br><span class="line">    if (newCapacity - MAX_ARRAY_SIZE &gt; 0)</span><br><span class="line">        newCapacity = hugeCapacity(minCapacity);        </span><br><span class="line">    // minCapacity is usually close to size, so this is a win:</span><br><span class="line">    elementData = Arrays.copyOf(elementData, newCapacity);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>因此 ArraryList 主要性能消耗是数据扩容及指定位置添加数据 ，因此应减少指定位置插入及预先指定大小 。</p>
-<h3 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h3><p>因 ArrayList 基于动态数组实现 ，导致并不是完全使用所有空间 。因此用<code>transient</code>修饰，防止自动序列化 。 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">transient Object[] elementData;</span><br></pre></td></tr></table></figure>
-<p>且 ArrayList 重写了 writeObject() 和 readObject() 来控制只序列化数组中有元素填充那部分内容。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">private void writeObject(java.io.ObjectOutputStream s)</span><br><span class="line">        throws java.io.IOException&#123;</span><br><span class="line">    // Write out element count, and any hidden stuff</span><br><span class="line">    int expectedModCount = modCount;</span><br><span class="line">    s.defaultWriteObject();</span><br><span class="line"></span><br><span class="line">    // Write out size as capacity for behavioural compatibility with clone()</span><br><span class="line">    s.writeInt(size);</span><br><span class="line">    // Write out all elements in the proper order.</span><br><span class="line">    for (int i=0; i&lt;size; i++) &#123;</span><br><span class="line">        s.writeObject(elementData[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    if (modCount != expectedModCount) &#123;</span><br><span class="line">        throw new ConcurrentModificationException();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private void readObject(java.io.ObjectInputStream s)</span><br><span class="line">        throws java.io.IOException, ClassNotFoundException&#123;</span><br><span class="line">    elementData = EMPTY_ELEMENTDATA;</span><br><span class="line">    // Read in size, and any hidden stuff</span><br><span class="line">    s.defaultReadObject();</span><br><span class="line">    // Read in capacity</span><br><span class="line">    s.readInt(); // ignored</span><br><span class="line">    if (size &gt; 0) &#123;</span><br><span class="line">        // be like clone(), allocate array based upon size not capacity</span><br><span class="line">        ensureCapacityInternal(size);</span><br><span class="line">    </span><br><span class="line">        Object[] a = elementData;</span><br><span class="line">        // Read in all elements in the proper order.</span><br><span class="line">        for (int i=0; i&lt;size; i++) &#123;</span><br><span class="line">            a[i] = s.readObject();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
           
+Java 集合框架也称为容器 ，本文主要对如下部分进行源码分析，并讲解面试中常见问题 。
+
+概述Java 集合框架位于java.util包下 ，主要有三个大类 : Collection(接口) 、Map(接口) 、集合工具类。提供了数据持有对象的方式 、对数据集合的操作。
+
+Collection
+
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/09/01/浅说java集合框架/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -892,20 +829,17 @@
       
         
           
-            <h3 id="1-java-中如何跳出当前多重循环"><a href="#1-java-中如何跳出当前多重循环" class="headerlink" title="1. java 中如何跳出当前多重循环"></a>1. java 中如何跳出当前多重循环</h3><p>使用标签语法， 循环前定义 <code>tag:</code> ，循环中 <code>break tag;</code></p>
-<h3 id="2-写-clone-方法时，通常都有一行代码，为什么？"><a href="#2-写-clone-方法时，通常都有一行代码，为什么？" class="headerlink" title="2. 写 clone() 方法时，通常都有一行代码，为什么？"></a>2. 写 clone() 方法时，通常都有一行代码，为什么？</h3><p>clone 有缺省行为，<code>super.clone()</code>; 因此首先要把父类成员复制结束，然后才能复制自己的成员</p>
-<h3 id="3-java-实现多态的机制？"><a href="#3-java-实现多态的机制？" class="headerlink" title="3. java 实现多态的机制？"></a>3. java 实现多态的机制？</h3><p>靠的是父类或接口定义的饮用变量可以指向子类或者实现类的实例对象，而程序调用的方法在运行期才动态绑定</p>
-<h3 id="4-基本数据类型"><a href="#4-基本数据类型" class="headerlink" title="4. 基本数据类型"></a>4. 基本数据类型</h3><p>byte, int, char, long, float, boolean, short, double</p>
-<h3 id="5-多线程有几种实现方法？同步有几种？"><a href="#5-多线程有几种实现方法？同步有几种？" class="headerlink" title="5. 多线程有几种实现方法？同步有几种？"></a>5. 多线程有几种实现方法？同步有几种？</h3><p>多线程: thread ,实现 Runnable 接口, 使用ExecutorService、Callable、Future实现有返回结果的多线程</p>
-<p>同步: synchronized, wait, notify</p>
-<h3 id="6-synchronized-与-Lock-区别"><a href="#6-synchronized-与-Lock-区别" class="headerlink" title="6. synchronized 与 Lock 区别"></a>6. synchronized 与 Lock 区别</h3><p>相同点: Lock 可以完成 synchronized 所有的功能</p>
-<p>异同点: Lock 比 synchronized 更为精确的线程语义和性能</p>
-<p>synchronized 会自动释放锁， Lock 必须手动释放</p>
-<h1 id="7-heap-与-stack-区别"><a href="#7-heap-与-stack-区别" class="headerlink" title="7. heap 与 stack 区别"></a>7. heap 与 stack 区别</h1><p>java 内存分为<code>栈内存</code>和<code>堆内存</code> </p>
-<p>栈内存指程序进入一个方法时，会位这个方法单独分配一块私属存储，用于存储这个方法私有变量，方法结束时会回收内存。</p>
-<p>堆一般用于存放不放在当前方法栈中的数据，比如对象，所以不会随方法结束而回收。final修饰的局部变量放在堆中。</p>
-
-          
+          1. java 中如何跳出当前多重循环使用标签语法， 循环前定义 tag: ，循环中 break tag;
+2. 写 clone() 方法时，通常都有一行代码，为什么？clone 有缺省行为，super.clone(); 因此首先要把父类成员复制结束，然后才能复制自己的成员
+3. java 实现多态
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/09/01/java-基础-一/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1023,20 +957,17 @@
       
         
           
-            <h2 id="什么是响应式编程"><a href="#什么是响应式编程" class="headerlink" title="什么是响应式编程"></a>什么是响应式编程</h2><p>开始之前 ，我们举一个例子——购物车。</p>
-<blockquote>
-<p>我们经常网上购物 ，购物车中添加了各种想买的和不确定是否必须买的商品 。以我自己来说 ，只有在平台搞活动才会购物车清空 ，但是每次购买都是有预算的 ，遇到商家的各种满减 、优惠券等怎么才能最大限度的买自己想买的东西呢 ？常见的电商购物车都有商品 、优惠 、邮费 、总价 。</p>
-</blockquote>
-<h4 id="1-The-propagation-of-change-变化传播"><a href="#1-The-propagation-of-change-变化传播" class="headerlink" title="1. The propagation of change 变化传播"></a>1. <code>The propagation of change</code> 变化传播</h4><p>为什么用购物车来举例 ？当购物车的总价超出预算或者有更优惠的组合时 ，通过购物车删减商品后 ，都会被实时的更新总价 。</p>
-<p>总价计算初始化时候监听购物车 ，一旦购物车有对应的价格计算的响应事件 ，总价计算就会响应这些事件 ，根据定义好的<code>单价 x 数量</code>进行计算总价 。 好比 Android 开发中的各种监听器 ， 声音的监听 ，摄像头的监听等 。</p>
-<p>一件商品发生变化后 ，会使引用它的地方发生变化 。这就是<strong><em>响应式的第一个核心特点 ：变化传播</em></strong> 。这就是<strong><em>响应式的第一个核心特点 ：变化传播</em></strong> ，简单来说就是以一个数据流为输入，经过一连串操作转化为另一个数据流，然后分发给各个订阅者的过程 。这就有点像函数式编程中的组合函数 ，将多个函数串联起来 ，把一组输入数据转化为格式迥异的输出数据 。</p>
-<h4 id="2-Data-streams-数据流"><a href="#2-Data-streams-数据流" class="headerlink" title="2. Data streams 数据流"></a>2. <code>Data streams</code> 数据流</h4><p>回头再看下购物车 ，现在已经有了一些商品 ，然后我每次里添加商品、删减商品数量 ，这种事件都会像一个个水珠经过水管流动 。这些操作事件连起来就是一串数据流（data stream）。这是<strong><em>响应式的第二个核心特点：基于数据流</em></strong> ，其中又分为静态数据流（比如数组 、文件）和动态数据流（比如事件流 、日志流）两种 。基于数据流模型 ，响应式编程得以提供一套统一的 Stream 风格的数据处理接口 。和 Java 8 中的 Stream API 相比 ，响应式编程 API 除了支持静态数据流 ，还支持动态数据流 ，并且允许复用和同时接入多个订阅者 。</p>
-<h4 id="3-Declarative-声明式"><a href="#3-Declarative-声明式" class="headerlink" title="3. Declarative 声明式"></a>3. <code>Declarative</code> 声明式</h4><p>接着上面 ，我们说到总价计算会响应事件 ，根据预先定义好的公式进行计算总价 。这是一种 <strong><em>声明式</em></strong> 的编程范式 。通过串起来的 map 调用 ，先声明好对于数据流将进行怎样的处理 ，当有数据流过来时 ，就会按照声明的流程进行处理 。</p>
-<p><img src="http://olt1b0ecs.bkt.clouddn.com/屏幕快照 2018-08-10 00.57.06.png" alt="价格计算事件流"></p>
-<p>无论购物车的商品如何变化 ，总价的计算逻辑是不变的 ，从而形成了一种对计算逻辑的 <code>绑定</code> 。</p>
-<p><strong><em>一句话 ，响应式编程是一种基于<code>变化传递</code>和<code>数据流</code>的<code>声明式</code>的编程范式 。</em></strong></p>
+          什么是响应式编程开始之前 ，我们举一个例子——购物车。
 
-          
+我们经常网上购物 ，购物车中添加了各种想买的和不确定是否必须买的商品 。以我自己来说 ，只有在平台搞活动才会购物车清空 ，但是每次购买都是有预算的 ，遇到商家的各种满减 、优惠券等怎么才能最大限度的买自己想买的东西呢 ？常见的电商购物车都有商
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/08/07/什么是响应式编程/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1154,49 +1085,19 @@
       
         
           
-            <p><img src="http://olt1b0ecs.bkt.clouddn.com/Spring 事务配置-1.png" alt="Spring 事务配置"></p>
-<blockquote>
-<p>Spring 配置文件中关于事务配置总是由三个组成部分，分别是 DataSource 、TransactionManager 和代理机制这三部分，无论哪种配置方式，一般变化的只是代理机制这部分 。</p>
-</blockquote>
-<p>Spring 声明式事务让我们从复杂的事务处理中得到解脱 。使得无需要去处理获得连接、关闭连接、事务提交和回滚等这些操作 ，更不需要在与事务相关的方法中处理大量的 try…catch…finally 代码 。 </p>
-<p>在使用 Spring 声明式事务时 ，有一个非常重要的概念就是事务属性 。事务属性通常由事务的传播行为 、事务的隔离级别 、事务的超时值和事务只读标志组成 。在进行事务划分时 ，需要进行事务定义 ，也就是配置事务的属性 。 </p>
-<p>Spring 在 TransactionDefinition 接口中定义这些属性 ，以供PlatformTransactionManager 使用 ， PlatformTransactionManager 是 spring 事务管理的核心接口 。</p>
-<p><strong>PlatformTransactionManager接口定义如下：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public interface PlatformTransactionManager &#123;  </span><br><span class="line">    TransactionStatus getTransaction(TransactionDefinition definition) throws TransactionException;  </span><br><span class="line">    void commit(TransactionStatus status) throws TransactionException;  </span><br><span class="line">    void rollback(TransactionStatus status) throws TransactionException;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li>getTransaction(): 返回一个已经激活的事务或创建一个新的事务（根据给定的 TransactionDefinition 类型参数定义的事务属性），返回的是 TransactionStatus 对象代表了当前事务的状态，其中该方法抛出 TransactionException（未检查异常）表示事务由于某种原因失败。</li>
-<li>commit(): 用于提交 TransactionStatus 参数代表的事务</li>
-<li>rollback(): 用于回滚 TransactionStatus 参数代表的事务</li>
-</ul>
-</blockquote>
-<p><strong>TransactionDefinition接口定义如下：</strong></p>
-<pre><code>public interface TransactionDefinition {  
-    int getPropagationBehavior();  
-    int getIsolationLevel();  
-    int getTimeout();  
-    boolean isReadOnly();  
-}  
-</code></pre><blockquote>
-<ul>
-<li>getPropagationBehavior(): 返回定义的事务传播行为</li>
-<li>getIsolationLevel(): 返回定义的事务隔离级别</li>
-<li>getTimeout(): 返回定义的事务超时时间</li>
-<li>isReadOnly(): 返回定义的事务是否是只读的</li>
-<li>getName(): 返回定义的事务名字</li>
-</ul>
-</blockquote>
-<p>在TransactionDefinition接口中定义了五个不同的事务隔离级别:</p>
-<p><strong>ISOLATION_DEFAULT</strong> 这是一个 PlatformTransactionManager 默认的隔离级别 ，使用数据库默认的事务隔离级别 。另外四个与JDBC的隔离级别相对应<br><strong>ISOLATION_READ_UNCOMMITTED</strong> 这是事务最低的隔离级别 ，它充许别外一个事务可以看到这个事务未提交的数据 。这种隔离级别会产生脏读 ，不可重复读和幻像读</p>
-<blockquote>
-<p>举个例子 ，别人通过支付宝转账 1W , 但未提交事务 。 此时我们查询支付宝余额 ，看到账户多了 1W 很开心 。这时支付宝发现转账账号错了回滚事务 ，此时余额变为 0 。这个读取的 1W 就是产生的脏数据</p>
-</blockquote>
-<p><strong>ISOLATION_READ_COMMITTED</strong> 保证一个事务修改的数据提交后才能被另外一个事务读取 。另外一个事务不能读取该事务未提交的数据。这种事务隔离级别可以避免脏读出现，但是可能会出现不可重复读和幻像读</p>
-<blockquote>
-</blockquote>
-<p><strong>ISOLATION_REPEATABLE_READ</strong>  这种事务隔离级别可以防止脏读，不可重复读。但是可能出现幻像读。它除了保证一个事务不能读取另一个事务未提交的数据外，还保证了避免下面的情况产生(不可重复读)<br><strong>ISOLATION_SERIALIZABLE</strong> 这是花费最高代价但是最可靠的事务隔离级别。事务被处理为顺序执行。除了防止脏读，不可重复读外，还避免了幻像读</p>
-
           
+
+Spring 配置文件中关于事务配置总是由三个组成部分，分别是 DataSource 、TransactionManager 和代理机制这三部分，无论哪种配置方式，一般变化的只是代理机制这部分 。
+
+Spring 声明式事务让我们从复杂的事务处理中得到解脱 。使得无需要去处理获得连接、关闭连接、
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/18/Spring事务配置/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1314,18 +1215,18 @@
       
         
           
-            <p><img src="http://olt1b0ecs.bkt.clouddn.com/Spring MVC请求处理流程.png" alt="Spring MVC请求处理流程"></p>
-<h3 id="Spring-MVC请求处理流程"><a href="#Spring-MVC请求处理流程" class="headerlink" title="Spring MVC请求处理流程"></a>Spring MVC请求处理流程</h3><ol>
-<li>客户端发送请求 -&gt; DispatcherServlet ，前端控制器收到请求后自己不进行处理，而是委托给其他的解析器进行处理，作为统一访问点，进行全局的流程控制</li>
-<li>DispatcherServlet —&gt; HandlerMapping ，HandlerMapping 将会把请求映射为HandlerExecutionChain 对象（包含一个 Handler 处理器（页面控制器）对象 、多个HandlerInterceptor 拦截器）对象，通过这种策略模式，很容易添加新的映射策略</li>
-<li>DispatcherServlet —&gt; HandlerAdapter ，HandlerAdapter 将会把处理器包装为适配器，从而支持多种类型的处理器，即适配器设计模式的应用，从而很容易支持很多类型的处理器</li>
-<li>HandlerAdapter —&gt; 处理器功能处理方法的调用，HandlerAdapter 将会根据适配的结果调用真正的处理器的功能处理方法，完成功能处理；并返回一个 ModelAndView 对象（包含模型数据、逻辑视图名）</li>
-<li>ModelAndView 的逻辑视图名—&gt; ViewResolver ， ViewResolver 将把逻辑视图名解析为具体的 View ，通过这种策略模式，很容易更换其他视图技术；</li>
-<li>View —&gt; 渲染，View 会根据传进来的 Model 模型数据进行渲染，此处的 Model 实际是一个 Map 数据结构，因此很容易支持其他视图技术</li>
-<li>返回控制权给 DispatcherServlet ，由 DispatcherServlet 返回响应给用户，到此一个流程结束</li>
-</ol>
-
           
+Spring MVC请求处理流程
+客户端发送请求 -&gt; DispatcherServlet ，前端控制器收到请求后自己不进行处理，而是委托给其他的解析器进行处理，作为统一访问点，进行全局的流程控制
+DispatcherServlet —&gt; HandlerMapping ，Handler
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/18/SpringMVC请求处理流程/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1443,104 +1344,21 @@
       
         
           
-            <h3 id="什么是注解"><a href="#什么是注解" class="headerlink" title="什么是注解"></a>什么是注解</h3><blockquote>
-<p>在 Java 中 Annotation是一个很重要的知识点 , 中文翻译过来就是注解 、批注的意思 。</p>
-</blockquote>
-<p>第一次学习注解的时候 , 看了很多文章解释一堆 , 但是感觉太抽象 ,  对初学者不是很友好 。</p>
-<p>之前一直在思考怎么才能浅显易懂的介绍注解 ,  我就想啊想 。。。</p>
-<p>。。。</p>
-<p>终于想到了一个很好的东西来解释注解 ,  现在网上对讨厌的人会给贴一个傻逼 、五毛 、睿智 ,  对喜欢的会贴个帅哥、小姐姐之类的标签 。但不管贴什么标签 , 人还是那个人 。 只是由于贴了不同的标签 ,  导致大家对这个人的看法会不一样 。</p>
-<p>到这里 ,  我们可以用比喻的手法来解释注解了 : </p>
-<blockquote>
-<p>如果把代码看成由一个个独立个体组成的群体 ,  那么注解就是给这些个体 ,  也就是方法 、类 、包等贴上一个标签 。 那么也可以直接说注解就是标签 。</p>
-</blockquote>
-<h3 id="怎么定义注解"><a href="#怎么定义注解" class="headerlink" title="怎么定义注解"></a>怎么定义注解</h3><blockquote>
-<p>注解通过 @interface 关键字进行定义 。</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public @interface SampleAnnotation &#123;&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="如何使用注解"><a href="#如何使用注解" class="headerlink" title="如何使用注解"></a>如何使用注解</h3><p>定义好了一个注解， 那如何使用呢 ？ 创建一个方法或者类 ，然后在方法或者类定义的地方加上 @SampleAnnotation 就可以用 SampleAnnotation 注解这个类了</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@SampleAnnotation</span><br><span class="line">public class Sample &#123;&#125;</span><br></pre></td></tr></table></figure>
-<p>目前我们只是使用了注解 ，但还不能正常的执行 。 若想让他正常的工作 ，我们还需要引入一个新的概念 元注解 。</p>
-<h3 id="元注解"><a href="#元注解" class="headerlink" title="元注解"></a>元注解</h3><p>可以注解到注解上的注解就叫元注解 ，主要有 @Retention、@Inherited、@Target、@Documented、@Repeatable 5 种。</p>
-<h4 id="Retention"><a href="#Retention" class="headerlink" title="@Retention"></a>@Retention</h4><p>Retention 的英文直译就是保留。其用到一个注解上，用于说明这个注解的的存活时间。</p>
-<p>有如下取值： </p>
-<ul>
-<li>RetentionPolicy.SOURCE 只在源码阶段保留 ，在编译器进行编译时将被丢弃忽视 。 </li>
-<li>RetentionPolicy.CLASS 只被保留到编译进行的时候 ，并不会被加载到 JVM 中 。 </li>
-<li>RetentionPolicy.RUNTIME 可以保留到程序运行的时候 ，它会被加载进入到 JVM 中 ，所以在程序运行时可以获取到它们 。 </li>
-</ul>
-<blockquote>
-<p>如果注解说是一个标签 ，@Retention 就可以看成是给标签盖了一个时间戳 。</p>
-</blockquote>
-<h4 id="Inherited"><a href="#Inherited" class="headerlink" title="@Inherited"></a>@Inherited</h4><p>@Inherited 并不是说注解本身可以继承 ，而是说如果一个父类被 @Inherited 注解过的注解进行注解的话 ，如果子类没有被任何注解应用的话 ，那么这个子类就继承了父类的注解 。 </p>
-<blockquote>
-<p>换而言之 ，王健林非常有钱被人贴了一个土豪的标签 ，那么他儿子王思聪还没出名时没人给贴标签 ， 但是自然也是个富二代土豪 。</p>
-</blockquote>
-<p>代码如下 :</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@Inherited</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@interface InheritedSample&#123;&#125;</span><br><span class="line"></span><br><span class="line">@InheritedSample</span><br><span class="line">public class Parent&#123;&#125;</span><br><span class="line"></span><br><span class="line">public class Son extends Parent&#123;&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="Target"><a href="#Target" class="headerlink" title="@Target"></a>@Target</h4><p>@Target 限定了注解的使用场景 。</p>
-<blockquote>
-<p>如果注解时标签 ，那么 @Target 限定使用场景好比 ，不同的标签有不同的场景 ， 你就不能说一个美女是帅哥、长腿欧巴。</p>
-</blockquote>
-<p>有如下取值 :</p>
-<ul>
-<li>ElementType.ANNOTATION_TYPE 可以给一个注解进行注解</li>
-<li>ElementType.CONSTRUCTOR 可以给构造方法进行注解</li>
-<li>ElementType.FIELD 可以给属性进行注解</li>
-<li>ElementType.LOCAL_VARIABLE 可以给局部变量进行注解</li>
-<li>ElementType.METHOD 可以给方法进行注解</li>
-<li>ElementType.PACKAGE 可以给一个包进行注解</li>
-<li>ElementType.PARAMETER 可以给一个方法内的参数进行注解</li>
-<li>ElementType.TYPE 可以给一个类型进行注解，比如类、接口、枚举</li>
-</ul>
-<h4 id="Documented"><a href="#Documented" class="headerlink" title="@Documented"></a>@Documented</h4><p>作用是能够将注解中的元素包含到 JavaDoc 中去 。</p>
-<h4 id="Repeatable"><a href="#Repeatable" class="headerlink" title="@Repeatable"></a>@Repeatable</h4><p>可重复的 ，是 JDK 1.8 才加入的新特性。</p>
-<blockquote>
-<p>什么场景下需要多次应用呢 ，比如我是一个程序员 ，同时我也是一个帅哥 、宅男 。</p>
-</blockquote>
-<p>代码如下 :</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@interface Men &#123;</span><br><span class="line">    Man[]  value();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@Repeatable(Men.class)</span><br><span class="line">@interface Man&#123;</span><br><span class="line">    String role default &quot;&quot;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@Man(role=&quot;Homebody&quot;)</span><br><span class="line">@Man(role=&quot;HandSome&quot;)</span><br><span class="line">@Man(role=&quot;Devloper&quot;)</span><br><span class="line">public class Baozi&#123;&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="注解的属性"><a href="#注解的属性" class="headerlink" title="注解的属性"></a>注解的属性</h3><p>注解的属性也就是成员变量 。注解只有成员变量 ，没有方法 。注解的成员变量在注解的定义中以<code>无形参的方法</code>形式来声明 ，方法名定义了该成员变量的名字 ，返回值定义了该成员变量的类型。</p>
-<blockquote>
-<p>属性的类型必须是 8 种基本数据类型加上类 、接口 、注解及其数组 。 也可以设置默认值 ，但需用 default 关键值指定 。</p>
-</blockquote>
-<p>例如:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">@Target(ElementType.TYPE)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">public @interface SampleAnnotation &#123;</span><br><span class="line"></span><br><span class="line">    int id() default 0 ;</span><br><span class="line"></span><br><span class="line">    String name() default &quot;&quot;;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@SampleAnnotation(id=0, name=&quot;测试注解&quot;)</span><br><span class="line">public class Sample &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="注解是怎么工作的"><a href="#注解是怎么工作的" class="headerlink" title="注解是怎么工作的"></a>注解是怎么工作的</h3><p>前面用标签来比喻注解 ，介绍了注解的语法和应用。但是此时我们只是可以定义 、应用注解 ，下面来说一下注解是怎么生效工作的 。</p>
-<p>这里绕不开反射。</p>
-<p>注解是通过反射获得 ，有如下几个步骤 :</p>
-<ol>
-<li>通过 Class 对象的 <code>isAnnotationPresent()</code> 方法判断是否使用了注解。</li>
-<li><p>再通过 <code>getAnnotation()</code> 或者是 <code>getAnnotations()</code> 方法来获取注解对象 。</p>
-<blockquote>
-<p>前一方法返回指定类型的注解 ，后一方法返回这个元素上的所有注解 。</p>
-</blockquote>
-</li>
-<li>如果可以获取到注解 ，就可以调用注解的属性方法了 。</li>
-</ol>
-<p>同样的 ，也可以获取属性和方法上的注解 。</p>
-<p>代码如下 :</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">@SampleAnnotation()</span><br><span class="line">public class Test &#123;</span><br><span class="line"></span><br><span class="line">    @Check(&quot;属性测试&quot;)</span><br><span class="line">    int a;</span><br><span class="line"></span><br><span class="line">    @Perform</span><br><span class="line">    public void printA()&#123;&#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        boolean hasAnnotation = Test.class.isAnnotationPresent(SampleAnnotation.class);</span><br><span class="line"></span><br><span class="line">        //获取类的注解  </span><br><span class="line">        if ( hasAnnotation ) &#123;</span><br><span class="line">            TestAnnotation testAnnotation = Test.class.getAnnotation(SampleAnnotation.class);</span><br><span class="line">            System.out.println(&quot;id:&quot; + testAnnotation.id());</span><br><span class="line">            System.out.println(&quot;name:&quot; + testAnnotation.name());</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        try &#123;</span><br><span class="line">            //获取一个成员变量上的注解</span><br><span class="line">            Field a = Test.class.getDeclaredField(&quot;a&quot;);</span><br><span class="line">            //取消 Java 的权限控制检查</span><br><span class="line">            a.setAccessible(true);        </span><br><span class="line">            Check check = a.getAnnotation(Check.class);</span><br><span class="line">            if ( check != null ) &#123;</span><br><span class="line">                System.out.println(&quot;check value:&quot;+check.value());</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            // 获取方法中的注解</span><br><span class="line">            Method testMethod = Test.class.getDeclaredMethod(&quot;printA&quot;);</span><br><span class="line">            if ( testMethod != null ) &#123;    </span><br><span class="line">                Annotation[] ans = testMethod.getAnnotations();</span><br><span class="line">                for( int i = 0;i &lt; ans.length;i++) &#123;</span><br><span class="line">                    System.out.println(&quot;method printA annotation:&quot;+ans[i].annotationType().getSimpleName());</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; catch (NoSuchFieldException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; catch (SecurityException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; catch (NoSuchMethodException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>必须要注意的是 ，如果注解要在运行时被提取 ，那么 @Retention 必须设置 RetentionPolicy.RUNTIME </p>
-</blockquote>
-<h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3><p>讲了这么多 ，那注解到底有什么用呢 ？<br>在官方文档中 ，有如下说明 :</p>
-<blockquote>
-<p>注解主要针对的是编译器和其它工具软件(SoftWare tool) 。当开发者使用了Annotation 修饰了类 、方法 、Field 等成员之后 ，这些 Annotation 不会自己生效 ，必须由开发者提供相应的代码来提取并处理 Annotation 信息 。这些处理提取和处理 Annotation 的代码统称为 APT（Annotation Processing Tool) 。</p>
-</blockquote>
-<p>此时我们心里有数了 ， 注解是给 APT 或者编译器用的。</p>
-<p>实际开发中 ，使用注解的场景太多了 。 例如 Spring Boot 中使用 java 配置其实就是各种注解的使用 ，JUnit 测试框架 ，Lombok 等。</p>
-<h3 id="回顾"><a href="#回顾" class="headerlink" title="回顾"></a>回顾</h3><ul>
-<li>我们用标签来解释了注解 。</li>
-<li>讲了注解的基本语法 、元注解 、属性等 。</li>
-<li>注解的工作原理需要借助 Java 的反射 。</li>
-<li>注解主要针对的是编译器和其它工具软件 。</li>
-</ul>
-<blockquote>
-<p>感谢阅读 ，您的关注是我持续创作的动力 !</p>
-</blockquote>
+          什么是注解
+在 Java 中 Annotation是一个很重要的知识点 , 中文翻译过来就是注解 、批注的意思 。
 
-          
+第一次学习注解的时候 , 看了很多文章解释一堆 , 但是感觉太抽象 ,  对初学者不是很友好 。
+之前一直在思考怎么才能浅显易懂的介绍注解 ,  我就想啊想 。。。
+。。。
+终于想到
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/11/可能把Java注解讲的最清楚的一篇文章/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1658,11 +1476,18 @@
       
         
           
-            <blockquote>
-<p>手机现在成了信息获取的主要来源。</p>
-</blockquote>
+          
+手机现在成了信息获取的主要来源。
+
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/02/文案排版规范/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
