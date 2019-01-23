@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://10buns.com/"/>
-  <updated>2019-01-22T14:51:19.066Z</updated>
+  <updated>2019-01-23T16:41:04.397Z</updated>
   <id>http://10buns.com/</id>
   
   <author>
@@ -15,6 +15,20 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>java 基础(二)</title>
+    <link href="http://10buns.com/2019/08/11/java-%E5%9F%BA%E7%A1%80-%E4%BA%8C/"/>
+    <id>http://10buns.com/2019/08/11/java-基础-二/</id>
+    <published>2019-08-10T16:40:46.000Z</published>
+    <updated>2019-01-23T16:41:04.397Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>Docker 安装 Redis&amp;Mysql&amp;portainer</title>
@@ -396,6 +410,27 @@
   </entry>
   
   <entry>
+    <title>Spring 常见问题</title>
+    <link href="http://10buns.com/2018/02/15/Spring-%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/"/>
+    <id>http://10buns.com/2018/02/15/Spring-常见问题/</id>
+    <published>2018-02-14T16:15:22.000Z</published>
+    <updated>2019-01-23T16:37:25.558Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="IOC和DI是什么"><a href="#IOC和DI是什么" class="headerlink" title="IOC和DI是什么"></a>IOC和DI是什么</h3><p>控制反转是就是应用本身不负责依赖对象的创建和维护,依赖对象的创建及维护是由外部容器负责的,这样控制权就有应用转移到了外部容器,控制权的转移就是控制反转。</p><p>依赖注入是指:在程序运行期间,由外部容器动态地将依赖对象注入到组件中 如：一般，通过构造函数注入或者setter注入。</p><h3 id="Spring-IOC-的理解，其初始化过程"><a href="#Spring-IOC-的理解，其初始化过程" class="headerlink" title="Spring IOC 的理解，其初始化过程"></a>Spring IOC 的理解，其初始化过程</h3><ol><li>Resource资源定位,这个Resouce指的是BeanDefinition的资源定位,这个过程就是容器找数据的过程。</li><li>BeanDefinition的载入过程,这个载入过程是把用户定义好的Bean表示成Ioc容器内部的数据结构，而这个容器内部的数据结构就是BeanDefition。</li><li>向IOC容器注册这些BeanDefinition的过程,这个过程就是将前面的BeanDefition保存到HashMap中的过程。</li></ol><h3 id="BeanFactory-和-FactoryBean的区别"><a href="#BeanFactory-和-FactoryBean的区别" class="headerlink" title="BeanFactory 和 FactoryBean的区别"></a>BeanFactory 和 FactoryBean的区别</h3><ul><li>BeanFactory是个Factory，也就是IOC容器或对象工厂，在Spring中，所有的Bean都是由BeanFactory(也就是IOC容器)来进行管理的，提供了实例化对象和拿对象的功能。</li><li>FactoryBean是个Bean，这个Bean不是简单的Bean，而是一个能生产或者修饰对象生成的工厂Bean,它的实现与设计模式中的工厂模式和修饰器模式类似。</li></ul><h3 id="BeanFactory和ApplicationContext的区别"><a href="#BeanFactory和ApplicationContext的区别" class="headerlink" title="BeanFactory和ApplicationContext的区别"></a>BeanFactory和ApplicationContext的区别</h3><ul><li>BeanFactory：在启动的时候不会去实例化Bean，中有从容器中拿Bean的时候才会去实例化；</li><li>ApplicationContext：在启动的时候就把所有的Bean全部实例化了。它还可以为Bean配置lazy-init=true来让Bean延迟实例化；</li></ul><h3 id="ApplicationContext-上下文的生命周期"><a href="#ApplicationContext-上下文的生命周期" class="headerlink" title="ApplicationContext 上下文的生命周期"></a>ApplicationContext 上下文的生命周期</h3><h3 id="Spring-Bean-的生命周期"><a href="#Spring-Bean-的生命周期" class="headerlink" title="Spring Bean 的生命周期"></a>Spring Bean 的生命周期</h3><ol><li>Bean的建立， 由BeanFactory读取Bean定义文件，并生成各个实例;</li><li>Setter注入，执行Bean的属性依赖注入;</li><li>BeanNameAware的setBeanName(), 如果实现该接口，则执行其setBeanName方法;</li><li>BeanFactoryAware的setBeanFactory()，如果实现该接口，则执行其setBeanFactory方法;</li><li>BeanPostProcessor的processBeforeInitialization()，如果有关联的processor，则在Bean初始化之前都会执行这个实例的processBeforeInitialization()方法;</li><li>InitializingBean的afterPropertiesSet()，如果实现了该接口，则执行其afterPropertiesSet()方法;</li><li>Bean定义文件中定义init-method;</li><li>BeanPostProcessors的processAfterInitialization()，如果有关联的processor，则在Bean初始化之前都会执行这个实例的processAfterInitialization()方法;</li><li>DisposableBean的destroy()，在容器关闭时，如果Bean类实现了该接口，则执行它的destroy()方法;</li><li>Bean定义文件中定义destroy-method，在容器关闭时，可以在Bean定义文件中使用“destory-method”定义的方法;</li></ol><h3 id="Spring-AOP的实现原理"><a href="#Spring-AOP的实现原理" class="headerlink" title="Spring AOP的实现原理"></a>Spring AOP的实现原理</h3><p>使用动态代理，所谓的动态代理就是说AOP框架不会去修改字节码，而是在内存中临时为方法生成一个AOP对象，这个AOP对象包含了目标对象的全部方法，并且在特定的切点做了增强处理，并回调原对象的方法。</p><p>Spring AOP中的动态代理主要有两种方式，JDK动态代理和CGLIB动态代理。JDK动态代理通过反射来接收被代理的类，并且要求被代理的类必须实现一个接口。JDK动态代理的核心是InvocationHandler接口和Proxy类。</p><p>Spring中AOP代理由Spring的IOC容器负责生成、管理，其依赖关系也由IOC容器负责管理。因此，AOP代理可以直接使用容器中的其它bean实例作为目标，这种关系可由IOC容器的依赖注入提供。</p><h3 id="Spring-是如何管理事务的，事务管理机制"><a href="#Spring-是如何管理事务的，事务管理机制" class="headerlink" title="Spring 是如何管理事务的，事务管理机制"></a>Spring 是如何管理事务的，事务管理机制</h3><p>Spring事务管理主要包括3个接口，Spring的事务主要是由它们(PlatformTransactionManager，TransactionDefinition，TransactionStatus)三个共同完成的。</p><ul><li><p>PlatformTransactionManager：事务管理器–主要用于平台相关事务的管理</p><p> 主要有三个方法：</p><ol><li>commit 事务提交；</li><li>rollback 事务回滚；</li><li>getTransaction 获取事务状态。</li></ol></li><li><p>TransactionDefinition：事务定义信息–用来定义事务相关的属性，给事务管理器PlatformTransactionManager使用</p><p>主要有四个主要方法：</p><ol><li>getIsolationLevel：获取隔离级别；</li><li>getPropagationBehavior：获取传播行为；</li><li>getTimeout：获取超时时间；</li><li>isReadOnly：是否只读（保存、更新、删除时属性变为false–可读写，查询时为true–只读）</li></ol><p>事务管理器能够根据这个返回值进行优化，这些事务的配置信息，都可以通过配置文件进行配置。</p></li><li><p>TransactionStatus：事务具体运行状态–事务管理过程中，每个时间点事务的状态信息。</p><p>  主要有三个方法：</p><ol><li>hasSavepoint()：返回这个事务内部是否包含一个保存点，</li><li>isCompleted()：返回该事务是否已完成，也就是说，是否已经提交或回滚</li><li>isNewTransaction()：判断当前事务是否是一个新事务</li></ol></li></ul><p>事务的四个特性: <code>原子性</code> <code>一致性</code> <code>隔离性</code> <code>持久性</code></p><p>事务的隔离级别:</p><pre><code>1. ISOLATION_DEFAULT： 这是一个PlatfromTransactionManager默认的隔离级别，使用数据库默认的事务隔离级别.另外四个与JDBC的隔离级别相对应2. ISOLATIONREADUNCOMMITTED： 这是事务最低的隔离级别，它充许令外一个事务可以看到这个事务未提交的数据。这种隔离级别会产生脏读，不可重复读和幻像读。3. ISOLATIONREADCOMMITTED： 保证一个事务修改的数据提交后才能被另外一个事务读取。另外一个事务不能读取该事务未提交的数据4. ISOLATIONREPEATABLEREAD： 这种事务隔离级别可以防止脏读，不可重复读。但是可能出现幻像读。它除了保证一个事务不能读取另一个事务未提交的数据外，还保证了避免下面的情况产生(不可重复读)。5. ISOLATION_SERIALIZABLE 这是花费最高代价但是最可靠的事务隔离级别。事务被处理为顺序执行。除了防止脏读，不可重复读外，还避免了幻像读。</code></pre><h3 id="Spring-的不同事务传播行为有哪些，干什么用的"><a href="#Spring-的不同事务传播行为有哪些，干什么用的" class="headerlink" title="Spring 的不同事务传播行为有哪些，干什么用的"></a>Spring 的不同事务传播行为有哪些，干什么用的</h3><ol><li>PROPAGATION_REQUIRED: 如果存在一个事务，则支持当前事务，如果没有事务则开启。</li><li>PROPAGATIONREQUIRESNEW: 总是开启一个新的事务，如果一个事务已经存在，则将这个存在的事务挂起。</li><li>PROPAGATION_SUPPORTS: 如果存在一个事务，支持当前事务。如果没有事务，则非事务的执行</li><li>PROPAGATION_MANDATORY: 如果已经存在一个事务，支持当前事务。如果没有一个活动的事务，则抛出异常。</li><li>PROPAGATIONNOTSUPPORTED: 总是非事务地执行，并挂起任何存在的事务。</li><li>PROPAGATION_NEVER: 总是非事务地执行，如果存在一个活动事务，则抛出异常</li><li>PROPAGATIONNESTED：如果一个活动的事务存在，则运行在一个嵌套的事务中. 如果没有活动事务, 则按TransactionDefinition.PROPAGATIONREQUIRED 属性执行</li></ol><h3 id="Spring-中用到了那些设计模式"><a href="#Spring-中用到了那些设计模式" class="headerlink" title="Spring 中用到了那些设计模式"></a>Spring 中用到了那些设计模式</h3><ul><li>代理模式: 在AOP和remoting中被用的比较多。</li><li>单例模式: 在spring配置文件中定义的bean默认为单例模式。</li><li>模板方法: 用来解决代码重复的问题。比如. RestTemplate, JmsTemplate, JpaTemplate。</li><li>工厂模式: BeanFactory用来创建对象的实例。</li><li>适配器: spring aop</li><li>装饰器: spring data hashmapper</li><li>观察者: spring 时间驱动模型</li><li>回调: Spring ResourceLoaderAware回调接口</li></ul><h3 id="Spring-MVC-的工作原理"><a href="#Spring-MVC-的工作原理" class="headerlink" title="Spring MVC 的工作原理"></a>Spring MVC 的工作原理</h3><ol><li>用户发起请求到前端控制器（DispatcherServlet）</li><li>前端控制器请求处理器映射器（HandlerMappering）去查找处理器（Handler）：通过xml配置或者注解进行查找</li><li>找到处理器映射器（HandlerMappering）向前端控制器返回执行链（HandlerExecutionChain）</li><li>前端控制器（DispatcherServlet）调用处理器适配器（HandlerAdapter）去执行处理器（Handler）</li><li>处理器适配器去执行Handler</li><li>Handler执行完给处理器适配器返回ModelAndView</li><li>处理器适配器向前端控制器返回ModelAndView</li><li>前端控制器请求视图解析器（ViewResolver）去进行视图解析</li><li>视图解析器像前端控制器返回View</li><li>前端控制器对视图进行渲染</li><li>前端控制器向用户响应结果</li></ol><h3 id="Spring如何解决循环依赖"><a href="#Spring如何解决循环依赖" class="headerlink" title="Spring如何解决循环依赖"></a>Spring如何解决循环依赖</h3><h3 id="Spring-如何保证-Controller-并发的安全"><a href="#Spring-如何保证-Controller-并发的安全" class="headerlink" title="Spring 如何保证 Controller 并发的安全"></a>Spring 如何保证 Controller 并发的安全</h3><p>Controller对象是单例的，那么如果不小心在类中定义了类变量，那么这个类变量是被所有请求共享的，这可能会造成多个请求修改该变量的值，出现与预期结果不符合的异常。<br>可以使用ThreadLocal来保存类变量，将类变量保存在线程的变量域中，让不同的请求隔离开来</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;IOC和DI是什么&quot;&gt;&lt;a href=&quot;#IOC和DI是什么&quot; class=&quot;headerlink&quot; title=&quot;IOC和DI是什么&quot;&gt;&lt;/a&gt;IOC和DI是什么&lt;/h3&gt;&lt;p&gt;控制反转是就是应用本身不负责依赖对象的创建和维护,依赖对象的创建及维护是由外部容器负
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
     <title>CentOS 安装 JDK</title>
     <link href="http://10buns.com/2018/02/08/CentOS-%E5%AE%89%E8%A3%85-JDK/"/>
     <id>http://10buns.com/2018/02/08/CentOS-安装-JDK/</id>
@@ -415,52 +450,6 @@
       
     
     </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Homebrew 常用命令</title>
-    <link href="http://10buns.com/2018/01/04/Homebrew%20%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
-    <id>http://10buns.com/2018/01/04/Homebrew 常用命令/</id>
-    <published>2018-01-04T15:11:28.000Z</published>
-    <updated>2018-01-04T16:51:02.000Z</updated>
-    
-    <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ ruby -e &quot;$(curl --insecure -fsSL</span><br><span class="line">https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</span><br><span class="line"></span><br><span class="line">$ brew --help #简洁命令帮助</span><br><span class="line">$ man brew #完整命令帮助</span><br><span class="line">$ brew install python #安装软件包</span><br><span class="line">$ brew uninstall python #卸载软件包</span><br><span class="line">$ brew search python #搜索软件包</span><br><span class="line">$ brew list #显示已经安装的所有软件包</span><br><span class="line">$ brew update #同步远程最新更新情况，对本机已经安装并有更新的软件用*标明</span><br><span class="line">$ brew outdated #查看已安装的哪些软件包需要更新</span><br><span class="line">$ brew upgrade python #更新单个软件包</span><br><span class="line">$ brew info python #查看软件包信息</span><br><span class="line">$ brew home python #访问软件包官方站</span><br><span class="line">$ brew cleanup #清理所有已安装软件包的历史老版本</span><br><span class="line">$ brew cleanup python #清理单个已安装软件包的历史版本</span><br></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-bin #用于存放所安装程序的启动链接（相当于快捷方式）</span><br><span class="line">-Cellar #所有brew安装的程序，都将以[程序名/版本号]存放于本目录下</span><br><span class="line">-etc #brew安装程序的配置文件默认存放路径</span><br><span class="line">-Library #Homebrew 系统自身文件夹</span><br><span class="line">+–Formula #程序的下载路径和编译参数及安装路径等配置文件存放地</span><br><span class="line">+–Homebrew #brew程序自身命令集</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class
-      
-    
-    </summary>
-    
-      <category term="工作" scheme="http://10buns.com/categories/%E5%B7%A5%E4%BD%9C/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>java 程序执行顺序</title>
-    <link href="http://10buns.com/2017/12/25/java%20%E7%A8%8B%E5%BA%8F%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/"/>
-    <id>http://10buns.com/2017/12/25/java 程序执行顺序/</id>
-    <published>2017-12-24T16:09:16.000Z</published>
-    <updated>2018-03-21T06:19:47.000Z</updated>
-    
-    <content type="html"><![CDATA[<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Son parent = <span class="keyword">new</span> Son();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Parent</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> ParentStaticParam staticParam = <span class="keyword">new</span> ParentStaticParam();</span><br><span class="line">    <span class="keyword">public</span> ParentParam parentParam = <span class="keyword">new</span> ParentParam();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">"执行父类静态代码块"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(<span class="string">"执行父类代码块"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Parent</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"执行父类构造器"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Son</span> <span class="keyword">extends</span> <span class="title">Parent</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> SonStaticParam sonStaticParam = <span class="keyword">new</span> SonStaticParam();</span><br><span class="line">    <span class="keyword">public</span> SonParam sonParam = <span class="keyword">new</span> SonParam();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">"执行子类静态代码块"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(<span class="string">"执行子类代码块"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Son</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"执行子类构造函数"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ParentStaticParam</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ParentStaticParam</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"执行父类静态变量初始化"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ParentParam</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ParentParam</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"执行父类变量初始化"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SonStaticParam</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SonStaticParam</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"执行子类静态变量初始化"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SonParam</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SonParam</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"执行子类变量初始化"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>执行结果:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">执行父类静态变量初始化</span><br><span class="line">执行父类静态代码块</span><br><span class="line">执行子类静态变量初始化</span><br><span class="line">执行子类静态代码块</span><br><span class="line">执行父类变量初始化</span><br><span class="line">执行父类代码块</span><br><span class="line">执行父类构造器</span><br><span class="line">执行子类变量初始化</span><br><span class="line">执行子类代码块</span><br><span class="line">执行子类构造函数</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=
-      
-    
-    </summary>
-    
-      <category term="Java 基础" scheme="http://10buns.com/categories/Java-%E5%9F%BA%E7%A1%80/"/>
     
     
   </entry>
