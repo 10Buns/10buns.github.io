@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="微服务,">
+  <meta name="keywords" content="JVM,">
 
 
 
@@ -81,18 +81,21 @@
 
 
 
-<meta name="description" content="微服务与分布式 微服务目前这么火，很多的文章拿它和分布式系统比较，但其实之间还是有很多的相同点   相同点 都需要来实现动态的服务注册发现机制 都需要考虑分布式下面的事务一致性，CAP原则下两段式提交不能保证性能，还需要考虑事务补偿机制 如何保证消息可靠性 都需要统一的网关来聚合、编排接口，实现统一认证机制，对外提供 API 使用的接口 需要解决分布式下定位系统问题，如何日志跟踪，例如支付系统的交">
-<meta name="keywords" content="微服务">
+<meta name="description" content="程序计数器记录当前线程所执行的字节码行号，用于获取下一条执行的字节码。 当多线程运行时，每个线程切换后需要知道上一次所运行的状态、位置。 程序计数器是每个线程私有的。 堆Java 堆是整个虚拟机所管理的最大内存区域，所有的对象创建都是在这个区域进行内存分配。 这块内存属于线程共享区域。 由于大多数垃圾回收器都采用分代回收算法，所有堆内存也分为 新生代、老年代，可以方便垃圾的准确回收。  可利用">
+<meta name="keywords" content="JVM">
 <meta property="og:type" content="article">
-<meta property="og:title" content="微服务杂谈">
-<meta property="og:url" content="http://10buns.com/2018/06/20/微服务杂谈/index.html">
+<meta property="og:title" content="Java 运行时的内存划分">
+<meta property="og:url" content="http://10buns.com/2019/01/15/Java-运行时的内存划分/index.html">
 <meta property="og:site_name" content="10buns">
-<meta property="og:description" content="微服务与分布式 微服务目前这么火，很多的文章拿它和分布式系统比较，但其实之间还是有很多的相同点   相同点 都需要来实现动态的服务注册发现机制 都需要考虑分布式下面的事务一致性，CAP原则下两段式提交不能保证性能，还需要考虑事务补偿机制 如何保证消息可靠性 都需要统一的网关来聚合、编排接口，实现统一认证机制，对外提供 API 使用的接口 需要解决分布式下定位系统问题，如何日志跟踪，例如支付系统的交">
+<meta property="og:description" content="程序计数器记录当前线程所执行的字节码行号，用于获取下一条执行的字节码。 当多线程运行时，每个线程切换后需要知道上一次所运行的状态、位置。 程序计数器是每个线程私有的。 堆Java 堆是整个虚拟机所管理的最大内存区域，所有的对象创建都是在这个区域进行内存分配。 这块内存属于线程共享区域。 由于大多数垃圾回收器都采用分代回收算法，所有堆内存也分为 新生代、老年代，可以方便垃圾的准确回收。  可利用">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-01-24T08:20:37.555Z">
+<meta property="og:image" content="https://github.com/10Buns/pictureForMarkDown/raw/master/JVM%E5%86%85%E5%AD%98.jpg">
+<meta property="og:image" content="https://github.com/10Buns/pictureForMarkDown/raw/master/jvm%E5%8C%BA%E5%9F%9F%E5%8F%82%E6%95%B0.jpg">
+<meta property="og:updated_time" content="2019-01-24T15:36:17.285Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="微服务杂谈">
-<meta name="twitter:description" content="微服务与分布式 微服务目前这么火，很多的文章拿它和分布式系统比较，但其实之间还是有很多的相同点   相同点 都需要来实现动态的服务注册发现机制 都需要考虑分布式下面的事务一致性，CAP原则下两段式提交不能保证性能，还需要考虑事务补偿机制 如何保证消息可靠性 都需要统一的网关来聚合、编排接口，实现统一认证机制，对外提供 API 使用的接口 需要解决分布式下定位系统问题，如何日志跟踪，例如支付系统的交">
+<meta name="twitter:title" content="Java 运行时的内存划分">
+<meta name="twitter:description" content="程序计数器记录当前线程所执行的字节码行号，用于获取下一条执行的字节码。 当多线程运行时，每个线程切换后需要知道上一次所运行的状态、位置。 程序计数器是每个线程私有的。 堆Java 堆是整个虚拟机所管理的最大内存区域，所有的对象创建都是在这个区域进行内存分配。 这块内存属于线程共享区域。 由于大多数垃圾回收器都采用分代回收算法，所有堆内存也分为 新生代、老年代，可以方便垃圾的准确回收。  可利用">
+<meta name="twitter:image" content="https://github.com/10Buns/pictureForMarkDown/raw/master/JVM%E5%86%85%E5%AD%98.jpg">
 
 
 
@@ -122,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://10buns.com/2018/06/20/微服务杂谈/">
+  <link rel="canonical" href="http://10buns.com/2019/01/15/Java-运行时的内存划分/">
 
 
 
 
 
-  <title>微服务杂谈 | 10buns</title>
+  <title>Java 运行时的内存划分 | 10buns</title>
   
 
 
@@ -275,7 +278,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://10buns.com/2018/06/20/微服务杂谈/">
+    <link itemprop="mainEntityOfPage" href="http://10buns.com/2019/01/15/Java-运行时的内存划分/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="10buns">
@@ -292,7 +295,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">微服务杂谈</h1>
+          <h1 class="post-title" itemprop="name headline">Java 运行时的内存划分</h1>
         
 
         <div class="post-meta">
@@ -304,8 +307,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-20T14:18:29+08:00">
-                2018-06-20
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-15T23:18:53+08:00">
+                2019-01-15
               </time>
             
 
@@ -314,28 +317,6 @@
             
           </span>
 
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/后端/" itemprop="url" rel="index">
-                    <span itemprop="name">后端</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -364,31 +345,38 @@
       
 
       
-        <h3 id="微服务与分布式"><a href="#微服务与分布式" class="headerlink" title="微服务与分布式"></a>微服务与分布式</h3><blockquote>
-<p>微服务目前这么火，很多的文章拿它和分布式系统比较，但其实之间还是有很多的相同点</p>
+        <a id="more"></a>
+<p><img src="https://github.com/10Buns/pictureForMarkDown/raw/master/JVM%E5%86%85%E5%AD%98.jpg" alt="JVM运行时内存划分"></p>
+<h2 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h2><p>记录当前线程所执行的字节码行号，用于获取下一条执行的字节码。</p>
+<p>当多线程运行时，每个线程切换后需要知道上一次所运行的状态、位置。</p>
+<p>程序计数器是每个线程私有的。</p>
+<h2 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h2><p><code>Java 堆</code>是整个虚拟机所管理的最大内存区域，所有的对象创建都是在这个区域进行内存分配。</p>
+<p>这块内存属于线程共享区域。</p>
+<p>由于大多数垃圾回收器都采用分代回收算法，所有堆内存也分为 新生代、老年代，可以方便垃圾的准确回收。</p>
+<blockquote>
+<p>可利用参数 <code>-Xms</code> <code>-Xmx</code>进行堆内存控制。</p>
 </blockquote>
+<h2 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h2><p>虚拟机栈由一个一个的栈帧组成，栈帧是在每一个方法调用时产生的。每一个栈帧由局部变量区、操作数栈等组成。每创建一个栈帧压栈，当一个方法执行完毕之后则出栈。</p>
+<p>这块内存区域是线程私有的。</p>
 <ul>
-<li>相同点<ol>
-<li>都需要来实现动态的服务注册发现机制</li>
-<li>都需要考虑分布式下面的事务一致性，CAP原则下两段式提交不能保证性能，还需要考虑事务补偿机制</li>
-<li>如何保证消息可靠性</li>
-<li>都需要统一的网关来聚合、编排接口，实现统一认证机制，对外提供 <code>API</code> 使用的接口</li>
-<li>需要解决分布式下定位系统问题，如何日志跟踪，例如支付系统的交易跟踪</li>
+<li>如果出现方法递归调用出现死循环的话就会造成栈帧过多，最终会抛出 StackOverflowError。</li>
+<li>若线程执行过程中栈帧大小超出虚拟机栈限制，则会抛出 StackOverflowError。</li>
+<li>若虚拟机栈允许动态扩展，但在尝试扩展时内存不足，或者在为一个新线程初始化新的虚拟机栈时申请不到足够的内存，则会抛出 OutOfMemoryError。</li>
+</ul>
+<h2 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a>方法区</h2><ol>
+<li><p>JDK 1.7（方法区）</p>
+<p> 主要用于存放已经被虚拟机加载的类信息，如常量，静态变量。 这块区域也被称为永久代。</p>
+<p> 参数 <code>-XX:PermSize -XX:MaxPermSize</code> 控制初始化方法区和最大方法区大小。</p>
+</li>
+<li><p>JDK 1.8 元数据区<br> 在 JDK1.8 中已经移除了方法区（永久代），并使用了一个元数据区域进行代替（Metaspace）。</p>
+<p> 默认情况下元数据区域会根据使用情况动态调整，避免了在 1.7 中由于加载类过多从而出现 <code>java.lang.OutOfMemoryError: PermGen</code></p>
+<p> 但也不能无限扩展，因此可以使用 <code>-XX:MaxMetaspaceSize</code>来控制最大内存。</p>
+</li>
 </ol>
-</li>
-</ul>
-<h3 id="切分微服务"><a href="#切分微服务" class="headerlink" title="切分微服务"></a>切分微服务</h3><ul>
-<li><p>服务的切分上有比较大的区别，SOA原本是以一种<code>集成</code>技术出现的，很多技术方案是将原有内部服务封装为一个独立进程，这样新的业务开发就可重用这些服务，这些服务很可能是类似 CRM 这样的非常大的维度；而微服务这个<code>微</code>，就说明了在切分上是有讲究的。如果是错误的切分，那么得到微服务将没有 <code>低耦合、无缝升级、高可用</code> 之类的优势，而会比使用 <code>Monolithic</code> 有更多的麻烦</p>
-</li>
-<li><p>不拆分数据存储的微服务是伪服务：日常接触最多的一种服务拆分方案是后端存储是全在单库中，仅仅把前端的业务逻辑拆分到不同的服务进程中，本质上和一个 <code>Monolithic</code> 一样，只是把模块之间的进程内调用改为进程间调用，这种切分违反了 <code>分布式第一原则</code> ，不仅没有解决模块耦合问题也影响了系统性能</p>
-</li>
-<li><p>微服务并不是越小越好，而是相对 <code>SOA</code> 那种粗粒度的服务，只是需要更小更合适的粒度，但不是无限小</p>
-</li>
-</ul>
-<h3 id="如何拆分服务"><a href="#如何拆分服务" class="headerlink" title="如何拆分服务"></a>如何拆分服务</h3><blockquote>
-<p>在《领域驱动设计》这本书中提出了一个能将一个大问题空间拆解分为领域和实体之间的关系和行为的技术。目前来说，这是一个最合理的解决拆分问题的方案，透过限界上下文（Bounded Context，下文简称为BC）这个概念，我们可以将实现细节封装起来，让BC都能够实现SRP（单一职责）原则</p>
-</blockquote>
-<p>以会员系统的的积分与会员举例，按照 DDD 拆解，他们应该是两个独立的界限上下文，但积分服务中肯定包含会员的，如果直接拆为两个 BC, 那么查询、调用关系就耦合在一起了，甚至不知不觉引入了棘手的分布式问题，这个关联如何拆解？BC 理论认为在不同的 BC 中，即使是一个术语，它的关注点也不一样。在会员中关注的是会员信息、积分、储值等，而在积分中更关注的是积分与会员。所以实际开发中会员服务往往把积分、储值等冗余在会员中，这个设计解脱和积分 BC 的强关联，两个 BC 可以独立提供服务和存储数据。</p>
+<h2 id="运行时常量池"><a href="#运行时常量池" class="headerlink" title="运行时常量池"></a>运行时常量池</h2><p>运行时常量池是方法区的一部分，其中存放了一些符号引用。当 new 一个对象时，会检查这个区域是否有这个符号的引用。</p>
+<h2 id="直接内存"><a href="#直接内存" class="headerlink" title="直接内存"></a>直接内存</h2><p>并不是由 JVM 虚拟机所管理的一块内存区域。</p>
+<p><img src="https://github.com/10Buns/pictureForMarkDown/raw/master/jvm%E5%8C%BA%E5%9F%9F%E5%8F%82%E6%95%B0.jpg" alt="JVM运行参数设置"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">常见的如下：</span><br><span class="line">-Xms64m 最小堆内存 64m.</span><br><span class="line">-Xmx128m 最大堆内存 128m.</span><br><span class="line">-XX:NewSize=30m 新生代初始化大小为30m.</span><br><span class="line">-XX:MaxNewSize=40m 新生代最大大小为40m.</span><br><span class="line">-Xss=256k 线程栈大小。</span><br><span class="line">-XX:+PrintHeapAtGC 当发生 GC 时打印内存布局。</span><br><span class="line">-XX:+HeapDumpOnOutOfMemoryError 发送内存溢出时 dump 内存。</span><br><span class="line"></span><br><span class="line">新生代和老年代的默认比例为 1:2，也就是新生代占用 1/3的堆内存，而老年代占用 2/3 的堆内存。</span><br><span class="line"></span><br><span class="line">可以通过参数 -XX:NewRatio=2 来设置老年代/新生代的比例。</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -406,7 +394,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/微服务/" rel="tag"><i class="fa fa-tag"></i> 微服务</a>
+            <a href="/tags/JVM/" rel="tag"><i class="fa fa-tag"></i> JVM</a>
           
         </div>
       
@@ -419,8 +407,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/03/java-多线程-一/" rel="next" title="java 多线程(一)">
-                <i class="fa fa-chevron-left"></i> java 多线程(一)
+              <a href="/2019/01/01/Docker-安装-Redis-Mysql-portainer/" rel="next" title="Docker 安装 Redis&Mysql&portainer">
+                <i class="fa fa-chevron-left"></i> Docker 安装 Redis&Mysql&portainer
               </a>
             
           </div>
@@ -428,10 +416,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/06/26/Spring-MyBatis-动态数据源切换/" rel="prev" title="Spring MyBatis 动态数据源切换">
-                Spring MyBatis 动态数据源切换 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -588,7 +572,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#微服务与分布式"><span class="nav-number">1.</span> <span class="nav-text">微服务与分布式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#切分微服务"><span class="nav-number">2.</span> <span class="nav-text">切分微服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何拆分服务"><span class="nav-number">3.</span> <span class="nav-text">如何拆分服务</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#程序计数器"><span class="nav-number">1.</span> <span class="nav-text">程序计数器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#堆"><span class="nav-number">2.</span> <span class="nav-text">堆</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#栈"><span class="nav-number">3.</span> <span class="nav-text">栈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法区"><span class="nav-number">4.</span> <span class="nav-text">方法区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行时常量池"><span class="nav-number">5.</span> <span class="nav-text">运行时常量池</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#直接内存"><span class="nav-number">6.</span> <span class="nav-text">直接内存</span></a></li></ol></div>
             
 
           </div>
