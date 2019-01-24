@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://10buns.com/tags/index.html</loc>
+    
+    <lastmod>2019-01-24T08:12:45.401Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://10buns.com/2017/06/15/Mac%E4%B8%8A%E6%90%AD%E5%BB%BAHexo%E5%8D%9A%E5%AE%A2/</loc>
     
     <lastmod>2019-01-24T08:09:58.179Z</lastmod>
@@ -177,23 +184,9 @@
   </url>
   
   <url>
-    <loc>http://10buns.com/tags/index-1.html</loc>
-    
-    <lastmod>2019-01-23T16:56:53.426Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://10buns.com/2019/01/01/Docker-%E5%AE%89%E8%A3%85-Redis-Mysql-portainer/</loc>
     
     <lastmod>2019-01-22T14:51:19.066Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://10buns.com/tags/index.html</loc>
-    
-    <lastmod>2019-01-02T08:23:37.992Z</lastmod>
     
   </url>
   
