@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="10buns">
 <meta property="og:description" content="项目开发中有一个需求，需要根据商户类型决定是否使用独立的数据库，即要动态的切换数据源。系统技术栈是 spring boot + mybatis, 常见的思路是基于不同的数据库创建不同的 bean 。 大体流程: 创建多个 Configuration 以及多个Bean,因为设为 @Configuration，所以在启动的时候 Bean 都会创建，默认走 @Primary 中的数据库连接，如果需要走其">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-01-24T08:15:11.284Z">
+<meta property="og:updated_time" content="2019-01-24T08:19:35.361Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring MyBatis 动态数据源切换">
 <meta name="twitter:description" content="项目开发中有一个需求，需要根据商户类型决定是否使用独立的数据库，即要动态的切换数据源。系统技术栈是 spring boot + mybatis, 常见的思路是基于不同的数据库创建不同的 bean 。 大体流程: 创建多个 Configuration 以及多个Bean,因为设为 @Configuration，所以在启动的时候 Bean 都会创建，默认走 @Primary 中的数据库连接，如果需要走其">
@@ -203,6 +203,16 @@
         </li>
       
         
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
@@ -304,6 +314,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/后端/" itemprop="url" rel="index">
+                    <span itemprop="name">后端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -460,10 +492,10 @@
               
               
               <div class="site-state-item site-state-categories">
-                
-                  <span class="site-state-item-count">7</span>
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">categories</span>
-                
+                </a>
               </div>
             
 
