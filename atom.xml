@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://10buns.com/"/>
-  <updated>2019-01-24T15:36:17.285Z</updated>
+  <updated>2019-01-25T14:13:42.240Z</updated>
   <id>http://10buns.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://10buns.com/2019/01/15/Java-%E8%BF%90%E8%A1%8C%E6%97%B6%E7%9A%84%E5%86%85%E5%AD%98%E5%88%92%E5%88%86/"/>
     <id>http://10buns.com/2019/01/15/Java-运行时的内存划分/</id>
     <published>2019-01-15T15:18:53.000Z</published>
-    <updated>2019-01-24T15:36:17.285Z</updated>
+    <updated>2019-01-25T14:13:42.240Z</updated>
     
     <content type="html"><![CDATA[<a id="more"></a><p><img src="https://github.com/10Buns/pictureForMarkDown/raw/master/JVM%E5%86%85%E5%AD%98.jpg" alt="JVM运行时内存划分"></p><h2 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h2><p>记录当前线程所执行的字节码行号，用于获取下一条执行的字节码。</p><p>当多线程运行时，每个线程切换后需要知道上一次所运行的状态、位置。</p><p>程序计数器是每个线程私有的。</p><h2 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h2><p><code>Java 堆</code>是整个虚拟机所管理的最大内存区域，所有的对象创建都是在这个区域进行内存分配。</p><p>这块内存属于线程共享区域。</p><p>由于大多数垃圾回收器都采用分代回收算法，所有堆内存也分为 新生代、老年代，可以方便垃圾的准确回收。</p><blockquote><p>可利用参数 <code>-Xms</code> <code>-Xmx</code>进行堆内存控制。</p></blockquote><h2 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h2><p>虚拟机栈由一个一个的栈帧组成，栈帧是在每一个方法调用时产生的。每一个栈帧由局部变量区、操作数栈等组成。每创建一个栈帧压栈，当一个方法执行完毕之后则出栈。</p><p>这块内存区域是线程私有的。</p><ul><li>如果出现方法递归调用出现死循环的话就会造成栈帧过多，最终会抛出 StackOverflowError。</li><li>若线程执行过程中栈帧大小超出虚拟机栈限制，则会抛出 StackOverflowError。</li><li>若虚拟机栈允许动态扩展，但在尝试扩展时内存不足，或者在为一个新线程初始化新的虚拟机栈时申请不到足够的内存，则会抛出 OutOfMemoryError。</li></ul><h2 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a>方法区</h2><ol><li><p>JDK 1.7（方法区）</p><p> 主要用于存放已经被虚拟机加载的类信息，如常量，静态变量。 这块区域也被称为永久代。</p><p> 参数 <code>-XX:PermSize -XX:MaxPermSize</code> 控制初始化方法区和最大方法区大小。</p></li><li><p>JDK 1.8 元数据区<br> 在 JDK1.8 中已经移除了方法区（永久代），并使用了一个元数据区域进行代替（Metaspace）。</p><p> 默认情况下元数据区域会根据使用情况动态调整，避免了在 1.7 中由于加载类过多从而出现 <code>java.lang.OutOfMemoryError: PermGen</code></p><p> 但也不能无限扩展，因此可以使用 <code>-XX:MaxMetaspaceSize</code>来控制最大内存。</p></li></ol><h2 id="运行时常量池"><a href="#运行时常量池" class="headerlink" title="运行时常量池"></a>运行时常量池</h2><p>运行时常量池是方法区的一部分，其中存放了一些符号引用。当 new 一个对象时，会检查这个区域是否有这个符号的引用。</p><h2 id="直接内存"><a href="#直接内存" class="headerlink" title="直接内存"></a>直接内存</h2><p>并不是由 JVM 虚拟机所管理的一块内存区域。</p><p><img src="https://github.com/10Buns/pictureForMarkDown/raw/master/jvm%E5%8C%BA%E5%9F%9F%E5%8F%82%E6%95%B0.jpg" alt="JVM运行参数设置"></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">常见的如下：</span><br><span class="line">-Xms64m 最小堆内存 64m.</span><br><span class="line">-Xmx128m 最大堆内存 128m.</span><br><span class="line">-XX:NewSize=30m 新生代初始化大小为30m.</span><br><span class="line">-XX:MaxNewSize=40m 新生代最大大小为40m.</span><br><span class="line">-Xss=256k 线程栈大小。</span><br><span class="line">-XX:+PrintHeapAtGC 当发生 GC 时打印内存布局。</span><br><span class="line">-XX:+HeapDumpOnOutOfMemoryError 发送内存溢出时 dump 内存。</span><br><span class="line"></span><br><span class="line">新生代和老年代的默认比例为 1:2，也就是新生代占用 1/3的堆内存，而老年代占用 2/3 的堆内存。</span><br><span class="line"></span><br><span class="line">可以通过参数 -XX:NewRatio=2 来设置老年代/新生代的比例。</span><br></pre></td></tr></table></figure>]]></content>
     
@@ -90,6 +90,34 @@
       <category term="Spring" scheme="http://10buns.com/tags/Spring/"/>
     
       <category term="Oauth2" scheme="http://10buns.com/tags/Oauth2/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>主键与唯一索引区别</title>
+    <link href="http://10buns.com/2018/12/14/%E4%B8%BB%E9%94%AE%E4%B8%8E%E5%94%AF%E4%B8%80%E7%B4%A2%E5%BC%95%E5%8C%BA%E5%88%AB/"/>
+    <id>http://10buns.com/2018/12/14/主键与唯一索引区别/</id>
+    <published>2018-12-14T14:11:50.000Z</published>
+    <updated>2019-01-25T14:13:49.838Z</updated>
+    
+    <content type="html"><![CDATA[<a id="more"></a><ul><li>主键一定会创建一个唯一索引，但是有唯一索引的列不一定是主键</li><li>主键不允许为空值，唯一索引列允许空值</li><li>一个表只能有一个主键，但是可以有多个唯一索引</li><li>主键可以被其他表引用为外键，唯一索引列不可以</li><li>主键是一种约束，而唯一索引是一种索引，是表的冗余数据结构，两者有本质的差别</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;主键一定会创建一个唯一索引，但是有唯一索引的列不一定是主键&lt;/li&gt;
+&lt;li&gt;主键不允许为空值，唯一索引列允许空值&lt;/li&gt;
+&lt;li&gt;一个表只能有一个主键，但是可以有多个唯一索引&lt;/li&gt;
+&lt;li&gt;主键可以被其他表引用为外键，
+      
+    
+    </summary>
+    
+    
+      <category term="mysql" scheme="http://10buns.com/tags/mysql/"/>
     
   </entry>
   
@@ -506,34 +534,6 @@
     
     
       <category term="Spring" scheme="http://10buns.com/tags/Spring/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>CentOS 安装 JDK</title>
-    <link href="http://10buns.com/2018/02/08/CentOS-%E5%AE%89%E8%A3%85-JDK/"/>
-    <id>http://10buns.com/2018/02/08/CentOS-安装-JDK/</id>
-    <published>2018-02-08T14:17:31.000Z</published>
-    <updated>2019-01-24T08:19:00.656Z</updated>
-    
-    <content type="html"><![CDATA[<ul><li>上传 jdk 压缩包</li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ scp ~/Downloads/jdk-8u191-linux-x64.tar.gz root@ip:/var/local</span><br></pre></td></tr></table></figure><ul><li>服务器操作</li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ tar -zxvf jdk-8u152-linux-x64.tar.gz </span><br><span class="line"># 在/etc/profile.d/路径下新建一个文件，名为java.sh</span><br><span class="line">$ touch java.sh </span><br><span class="line">$ vim java.sh</span><br></pre></td></tr></table></figure><blockquote><p>内容如下</p></blockquote><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">JAVA_HOME=/usr/java/jdk1.8.0_102/</span><br><span class="line">PATH=$JAVA_HOME/bin:$PATH</span><br><span class="line">export PATH JAVA_HOME</span><br><span class="line">export CLASSPATH=.</span><br></pre></td></tr></table></figure><ul><li>保存并刷新</li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ chmod +x /etc/profile.d/java.sh</span><br><span class="line">$ source /etc/profile.d/java.sh</span><br><span class="line">$ java -version</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;ul&gt;
-&lt;li&gt;上传 jdk 压缩包&lt;/li&gt;
-&lt;/ul&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;
-      
-    
-    </summary>
-    
-      <category term="服务器" scheme="http://10buns.com/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
-    
-    
-      <category term="服务器" scheme="http://10buns.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
     
   </entry>
   
