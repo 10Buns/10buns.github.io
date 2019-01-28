@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Spring,Swagger,">
+  <meta name="keywords" content="Hexo, NexT">
 
 
 
@@ -81,25 +81,16 @@
 
 
 
-<meta name="description" content="团队中大量使用 Swagger 为项目中的接口生成 API 文档，但这些 API 文档都分散在各个微服务中，是否可以通过聚合这些 API 文档在一起呢？在阅读 Swagger 源码后, 发现可以通过 SwaggerResourcesProvider 接口实现添加多个资源文档来源  0x01 基础环境搭建 第一步 构建注册中心、测试服务、zuul 网关    discovery 注册中心gaetw">
-<meta name="keywords" content="Spring,Swagger">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Swagger聚合微服务的API接口文档">
-<meta property="og:url" content="http://10buns.com/2018/06/29/Swagger聚合微服务的API接口文档/index.html">
+<meta name="description" content="Study hard and make progress every day">
+<meta property="og:type" content="website">
+<meta property="og:title" content="10buns">
+<meta property="og:url" content="http://10buns.com/archives/2017/page/2/index.html">
 <meta property="og:site_name" content="10buns">
-<meta property="og:description" content="团队中大量使用 Swagger 为项目中的接口生成 API 文档，但这些 API 文档都分散在各个微服务中，是否可以通过聚合这些 API 文档在一起呢？在阅读 Swagger 源码后, 发现可以通过 SwaggerResourcesProvider 接口实现添加多个资源文档来源  0x01 基础环境搭建 第一步 构建注册中心、测试服务、zuul 网关    discovery 注册中心gaetw">
+<meta property="og:description" content="Study hard and make progress every day">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://olt1b0ecs.bkt.clouddn.com/屏幕快照 2018-06-29 22.06.06.png">
-<meta property="og:image" content="http://olt1b0ecs.bkt.clouddn.com/屏幕快照 2018-06-29 22.08.30.png">
-<meta property="og:image" content="http://olt1b0ecs.bkt.clouddn.com/屏幕快照 2018-06-29 22.08.37.png">
-<meta property="og:image" content="http://olt1b0ecs.bkt.clouddn.com/屏幕快照 2018-06-29 22.11.31.png">
-<meta property="og:image" content="http://olt1b0ecs.bkt.clouddn.com/屏幕快照 2018-06-29 21.51.25.png">
-<meta property="og:image" content="http://olt1b0ecs.bkt.clouddn.com/屏幕快照 2018-06-29 21.51.38.png">
-<meta property="og:updated_time" content="2019-01-24T08:19:32.730Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Swagger聚合微服务的API接口文档">
-<meta name="twitter:description" content="团队中大量使用 Swagger 为项目中的接口生成 API 文档，但这些 API 文档都分散在各个微服务中，是否可以通过聚合这些 API 文档在一起呢？在阅读 Swagger 源码后, 发现可以通过 SwaggerResourcesProvider 接口实现添加多个资源文档来源  0x01 基础环境搭建 第一步 构建注册中心、测试服务、zuul 网关    discovery 注册中心gaetw">
-<meta name="twitter:image" content="http://olt1b0ecs.bkt.clouddn.com/屏幕快照 2018-06-29 22.06.06.png">
+<meta name="twitter:title" content="10buns">
+<meta name="twitter:description" content="Study hard and make progress every day">
 
 
 
@@ -129,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://10buns.com/2018/06/29/Swagger聚合微服务的API接口文档/">
+  <link rel="canonical" href="http://10buns.com/archives/2017/page/2/">
 
 
 
 
 
-  <title>Swagger聚合微服务的API接口文档 | 10buns</title>
+  <title>Archive | 10buns</title>
   
 
 
@@ -164,7 +155,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-left page-archive">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -268,194 +259,76 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
+  
+  
+  
+  <div class="post-block archive">
+    <div id="posts" class="posts-collapse">
+      <span class="archive-move-on"></span>
 
-  
+      <span class="archive-page-counter">
+        
+        
+        
+          
+        
+        Um..! 29 posts in total. Keep on posting.
+      </span>
 
-  
-  
-  
+      
+
+        
+        
+        
+
+        
+          
+          <div class="collection-title">
+            <h1 class="archive-year" id="archive-year-2017">2017</h1>
+          </div>
+        
+        
+
+        
 
   <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://10buns.com/2018/06/29/Swagger聚合微服务的API接口文档/">
+    <header class="post-header">
 
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="10buns">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="10buns">
-    </span>
-
-    
-      <header class="post-header">
-
+      <h2 class="post-title">
         
+            <a class="post-title-link" href="/2017/02/17/【java-集合】总体概览/" itemprop="url">
+              
+                <span itemprop="name">【java 集合】总体概览</span>
+              
+            </a>
         
-          <h1 class="post-title" itemprop="name headline">Swagger聚合微服务的API接口文档</h1>
-        
+      </h2>
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-29T16:55:07+08:00">
-                2018-06-29
-              </time>
-            
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2017-02-17T22:15:24+08:00" content="2017-02-17">
+          02-17
+        </time>
+      </div>
 
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/后端/" itemprop="url" rel="index">
-                    <span itemprop="name">后端</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <blockquote>
-<p>团队中大量使用 Swagger 为项目中的接口生成 API 文档，但这些 API 文档都分散在各个微服务中，是否可以通过聚合这些 API 文档在一起呢？<br>在阅读 Swagger 源码后, 发现可以通过 SwaggerResourcesProvider 接口实现添加多个资源文档来源</p>
-</blockquote>
-<h2 id="0x01-基础环境搭建"><a href="#0x01-基础环境搭建" class="headerlink" title="0x01 基础环境搭建"></a>0x01 基础环境搭建</h2><ul>
-<li>第一步 构建注册中心、测试服务、zuul 网关</li>
-</ul>
-<p><img src="http://olt1b0ecs.bkt.clouddn.com/屏幕快照 2018-06-29 22.06.06.png" alt="项目结构"></p>
-<blockquote>
-<p>discovery 注册中心<br>gaetway zuul 网关<br>ms-product 测试服务<br>ms-user 测试服务</p>
-</blockquote>
-<ul>
-<li>第二步 完善服务</li>
-</ul>
-<p><img src="http://olt1b0ecs.bkt.clouddn.com/屏幕快照 2018-06-29 22.08.30.png" alt="测试服务接口"></p>
-<p><img src="http://olt1b0ecs.bkt.clouddn.com/屏幕快照 2018-06-29 22.08.37.png" alt="测试服务 swagger 配置"></p>
-<h2 id="0x02-zuul-网关整合-Swagger"><a href="#0x02-zuul-网关整合-Swagger" class="headerlink" title="0x02 zuul 网关整合 Swagger"></a>0x02 zuul 网关整合 Swagger</h2><p>核心是对 <code>SwaggerResourcesProvider</code> 的接口实现，通过<code>SwaggerResource</code> 添加多个文档来源。网关上 Swagger 会通过访问 <code>/ms-product/v2/api-docs</code> 和 <code>ms-user/v2/api-docs</code> 来加载两个文档内容，这两个请求会转发到 <code>ms-product</code> 和 <code>ms-user</code> 服务上的 <code>/v2/api-docs</code> 接口获得到 Swagger 的 JSON 文档，来达到文档聚合目的。</p>
-<p><img src="http://olt1b0ecs.bkt.clouddn.com/屏幕快照 2018-06-29 22.11.31.png" alt="重写接口实现"></p>
-<h2 id="0x03-测试"><a href="#0x03-测试" class="headerlink" title="0x03 测试"></a>0x03 测试</h2><p>将微服务、网关以及注册中心启动之后，访问 zuul 的 Swagger 页面<code>http://localhost:9090/swagger-ui.html</code>，可以看到下图内容</p>
-<p><img src="http://olt1b0ecs.bkt.clouddn.com/屏幕快照 2018-06-29 21.51.25.png" alt="swagger"></p>
-<p><img src="http://olt1b0ecs.bkt.clouddn.com/屏幕快照 2018-06-29 21.51.38.png" alt="eureka"></p>
-
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/Spring/" rel="tag"><i class="fa fa-tag"></i> Spring</a>
-          
-            <a href="/tags/Swagger/" rel="tag"><i class="fa fa-tag"></i> Swagger</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2018/06/28/解决-ignored-tracked-with-git/" rel="next" title="解决 .ignored tracked with git">
-                <i class="fa fa-chevron-left"></i> 解决 .ignored tracked with git
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/07/11/可能把Java注解讲的最清楚的一篇文章/" rel="prev" title="可能把Java注解讲的最清楚的一篇文章">
-                可能把Java注解讲的最清楚的一篇文章 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
+    </header>
   </article>
 
 
 
-    <div class="post-spread">
       
+
     </div>
   </div>
+  
+  
+  
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/archives/2017/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/archives/2017/">1</a><span class="page-number current">2</span>
+  </nav>
+
+
 
 
           </div>
@@ -463,10 +336,6 @@
 
 
           
-
-  
-
-
 
         </div>
         
@@ -487,17 +356,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -582,22 +442,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-基础环境搭建"><span class="nav-number">1.</span> <span class="nav-text">0x01 基础环境搭建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-zuul-网关整合-Swagger"><span class="nav-number">2.</span> <span class="nav-text">0x02 zuul 网关整合 Swagger</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-测试"><span class="nav-number">3.</span> <span class="nav-text">0x03 测试</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -745,10 +589,6 @@
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
 
   
 
