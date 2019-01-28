@@ -148,60 +148,6 @@
   </entry>
   
   <entry>
-    <title>浅说java集合框架</title>
-    <link href="http://10buns.com/2018/09/01/%E6%B5%85%E8%AF%B4java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/"/>
-    <id>http://10buns.com/2018/09/01/浅说java集合框架/</id>
-    <published>2018-09-01T15:42:50.000Z</published>
-    <updated>2019-01-24T08:19:22.359Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p>Java 集合框架也称为容器 ，本文主要对如下部分进行源码分析，并讲解面试中常见问题 。</p></blockquote><h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>Java 集合框架位于<code>java.util</code>包下 ，主要有三个大类 : Collection(接口) 、Map(接口) 、集合工具类。提供了数据持有对象的方式 、对数据集合的操作。</p><p><img src="http://olt1b0ecs.bkt.clouddn.com/java 集合框架图.gif" alt="java 集合框架图"></p><h2 id="Collection"><a href="#Collection" class="headerlink" title="Collection"></a>Collection</h2><ul><li><p>ArrayList：线程不同步。默认初始容量为 10，当数组大小不足时容量扩大为 1.5 倍。为追求效率，没有实现同步（synchronized），若需要并发访问，只能可动同步，也可使用 Vector 替代。</p></li><li><p>LinkedList：线程不同步。双向链接实现。LinkedList 同时实现了 List 接口和 Deque 接口，既可以看作一个顺序容器，又可以看作一个队列，还可以看作一个栈。</p></li><li><p>Stack &amp; Queue：Java 有 Stack 类，但并没有叫做 Queue 的类，只有 Queue 接口，他。当需要使用栈时，推荐使用更高效的 ArrayDeque；当需要使用队列时也就首选 ArrayDeque。</p></li><li><p>Vector：线程同步。默认初始容量为 10，当数组大小不足时容量扩大为 2 倍。它的同步是通过 Iterator 方法加 synchronized 实现的。</p></li><li><p>TreeSet：线程不同步，内部使用 NavigableMap 操作。默认元素 <code>自然顺序</code> 排列，可以通过 Comparator 改变排序。TreeSet 里面有一个 TreeMap（适配器模式）。</p></li><li><p>HashSet：线程不同步，内部使用 HashMap 进行数据存储，提供的方法基本都是调用 HashMap 的方法，所以两者本质是一样的。集合元素可以为 NULL。</p></li><li><p>Set：Set 是一种不包含重复元素的 Collection，Set 最多只有一个 null 元素。Set 集合通常可以通过 Map 集合通过适配器模式得到。</p></li><li><p>PriorityQueue：Java 中 PriorityQueue 实现了 Queue 接口，不允许放入 null 元素；其通过堆实现，具体说是通过完全二叉树（complete binary tree）实现的小顶堆（任意一个非叶子节点的权值，都不大于其左右子节点的权值），也就意味着可以通过数组来作为 PriorityQueue 的底层实现。</p><h2 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h2></li><li><p>TreeMap：线程不同步，基于<code>红黑树（Red-Black tree）</code>的 NavigableMap 实现，能够把它保存的记录根据键排序，默认是按键值的升序排序，也可以指定排序的比较器，当用 Iterator 遍历 TreeMap 时，得到的记录是排过序的。</p></li><li><p>HashTable：线程安全，HashMap 的迭代器 (Iterator) 是 fail-fast 迭代器。HashTable 不能存储 NULL 的 key 和 value。</p></li><li><p>HashMap：线程不同步。根据 key 的 hashcode 进行存储，内部使用静态内部类 Node 的数组进行存储，默认初始大小为 16，每次扩大一倍。当发生 Hash 冲突时，采用拉链法（链表）。JDK 1.8中：当单个桶中元素个数大于等于8时，链表实现改为红黑树实现；当元素个数小于6时，变回链表实现。由此来防止hashCode攻击。HashMap 是 Hashtable 的轻量级实现，可以接受为 null 的键值 (key) 和值 (value)，而 Hashtable 不允许。</p></li><li><p>LinkedHashMap：保存了记录的插入顺序，在用 Iterator 遍历 LinkedHashMap 时，先得到的记录肯定是先插入的。也可以在构造时用带参数，按照应用次数排序。在遍历的时候会比 HashMap 慢，不过有种情况例外，当 HashMap 容量很大，实际数据较少时，遍历起来可能会比 LinkedHashMap 慢，因为 LinkedHashMap 的遍历速度只和实际数据有关，和容量无关，而 HashMap 的遍历速度和他的容量有关。</p></li><li><p>WeakHashMap：在 WeakHashMap 里的 entry 可能会被 GC 自动删除，即使没有手动调用 remove() 或者 clear() 方法。 WeakHashMap 的存储结构类似于HashMap。</p></li></ul><h2 id="容器实现"><a href="#容器实现" class="headerlink" title="容器实现"></a>容器实现</h2><p><img src="http://olt1b0ecs.bkt.clouddn.com/java 容器通用实现.png" alt="java 容器通用实现"></p><h1 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h1><h2 id="ArryList"><a href="#ArryList" class="headerlink" title="ArryList"></a>ArryList</h2><p>实现 List、RandomAccess 接口 , 可以插入空数据 , 也支持随机访问。</p><p>ArrayList相当于动态数据，其中最重要的两个属性分别是: elementData 数组 , 以及 size 大小 。在调用 add() 方法的时候 : </p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public boolean add(E e) &#123;</span><br><span class="line">    ensureCapacityInternal(size + 1);  // Increments modCount!!</span><br><span class="line">    elementData[size++] = e;</span><br><span class="line">    return true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ol><li>先进行扩容校验</li><li>将插入的值放到尾部，并将 size + 1 。</li></ol><p>如果调用 add(index , e) 指定位置添加:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public void add(int index, E element) &#123;</span><br><span class="line">    rangeCheckForAdd(index);</span><br><span class="line">    ensureCapacityInternal(size + 1);  // Increments modCount!!</span><br><span class="line">    //复制，向后移动</span><br><span class="line">    System.arraycopy(elementData, index, elementData, index + 1, size - index);</span><br><span class="line">    elementData[index] = element;</span><br><span class="line">    size++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ol><li>先扩容校验</li><li>然后进行数据复制 , 把 index 位置空出存放本次插入的数据 , 并将其后数据后移 。</li></ol><p>扩容最终调用 grow(int minCapacity) , 也就是数据复制:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">private void grow(int minCapacity) &#123;</span><br><span class="line">    // overflow-conscious code</span><br><span class="line">    int oldCapacity = elementData.length;</span><br><span class="line">    int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</span><br><span class="line">    if (newCapacity - minCapacity &lt; 0)</span><br><span class="line">        newCapacity = minCapacity;</span><br><span class="line">    if (newCapacity - MAX_ARRAY_SIZE &gt; 0)</span><br><span class="line">        newCapacity = hugeCapacity(minCapacity);        </span><br><span class="line">    // minCapacity is usually close to size, so this is a win:</span><br><span class="line">    elementData = Arrays.copyOf(elementData, newCapacity);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>因此 ArraryList 主要性能消耗是数据扩容及指定位置添加数据 ，因此应减少指定位置插入及预先指定大小 。</p><h3 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h3><p>因 ArrayList 基于动态数组实现 ，导致并不是完全使用所有空间 。因此用<code>transient</code>修饰，防止自动序列化 。 </p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">transient Object[] elementData;</span><br></pre></td></tr></table></figure><p>且 ArrayList 重写了 writeObject() 和 readObject() 来控制只序列化数组中有元素填充那部分内容。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">private void writeObject(java.io.ObjectOutputStream s)</span><br><span class="line">        throws java.io.IOException&#123;</span><br><span class="line">    // Write out element count, and any hidden stuff</span><br><span class="line">    int expectedModCount = modCount;</span><br><span class="line">    s.defaultWriteObject();</span><br><span class="line"></span><br><span class="line">    // Write out size as capacity for behavioural compatibility with clone()</span><br><span class="line">    s.writeInt(size);</span><br><span class="line">    // Write out all elements in the proper order.</span><br><span class="line">    for (int i=0; i&lt;size; i++) &#123;</span><br><span class="line">        s.writeObject(elementData[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    if (modCount != expectedModCount) &#123;</span><br><span class="line">        throw new ConcurrentModificationException();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private void readObject(java.io.ObjectInputStream s)</span><br><span class="line">        throws java.io.IOException, ClassNotFoundException&#123;</span><br><span class="line">    elementData = EMPTY_ELEMENTDATA;</span><br><span class="line">    // Read in size, and any hidden stuff</span><br><span class="line">    s.defaultReadObject();</span><br><span class="line">    // Read in capacity</span><br><span class="line">    s.readInt(); // ignored</span><br><span class="line">    if (size &gt; 0) &#123;</span><br><span class="line">        // be like clone(), allocate array based upon size not capacity</span><br><span class="line">        ensureCapacityInternal(size);</span><br><span class="line">    </span><br><span class="line">        Object[] a = elementData;</span><br><span class="line">        // Read in all elements in the proper order.</span><br><span class="line">        for (int i=0; i&lt;size; i++) &#123;</span><br><span class="line">            a[i] = s.readObject();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;blockquote&gt;
-&lt;p&gt;Java 集合框架也称为容器 ，本文主要对如下部分进行源码分析，并讲解面试中常见问题 。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h1 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概
-      
-    
-    </summary>
-    
-      <category term="后端" scheme="http://10buns.com/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    
-      <category term="Java基础" scheme="http://10buns.com/tags/Java%E5%9F%BA%E7%A1%80/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>java 基础(二)</title>
-    <link href="http://10buns.com/2018/08/11/java-%E5%9F%BA%E7%A1%80-%E4%BA%8C/"/>
-    <id>http://10buns.com/2018/08/11/java-基础-二/</id>
-    <published>2018-08-10T16:40:46.000Z</published>
-    <updated>2019-01-24T08:18:17.931Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="Object有哪些公用方法"><a href="#Object有哪些公用方法" class="headerlink" title="Object有哪些公用方法"></a>Object有哪些公用方法</h3><ul><li><p>clone 保护方法，实现对象的浅复制，只有实现了Cloneable接口才可以调用该方法，否则抛出CloneNotSupportedException异常。</p></li><li><p>equals 在Object中与==是一样的，子类一般需要重写该方法。</p></li><li><p>hashCode 该方法用于哈希查找，重写了equals方法一般都要重写hashCode方法。这个方法在一些具有哈希功能的Collection中用到。</p></li><li><p>getClass final方法，获得运行时类型</p></li><li><p>wait 使当前线程等待该对象的锁，当前线程必须是该对象的拥有者，也就是具有该对象的锁。 wait() 方法一直等待，直到获得锁或者被中断。 wait(long timeout) 设定一个超时间隔，如果在规定时间内没有获得锁就返回。</p></li><li><p>notify 唤醒在该对象上等待的某个线程。</p></li><li><p>notifyAll 唤醒在该对象上等待的所有线程。</p></li><li><p>toString 转换成字符串，一般子类都有重写，否则打印句柄。</p></li></ul><h3 id="Java的四种引用，强弱软虚，用到的场景"><a href="#Java的四种引用，强弱软虚，用到的场景" class="headerlink" title="Java的四种引用，强弱软虚，用到的场景"></a>Java的四种引用，强弱软虚，用到的场景</h3><ol><li>强引用</li></ol><p>最普遍的一种引用方式，如String s = “abc”，变量s就是字符串“abc”的强引用，只要强引用存在，则垃圾回收器就不会回收这个对象。</p><ol start="2"><li>软引用（SoftReference）</li></ol><p>用于描述还有用但非必须的对象，如果内存足够，不回收，如果内存不足，则回收。一般用于实现内存敏感的高速缓存，软引用可以和引用队列ReferenceQueue联合使用，如果软引用的对象被垃圾回收，JVM就会把这个软引用加入到与之关联的引用队列中。</p><ol start="3"><li>弱引用（WeakReference）</li></ol><p>弱引用和软引用大致相同，弱引用与软引用的区别在于：只具有弱引用的对象拥有更短暂的生命周期。在垃圾回收器线程扫描它所管辖的内存区域的过程中，一旦发现了只具有弱引用的对象，不管当前内存空间足够与否，都会回收它的内存。</p><ol start="4"><li>虚引用（PhantomReference）</li></ol><p>就是形同虚设，与其他几种引用都不同，虚引用并不会决定对象的生命周期。如果一个对象仅持有虚引用，那么它就和没有任何引用一样，在任何时候都可能被垃圾回收器回收。 虚引用主要用来跟踪对象被垃圾回收器回收的活动。</p><blockquote><p>虚引用必须和引用队列 （ReferenceQueue）联合使用。当垃圾回收器准备回收一个对象时，如果发现它还有虚引，就会在回收对象的内存之前，把这个虚引用加入到与之关联的引用队列中。</p></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;Object有哪些公用方法&quot;&gt;&lt;a href=&quot;#Object有哪些公用方法&quot; class=&quot;headerlink&quot; title=&quot;Object有哪些公用方法&quot;&gt;&lt;/a&gt;Object有哪些公用方法&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;clone 保护方法，实现对象的浅
-      
-    
-    </summary>
-    
-      <category term="后端" scheme="http://10buns.com/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    
-      <category term="Java基础" scheme="http://10buns.com/tags/Java%E5%9F%BA%E7%A1%80/"/>
-    
-  </entry>
-  
-  <entry>
     <title>【 浅析 Spring WebFlux 】什么是响应式编程 ( 一 )</title>
     <link href="http://10buns.com/2018/08/07/%E4%BB%80%E4%B9%88%E6%98%AF%E5%93%8D%E5%BA%94%E5%BC%8F%E7%BC%96%E7%A8%8B/"/>
     <id>http://10buns.com/2018/08/07/什么是响应式编程/</id>
@@ -296,31 +242,6 @@
       
         &lt;h3 id=&quot;什么是注解&quot;&gt;&lt;a href=&quot;#什么是注解&quot; class=&quot;headerlink&quot; title=&quot;什么是注解&quot;&gt;&lt;/a&gt;什么是注解&lt;/h3&gt;&lt;blockquote&gt;
 &lt;p&gt;在 Java 中 Annotation是一个很重要的知识点 , 中文翻译过来就是注解 、批
-      
-    
-    </summary>
-    
-      <category term="后端" scheme="http://10buns.com/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    
-      <category term="Java基础" scheme="http://10buns.com/tags/Java%E5%9F%BA%E7%A1%80/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>java 基础(一)</title>
-    <link href="http://10buns.com/2018/07/01/java-%E5%9F%BA%E7%A1%80-%E4%B8%80/"/>
-    <id>http://10buns.com/2018/07/01/java-基础-一/</id>
-    <published>2018-07-01T14:38:59.000Z</published>
-    <updated>2019-01-24T08:18:31.379Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="1-java-中如何跳出当前多重循环"><a href="#1-java-中如何跳出当前多重循环" class="headerlink" title="1. java 中如何跳出当前多重循环"></a>1. java 中如何跳出当前多重循环</h3><p>使用标签语法， 循环前定义 <code>tag:</code> ，循环中 <code>break tag;</code></p><h3 id="2-写-clone-方法时，通常都有一行代码，为什么？"><a href="#2-写-clone-方法时，通常都有一行代码，为什么？" class="headerlink" title="2. 写 clone() 方法时，通常都有一行代码，为什么？"></a>2. 写 clone() 方法时，通常都有一行代码，为什么？</h3><p>clone 有缺省行为，<code>super.clone()</code>; 因此首先要把父类成员复制结束，然后才能复制自己的成员</p><h3 id="3-java-实现多态的机制？"><a href="#3-java-实现多态的机制？" class="headerlink" title="3. java 实现多态的机制？"></a>3. java 实现多态的机制？</h3><p>靠的是父类或接口定义的饮用变量可以指向子类或者实现类的实例对象，而程序调用的方法在运行期才动态绑定</p><h3 id="4-基本数据类型"><a href="#4-基本数据类型" class="headerlink" title="4. 基本数据类型"></a>4. 基本数据类型</h3><p>byte, int, char, long, float, boolean, short, double</p><h3 id="5-多线程有几种实现方法？同步有几种？"><a href="#5-多线程有几种实现方法？同步有几种？" class="headerlink" title="5. 多线程有几种实现方法？同步有几种？"></a>5. 多线程有几种实现方法？同步有几种？</h3><p>多线程: thread ,实现 Runnable 接口, 使用ExecutorService、Callable、Future实现有返回结果的多线程</p><p>同步: synchronized, wait, notify</p><h3 id="6-synchronized-与-Lock-区别"><a href="#6-synchronized-与-Lock-区别" class="headerlink" title="6. synchronized 与 Lock 区别"></a>6. synchronized 与 Lock 区别</h3><p>相同点: Lock 可以完成 synchronized 所有的功能</p><p>异同点: Lock 比 synchronized 更为精确的线程语义和性能</p><p>synchronized 会自动释放锁， Lock 必须手动释放</p><h1 id="7-heap-与-stack-区别"><a href="#7-heap-与-stack-区别" class="headerlink" title="7. heap 与 stack 区别"></a>7. heap 与 stack 区别</h1><p>java 内存分为<code>栈内存</code>和<code>堆内存</code> </p><p>栈内存指程序进入一个方法时，会位这个方法单独分配一块私属存储，用于存储这个方法私有变量，方法结束时会回收内存。</p><p>堆一般用于存放不放在当前方法栈中的数据，比如对象，所以不会随方法结束而回收。final修饰的局部变量放在堆中。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;1-java-中如何跳出当前多重循环&quot;&gt;&lt;a href=&quot;#1-java-中如何跳出当前多重循环&quot; class=&quot;headerlink&quot; title=&quot;1. java 中如何跳出当前多重循环&quot;&gt;&lt;/a&gt;1. java 中如何跳出当前多重循环&lt;/h3&gt;&lt;p&gt;使用标签
       
     
     </summary>
@@ -534,6 +455,84 @@
     
     
       <category term="Spring" scheme="http://10buns.com/tags/Spring/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CentOS 安装 JDK</title>
+    <link href="http://10buns.com/2018/02/08/CentOS-%E5%AE%89%E8%A3%85-JDK/"/>
+    <id>http://10buns.com/2018/02/08/CentOS-安装-JDK/</id>
+    <published>2018-02-08T14:17:31.000Z</published>
+    <updated>2019-01-24T08:19:00.656Z</updated>
+    
+    <content type="html"><![CDATA[<ul><li>上传 jdk 压缩包</li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ scp ~/Downloads/jdk-8u191-linux-x64.tar.gz root@ip:/var/local</span><br></pre></td></tr></table></figure><ul><li>服务器操作</li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ tar -zxvf jdk-8u152-linux-x64.tar.gz </span><br><span class="line"># 在/etc/profile.d/路径下新建一个文件，名为java.sh</span><br><span class="line">$ touch java.sh </span><br><span class="line">$ vim java.sh</span><br></pre></td></tr></table></figure><blockquote><p>内容如下</p></blockquote><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">JAVA_HOME=/usr/java/jdk1.8.0_102/</span><br><span class="line">PATH=$JAVA_HOME/bin:$PATH</span><br><span class="line">export PATH JAVA_HOME</span><br><span class="line">export CLASSPATH=.</span><br></pre></td></tr></table></figure><ul><li>保存并刷新</li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ chmod +x /etc/profile.d/java.sh</span><br><span class="line">$ source /etc/profile.d/java.sh</span><br><span class="line">$ java -version</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;ul&gt;
+&lt;li&gt;上传 jdk 压缩包&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;
+      
+    
+    </summary>
+    
+      <category term="服务器" scheme="http://10buns.com/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+    
+      <category term="服务器" scheme="http://10buns.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Homebrew 常用命令</title>
+    <link href="http://10buns.com/2018/01/04/Homebrew%20%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
+    <id>http://10buns.com/2018/01/04/Homebrew 常用命令/</id>
+    <published>2018-01-04T15:11:28.000Z</published>
+    <updated>2019-01-24T08:20:30.264Z</updated>
+    
+    <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ ruby -e &quot;$(curl --insecure -fsSL</span><br><span class="line">https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</span><br><span class="line"></span><br><span class="line">$ brew --help #简洁命令帮助</span><br><span class="line">$ man brew #完整命令帮助</span><br><span class="line">$ brew install python #安装软件包</span><br><span class="line">$ brew uninstall python #卸载软件包</span><br><span class="line">$ brew search python #搜索软件包</span><br><span class="line">$ brew list #显示已经安装的所有软件包</span><br><span class="line">$ brew update #同步远程最新更新情况，对本机已经安装并有更新的软件用*标明</span><br><span class="line">$ brew outdated #查看已安装的哪些软件包需要更新</span><br><span class="line">$ brew upgrade python #更新单个软件包</span><br><span class="line">$ brew info python #查看软件包信息</span><br><span class="line">$ brew home python #访问软件包官方站</span><br><span class="line">$ brew cleanup #清理所有已安装软件包的历史老版本</span><br><span class="line">$ brew cleanup python #清理单个已安装软件包的历史版本</span><br></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-bin #用于存放所安装程序的启动链接（相当于快捷方式）</span><br><span class="line">-Cellar #所有brew安装的程序，都将以[程序名/版本号]存放于本目录下</span><br><span class="line">-etc #brew安装程序的配置文件默认存放路径</span><br><span class="line">-Library #Homebrew 系统自身文件夹</span><br><span class="line">+–Formula #程序的下载路径和编译参数及安装路径等配置文件存放地</span><br><span class="line">+–Homebrew #brew程序自身命令集</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class
+      
+    
+    </summary>
+    
+      <category term="工具" scheme="http://10buns.com/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+    
+      <category term="Homebrew" scheme="http://10buns.com/tags/Homebrew/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>java 程序执行顺序</title>
+    <link href="http://10buns.com/2017/12/25/java%20%E7%A8%8B%E5%BA%8F%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/"/>
+    <id>http://10buns.com/2017/12/25/java 程序执行顺序/</id>
+    <published>2017-12-24T16:09:16.000Z</published>
+    <updated>2019-01-24T08:20:19.293Z</updated>
+    
+    <content type="html"><![CDATA[<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Son parent = <span class="keyword">new</span> Son();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Parent</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> ParentStaticParam staticParam = <span class="keyword">new</span> ParentStaticParam();</span><br><span class="line">    <span class="keyword">public</span> ParentParam parentParam = <span class="keyword">new</span> ParentParam();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">"执行父类静态代码块"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(<span class="string">"执行父类代码块"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Parent</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"执行父类构造器"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Son</span> <span class="keyword">extends</span> <span class="title">Parent</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> SonStaticParam sonStaticParam = <span class="keyword">new</span> SonStaticParam();</span><br><span class="line">    <span class="keyword">public</span> SonParam sonParam = <span class="keyword">new</span> SonParam();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">"执行子类静态代码块"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(<span class="string">"执行子类代码块"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Son</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"执行子类构造函数"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ParentStaticParam</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ParentStaticParam</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"执行父类静态变量初始化"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ParentParam</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ParentParam</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"执行父类变量初始化"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SonStaticParam</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SonStaticParam</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"执行子类静态变量初始化"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SonParam</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SonParam</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"执行子类变量初始化"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>执行结果:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">执行父类静态变量初始化</span><br><span class="line">执行父类静态代码块</span><br><span class="line">执行子类静态变量初始化</span><br><span class="line">执行子类静态代码块</span><br><span class="line">执行父类变量初始化</span><br><span class="line">执行父类代码块</span><br><span class="line">执行父类构造器</span><br><span class="line">执行子类变量初始化</span><br><span class="line">执行子类代码块</span><br><span class="line">执行子类构造函数</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=
+      
+    
+    </summary>
+    
+      <category term="Java基础" scheme="http://10buns.com/categories/Java%E5%9F%BA%E7%A1%80/"/>
+    
+    
+      <category term="Java基础" scheme="http://10buns.com/tags/Java%E5%9F%BA%E7%A1%80/"/>
     
   </entry>
   
