@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="Java 笔记,">
 
 
 
@@ -81,16 +81,18 @@
 
 
 
-<meta name="description" content="Study hard and make progress every day">
-<meta property="og:type" content="website">
-<meta property="og:title" content="10buns">
-<meta property="og:url" content="http://10buns.com/archives/2018/01/index.html">
+<meta name="description" content="产生死锁的主要原因是 因为系统资源不足。 进程运行推进的顺序不合适。 资源分配不当等。  如果系统资源充足，进程的资源请求都能够得到满足，死锁出现的可能性就很低，否则就会因争夺有限的资源而陷入死锁。其次，进程运行推进顺序与速度不同，也可能产生死锁。 产生死锁的四个必要条件： 互斥条件：一个资源每次只能被一个进程使用。 请求与保持条件：一个进程因请求资源而阻塞时，对已获得的资源保持不放。 不剥夺条">
+<meta name="keywords" content="Java 笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Java笔记】死锁条件">
+<meta property="og:url" content="http://10buns.com/2018/11/29/【Java笔记】死锁条件/index.html">
 <meta property="og:site_name" content="10buns">
-<meta property="og:description" content="Study hard and make progress every day">
+<meta property="og:description" content="产生死锁的主要原因是 因为系统资源不足。 进程运行推进的顺序不合适。 资源分配不当等。  如果系统资源充足，进程的资源请求都能够得到满足，死锁出现的可能性就很低，否则就会因争夺有限的资源而陷入死锁。其次，进程运行推进顺序与速度不同，也可能产生死锁。 产生死锁的四个必要条件： 互斥条件：一个资源每次只能被一个进程使用。 请求与保持条件：一个进程因请求资源而阻塞时，对已获得的资源保持不放。 不剥夺条">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-02-13T09:38:56.352Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="10buns">
-<meta name="twitter:description" content="Study hard and make progress every day">
+<meta name="twitter:title" content="【Java笔记】死锁条件">
+<meta name="twitter:description" content="产生死锁的主要原因是 因为系统资源不足。 进程运行推进的顺序不合适。 资源分配不当等。  如果系统资源充足，进程的资源请求都能够得到满足，死锁出现的可能性就很低，否则就会因争夺有限的资源而陷入死锁。其次，进程运行推进顺序与速度不同，也可能产生死锁。 产生死锁的四个必要条件： 互斥条件：一个资源每次只能被一个进程使用。 请求与保持条件：一个进程因请求资源而阻塞时，对已获得的资源保持不放。 不剥夺条">
 
 
 
@@ -120,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://10buns.com/archives/2018/01/">
+  <link rel="canonical" href="http://10buns.com/2018/11/29/【Java笔记】死锁条件/">
 
 
 
 
 
-  <title>Archive | 10buns</title>
+  <title>【Java笔记】死锁条件 | 10buns</title>
   
 
 
@@ -155,7 +157,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -259,71 +261,165 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
-
-      <span class="archive-page-counter">
-        
-        
-         
-        
-        OK! 32 posts in total. Keep on posting.
-      </span>
-
-      
-
-        
-        
-        
-
-        
-          
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2018">2018</h1>
-          </div>
-        
-        
-
-        
 
   <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://10buns.com/2018/11/29/【Java笔记】死锁条件/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="10buns">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="10buns">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/01/04/Homebrew 常用命令/" itemprop="url">
-              
-                <span itemprop="name">Homebrew 常用命令</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">【Java笔记】死锁条件</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-01-04T23:11:28+08:00" content="2018-01-04">
-          01-04
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-29T23:57:17+08:00">
+                2018-11-29
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
 
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
+      
 
+      
+        <a id="more"></a>
+<h1 id="产生死锁的主要原因是"><a href="#产生死锁的主要原因是" class="headerlink" title="产生死锁的主要原因是"></a>产生死锁的主要原因是</h1><ol>
+<li>因为系统资源不足。</li>
+<li>进程运行推进的顺序不合适。</li>
+<li>资源分配不当等。</li>
+</ol>
+<p>如果系统资源充足，进程的资源请求都能够得到满足，死锁出现的可能性就很低，否则<br>就会因争夺有限的资源而陷入死锁。其次，进程运行推进顺序与速度不同，也可能产生死锁。</p>
+<h1 id="产生死锁的四个必要条件："><a href="#产生死锁的四个必要条件：" class="headerlink" title="产生死锁的四个必要条件："></a>产生死锁的四个必要条件：</h1><ul>
+<li>互斥条件：一个资源每次只能被一个进程使用。</li>
+<li>请求与保持条件：一个进程因请求资源而阻塞时，对已获得的资源保持不放。</li>
+<li>不剥夺条件:进程已获得的资源，在末使用完之前，不能强行剥夺。</li>
+<li>循环等待条件:若干进程之间形成一种头尾相接的循环等待资源关系。</li>
+</ul>
+<p>这四个条件是死锁的必要条件，只要系统发生死锁，这些条件必然成立，而只要上述条件之<br>一不满足，就不会发生死锁。</p>
+<h1 id="死锁的处理及预防："><a href="#死锁的处理及预防：" class="headerlink" title="死锁的处理及预防："></a>死锁的处理及预防：</h1><p>理解了死锁的原因，尤其是产生死锁的四个必要条件，就可以最大可能地避免、预防和<br>解除死锁。所以在系统设计、进程调度等方面注意如何不让这四个必要条件成立，如何确<br>定资源的合理分配算法，避免进程永久占据系统资源。此外，也要防止进程在处于等待状态<br>的情况下占用资源。因此，对资源的分配要给予合理的规划。</p>
+
+      
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java-笔记/" rel="tag"><i class="fa fa-tag"></i> Java 笔记</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/05/centos-安装-redis/" rel="next" title="centos 安装 redis">
+                <i class="fa fa-chevron-left"></i> centos 安装 redis
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/14/主键与唯一索引区别/" rel="prev" title="主键与唯一索引区别">
+                主键与唯一索引区别 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -331,6 +427,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -351,8 +451,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -437,6 +546,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#产生死锁的主要原因是"><span class="nav-number">1.</span> <span class="nav-text">产生死锁的主要原因是</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#产生死锁的四个必要条件："><span class="nav-number">2.</span> <span class="nav-text">产生死锁的四个必要条件：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#死锁的处理及预防："><span class="nav-number">3.</span> <span class="nav-text">死锁的处理及预防：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -584,6 +709,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
