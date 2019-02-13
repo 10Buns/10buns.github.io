@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://10buns.com/"/>
-  <updated>2019-01-25T14:13:42.240Z</updated>
+  <updated>2019-02-13T05:59:03.450Z</updated>
   <id>http://10buns.com/</id>
   
   <author>
@@ -15,6 +15,54 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>【Java笔记】死锁条件</title>
+    <link href="http://10buns.com/2019/02/13/%E3%80%90Java%E7%AC%94%E8%AE%B0%E3%80%91%E6%AD%BB%E9%94%81%E6%9D%A1%E4%BB%B6/"/>
+    <id>http://10buns.com/2019/02/13/【Java笔记】死锁条件/</id>
+    <published>2019-02-13T05:57:17.000Z</published>
+    <updated>2019-02-13T05:59:03.450Z</updated>
+    
+    <content type="html"><![CDATA[<a id="more"></a><h1 id="产生死锁的主要原因是"><a href="#产生死锁的主要原因是" class="headerlink" title="产生死锁的主要原因是"></a>产生死锁的主要原因是</h1><ol><li>因为系统资源不足。</li><li>进程运行推进的顺序不合适。</li><li>资源分配不当等。</li></ol><p>如果系统资源充足，进程的资源请求都能够得到满足，死锁出现的可能性就很低，否则<br>就会因争夺有限的资源而陷入死锁。其次，进程运行推进顺序与速度不同，也可能产生死锁。</p><h1 id="产生死锁的四个必要条件："><a href="#产生死锁的四个必要条件：" class="headerlink" title="产生死锁的四个必要条件："></a>产生死锁的四个必要条件：</h1><ul><li>互斥条件：一个资源每次只能被一个进程使用。</li><li>请求与保持条件：一个进程因请求资源而阻塞时，对已获得的资源保持不放。</li><li>不剥夺条件:进程已获得的资源，在末使用完之前，不能强行剥夺。</li><li>循环等待条件:若干进程之间形成一种头尾相接的循环等待资源关系。</li></ul><p>这四个条件是死锁的必要条件，只要系统发生死锁，这些条件必然成立，而只要上述条件之<br>一不满足，就不会发生死锁。</p><h1 id="死锁的处理及预防："><a href="#死锁的处理及预防：" class="headerlink" title="死锁的处理及预防："></a>死锁的处理及预防：</h1><p>理解了死锁的原因，尤其是产生死锁的四个必要条件，就可以最大可能地避免、预防和<br>解除死锁。所以在系统设计、进程调度等方面注意如何不让这四个必要条件成立，如何确<br>定资源的合理分配算法，避免进程永久占据系统资源。此外，也要防止进程在处于等待状态<br>的情况下占用资源。因此，对资源的分配要给予合理的规划。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h1 id=&quot;产生死锁的主要原因是&quot;&gt;&lt;a href=&quot;#产生死锁的主要原因是&quot; class=&quot;headerlink&quot; title=&quot;产生死锁的主要原因是&quot;&gt;&lt;/a&gt;产生死锁的主要原因是&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;因为系统资源不足。&lt;/li&gt;
+      
+    
+    </summary>
+    
+    
+      <category term="Java 笔记" scheme="http://10buns.com/tags/Java-%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="http://10buns.com/2019/01/27/media/%E3%80%90%E7%AE%80%E5%8E%86%E3%80%91%E7%8E%8B%E4%BD%B3%E4%B9%90/"/>
+    <id>http://10buns.com/2019/01/27/media/【简历】王佳乐/</id>
+    <published>2019-01-26T16:56:12.844Z</published>
+    <updated>2019-01-29T08:46:05.948Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="联系方式"><a href="#联系方式" class="headerlink" title="联系方式"></a>联系方式</h1><ul><li>手机：18915966899</li><li>Email：<a href="mailto:loverichy8@gmail.com" target="_blank" rel="noopener">loverichy8@gmail.com</a></li><li>微信：18915966899</li></ul><h1 id="个人信息"><a href="#个人信息" class="headerlink" title="个人信息"></a>个人信息</h1><ul><li>王佳乐/男/1991</li><li>大专/南京铁道学院</li><li>本科/ 南京理工(自考在读)</li><li>工作年限：5年</li><li>技术博客：<a href="http://10buns.com">http://10buns.com</a></li><li>期望职位：Java 中高级开发</li><li>期望薪资：面谈</li><li>期望城市：南京  </li></ul><h1 id="工作经历"><a href="#工作经历" class="headerlink" title="工作经历"></a>工作经历</h1><ul><li><p>南京云帐房(2018.9~2018.12)</p><blockquote><p>因个人原因需要长期请假, 已提离职</p></blockquote></li><li><p>上海非码网络科技有限公司(2014.4~2018.8)</p></li></ul><h2 id="南京云帐房-（-2018年10月-2018年12月-）"><a href="#南京云帐房-（-2018年10月-2018年12月-）" class="headerlink" title="南京云帐房 （ 2018年10月 ~ 2018年12月 ）"></a>南京云帐房 （ 2018年10月 ~ 2018年12月 ）</h2><h3 id="代账计费系统"><a href="#代账计费系统" class="headerlink" title="代账计费系统"></a>代账计费系统</h3><p>作为公司的核心系统之一，主要提供客户代账计费、数据汇总、报表展示、运营财务日常使用等。<br>我在此项目中负责计费系统的技术改造、新业务支撑开发。</p><p>原代账系统使用 vert.x 、jpa 等框架开发，但由于前期需求或规划问题，与公司其他项目存在技术框架不匹配，性能不可靠等问题。</p><p>接手项目后，首先拆分两个方向保证系统的持续运行和迭代, 1) 新的业务需求使用公司已全面推广的 spring cloud 框架开发 2）原项目上优化现有业务功能的性能，优化完成后迁移至新的系统。</p><p>经过两个月的快速迭代，整个计费系统性能有了非常大的提升。相关API接口从3~15s降为500ms内，报表服务也做到了秒级别, 给运营支撑带来了更快速的响应。</p><h2 id="上海非码网络科技有限公司-（-2014年4月-2018年8月-）"><a href="#上海非码网络科技有限公司-（-2014年4月-2018年8月-）" class="headerlink" title="上海非码网络科技有限公司 （ 2014年4月 ~ 2018年8月 ）"></a>上海非码网络科技有限公司 （ 2014年4月 ~ 2018年8月 ）</h2><h3 id="电商电子预付费卡"><a href="#电商电子预付费卡" class="headerlink" title="电商电子预付费卡"></a>电商电子预付费卡</h3><p>该产品是为电商提供便捷的电子预付费卡业务，为顾客提供线上、线下的储值消费，例如微信礼品卡，会员礼品卡等。目前该项目已服务两个大型 KA 商户。</p><p>主要用到的技术栈：apollo、spring boot、mysql、redis、rabbit mq、spring cloud。</p><p>我主要负责项目的设计、带领团队开发。该项目中对服务的高可用、数据的安全性等都有高要求。实际中也遇到一些困难和问题，比如交易链路的安全性、一次性条码、交易异常恢复等。从这个项目学到了如何带领管理团队发挥最大效能，更学到了如何灵活运用解决实际问题。</p><h3 id="电商-门店统一支付网关、移动收银终端"><a href="#电商-门店统一支付网关、移动收银终端" class="headerlink" title="电商/门店统一支付网关、移动收银终端"></a>电商/门店统一支付网关、移动收银终端</h3><p>为电商及门店赋能、提供效能，简化接入在线/离线第三方支付的难度，并为运营精准化营销提供数据支撑。<br>主要用到的技术栈：apollo、spring boot、mysql、redis、rabbit mq、spring cloud。<br>我主要负责项目的设计、带领团队开发。项目初期遇到了很多问题，比如高并发、高可用、瞬时并发、三方对账等技术业务难题，在尝试并逐步解决的过程中，极大的扩充了自己的处理复杂业务的能力。</p><h3 id="其他项目"><a href="#其他项目" class="headerlink" title="其他项目"></a>其他项目</h3><h4 id="开放Saas平台"><a href="#开放Saas平台" class="headerlink" title="开放Saas平台"></a>开放Saas平台</h4><p>参与公司自有开放平台的设计、开发。负责团队的技术难点解决、代码规范管理。<br>主要负责了 oauth2 权限认证 、 API SDK 、应用网关 及 设计开发了转盘、灯谜等几款微信小程序应用。</p><h4 id="电商会员"><a href="#电商会员" class="headerlink" title="电商会员"></a>电商会员</h4><p>在此项目负责了系统的优化改进。这个项目中，通过优化数据库读写、业务层解耦、引入缓存，API服务提高到600+稳定。完善原有的日志系统，部分配置动态化，会员系统变为可水平动态扩展，在遇到商户促销活动时，稳定支撑商户正常运营。为公司挽留了客户，避免因为之前故障导致的商户流失。现总会员日活50w+。</p><h2 id="技术文章"><a href="#技术文章" class="headerlink" title="技术文章"></a>技术文章</h2><ul><li><a href="https://10buns.com/2018/07/11/可能把Java注解讲的最清楚的一篇文章/">可能把Java注解讲的最清楚的一篇文章</a></li><li><a href="https://10buns.com/2018/08/07/什么是响应式编程/">浅析 Spring WebFlux</a></li></ul><h2 id="演讲和讲义"><a href="#演讲和讲义" class="headerlink" title="演讲和讲义"></a>演讲和讲义</h2><ul><li>2017年非码内部技术培训：[spring cloud 如何落地生产]</li></ul><h1 id="技能清单"><a href="#技能清单" class="headerlink" title="技能清单"></a>技能清单</h1><p>以下均为我熟练使用的技能</p><ul><li>Web开发：JAVA/.Net/Python</li><li>Web框架：Spring/Spring Boot/Spring Cloud</li><li>数据库相关：MySQL/Sql Server/SQLite</li><li>构建工具: Maven/Gradle</li><li>版本管理、文档和自动化部署工具：Svn/Git/Swagger</li><li>单元测试：TestNG/Junit</li><li>云和开放平台：阿里云/腾讯云/支付宝开放平台/微信应用开发/银联</li></ul><h2 id="自我评价"><a href="#自我评价" class="headerlink" title="自我评价"></a>自我评价</h2><ol><li>熟练掌握 Java ，能熟练使用 spring 搭建项目</li><li>熟练掌握消息队列，了解<code>Rabbit MQ</code>开源组件</li><li>熟练掌握 Spring cloud 框架，熟练运用其组件</li><li>熟悉网络基础知识、TCP/IP协议、socket 编程</li><li>熟练使用 Mysql、Redis</li><li>熟练掌握 web 相关开发技术，了解前端知识</li><li>熟悉了解 JVM ，对并发、分布式有一定理解</li><li>对开源技术有浓厚兴趣，关注开源社区， 经常参加线下开源聚会</li><li>良好英文阅读能力，喜欢阅读技术文档与源码</li></ol><hr><h1 id="致谢"><a href="#致谢" class="headerlink" title="致谢"></a>致谢</h1><p>感谢您花时间阅读我的简历，期待能有机会和您共事。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;联系方式&quot;&gt;&lt;a href=&quot;#联系方式&quot; class=&quot;headerlink&quot; title=&quot;联系方式&quot;&gt;&lt;/a&gt;联系方式&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;手机：18915966899&lt;/li&gt;
+&lt;li&gt;Email：&lt;a href=&quot;mailto:loverichy8
+      
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>Java 运行时的内存划分</title>
@@ -485,56 +533,6 @@
     
     
       <category term="Homebrew" scheme="http://10buns.com/tags/Homebrew/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>java 程序执行顺序</title>
-    <link href="http://10buns.com/2017/12/25/java%20%E7%A8%8B%E5%BA%8F%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/"/>
-    <id>http://10buns.com/2017/12/25/java 程序执行顺序/</id>
-    <published>2017-12-24T16:09:16.000Z</published>
-    <updated>2019-01-24T08:20:19.293Z</updated>
-    
-    <content type="html"><![CDATA[<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Son parent = <span class="keyword">new</span> Son();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Parent</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> ParentStaticParam staticParam = <span class="keyword">new</span> ParentStaticParam();</span><br><span class="line">    <span class="keyword">public</span> ParentParam parentParam = <span class="keyword">new</span> ParentParam();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">"执行父类静态代码块"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(<span class="string">"执行父类代码块"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Parent</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"执行父类构造器"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Son</span> <span class="keyword">extends</span> <span class="title">Parent</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> SonStaticParam sonStaticParam = <span class="keyword">new</span> SonStaticParam();</span><br><span class="line">    <span class="keyword">public</span> SonParam sonParam = <span class="keyword">new</span> SonParam();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">"执行子类静态代码块"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(<span class="string">"执行子类代码块"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Son</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"执行子类构造函数"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ParentStaticParam</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ParentStaticParam</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"执行父类静态变量初始化"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ParentParam</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ParentParam</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"执行父类变量初始化"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SonStaticParam</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SonStaticParam</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"执行子类静态变量初始化"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SonParam</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SonParam</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"执行子类变量初始化"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>执行结果:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">执行父类静态变量初始化</span><br><span class="line">执行父类静态代码块</span><br><span class="line">执行子类静态变量初始化</span><br><span class="line">执行子类静态代码块</span><br><span class="line">执行父类变量初始化</span><br><span class="line">执行父类代码块</span><br><span class="line">执行父类构造器</span><br><span class="line">执行子类变量初始化</span><br><span class="line">执行子类代码块</span><br><span class="line">执行子类构造函数</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=
-      
-    
-    </summary>
-    
-      <category term="Java基础" scheme="http://10buns.com/categories/Java%E5%9F%BA%E7%A1%80/"/>
-    
-    
-      <category term="Java基础" scheme="http://10buns.com/tags/Java%E5%9F%BA%E7%A1%80/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>【计算机基础】网络</title>
-    <link href="http://10buns.com/2017/11/14/%E3%80%90%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E3%80%91%E7%BD%91%E7%BB%9C/"/>
-    <id>http://10buns.com/2017/11/14/【计算机基础】网络/</id>
-    <published>2017-11-14T03:47:48.000Z</published>
-    <updated>2019-01-29T04:14:28.858Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h1><h2 id="OSI七层模型-TCP-IP四层模型-五层协议"><a href="#OSI七层模型-TCP-IP四层模型-五层协议" class="headerlink" title="OSI七层模型 TCP/IP四层模型 五层协议"></a>OSI七层模型 TCP/IP四层模型 五层协议</h2><p><img src="/images/osi模型.png" alt="osi模型"></p><h4 id="五层协议"><a href="#五层协议" class="headerlink" title="五层协议"></a>五层协议</h4><ul><li><code>应用层</code> ：提供用户接口，特指能够发起网络流量的程序，比如客户端程序：QQ，MSN，浏览器等；服务器程序：web服务器，邮件服务器，流媒体服务器等等。数据单位为报文。</li><li><code>运输层</code> ：提供的是进程间的通用数据传输服务。由于应用层协议很多，定义通用的运输层协议就可以支持不断增多的应用层协议。运输层包括两种协议：<ol><li>传输控制协议 TCP，提供面向连接、可靠的数据传输服务，数据单位为报文段；</li><li>用户数据报协议 UDP，提供无连接、尽最大努力的数据传输服务，数据单位为用户数据报。</li><li>TCP 主要提供完整性服务，UDP 主要提供及时性服务。</li></ol></li><li><code>网络层</code> ：为主机间提供数据传输服务，而运输层协议是为主机中的进程提供服务。网络层把运输层传递下来的报文段或者用户数据报封装成分组。（负责选择最佳路径 规划IP地址）<ol><li>路由器查看数据包目标IP地址，根据路由表为数据包选择路径。路由表中的类目可以人工添加（静态路由）也可以动态生成（动态路由）。</li></ol></li><li><code>数据链路层</code> ：不同的网络类型，发送数据的机制不同，数据链路层就是将数据包封装成能够在不同的网络传输的帧。能够进行差错检验，但不纠错，监测处错误丢掉该帧。<ol><li>帧的开始和结束，透明传输，差错校验</li></ol></li><li><code>物理层</code> ：物理层解决如何在连接各种计算机的传输媒体上传输数据比特流，而不是指具体的传输媒体。物理层的主要任务描述为：确定与传输媒体的接口的一些特性，即：<ol><li>机械特性：例接口形状，大小，引线数目</li><li>电气特性：例规定电压范围 ( -5V 到 +5V )</li><li>功能特性：例规定 -5V 表示 0，＋5V 表示 1</li><li>过程特性：也称规程特性，规定建立连接时各个相关部件的工作步骤</li></ol></li></ul><h4 id="七层模型"><a href="#七层模型" class="headerlink" title="七层模型"></a>七层模型</h4><ul><li><p><code>表示层</code> ：数据压缩、加密以及数据描述。这使得应用程序不必担心在各台主机中表示/存储的内部格式（二进制、ASCII，比如乱码）不同的问题。</p></li><li><p><code>会话层</code> ：建立会话，如session认证、断点续传。通信的应用程序之间建立、维护和释放面向用户的连接。通信的应用程序之间建立会话，需要传输层建立1个或多个连接。（…后台运行的木马，netstat -n）</p></li></ul><blockquote><p>五层协议没有表示层和会话层，而是将这些功能留给应用程序开发者处理。</p></blockquote><h4 id="TCP-IP四层模型"><a href="#TCP-IP四层模型" class="headerlink" title="TCP/IP四层模型"></a>TCP/IP四层模型</h4><p><img src="/images/tcp协议族示图.png" alt="tcp协议族示图"></p><h1 id="TCP报头格式和UDP报头格式"><a href="#TCP报头格式和UDP报头格式" class="headerlink" title="TCP报头格式和UDP报头格式"></a>TCP报头格式和UDP报头格式</h1><h3 id="UDP-和-TCP-的特点"><a href="#UDP-和-TCP-的特点" class="headerlink" title="UDP 和 TCP 的特点"></a>UDP 和 TCP 的特点</h3><ul><li><code>用户数据报协议 UDP</code>（User Datagram Protocol）是无连接的，尽最大可能交付，没有拥塞控制，面向报文（对于应用程序传下来的报文不合并也不拆分，只是添加 UDP 首部），支持一对一、一对多、多对一和多对多的交互通信。例如：视频传输、实时通信</li><li><code>传输控制协议 TCP</code>（Transmission Control Protocol）是面向连接的，提供可靠交付，有流量控制，拥塞控制，提供全双工通信，面向字节流（把应用层传下来的报文看成字节流，把字节流组织成大小不等的数据块），每一条 TCP 连接只能是点对点的（一对一）。</li></ul><h3 id="UDP-首部格式"><a href="#UDP-首部格式" class="headerlink" title="UDP 首部格式"></a>UDP 首部格式</h3><p><img src="/images/udp头部格式.png" alt=""><br>首部字段只有 8 个字节，包括源端口、目的端口、长度、检验和。12 字节的伪首部是为了计算检验和临时添加的。</p><h3 id="TCP-首部格式"><a href="#TCP-首部格式" class="headerlink" title="TCP 首部格式"></a>TCP 首部格式</h3><p><img src="/images/tcp头部格式.png" alt=""></p><ul><li><code>序号 seq</code> ：用于对字节流进行编号，例如序号为 301，表示第一个字节的编号为 301，如果携带的数据长度为 100 字节，那么下一个报文段的序号应为 401。[301,400]为序号301的数据长度，下一个则为401</li><li><code>确认号 ack</code> ：期望收到的下一个报文段的序号。例如 B 正确收到 A 发送来的一个报文段，序号为 501，携带的数据长度为 200 字节，因此 B 期望下一个报文段的序号为 701，B 发送给 A 的确认报文段中确认号就为 701。</li><li><code>数据偏移</code> ：指的是数据部分距离报文段起始处的偏移量，实际上指的是首部的长度。</li><li><code>确认 ACK</code> ：当 ACK=1 时确认号字段有效，否则无效。TCP 规定，在连接建立后所有传送的报文段都必须把 ACK 置 1。</li><li><code>同步 SYN</code> ：在连接建立时用来同步序号。当 SYN=1，ACK=0 时表示这是一个连接请求报文段。若对方同意建立连接，则响应报文中 SYN=1，ACK=1。</li><li><code>终止 FIN</code> ：用来释放一个连接，当 FIN=1 时，表示此报文段的发送方的数据已发送完毕，并要求释放连接。<br>窗口 ：窗口值作为接收方让发送方设置其发送窗口的依据。之所以要有这个限制，是因为接收方的数据缓存空间是有限的。</li></ul><h3 id="为什么TCP连接需要三次握手"><a href="#为什么TCP连接需要三次握手" class="headerlink" title="为什么TCP连接需要三次握手"></a>为什么TCP连接需要三次握手</h3><p>为了防止已失效的连接请求报文段突然又传送到了服务端，占用服务器资源。 （假设主机A为客户端，主机B为服务器端）</p><p>现假定出现一种异常情况，即A发出的第一个连接请求报文段并没有丢失，而是在某些网络节点长时间滞留了，以致延误到连接释放以后的某个时间才到B。本来这是一个已失效的报文段。但是B收到此失效的连接请求报文段后，就误认为是A有发出一次新的连接请求。于是就向A发出确认报文段，同意建立连接。假定不采用三次握手，那么只要B发出确认，新的连接就建立了。</p><p>由于现在A并没有发出建立连接的请求，因此不会理睬B的确认，也不会向B发送数据。但B却以为新的运输连接已经建立了，并一直等待A发来数据。B的许多资源就这样白白浪费了。</p><p>采用三次握手的办法可以防止上述现象的发生。例如在刚才的情况下，A不会向B的确认发出确认。B由于收不到确认，就知道A并没有要求建立连接。</p><h3 id="为什么TCP连接需要四次挥手"><a href="#为什么TCP连接需要四次挥手" class="headerlink" title="为什么TCP连接需要四次挥手"></a>为什么TCP连接需要四次挥手</h3><p>客户端发送了 FIN 连接释放报文之后，服务器收到了这个报文，就进入了 CLOSE-WAIT 状态。这个状态是为了让服务器端发送还未传送完毕的数据，传送完毕之后，服务器会发送 FIN 连接释放报文。</p><h3 id="如何保证可靠传输"><a href="#如何保证可靠传输" class="headerlink" title="如何保证可靠传输"></a>如何保证可靠传输</h3><ul><li>应用数据被分割成TCP认为最适合发送的数据块。 </li><li><code>超时重传</code>：当TCP发出一个段后，它启动一个定时器，等待目的端确认收到这个报文段。如果不能及时收到一个确认，将重发这个报文段。<br>TCP给发送的每一个包进行编号，接收方对数据包进行排序，把有序数据传送给应用层。 </li><li><code>校验和</code>：TCP将保持它首部和数据的检验和。这是一个端到端的检验和，目的是检测数据在传输过程中的任何变化。如果收到段的检验和有差错，TCP将丢弃这个报文段和不确认收到此报文段。<br>TCP的接收端会丢弃重复的数据。</li><li><code>流量控制</code>：TCP连接的每一方都有固定大小的缓冲空间，TCP的接收端只允许发送端发送接收端缓冲区能接纳的我数据。当接收方来不及处理发送方的数据，能提示发送方降低发送的速率，防止包丢失。TCP使用的流量控制协议是可变大小的滑动窗口协议。</li><li><code>拥塞控制</code>：当网络拥塞时，减少数据的发送。</li></ul><h3 id="TCP和UDP区别"><a href="#TCP和UDP区别" class="headerlink" title="TCP和UDP区别"></a>TCP和UDP区别</h3><ul><li>TCP和UDP区别<ul><li>UDP 是无连接的，即发送数据之前不需要建立连接。</li><li>UDP 使用尽最大努力交付，即不保证可靠交付，同时也不使用拥塞控制。</li><li>UDP 是面向报文的。UDP 没有拥塞控制，很适合多媒体通信的要求。</li><li>UDP 支持一对一、一对多、多对一和多对多的交互通信。</li><li>UDP 的首部开销小，只有 8 个字节。</li><li>TCP 是面向连接的运输层协议。</li><li>每一条 TCP 连接只能有两个端点(endpoint)，每一条 TCP 连接只能是点对点的（一对一）。</li><li>TCP 提供可靠交付的服务。</li><li>TCP 提供全双工通信。</li><li>TCP是面向字节流。  </li><li>首部最低20个字节。</li><li>TCP加快传输效率的方法</li></ul></li><li>采取一块确认的机制</li></ul><h3 id="TCP滑动窗口"><a href="#TCP滑动窗口" class="headerlink" title="TCP滑动窗口"></a>TCP滑动窗口</h3><p><img src="/images/tcp滑动窗口.png" alt=""></p><p>窗口是缓存的一部分，用来暂时存放字节流。发送方和接收方各有一个窗口，接收方通过 TCP 报文段中的窗口字段告诉发送方自己的窗口大小，发送方根据这个值和其它信息设置自己的窗口大小。</p><p>发送窗口内的字节都允许被发送，接收窗口内的字节都允许被接收。如果发送窗口左部的字节已经发送并且收到了确认，那么就将发送窗口向右滑动一定距离，直到左部第一个字节不是已发送并且已确认的状态；接收窗口的滑动类似，接收窗口左部字节已经发送确认并交付主机，就向右滑动接收窗口。</p><p>接收窗口只会对窗口内最后一个按序到达的字节进行确认，例如接收窗口已经收到的字节为 {31, 34, 35}，其中 {31} 按序到达，而 {32, 33} 就不是，因此只对字节 31 进行确认。发送方得到一个字节的确认之后，就知道这个字节之前的所有字节都已经被接收。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;传输层&quot;&gt;&lt;a href=&quot;#传输层&quot; class=&quot;headerlink&quot; title=&quot;传输层&quot;&gt;&lt;/a&gt;传输层&lt;/h1&gt;&lt;h2 id=&quot;OSI七层模型-TCP-IP四层模型-五层协议&quot;&gt;&lt;a href=&quot;#OSI七层模型-TCP-IP四层模型-五层协议&quot; c
-      
-    
-    </summary>
-    
-    
-      <category term="计算机基础" scheme="http://10buns.com/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/"/>
-    
-      <category term="网络" scheme="http://10buns.com/tags/%E7%BD%91%E7%BB%9C/"/>
     
   </entry>
   
