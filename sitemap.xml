@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://10buns.com/2019/02/24/%E5%9C%A8MyBatis%E4%B8%AD%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E5%A4%84%E7%90%86%E6%9E%9A%E4%B8%BE/</loc>
+    
+    <lastmod>2019-02-24T15:43:50.107Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://10buns.com/2019/01/01/Docker-%E5%AE%89%E8%A3%85-Redis-Mysql-portainer/</loc>
+    
+    <lastmod>2019-02-21T09:07:45.212Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://10buns.com/2019/02/13/%E7%AE%80%E8%BF%B0%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</loc>
     
     <lastmod>2019-02-13T10:00:53.191Z</lastmod>
@@ -166,13 +180,6 @@
     <loc>http://10buns.com/2018/12/15/Spring-Security-Oauth2-%E5%85%A5%E9%97%A8/</loc>
     
     <lastmod>2019-01-24T08:19:17.685Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://10buns.com/2019/01/01/Docker-%E5%AE%89%E8%A3%85-Redis-Mysql-portainer/</loc>
-    
-    <lastmod>2019-01-24T08:19:07.552Z</lastmod>
     
   </url>
   

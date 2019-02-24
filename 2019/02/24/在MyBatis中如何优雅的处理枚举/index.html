@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon.png?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="MyBatis,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="10buns" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="在实际开发中，我们经常需要用数字来表示某种类型、状态等，比如性别、用户等级、交易状态等。 假设有如下的枚举: 123456789101112131415161718192021public enum UserLevelEnum implements IUserLevelEnum &amp;#123;    //普通会员    CARD_MEMBER(0),    //银卡    SILVER_MEMBER">
+<meta name="keywords" content="MyBatis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在MyBatis中如何优雅的处理枚举">
+<meta property="og:url" content="http://10buns.com/2019/02/24/在MyBatis中如何优雅的处理枚举/index.html">
+<meta property="og:site_name" content="10buns">
+<meta property="og:description" content="在实际开发中，我们经常需要用数字来表示某种类型、状态等，比如性别、用户等级、交易状态等。 假设有如下的枚举: 123456789101112131415161718192021public enum UserLevelEnum implements IUserLevelEnum &amp;#123;    //普通会员    CARD_MEMBER(0),    //银卡    SILVER_MEMBER">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://10buns.com/images/EnumTypeHandler.png">
+<meta property="og:image" content="http://10buns.com/images/EnumOrdinalTypeHandler.png">
+<meta property="og:image" content="http://10buns.com/images/获取用户接口.png">
+<meta property="og:updated_time" content="2019-02-24T15:43:50.107Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在MyBatis中如何优雅的处理枚举">
+<meta name="twitter:description" content="在实际开发中，我们经常需要用数字来表示某种类型、状态等，比如性别、用户等级、交易状态等。 假设有如下的枚举: 123456789101112131415161718192021public enum UserLevelEnum implements IUserLevelEnum &amp;#123;    //普通会员    CARD_MEMBER(0),    //银卡    SILVER_MEMBER">
+<meta name="twitter:image" content="http://10buns.com/images/EnumTypeHandler.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://10buns.com/2019/02/24/在MyBatis中如何优雅的处理枚举/">
+
+
+
+
+
+  <title>在MyBatis中如何优雅的处理枚举 | 10buns</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c873067502e43c16757b0901e5bb26c2";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">10buns</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://10buns.com/2019/02/24/在MyBatis中如何优雅的处理枚举/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="10buns">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="10buns">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">在MyBatis中如何优雅的处理枚举</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-24T22:42:14+08:00">
+                2019-02-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/MyBatis/" itemprop="url" rel="index">
+                    <span itemprop="name">MyBatis</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在实际开发中，我们经常需要用数字来表示某种类型、状态等，比如性别、用户等级、交易状态等。</p>
+<p>假设有如下的枚举:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public enum UserLevelEnum implements IUserLevelEnum &#123;</span><br><span class="line">    //普通会员</span><br><span class="line">    CARD_MEMBER(0),</span><br><span class="line">    //银卡</span><br><span class="line">    SILVER_MEMBER(1),</span><br><span class="line">    //金卡</span><br><span class="line">    GOLD_MEMBER(2)</span><br><span class="line">    ;</span><br><span class="line"></span><br><span class="line">    // 会员等级</span><br><span class="line">    private int level;</span><br><span class="line"></span><br><span class="line">    UserLevelEnum(int type)&#123;</span><br><span class="line">        this.level = type;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public int getLevel() &#123;</span><br><span class="line">        return this.level;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们希望将<code>CARD_MEMBER(0)</code>在存入数据库时自动转换为0,以简化操作，提高代码的可阅读性。</p>
+<p>目前主要使用<code>MyBatis</code>作为数据库操作的<code>ORM</code>工具，所以着重看<code>MyBatis</code>是否支持这样的操作。</p>
+<p>在<code>MyBatis</code>内置了两个枚举转换器分别如下: </p>
+<ul>
+<li><code>EnumTypeHandler</code>:默认的枚举转换器，该转换器将枚举实例转换为实例名称的字符串，即将<code>UserLevelEnum.CARD_MEMBER</code>转换<code>CARD_MEMBER</code></li>
+<li><code>EnumOrdinalTypeHandler</code>:将枚举的<code>ordinal</code>属性作为取值，即<code>UserLevelEnum.CARD_MEMBER</code>转换为0。</li>
+</ul>
+<blockquote>
+<p>枚举<code>ordinal</code>表示枚举值在枚举集合中的顺序，是整数，属性值只读。</p>
+</blockquote>
+<p>现在看来，只有枚举值和枚举在集合中的顺序相同才可以使用<code>EnumOrdinalTypeHandler</code>，否则无法通过<code>MyBatis</code>内置的枚举转换器进行枚举转换。</p>
+<p><img src="/images/EnumTypeHandler.png" alt="EnumTypeHandler"></p>
+<p><img src="/images/EnumOrdinalTypeHandler.png" alt="EnumOrdinalTypeHandler"></p>
+<p>但通过观察<code>EnumTypeHandler</code>和<code>EnumOrdinalTypeHandler</code>源码，发现都继承了<code>BaseTypeHandler</code>类, 主要有四个方法:</p>
+<ul>
+<li><p><code>setNonNullParameter</code>: 把Java类型的参数转换为对应的数据库类型</p>
+</li>
+<li><p><code>getNullableResult</code>: 通过字段名称获取字段数据时，把数据库类型转换为对应的Java类型</p>
+</li>
+<li><p><code>getNullableResult</code>: 通过字段索引获取字段数据时，把数据库类型转换为对应的Java类型</p>
+</li>
+<li><p><code>getNullableResult</code>: 调用存储过程时，把数据库类型转换为对应的Java类型</p>
+</li>
+</ul>
+<p>那么我们就自定义一个枚举转换器<code>UserLevelEnumTypeHandler</code>，核心代码如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public void setNonNullParameter(PreparedStatement preparedStatement, int i, IUserLevelEnum baseEnum, JdbcType jdbcType) throws SQLException &#123;</span><br><span class="line">    preparedStatement.setInt(i, baseEnum.getLevel());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@Override</span><br><span class="line">public IUserLevelEnum getNullableResult(ResultSet resultSet, String s) throws SQLException &#123;</span><br><span class="line">    int enumCode = resultSet.getInt(s);</span><br><span class="line">    return resultSet.wasNull() ? null : valueConvert(enumCode);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@Override</span><br><span class="line">public IUserLevelEnum getNullableResult(ResultSet resultSet, int i) throws SQLException &#123;</span><br><span class="line">    int enumCode = resultSet.getInt(i);</span><br><span class="line">    return resultSet.wasNull() ? null : valueConvert(enumCode);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@Override</span><br><span class="line">public IUserLevelEnum getNullableResult(CallableStatement callableStatement, int i) throws SQLException &#123;</span><br><span class="line">    int enumCode = callableStatement.getInt(i);</span><br><span class="line">    return callableStatement.wasNull() ? null : valueConvert(enumCode);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>数据库用户表对应实体定义如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@Data</span><br><span class="line">public class User &#123;</span><br><span class="line">    private int id;</span><br><span class="line">    private String name;</span><br><span class="line">    private UserLevelEnum level;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后在<code>MyBatis配置文件</code>中配置我们自定义的handler:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;typeHandlers&gt;</span><br><span class="line">    &lt;!-- 用户等级枚举 --&gt;</span><br><span class="line">    &lt;typeHandler handler=&quot;com.summer.sample.handler.UserLevelEnumTypeHandler&quot; javaType=&quot;com.summer.sample.constant.UserLevelEnum&quot;/&gt;</span><br><span class="line">&lt;/typeHandlers&gt;</span><br></pre></td></tr></table></figure>
+<p>启动访问接口<code>http://localhost:8080/test/users</code></p>
+<p><img src="/images/获取用户接口.png" alt="获取用户接口"></p>
+<p>测试发现数据库字段<code>level</code>值经过自定义的handler自动进行了枚举转换。大功告成，但是等等，实际业务开发中，会涉及到很多的枚举转换，难道每次都要修改添加配置，这怎么能忍。</p>
+<p>在Spring中，万物皆bean，那么我们能否重写代码来替换<code>MyBatis</code>的这个默认的枚举转换器呢？</p>
+<p>通过查看源码发现，在类型转换器注册器<code>TypeHandlerRegistry</code>中有一个方法<code>setDefaultEnumTypeHandler</code>可以设置默认的枚举转换器。<br>那么我们的自动枚举转换的思路就清晰了:</p>
+<ol>
+<li>实现一个自动转换枚举转换器的转换器(有点绕)</li>
+<li>获取类型转换注册器</li>
+<li>替换默认的枚举转换器</li>
+</ol>
+<p>定义一个<code>SqlSessionFactory</code>bean</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">@Bean</span><br><span class="line">public SqlSessionFactory sqlSessionFactory(@Qualifier(&quot;dataSource&quot;) DataSource dataSource) throws Exception &#123;</span><br><span class="line">    SqlSessionFactoryBean factory = new SqlSessionFactoryBean();</span><br><span class="line">    factory.setDataSource(dataSource);</span><br><span class="line">    // 设置MyBatis的配置文件及mapper文件路径</span><br><span class="line">    ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();</span><br><span class="line">    factory.setConfigLocation(resolver.getResource(configLocation));</span><br><span class="line">    factory.setMapperLocations(resolver.getResources(mapperLocations));</span><br><span class="line">    SqlSessionFactory sqlSessionFactory = factory.getObject();</span><br><span class="line">    // 获取类型转换注册器</span><br><span class="line">    TypeHandlerRegistry typeHandlerRegistry =</span><br><span class="line">            sqlSessionFactory.getConfiguration().getTypeHandlerRegistry();</span><br><span class="line">    // 替换默认的枚举转换器</span><br><span class="line">    typeHandlerRegistry.setDefaultEnumTypeHandler(AutoEnumTypeHandler.class);</span><br><span class="line">    return sqlSessionFactory;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>MyBatis配置文件</code>中配置我们自定义的handler，这样就可以通过代码来自动选择使用哪一个枚举转换器。</p>
+<p><a href="https://github.com/10Buns/mybatis-enum-sample" target="_blank" rel="noopener">Github源码</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MyBatis/" rel="tag"><i class="fa fa-tag"></i> MyBatis</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/13/简述设计模式/" rel="next" title="简述设计模式">
+                <i class="fa fa-chevron-left"></i> 简述设计模式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="10buns">
+            
+              <p class="site-author-name" itemprop="name">10buns</p>
+              <p class="site-description motion-element" itemprop="description">Study hard and make progress every day</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/10Buns" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.weibo.com/loverichy" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-Weibo"></i>Weibo</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">10buns</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+<div class="powered-by">
+	<i class="fa fa-user-md"></i>
+	<span id="busuanzi_container_site_uv">
+		本站访客数:<span id="busuanzi_value_site_uv"></span>
+	</span>
+	<span class="post-meta-divider">|</span>
+	<span id="busuanzi_container_site_pv">
+		本站访问量<span id="busuanzi_value_site_pv"></span>
+	</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
