@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Docker,">
+  <meta name="keywords" content="Java基础,">
 
 
 
@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="Portainer12345678$ docker pull portainer$ docker volume create ~/dev/docker_volume/data$ docker run -d -p 9000:9000 \    --restart=always \    -v /var/run/docker.sock:/var/run/docker.sock \    -v port">
-<meta name="keywords" content="Docker">
+<meta name="description" content="反射定义反射 (Reflection) 允许运行中的Java程序获取自身的信息，并可以操作类或对象的内部属性。一般对象的类型都是在编译期已确定下来。但通过反射机制我们就可以创建对象，即使对象的类型在编译期是未知的。 反射的核心是JVM在运行时才动态加载类或调用方法、访问属性，它不需要事先（写代码的时候或编译期）知道运行对象是谁。 Java反射核心就是运行时而非编译时 通过Java反射，我们就可以在">
+<meta name="keywords" content="Java基础">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Docker 安装 Redis&amp;Mysql&amp;portainer">
-<meta property="og:url" content="http://10buns.com/2019/01/01/Docker-安装-Redis-Mysql-portainer/index.html">
+<meta property="og:title" content="再谈Java反射">
+<meta property="og:url" content="http://10buns.com/2019/03/03/再谈Java反射/index.html">
 <meta property="og:site_name" content="10buns">
-<meta property="og:description" content="Portainer12345678$ docker pull portainer$ docker volume create ~/dev/docker_volume/data$ docker run -d -p 9000:9000 \    --restart=always \    -v /var/run/docker.sock:/var/run/docker.sock \    -v port">
+<meta property="og:description" content="反射定义反射 (Reflection) 允许运行中的Java程序获取自身的信息，并可以操作类或对象的内部属性。一般对象的类型都是在编译期已确定下来。但通过反射机制我们就可以创建对象，即使对象的类型在编译期是未知的。 反射的核心是JVM在运行时才动态加载类或调用方法、访问属性，它不需要事先（写代码的时候或编译期）知道运行对象是谁。 Java反射核心就是运行时而非编译时 通过Java反射，我们就可以在">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-02-21T09:07:45.212Z">
+<meta property="og:updated_time" content="2019-03-03T10:06:42.366Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Docker 安装 Redis&amp;Mysql&amp;portainer">
-<meta name="twitter:description" content="Portainer12345678$ docker pull portainer$ docker volume create ~/dev/docker_volume/data$ docker run -d -p 9000:9000 \    --restart=always \    -v /var/run/docker.sock:/var/run/docker.sock \    -v port">
+<meta name="twitter:title" content="再谈Java反射">
+<meta name="twitter:description" content="反射定义反射 (Reflection) 允许运行中的Java程序获取自身的信息，并可以操作类或对象的内部属性。一般对象的类型都是在编译期已确定下来。但通过反射机制我们就可以创建对象，即使对象的类型在编译期是未知的。 反射的核心是JVM在运行时才动态加载类或调用方法、访问属性，它不需要事先（写代码的时候或编译期）知道运行对象是谁。 Java反射核心就是运行时而非编译时 通过Java反射，我们就可以在">
 
 
 
@@ -122,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://10buns.com/2019/01/01/Docker-安装-Redis-Mysql-portainer/">
+  <link rel="canonical" href="http://10buns.com/2019/03/03/再谈Java反射/">
 
 
 
 
 
-  <title>Docker 安装 Redis&Mysql&portainer | 10buns</title>
+  <title>再谈Java反射 | 10buns</title>
   
 
 
@@ -275,7 +275,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://10buns.com/2019/01/01/Docker-安装-Redis-Mysql-portainer/">
+    <link itemprop="mainEntityOfPage" href="http://10buns.com/2019/03/03/再谈Java反射/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="10buns">
@@ -292,7 +292,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Docker 安装 Redis&Mysql&portainer</h1>
+          <h1 class="post-title" itemprop="name headline">再谈Java反射</h1>
         
 
         <div class="post-meta">
@@ -304,8 +304,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-01T15:58:11+08:00">
-                2019-01-01
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-03T15:44:10+08:00">
+                2019-03-03
               </time>
             
 
@@ -327,8 +327,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Docker/" itemprop="url" rel="index">
-                    <span itemprop="name">Docker</span>
+                  <a href="/categories/Java基础/" itemprop="url" rel="index">
+                    <span itemprop="name">Java基础</span>
                   </a>
                 </span>
 
@@ -364,10 +364,85 @@
       
 
       
-        <h2 id="Portainer"><a href="#Portainer" class="headerlink" title="Portainer"></a>Portainer</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ docker pull portainer</span><br><span class="line">$ docker volume create ~/dev/docker_volume/data</span><br><span class="line">$ docker run -d -p 9000:9000 \</span><br><span class="line">    --restart=always \</span><br><span class="line">    -v /var/run/docker.sock:/var/run/docker.sock \</span><br><span class="line">    -v portainer_data:/data \</span><br><span class="line">    --name prtainer\</span><br><span class="line">    portainer</span><br></pre></td></tr></table></figure>
-<h2 id="redis"><a href="#redis" class="headerlink" title="redis"></a>redis</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ docker pull redis:3.2</span><br><span class="line">$ docker run -p 6379:6379 --restart=always \</span><br><span class="line">    -v ~/dev/docker_volume/redis/redis.conf:/etc/redis/redis.conf \</span><br><span class="line">    -v ~/dev/docker_volume/redis:/data \</span><br><span class="line">    --name redis\</span><br><span class="line">    -d redis redis-server /data/redis.conf</span><br></pre></td></tr></table></figure>
-<h2 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ docker run --name mysql \</span><br><span class="line">    -v /dev/docker_volume/mysql/data:/var/lib/mysql \</span><br><span class="line">    -e MYSQL_ROOT_PASSWORD=123456 \</span><br><span class="line">    -p 6630:3306 \</span><br><span class="line">    -d mysql.5.7</span><br></pre></td></tr></table></figure>
-<h2 id="zookeeper"><a href="#zookeeper" class="headerlink" title="zookeeper"></a>zookeeper</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ docker pull zookeeper:latest</span><br><span class="line">$ docker run -p 12181:2181 -v ~/dev/docker_volume/zookeeper:/data --name zookeeper -d zookeeper:latest</span><br></pre></td></tr></table></figure>
+        <h2 id="反射定义"><a href="#反射定义" class="headerlink" title="反射定义"></a>反射定义</h2><p>反射 (Reflection) 允许运行中的<code>Java</code>程序获取自身的信息，并可以操作类或对象的内部属性。一般对象的类型都是在编译期已确定下来。但通过<code>反射机制</code>我们就可以创建对象，即使对象的类型在编译期是未知的。</p>
+<p>反射的核心是JVM在运行时才动态加载类或调用方法、访问属性，它不需要事先（写代码的时候或编译期）知道运行对象是谁。</p>
+<p><strong>Java反射核心就是运行时而非编译时</strong></p>
+<p>通过Java反射，我们就可以在运行时:</p>
+<ul>
+<li>判断对象所属的类</li>
+<li>构造任意类的对象</li>
+<li>判断类的变量、方法</li>
+<li>调用对象的任意方法(包括private)</li>
+</ul>
+<h2 id="反射使用场景"><a href="#反射使用场景" class="headerlink" title="反射使用场景"></a>反射使用场景</h2><h4 id="获取Class对象"><a href="#获取Class对象" class="headerlink" title="获取Class对象"></a>获取Class对象</h4><ol>
+<li><p>通过Class类的forName()方法</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Class&lt;?&gt; cls2 = Class.forName(&quot;com.summer.A&quot;);</span><br><span class="line">System.out.println(cls2.getName());</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<pre><code>&gt;实际开发中我们常通过Class.forName(&quot;jdbc.driveer&quot;)加载数据库驱动
+</code></pre><ol start="2">
+<li><p>通过对象的getClass()方法</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">A a = new A(&quot;sample a&quot;);</span><br><span class="line">    Class&lt;?&gt; cls = a.getClass();</span><br><span class="line">System.out.println(cls.getName());</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>直接获取class</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Class&lt;?&gt; cls1 = A.class;</span><br><span class="line">System.out.println(cls1.getName());</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="判断对象所属的类"><a href="#判断对象所属的类" class="headerlink" title="判断对象所属的类"></a>判断对象所属的类</h4><p>主要有<code>instanceof</code>，<code>isInstance</code>，<code>isAssignableForm</code> 三个方法判断是否为某个类的实例或子类</p>
+<ol>
+<li><p>instanceof</p>
+<blockquote>
+<p>A instanceof B，A是B的实例<br>B必须是一个具体的类，否则编译错误，比如传递范型</p>
+</blockquote>
+</li>
+<li><p>isInstance</p>
+<blockquote>
+<p>A.isinstance(B)，B是A的实例</p>
+</blockquote>
+</li>
+<li><p>isAssignableForm</p>
+<blockquote>
+<p>A.isAssignableForm(B)，B是A的子类</p>
+</blockquote>
+</li>
+</ol>
+<h4 id="获取构造器信息"><a href="#获取构造器信息" class="headerlink" title="获取构造器信息"></a>获取构造器信息</h4><p>通过Class类的<code>getConstructor</code>或<code>getConstructors</code>方法获取构造方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Class&lt;?&gt; cls2 = Class.forName(&quot;com.summer.A&quot;);</span><br><span class="line">Constructor&lt;?&gt;[] cons = cls2.getConstructors();</span><br><span class="line">for (Constructor c : cons)&#123;</span><br><span class="line">    System.out.println(c);        </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="获取方法"><a href="#获取方法" class="headerlink" title="获取方法"></a>获取方法</h4><ol>
+<li><p>getMethod 获取一个指定的public方法</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">A a = new A(&quot;sample a&quot;);</span><br><span class="line">Class&lt;?&gt; cls = a.getClass();</span><br><span class="line">System.out.println(cls.getMethod(&quot;add&quot;, int.class, int.class));</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>getMethods 获取所有的public方法</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">A a = new A(&quot;sample a&quot;);</span><br><span class="line">Class&lt;?&gt; cls = a.getClass();</span><br><span class="line">Method[] methods = cls.getMethods();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>getDeclaredMethod 获取任意指定的方法</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">    A a = new A(&quot;sample a&quot;);</span><br><span class="line">    Class&lt;?&gt; cls = a.getClass();</span><br><span class="line">System.out.println(cls.getDeclaredMethod(&quot;printLog&quot;));</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>getDeclaredMethods 获取所有的方法</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">A a = new A(&quot;sample a&quot;);</span><br><span class="line">Class&lt;?&gt; cls = a.getClass();</span><br><span class="line">cls.getDeclaredMethods();</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="获取变量"><a href="#获取变量" class="headerlink" title="获取变量"></a>获取变量</h4><ol>
+<li><p>getField 获取指定名字的pulic的成员变量</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">A a = new A(&quot;sample a&quot;);</span><br><span class="line">Class&lt;?&gt; cls = a.getClass();</span><br><span class="line">cls.getField(&quot;id&quot;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>getFileds 获取pulic的成员变量</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">A a = new A(&quot;sample a&quot;);</span><br><span class="line">Class&lt;?&gt; cls = a.getClass();</span><br><span class="line">Field[] fields = cls.getFields();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>getDeclaredField 获取指定名字的成员变量，但不包括父类的成员变量</p>
+</li>
+<li><p>getDeclaredFields 获取所有的成员变量，但不包括父类的成员变量</p>
+<blockquote>
+<p>使用方法参考获取方法</p>
+</blockquote>
+</li>
+</ol>
+<h4 id="执行方法"><a href="#执行方法" class="headerlink" title="执行方法"></a>执行方法</h4><p>通过类获取了一个方法后，就可以通过<code>invoke()</code>方法来调用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">A a = new A(&quot;sample a&quot;);</span><br><span class="line">Class&lt;?&gt; cls = a.getClass();</span><br><span class="line">Object obj = cls.newInstance();</span><br><span class="line">Method method = cls.getMethod(&quot;add&quot;,    int.class, int.class);</span><br><span class="line">method.setAccessible(true);//</span><br><span class="line">Object object = method.invoke(obj,1,1);</span><br><span class="line">System.out.println(object);</span><br></pre></td></tr></table></figure>
+<p>setAccessible控制对访问修饰符的检查，例如可以执行私有方法。</p>
+<p><code>invoke</code>的执行过程还是比较复杂， 有时间单独开一篇分析下</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>虽然反射有种种的好处，但是由于其会额外消耗系统资源。因此实际使用还是要根据场景决定。</p>
+<p>且根据<code>执行方法</code>的例子，我们可以看出是可以人为的在执行方法时忽略权限检查，这也导致会破坏系统的封装性而导致安全问题。</p>
 
       
     </div>
@@ -385,7 +460,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Docker/" rel="tag"><i class="fa fa-tag"></i> Docker</a>
+            <a href="/tags/Java基础/" rel="tag"><i class="fa fa-tag"></i> Java基础</a>
           
         </div>
       
@@ -398,8 +473,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/12/15/Spring-Security-Oauth2-入门/" rel="next" title="Spring Security Oauth2 入门">
-                <i class="fa fa-chevron-left"></i> Spring Security Oauth2 入门
+              <a href="/2019/02/24/在MyBatis中如何优雅的处理枚举/" rel="next" title="在MyBatis中如何优雅的处理枚举">
+                <i class="fa fa-chevron-left"></i> 在MyBatis中如何优雅的处理枚举
               </a>
             
           </div>
@@ -407,10 +482,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/01/15/Java-运行时的内存划分/" rel="prev" title="Java 运行时的内存划分">
-                Java 运行时的内存划分 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -567,7 +638,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Portainer"><span class="nav-number">1.</span> <span class="nav-text">Portainer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#redis"><span class="nav-number">2.</span> <span class="nav-text">redis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mysql"><span class="nav-number">3.</span> <span class="nav-text">mysql</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zookeeper"><span class="nav-number">4.</span> <span class="nav-text">zookeeper</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#反射定义"><span class="nav-number">1.</span> <span class="nav-text">反射定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反射使用场景"><span class="nav-number">2.</span> <span class="nav-text">反射使用场景</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#获取Class对象"><span class="nav-number">2.0.1.</span> <span class="nav-text">获取Class对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#判断对象所属的类"><span class="nav-number">2.0.2.</span> <span class="nav-text">判断对象所属的类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取构造器信息"><span class="nav-number">2.0.3.</span> <span class="nav-text">获取构造器信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取方法"><span class="nav-number">2.0.4.</span> <span class="nav-text">获取方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取变量"><span class="nav-number">2.0.5.</span> <span class="nav-text">获取变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#执行方法"><span class="nav-number">2.0.6.</span> <span class="nav-text">执行方法</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></div>
             
 
           </div>
