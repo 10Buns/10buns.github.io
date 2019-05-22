@@ -91,7 +91,7 @@
 <meta property="og:image" content="http://10buns.com/images/hadoop-dashbard.jpg">
 <meta property="og:image" content="http://10buns.com/images/hadoop-datanode.png">
 <meta property="og:image" content="http://10buns.com/images/docker-images.jpg">
-<meta property="og:updated_time" content="2019-05-22T03:07:34.474Z">
+<meta property="og:updated_time" content="2019-05-22T03:17:09.213Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【实践】Docker安装Hadoop集群">
 <meta name="twitter:description" content="安装centos1234$ docker search centos$ docker pull centos$ docker run -it --name hadoop-base-env --privileged=true -v /Users/summer/dev/docker_volume/hadoop:/home/root/data centos /usr/sbin/init$ docker">
@@ -409,19 +409,24 @@
  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">7. 修改slaves</span><br></pre></td></tr></table></figure>
 <p> vim slaves</p>
 <p> node1<br> node2<br> node3</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 提交构建镜像</span><br></pre></td></tr></table></figure>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 启动Hadoop</span><br><span class="line"></span><br><span class="line">* 构建镜像</span><br></pre></td></tr></table></figure>
+<p> docker ps # 查找当前运行的镜像ID<br> docker commit 750233d292c0 hadoop-2.9.2-base</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* 启动 master</span><br></pre></td></tr></table></figure>
+<p> docker run -it –name hadoop-master \<br> -p 50010:50010 \<br> -p 50020:50020 \<br> -p 50070:50070 \<br> -p 50075:50075 \<br> -p 50090:50090 \<br> -p 8020:8020 \<br> -p 9001:9000 \<br> -p 10020:10020 \<br> -p 8030:8030 \<br> -p 19888:19888 \<br> -p 8031:8031 \<br> -p 8032:8032 \<br> -p 8033:8033 \<br> -p 8040:8040 \<br> -p 8042:8042 \<br> -p 8088:8088 \<br> -p 49707:49707 \<br> -p 2122:2122 \<br> -v /Users/summer/dev/docker_volume/hadoop:/home/root/data \<br> -h master hadoop-2.9.2-base /bin/bash</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* 启动 node1</span><br></pre></td></tr></table></figure>
+<p> docker run -it –name hadoop-node1 \<br> -p 50010 \<br> -p 50020 \<br> -p 50070 \<br> -p 50075 \<br> -p 50090 \<br> -p 8020 \<br> -p 9000 \<br> -p 10020 \<br> -p 8030 \<br> -p 19888 \<br> -p 8031 \<br> -p 8032 \<br> -p 8033 \<br> -p 8040 \<br> -p 8042 \<br> -p 8088 \<br> -p 49707 \<br> -p 2122 \<br> -v /Users/summer/dev/docker_volume/hadoop:/home/root/data \<br> -h node1 hadoop-2.9.2-base /bin/bash</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* 启动 node2</span><br></pre></td></tr></table></figure>
+<p> docker run -it –name hadoop-node2 \<br> -p 50010 \<br> -p 50020 \<br> -p 50070 \<br> -p 50075 \<br> -p 50090 \<br> -p 8020 \<br> -p 9000 \<br> -p 10020 \<br> -p 8030 \<br> -p 19888 \<br> -p 8031 \<br> -p 8032 \<br> -p 8033 \<br> -p 8040 \<br> -p 8042 \<br> -p 8088 \<br> -p 49707 \<br> -p 2122 \<br> -v /Users/summer/dev/docker_volume/hadoop:/home/root/data \<br> -h node2 hadoop-2.9.2-base /bin/bash</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* 启动 node3</span><br></pre></td></tr></table></figure>
+<p> docker run -it –name hadoop-node3 \<br> -p 50010 \<br> -p 50020 \<br> -p 50070 \<br> -p 50075 \<br> -p 50090 \<br> -p 8020 \<br> -p 9000 \<br> -p 10020 \<br> -p 8030 \<br> -p 19888 \<br> -p 8031 \<br> -p 8032 \<br> -p 8033 \<br> -p 8040 \<br> -p 8042 \<br> -p 8088 \<br> -p 49707 \<br> -p 2122 \<br> -v /Users/summer/dev/docker_volume/hadoop:/home/root/data \<br> -h node3 hadoop-2.9.2-base /bin/bash</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* 容器启动ssh&amp;更新设置</span><br></pre></td></tr></table></figure>
+<p> /usr/sbin/sshd #启动ssh<br> source /etc/profile</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* 配置节点的 hosts</span><br></pre></td></tr></table></figure>
+<p> ip address<br> vim /etc/hosts<br> 172.17.0.3      master<br> 172.16.0.5      node2<br> 172.16.0.6      node3<br> 172.16.0.4      node4</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* master 节点启动</span><br></pre></td></tr></table></figure>
+<p> hadoop namenode -format #格式化<br> start-all.sh #启动<br> stop-all.sh #停止<br> <code>`</code></p>
 </li>
 </ol>
-<p>docker ps # 查找当前运行的镜像ID<br>docker commit 750233d292c0 hadoop-2.9.2-base</p>
-<p>docker run -it –name hadoop-master \<br>-p 50010:50010 \<br>-p 50020:50020 \<br>-p 50070:50070 \<br>-p 50075:50075 \<br>-p 50090:50090 \<br>-p 8020:8020 \<br>-p 9001:9000 \<br>-p 10020:10020 \<br>-p 8030:8030 \<br>-p 19888:19888 \<br>-p 8031:8031 \<br>-p 8032:8032 \<br>-p 8033:8033 \<br>-p 8040:8040 \<br>-p 8042:8042 \<br>-p 8088:8088 \<br>-p 49707:49707 \<br>-p 2122:2122 \<br>-v /Users/summer/dev/docker_volume/hadoop:/home/root/data \<br>-h master hadoop-2.9.2-base /bin/bash</p>
-<p>docker run -it –name hadoop-node1 \<br>-p 50010 \<br>-p 50020 \<br>-p 50070 \<br>-p 50075 \<br>-p 50090 \<br>-p 8020 \<br>-p 9000 \<br>-p 10020 \<br>-p 8030 \<br>-p 19888 \<br>-p 8031 \<br>-p 8032 \<br>-p 8033 \<br>-p 8040 \<br>-p 8042 \<br>-p 8088 \<br>-p 49707 \<br>-p 2122 \<br>-v /Users/summer/dev/docker_volume/hadoop:/home/root/data \<br>-h node1 hadoop-2.9.2-base /bin/bash</p>
-<p>docker run -it –name hadoop-node2 \<br>-p 50010 \<br>-p 50020 \<br>-p 50070 \<br>-p 50075 \<br>-p 50090 \<br>-p 8020 \<br>-p 9000 \<br>-p 10020 \<br>-p 8030 \<br>-p 19888 \<br>-p 8031 \<br>-p 8032 \<br>-p 8033 \<br>-p 8040 \<br>-p 8042 \<br>-p 8088 \<br>-p 49707 \<br>-p 2122 \<br>-v /Users/summer/dev/docker_volume/hadoop:/home/root/data \<br>-h node2 hadoop-2.9.2-base /bin/bash</p>
-<p>docker run -it –name hadoop-node3 \<br>-p 50010 \<br>-p 50020 \<br>-p 50070 \<br>-p 50075 \<br>-p 50090 \<br>-p 8020 \<br>-p 9000 \<br>-p 10020 \<br>-p 8030 \<br>-p 19888 \<br>-p 8031 \<br>-p 8032 \<br>-p 8033 \<br>-p 8040 \<br>-p 8042 \<br>-p 8088 \<br>-p 49707 \<br>-p 2122 \<br>-v /Users/summer/dev/docker_volume/hadoop:/home/root/data \<br>-h node3 hadoop-2.9.2-base /bin/bash</p>
-<p>/usr/sbin/sshd #启动ssh<br>source /etc/profile</p>
-<p>ip address</p>
-<p>vim /etc/hosts</p>
-<p>172.17.0.3      master<br>172.16.0.5      node2<br>172.16.0.6      node3<br>172.16.0.4      node4</p>
-<p><code>`</code></p>
 <p>访问 <a href="http://localhost:50070/" target="_blank" rel="noopener">http://localhost:50070/</a></p>
 <p><img src="/images/hadoop-dashbard.jpg" alt="获取用户接口"></p>
 <p><img src="/images/hadoop-datanode.png" alt="获取用户接口"></p>
