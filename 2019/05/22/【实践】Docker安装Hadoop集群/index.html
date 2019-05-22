@@ -81,21 +81,21 @@
 
 
 
-<meta name="description" content="之前断断续续看了两个多月的书，先把基础理论熟悉了解。发现大数据可以概括几类：精通基础组件，精通数仓设计/业务分析，精通高级分析。目标能精通基础组建，围绕这一块做一些解决实际问题的工具。  安装 CentOS1234$ docker search centos$ docker pull centos$ docker run -it --name hadoop-base-env --privileg">
+<meta name="description" content="之前断断续续看了两个多月的书，先把基础理论熟悉了解。发现大数据可以概括几类：精通基础组件，精通数仓设计/业务分析，精通高级分析。目标能精通基础组件，围绕这一块做一些解决实际问题的工具。  安装 CentOS1234$ docker search centos$ docker pull centos$ docker run -it --name hadoop-base-env --privileg">
 <meta name="keywords" content="Hadoop">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【实践】Docker安装Hadoop集群">
 <meta property="og:url" content="http://10buns.com/2019/05/22/【实践】Docker安装Hadoop集群/index.html">
 <meta property="og:site_name" content="10buns">
-<meta property="og:description" content="之前断断续续看了两个多月的书，先把基础理论熟悉了解。发现大数据可以概括几类：精通基础组件，精通数仓设计/业务分析，精通高级分析。目标能精通基础组建，围绕这一块做一些解决实际问题的工具。  安装 CentOS1234$ docker search centos$ docker pull centos$ docker run -it --name hadoop-base-env --privileg">
+<meta property="og:description" content="之前断断续续看了两个多月的书，先把基础理论熟悉了解。发现大数据可以概括几类：精通基础组件，精通数仓设计/业务分析，精通高级分析。目标能精通基础组件，围绕这一块做一些解决实际问题的工具。  安装 CentOS1234$ docker search centos$ docker pull centos$ docker run -it --name hadoop-base-env --privileg">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://10buns.com/images/hadoop-dashbard.jpg">
 <meta property="og:image" content="http://10buns.com/images/hadoop-datanode.png">
 <meta property="og:image" content="http://10buns.com/images/docker-images.jpg">
-<meta property="og:updated_time" content="2019-05-22T03:53:29.364Z">
+<meta property="og:updated_time" content="2019-05-22T03:58:16.563Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【实践】Docker安装Hadoop集群">
-<meta name="twitter:description" content="之前断断续续看了两个多月的书，先把基础理论熟悉了解。发现大数据可以概括几类：精通基础组件，精通数仓设计/业务分析，精通高级分析。目标能精通基础组建，围绕这一块做一些解决实际问题的工具。  安装 CentOS1234$ docker search centos$ docker pull centos$ docker run -it --name hadoop-base-env --privileg">
+<meta name="twitter:description" content="之前断断续续看了两个多月的书，先把基础理论熟悉了解。发现大数据可以概括几类：精通基础组件，精通数仓设计/业务分析，精通高级分析。目标能精通基础组件，围绕这一块做一些解决实际问题的工具。  安装 CentOS1234$ docker search centos$ docker pull centos$ docker run -it --name hadoop-base-env --privileg">
 <meta name="twitter:image" content="http://10buns.com/images/hadoop-dashbard.jpg">
 
 
@@ -347,7 +347,7 @@
 
       
         <blockquote>
-<p>之前断断续续看了两个多月的书，先把基础理论熟悉了解。发现大数据可以概括几类：精通基础组件，精通数仓设计/业务分析，精通高级分析。<br>目标能精通基础组建，围绕这一块做一些解决实际问题的工具。</p>
+<p>之前断断续续看了两个多月的书，先把基础理论熟悉了解。发现大数据可以概括几类：精通基础组件，精通数仓设计/业务分析，精通高级分析。<br>目标能精通基础组件，围绕这一块做一些解决实际问题的工具。</p>
 </blockquote>
 <h2 id="安装-CentOS"><a href="#安装-CentOS" class="headerlink" title="安装 CentOS"></a>安装 CentOS</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ docker search centos</span><br><span class="line">$ docker pull centos</span><br><span class="line">$ docker run -it --name hadoop-base-env --privileged=true -v /Users/summer/dev/docker_volume/hadoop:/home/root/data centos /usr/sbin/init</span><br><span class="line">$ docker exec -it hadoop-base-env /bin/bash</span><br></pre></td></tr></table></figure>
 <blockquote>
