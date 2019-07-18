@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://10buns.com/"/>
-  <updated>2019-05-22T03:58:16.563Z</updated>
+  <updated>2019-07-18T17:20:47.336Z</updated>
   <id>http://10buns.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>TestNG 测试 ABC</title>
+    <link href="http://10buns.com/2019/07/19/TestNG-%E6%B5%8B%E8%AF%95-ABC/"/>
+    <id>http://10buns.com/2019/07/19/TestNG-测试-ABC/</id>
+    <published>2019-07-19T15:22:56.000Z</published>
+    <updated>2019-07-18T17:20:47.336Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>单元测试不仅可以检查代码中是否存在缺陷漏洞，也可以降低bug修复、需求变更等引发的代码风险。良好的单元测试对产品开发维护和技术提升有着积极而重大的意义。</p><h2 id="如何开始单元测试"><a href="#如何开始单元测试" class="headerlink" title="如何开始单元测试"></a>如何开始单元测试</h2><h3 id="1-1-开发环境"><a href="#1-1-开发环境" class="headerlink" title="1.1 开发环境"></a>1.1 开发环境</h3><p>IDEA 启用 <code>TestNG</code> 插件</p><h3 id="1-2-maven-依赖"><a href="#1-2-maven-依赖" class="headerlink" title="1.2 maven 依赖"></a>1.2 maven 依赖</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.testng&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;testng&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;last-version&lt;/version&gt;</span><br><span class="line">    &lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure><h3 id="1-3-创建测试"><a href="#1-3-创建测试" class="headerlink" title="1.3 创建测试"></a>1.3 创建测试</h3><ul><li>类名 <code>alt + enter</code> 创建单元测试</li></ul><p><img src="/images/idea-add-test.png" alt="EnumTypeHandler"></p><ul><li>xml 文件配置单元测试</li></ul><p><img src="/images/xml-add-test.png" alt="EnumTypeHandler"></p><h3 id="1-4-执行测试"><a href="#1-4-执行测试" class="headerlink" title="1.4 执行测试"></a>1.4 执行测试</h3><ul><li>测试方法右击执行 <code>run</code> 、 <code>debug</code></li><li><p>maven</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mvn test 执行目录下所有单元测试</span><br><span class="line">mvn test -Dtest=Test1,Test2 执行具体的单元测试类</span><br><span class="line">mvn test -Dtest=Test#test1 执行具体的单元测试类的方法</span><br><span class="line">mvn test -Dtest=com/summer/service/* 执行某个包下的单元测试</span><br><span class="line">mvn -Dmaven.test.skip=true 忽略单元测试</span><br></pre></td></tr></table></figure></li></ul><h3 id="1-5-检查覆盖率"><a href="#1-5-检查覆盖率" class="headerlink" title="1.5 检查覆盖率"></a>1.5 检查覆盖率</h3><p><img src="/images/覆盖率测试.png" alt="EnumTypeHandler"></p><h2 id="TestNG-使用"><a href="#TestNG-使用" class="headerlink" title="TestNG 使用"></a>TestNG 使用</h2><h3 id="2-1-特点"><a href="#2-1-特点" class="headerlink" title="2.1 特点"></a>2.1 特点</h3><p>• 支持注解<br>• 支持多线程和线程安全<br>• 数据驱动<br>• 灵活的运行时配置<br>• 支持分组<br>• 支持依赖测试方法、并行测试、负载测试、局部故障<br>• 丰富的插件 API</p><h3 id="2-2-基础概念"><a href="#2-2-基础概念" class="headerlink" title="2.2 基础概念"></a>2.2 基础概念</h3><ul><li><code>套件 Suit</code>由一个 XML 文件所表示。它能够包含一个或者多个测试，<suite> 标记来定义</suite></li><li><code>组 Group</code> TestNG 可以将各个 method 存放在不同的 group 里面，然后运行的时候可以指定要运行的 group</li></ul><h3 id="2-3-常用注解"><a href="#2-3-常用注解" class="headerlink" title="2.3 常用注解"></a>2.3 常用注解</h3><ul><li><code>@Test</code> 测试注解 </li><li><code>@BeforeTest</code> 在测试之前执行</li><li><code>@AfterTest</code> 在测试之后执行</li><li><code>@BeforeClass</code> 在测试类执行之前执行</li><li><code>@AfterClass</code> 在测试类执行之后执行</li><li><code>@BeforeMethod</code> 在测试方法执行之前执行</li><li><code>@AfterMethod在</code> 测试方法执行之后执行</li><li><code>@BeforeSuite</code> 在测试套件执行之前执行</li><li><code>@AfterSuite</code> 在测试套件执行之后执行</li><li><code>@BeforeGroups</code> 在测试组执行之前执行</li><li><code>@AfterGroups</code> 在测试组执行之后执行</li><li><code>@Test(enable=false)</code> 忽略测试</li><li><code>@Test(expectedExceptions = Exception.class)</code> 设置异常</li><li><code>@Test(timeout = 1000)</code> 设置超时时间</li></ul><h3 id="2-4-测试类型"><a href="#2-4-测试类型" class="headerlink" title="2.4 测试类型"></a>2.4 测试类型</h3><h4 id="2-4-1-时间测试"><a href="#2-4-1-时间测试" class="headerlink" title="2.4.1 时间测试"></a>2.4.1 时间测试</h4><p>设置单元测试执行的超时时间</p><p><img src="/images/测试超时时间.png" alt="测试超时时间"></p><h4 id="2-4-2-异常测试"><a href="#2-4-2-异常测试" class="headerlink" title="2.4.2 异常测试"></a>2.4.2 异常测试</h4><p>指定测试中抛出的异常</p><p><img src="/images/测试指定异常.png" alt="测试指定异常"></p><h4 id="2-4-3-忽略测试"><a href="#2-4-3-忽略测试" class="headerlink" title="2.4.3 忽略测试"></a>2.4.3 忽略测试</h4><p>忽略指定的测试</p><p><img src="/images/忽略测试.png" alt="忽略测试"></p><h4 id="2-4-5-套件测试"><a href="#2-4-5-套件测试" class="headerlink" title="2.4.5 套件测试"></a>2.4.5 套件测试</h4><p>将多个测试组合成一个模块并执行</p><p><img src="/images/套件测试.png" alt="套件测试"></p><h4 id="2-4-6-组测试"><a href="#2-4-6-组测试" class="headerlink" title="2.4.6 组测试"></a>2.4.6 组测试</h4><p>将各个 method 存放在不同的 group 里面，然后运行的时候可以指定要运行的 group</p><p><img src="/images/组测试.png" alt="组测试"></p><h4 id="2-4-7-参数化测试"><a href="#2-4-7-参数化测试" class="headerlink" title="2.4.7 参数化测试"></a>2.4.7 参数化测试</h4><p>指定传多种参数值，验证接口对多种不同参数的处理是否正确，有两种方式<code>注解@DataProvider</code>、<code>xml</code></p><ul><li><p>xml 配置参数</p><p>  <img src="/images/xml配置参数.png" alt="xml配置参数"></p><p>  <img src="/images/测试使用参数.png" alt="测试使用参数"></p></li><li><p>DataProvider 配置参数</p><p>  <img src="/images/DataProvider测试.png" alt="DataProvider测试"></p></li></ul><h4 id="2-4-8-依赖测试"><a href="#2-4-8-依赖测试" class="headerlink" title="2.4.8 依赖测试"></a>2.4.8 依赖测试</h4><p>在执行的测试之前需要执行的另一测试。如果依赖的测试出现错误，所有的子测试都被忽略，且不被标记为失败。</p><p><img src="/images/依赖测试.png" alt="依赖测试"></p><h4 id="2-4-8-性能测试"><a href="#2-4-8-性能测试" class="headerlink" title="2.4.8 性能测试"></a>2.4.8 性能测试</h4><p>通过多个线程并发调用测试接口来实现性能测试</p><ul><li>invocationCount 执行次数 </li><li>threadPoolSize 线程数</li><li>timeOut 超时时间</li><li>invocationTimeOut 总耗时时间</li></ul><p><img src="/images/性能测试.png" alt="性能测试"></p><h2 id="单元测试规范"><a href="#单元测试规范" class="headerlink" title="单元测试规范"></a>单元测试规范</h2><h3 id="3-1-命名规范"><a href="#3-1-命名规范" class="headerlink" title="3.1 命名规范"></a>3.1 命名规范</h3><ul><li>目录结构：项目目录结构下的单元测试目录<code>test</code></li><li>包名：被测试类包名</li><li>类名：被测试类名 + Test</li><li>方法名：test + 被测试方法名 + 场景</li></ul><h3 id="3-2-测试方向"><a href="#3-2-测试方向" class="headerlink" title="3.2 测试方向"></a>3.2 测试方向</h3><h4 id="3-2-1-模拟接口测试"><a href="#3-2-1-模拟接口测试" class="headerlink" title="3.2.1 模拟接口测试"></a>3.2.1 模拟接口测试</h4><ol><li>模块输入参数数量、属性、类型等是否一致</li><li>传到被调用模块的实参的数量、属性、类型是否与被调用模块形参一致</li><li>引用内部函数时，实参的顺序和数目是否正确</li><li>是否引用了与当前入口无关的参数</li><li>用于输入的变量有没有改变</li><li>不同模块的全局变量的定义是否一致</li><li>限制条件是否以形参的形式传递</li><li>是否及时释放资源<h4 id="3-2-2-局部数据结构测试"><a href="#3-2-2-局部数据结构测试" class="headerlink" title="3.2.2 局部数据结构测试"></a>3.2.2 局部数据结构测试</h4></li><li>不正确或不一致的数据类型说明</li><li>使用未初始化的变量</li><li>错误的初始值或错误的默认值</li><li>数据类型不一致</li><li>全局变量影响</li><li>数组越界</li></ol><h4 id="3-2-3-路径测试"><a href="#3-2-3-路径测试" class="headerlink" title="3.2.3 路径测试"></a>3.2.3 路径测试</h4><ol><li>不同数据类型的比较</li><li>不正确的逻辑运算符或优先次序</li><li>浮点运算精度问题</li><li>不正常的或不存在的循环中的条件</li><li>无法跳出/终止循环</li><li>错误修改循环变量<h4 id="3-2-4-错误处理测试"><a href="#3-2-4-错误处理测试" class="headerlink" title="3.2.4 错误处理测试"></a>3.2.4 错误处理测试</h4></li><li>是否能够对错误定位</li><li>显示与实际的错误是否一致</li><li>是否正确处理错误条件</li><li>是否可以干预错误条件</li></ol><h4 id="3-2-5-边界测试"><a href="#3-2-5-边界测试" class="headerlink" title="3.2.5 边界测试"></a>3.2.5 边界测试</h4><ol><li>普通合法数据是否正确处理</li><li>普通非法数据是否正确处理</li><li>边界内最接近边界的（合法）数据是否正确处理</li><li>边界外最接近边界的（非法）数据是否正确处理等</li><li>在n次循环的第0次、第1次、第n次是否有错误</li></ol><h3 id="3-3-测试覆盖率"><a href="#3-3-测试覆盖率" class="headerlink" title="3.3 测试覆盖率"></a>3.3 测试覆盖率</h3><ol><li>语句覆盖达到100%<br> 指被测单元中每条可执行语句都被测试用例所覆盖</li><li>分支覆盖达到100%<br> 指分支语句取<code>true</code>和<code>false</code>各一次。分支覆盖使这些分支产生的输出都得到验证，提高测试的充分性。</li><li>覆盖错误处理路径</li><li>单元的软件特性覆盖，包括功能、性能、属性、设计约束、状态数目、分支的行数等</li><li>排除异常的输入。</li></ol><h3 id="3-4-变异测试"><a href="#3-4-变异测试" class="headerlink" title="3.4 变异测试"></a>3.4 变异测试</h3><p><del>暂未使用</del></p><h2 id="单元测试使用总结"><a href="#单元测试使用总结" class="headerlink" title="单元测试使用总结"></a>单元测试使用总结</h2><ol><li>单元测试努力维持在<code>Class</code>级别，保证易执行</li><li>努力全自动</li><li>评估分析测试结果</li><li>保持独立</li><li>不测试私有方法，降低复杂度</li><li>重要方法100%覆盖</li><li>尽可能提高测试覆盖率</li><li>bug可重现</li><li>单元测试无法保证代码正确</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;单元测试不仅可以检查代码中是否存在缺陷漏洞，也可以降低bug修复、需求变更等引发的代码风险。良好的单元测试对产品开发维护和技术提升有着积极而
+      
+    
+    </summary>
+    
+    
+      <category term="测试" scheme="http://10buns.com/tags/%E6%B5%8B%E8%AF%95/"/>
+    
+  </entry>
   
   <entry>
     <title>【实践】Docker安装Hadoop集群</title>
@@ -505,32 +528,6 @@
     
     
       <category term="MyBatis" scheme="http://10buns.com/tags/MyBatis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>微服务杂谈</title>
-    <link href="http://10buns.com/2018/06/20/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9D%82%E8%B0%88/"/>
-    <id>http://10buns.com/2018/06/20/微服务杂谈/</id>
-    <published>2018-06-20T06:18:29.000Z</published>
-    <updated>2019-01-24T08:20:37.555Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="微服务与分布式"><a href="#微服务与分布式" class="headerlink" title="微服务与分布式"></a>微服务与分布式</h3><blockquote><p>微服务目前这么火，很多的文章拿它和分布式系统比较，但其实之间还是有很多的相同点</p></blockquote><ul><li>相同点<ol><li>都需要来实现动态的服务注册发现机制</li><li>都需要考虑分布式下面的事务一致性，CAP原则下两段式提交不能保证性能，还需要考虑事务补偿机制</li><li>如何保证消息可靠性</li><li>都需要统一的网关来聚合、编排接口，实现统一认证机制，对外提供 <code>API</code> 使用的接口</li><li>需要解决分布式下定位系统问题，如何日志跟踪，例如支付系统的交易跟踪</li></ol></li></ul><h3 id="切分微服务"><a href="#切分微服务" class="headerlink" title="切分微服务"></a>切分微服务</h3><ul><li><p>服务的切分上有比较大的区别，SOA原本是以一种<code>集成</code>技术出现的，很多技术方案是将原有内部服务封装为一个独立进程，这样新的业务开发就可重用这些服务，这些服务很可能是类似 CRM 这样的非常大的维度；而微服务这个<code>微</code>，就说明了在切分上是有讲究的。如果是错误的切分，那么得到微服务将没有 <code>低耦合、无缝升级、高可用</code> 之类的优势，而会比使用 <code>Monolithic</code> 有更多的麻烦</p></li><li><p>不拆分数据存储的微服务是伪服务：日常接触最多的一种服务拆分方案是后端存储是全在单库中，仅仅把前端的业务逻辑拆分到不同的服务进程中，本质上和一个 <code>Monolithic</code> 一样，只是把模块之间的进程内调用改为进程间调用，这种切分违反了 <code>分布式第一原则</code> ，不仅没有解决模块耦合问题也影响了系统性能</p></li><li><p>微服务并不是越小越好，而是相对 <code>SOA</code> 那种粗粒度的服务，只是需要更小更合适的粒度，但不是无限小</p></li></ul><h3 id="如何拆分服务"><a href="#如何拆分服务" class="headerlink" title="如何拆分服务"></a>如何拆分服务</h3><blockquote><p>在《领域驱动设计》这本书中提出了一个能将一个大问题空间拆解分为领域和实体之间的关系和行为的技术。目前来说，这是一个最合理的解决拆分问题的方案，透过限界上下文（Bounded Context，下文简称为BC）这个概念，我们可以将实现细节封装起来，让BC都能够实现SRP（单一职责）原则</p></blockquote><p>以会员系统的的积分与会员举例，按照 DDD 拆解，他们应该是两个独立的界限上下文，但积分服务中肯定包含会员的，如果直接拆为两个 BC, 那么查询、调用关系就耦合在一起了，甚至不知不觉引入了棘手的分布式问题，这个关联如何拆解？BC 理论认为在不同的 BC 中，即使是一个术语，它的关注点也不一样。在会员中关注的是会员信息、积分、储值等，而在积分中更关注的是积分与会员。所以实际开发中会员服务往往把积分、储值等冗余在会员中，这个设计解脱和积分 BC 的强关联，两个 BC 可以独立提供服务和存储数据。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;微服务与分布式&quot;&gt;&lt;a href=&quot;#微服务与分布式&quot; class=&quot;headerlink&quot; title=&quot;微服务与分布式&quot;&gt;&lt;/a&gt;微服务与分布式&lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;微服务目前这么火，很多的文章拿它和分布式系统比较，但其实之间还是有很多的相
-      
-    
-    </summary>
-    
-      <category term="后端" scheme="http://10buns.com/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    
-      <category term="微服务" scheme="http://10buns.com/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
     
   </entry>
   
