@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://10buns.com/"/>
-  <updated>2019-07-18T17:29:50.389Z</updated>
+  <updated>2019-11-12T06:35:44.620Z</updated>
   <id>http://10buns.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Feign读取apollo配置无效问题</title>
+    <link href="http://10buns.com/2019/11/12/Feign%E8%AF%BB%E5%8F%96apollo%E9%85%8D%E7%BD%AE%E6%97%A0%E6%95%88%E9%97%AE%E9%A2%98/"/>
+    <id>http://10buns.com/2019/11/12/Feign读取apollo配置无效问题/</id>
+    <published>2019-11-12T06:28:19.000Z</published>
+    <updated>2019-11-12T06:35:44.620Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>接手一个项目，需要做服务器迁移，之前配置的 feign client url 为IP，配置迁移 apollo 读取失败</p><h3 id="原因分析"><a href="#原因分析" class="headerlink" title="原因分析"></a>原因分析</h3><p>项目启动时候，会扫描<code>@FeignClient</code>注解，此时会注入<code>url</code>的值。但<code>apollo</code>配置是在<code>@FeignClient</code>扫描后才加载。</p><p>问题原因找到，解决方法其实也挺简单。手动配置配置懒加载让<code>apollo</code>在扫描<code>@FeignClient</code>注解前加载。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apollo.bootstrap.enabled = true</span><br><span class="line">apollo.bootstrap.eagerLoad.enabled=true</span><br></pre></td></tr></table></figure><p>还有一种方法，设置配置加载在<code>SpringApplication.run()</code>启动之前，</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">       new FeignClientUrl().init();</span><br><span class="line">       SpringApplication.run(Application.class, args);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;问题描述&quot;&gt;&lt;a href=&quot;#问题描述&quot; class=&quot;headerlink&quot; title=&quot;问题描述&quot;&gt;&lt;/a&gt;问题描述&lt;/h3&gt;&lt;p&gt;接手一个项目，需要做服务器迁移，之前配置的 feign client url 为IP，配置迁移 apollo 读取失败&lt;/p
+      
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>TestNG 测试 ABC</title>
@@ -502,32 +523,6 @@
     
     
       <category term="Git" scheme="http://10buns.com/tags/Git/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Spring MyBatis 动态数据源切换</title>
-    <link href="http://10buns.com/2018/06/26/Spring-MyBatis-%E5%8A%A8%E6%80%81%E6%95%B0%E6%8D%AE%E6%BA%90%E5%88%87%E6%8D%A2/"/>
-    <id>http://10buns.com/2018/06/26/Spring-MyBatis-动态数据源切换/</id>
-    <published>2018-06-26T01:14:51.000Z</published>
-    <updated>2019-05-09T15:13:57.922Z</updated>
-    
-    <content type="html"><![CDATA[<p>项目开发中有一个需求，需要根据商户类型决定是否使用独立的数据库，即要动态的切换数据源。系统技术栈是 spring boot + mybatis, 常见的思路是基于不同的数据库创建不同的 bean 。</p><p>大体流程: 创建多个 <code>Configuration</code> 以及多个<code>Bean</code>,因为设为 <code>@Configuration</code>，所以在启动的时候 <code>Bean</code> 都会创建，默认走 <code>@Primary</code> 中的数据库连接，如果需要走其他的，只要在数据库 DAO中加上<code>@@qualifier(&quot;bean名&quot;)</code>即可。</p><p>但数据库可能是动态实时修改的，例如后台配置修改数据源，或者分库的场景。显然这种方法是走不通的。</p><p>在 Mybatis 中， <code>SqlSessionFactory</code> 负责创建SqlSession。虽然在初始化中相关 bean 已经创建完毕， 但是 bean 的一些属性是可以修改的。所以事先动态数据源切换，只需要修改对应的属性就可以了。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public SqlSessionFactory changeSqlSessionFactory() throws Exception&#123;</span><br><span class="line">        SqlSessionFactory bean = SVCAppContextAware.getBean(SqlSessionFactory.class);</span><br><span class="line">        DruidDataSource druidDataSource = new DruidDataSource();</span><br><span class="line">        //ds初始化</span><br><span class="line">        TransactionFactory transactionFactory =  new JdbcTransactionFactory();</span><br><span class="line">        Environment environment = new Environment(&quot;数据库名称&quot;, transactionFactory, druidDataSource);</span><br><span class="line">        bean.getConfiguration().setEnvironment(environment);</span><br><span class="line">        return bean;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><p>获取 bean 的 configuration，然后修改Environment 的数据库连接。在需要对数据库变更的时候，只要重新调用<code>changeSqlSessionFactory</code>方法即可。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;项目开发中有一个需求，需要根据商户类型决定是否使用独立的数据库，即要动态的切换数据源。系统技术栈是 spring boot + mybatis, 常见的思路是基于不同的数据库创建不同的 bean 。&lt;/p&gt;
-&lt;p&gt;大体流程: 创建多个 &lt;code&gt;Configuration
-      
-    
-    </summary>
-    
-      <category term="后端" scheme="http://10buns.com/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    
-      <category term="MyBatis" scheme="http://10buns.com/tags/MyBatis/"/>
     
   </entry>
   
