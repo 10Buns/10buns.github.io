@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon.png?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="git,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="10buns" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="一、规范的 Commit message 作用 方便快速浏览 格式化 message , 每行头部信息即可知道 commit 意义  1git log &amp;lt;last tag&amp;gt; HEAD --pretty=format:%s    快速查找 查找本次修复的提交  1git log &amp;lt;last release&amp;gt; HEAD --grep fix  输出 Change log   二">
+<meta name="keywords" content="git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git Commmit mesagge 和 Change log 使用">
+<meta property="og:url" content="http://10buns.com/2019/11/28/Git-Commmit-mesagge-和-Change-log-使用/index.html">
+<meta property="og:site_name" content="10buns">
+<meta property="og:description" content="一、规范的 Commit message 作用 方便快速浏览 格式化 message , 每行头部信息即可知道 commit 意义  1git log &amp;lt;last tag&amp;gt; HEAD --pretty=format:%s    快速查找 查找本次修复的提交  1git log &amp;lt;last release&amp;gt; HEAD --grep fix  输出 Change log   二">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://10buns.com/images/commit-message-template.png">
+<meta property="og:image" content="http://10buns.com/images/commit-template-type.png">
+<meta property="og:image" content="http://10buns.com/images/use-commit.png">
+<meta property="og:updated_time" content="2019-11-28T09:10:00.838Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Git Commmit mesagge 和 Change log 使用">
+<meta name="twitter:description" content="一、规范的 Commit message 作用 方便快速浏览 格式化 message , 每行头部信息即可知道 commit 意义  1git log &amp;lt;last tag&amp;gt; HEAD --pretty=format:%s    快速查找 查找本次修复的提交  1git log &amp;lt;last release&amp;gt; HEAD --grep fix  输出 Change log   二">
+<meta name="twitter:image" content="http://10buns.com/images/commit-message-template.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://10buns.com/2019/11/28/Git-Commmit-mesagge-和-Change-log-使用/">
+
+
+
+
+
+  <title>Git Commmit mesagge 和 Change log 使用 | 10buns</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c873067502e43c16757b0901e5bb26c2";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">10buns</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://10buns.com/2019/11/28/Git-Commmit-mesagge-和-Change-log-使用/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="10buns">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="10buns">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Git Commmit mesagge 和 Change log 使用</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-28T16:30:25+08:00">
+                2019-11-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="一、规范的-Commit-message-作用"><a href="#一、规范的-Commit-message-作用" class="headerlink" title="一、规范的 Commit message 作用"></a>一、规范的 Commit message 作用</h3><ol>
+<li><p>方便快速浏览<br> 格式化 message , 每行头部信息即可知道 commit 意义</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log &lt;last tag&gt; HEAD --pretty=format:%s</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol start="2">
+<li><p>快速查找<br> 查找本次修复的提交</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log &lt;last release&gt; HEAD --grep fix</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>输出 Change log</p>
+</li>
+</ol>
+<h3 id="二、Commit-message-格式"><a href="#二、Commit-message-格式" class="headerlink" title="二、Commit message 格式"></a>二、Commit message 格式</h3><p>采用<a href="https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit#" target="_blank" rel="noopener">Google Angular 规范</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;type&gt;(&lt;scope&gt;): &lt;subject&gt;</span><br><span class="line">// 空一行</span><br><span class="line">&lt;body&gt;</span><br><span class="line">// 空一行</span><br><span class="line">&lt;footer&gt;</span><br></pre></td></tr></table></figure>
+<p>header 必须的， body 和 footer 可缺省</p>
+<h4 id="2-1-Header"><a href="#2-1-Header" class="headerlink" title="2.1 Header"></a>2.1 Header</h4><p>首行 header 包含: type(必需)、scope(可选)、subject(必需)</p>
+<ol>
+<li><p><code>type</code> 用于说明 commit 类别，限定如下类别:</p>
+<ul>
+<li><code>feat</code>:新功能（feature）</li>
+<li><code>fix</code>:修补bug</li>
+<li><code>docs</code>:文档（documentation）</li>
+<li><code>style</code>:格式（不影响代码运行的变动,空格,格式化,等等）</li>
+<li><code>refactor</code>:重构（即不是新增功能，也不是修改bug的代码变动）</li>
+<li><code>perf</code>:性能 (提高代码性能的改变)</li>
+<li><code>test</code>:增加测试或者修改测试</li>
+<li><code>build</code>:影响构建系统或外部依赖项的更改(maven,gradle,npm 等等)</li>
+<li><code>ci</code>:对CI配置文件和脚本的更改</li>
+<li><code>chore</code>:对非 src 和 test 目录的修改</li>
+<li><p><code>revert</code>:Revert a commit</p>
+<p>输出 <code>change log</code> 时， 肯定包含 <code>feat</code>、<code>fix</code></p>
+</li>
+</ul>
+</li>
+<li><p><code>scope</code> 说明 commit 影响的范围</p>
+</li>
+<li><p><code>subject</code> commit 的简述</p>
+<ul>
+<li>动词、第一人称</li>
+<li>首字母小写</li>
+<li>结尾无句号</li>
+</ul>
+</li>
+</ol>
+<h4 id="2-2-Body"><a href="#2-2-Body" class="headerlink" title="2.2 Body"></a>2.2 Body</h4><p>对 commit 的详细描述，可拆分多行</p>
+<h4 id="2-3-Footer"><a href="#2-3-Footer" class="headerlink" title="2.3 Footer"></a>2.3 Footer</h4><ol>
+<li>不兼容的变更<br> 如果当前变更与之前不兼容，以<code>BREAKING CHANGE:</code>开头，紧跟描述</li>
+<li>关闭 issue<br> Closes #123, #456, #789</li>
+</ol>
+<h4 id="2-4-Revert"><a href="#2-4-Revert" class="headerlink" title="2.4 Revert"></a>2.4 Revert</h4><p>如果当前 commit 是为了回退历史的 commit，则以revert:开头，紧跟待撤销的 commit 的 header</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">revert: feat(svc): add &apos;a/b amount&apos; option</span><br></pre></td></tr></table></figure>
+<h3 id="三、Git-Commit-Template"><a href="#三、Git-Commit-Template" class="headerlink" title="三、Git Commit Template"></a>三、Git Commit Template</h3><p><code>Git Commit Template</code> 是 IDEA 中用编写 commit log 的日志</p>
+<ol>
+<li><p>安装</p>
+<p> idea -&gt; plugins -&gt; 搜索 <code>Git Commit Template</code></p>
+<p> <img src="/images/commit-message-template.png" alt="界面"></p>
+<p> <img src="/images/commit-template-type.png" alt="类型"></p>
+</li>
+<li><p>使用</p>
+<p> <img src="/images/use-commit.png" alt="使用"></p>
+</li>
+</ol>
+<h3 id="四、生成-Change-log"><a href="#四、生成-Change-log" class="headerlink" title="四、生成 Change log"></a>四、生成 Change log</h3><ol>
+<li><p>安装 </p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g conventional-changelog-cli</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 只会在 CHANGELOG.md 的头部加上自从上次发布以来的变动</span><br><span class="line">$ conventional-changelog -p angular -i CHANGELOG.md -s -p </span><br><span class="line"># 生成所有发布的 Change log </span><br><span class="line">$ conventional-changelog -p angular -i CHANGELOG.md -w -r 0</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/git/" rel="tag"><i class="fa fa-tag"></i> git</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/12/Feign读取apollo配置无效问题/" rel="next" title="Feign读取apollo配置无效问题">
+                <i class="fa fa-chevron-left"></i> Feign读取apollo配置无效问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="10buns">
+            
+              <p class="site-author-name" itemprop="name">10buns</p>
+              <p class="site-description motion-element" itemprop="description">Study hard and make progress every day</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/10Buns" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.weibo.com/loverichy" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-Weibo"></i>Weibo</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、规范的-Commit-message-作用"><span class="nav-number">1.</span> <span class="nav-text">一、规范的 Commit message 作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、Commit-message-格式"><span class="nav-number">2.</span> <span class="nav-text">二、Commit message 格式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-Header"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 Header</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-Body"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 Body</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-Footer"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 Footer</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-Revert"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 Revert</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、Git-Commit-Template"><span class="nav-number">3.</span> <span class="nav-text">三、Git Commit Template</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、生成-Change-log"><span class="nav-number">4.</span> <span class="nav-text">四、生成 Change log</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">10buns</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+<div class="powered-by">
+	<i class="fa fa-user-md"></i>
+	<span id="busuanzi_container_site_uv">
+		本站访客数:<span id="busuanzi_value_site_uv"></span>
+	</span>
+	<span class="post-meta-divider">|</span>
+	<span id="busuanzi_container_site_pv">
+		本站访问量<span id="busuanzi_value_site_pv"></span>
+	</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
