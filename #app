@@ -1,0 +1,168 @@
+#app
+server.port = 8886
+server.display-name = svc_adapter_saas
+#spring
+spring.application.name = svc_adapter_saas
+#datasource
+spring.datasource.type = com.alibaba.druid.pool.DruidDataSource
+spring.datasource.url = UH8wFcPLr7JeohOzb5CEAx6ZRWiCilCw9f4VqiP3h9FChxLdA50ev8I5N6F8SiWlA9UbRDCM00a6FlwDdwEZPb0ltdVMreP4ocEZ2SuwZgu/1JGcj+TJQZ9qMe6zw6fH
+spring.datasource.username = PXG25caq7p+JHlKX/YFSug==
+spring.datasource.password = EOGi2qgMnYA1hdIMHnasEQ==
+spring.datasource.driver-class-name = com.mysql.jdbc.Driver
+spring.datasource.initialSize = 5
+spring.datasource.minIdle = 5
+spring.datasource.maxActive = 200
+spring.datasource.maxWait = 60000
+spring.datasource.timeBetweenEvictionRunsMillis = 60000
+spring.datasource.minEvictableIdleTimeMillis = 300000
+spring.datasource.validationQuery = SELECT 1 FROM DUAL
+spring.datasource.testWhileIdle = true
+spring.datasource.testOnBorrow = false
+spring.datasource.testOnReturn = false
+spring.datasource.filters = stat,wall,slf4j
+spring.datasource.logSlowSql = true
+#mybatis
+mybatis-plus.mapper-locations = classpath:/mapper/*Mapper.xml
+mybatis-plus.type-aliases-package = cn.freemud.svc.adapter.saas.mapper.entity
+mybatis-plus.global-config.id-type = 0
+mybatis-plus.global-config.field-strategy = 2
+mybatis-plus.global-config.db-column-underline = false
+mybatis-plus.global-config.refresh-mapper = true
+mybatis-plus.configuration.mapUnderscoreToCamelCase = false
+#xxl-job
+#http://139.196.195.40:8791/scheduling-platform
+xxl.job.admin.addresses = z6Ym9RG6+a28bxHuq2iHsDBPiAGVsTLAyr6NfDNoJaoXlqBQtIUIU9lNFjV5XuTO
+xxl.job.executor.appname = svc-adapter-saas
+xxl.job.executor.ip = 
+xxl.job.executor.port = 8761
+xxl.job.accessToken = 
+xxl.job.executor.logpath = qxh3rjKBnAj/bwZcCaIL0AQcEVe7jhwB50avjj3EU5eOkrBc/qzr/1KfIjxUK+kt
+# sftp
+sftp.host = hmLnUQ9EJBkytIShypu5Bg==
+sftp.port = 22
+sftp.username = root
+sftp.password = z4wayRbn8PYottB+2c8+NM+pjlxnkFGeOTflwjBRxKA=
+sftp.timeout = 60000
+sftp.filepath = 7zU2bdDyAeFB3zChsf/2Dg==
+giftcard.send.updateuser.default = https://giftcard.sandload.cn/api/card/updateuser
+giftCard.partner_id = 1744
+#redis
+spring.redis.nodes = uG98LbM+B5caH44SK+A/As+pjlxnkFGeOTflwjBRxKA=
+spring.redis.max-redirects = 8
+spring.redis.password = CtbkxzQms0PRcw7Rte5gq8+pjlxnkFGeOTflwjBRxKA=
+spring.redis.maxAttempts = 2
+spring.redis.timeout = 0
+spring.redis.pool.max-active = 30
+spring.redis.pool.max-wait = -1
+spring.redis.pool.max-idle = 8
+spring.redis.pool.min-idle = 0
+#redisson
+redisson.lock.server.address = uG98LbM+B5caH44SK+A/As+pjlxnkFGeOTflwjBRxKA=
+redisson.lock.server.password = CtbkxzQms0PRcw7Rte5gq8+pjlxnkFGeOTflwjBRxKA=
+redisson.lock.server.type = standalone
+#svc.url = http://localhost:8888
+svc.url = V8QovCNurpemo9a0gLYiXxlLytRsN1l9s8KzSTtDmNo=
+svc.send.privateKey = L1UMxDAllBXFhcFP2YRyJPMrPRnD9a4XtrfYR+NyRySTGGI8g2VCUGG+Vb+RJWUlsEFbCCjn/owulmwBRC2tHJ3yK7s9QB/c7NgHC9Y4450HmPZoVnxpH71rGANMztut5kSfE15uFe1hUeGKhObuBxthS3Rz5nDCiq8zLy0HgAkptOrlov7vyUUCjHguKCcHvVIrCqpKy++2h4xprHA+aktEJEgELCw6oOeXGzCrqL/qW53nOBFqStgIC1i16YFbWHOUte+ickHteUYzWiKN7/jFBr9C9GsX8rW96Ohm2B0hehjtWZXrWpDUGM0QOqNOXBPpgBmm31HKMwqHfKKfsXyF0k6sTsBmzGIQ3zgiDhznwV8jcjcdvaFi81x0VVVhcYn4PlvCYvv89d7byBQCuuyyrRvo2UZxkrzRkPPblZL5D62DgGV0S0qU4DFlWvILnyYwqZL+2RrrYvlu7Vq+u9pnsIkPlte6BduPZFDXbQvEUFv+CXxXRYDeqV+Qg39yW1EPDlSTrG6qwk/3KSS+mRDeZRPOYq74/MhMRuFPHnt1Y6uOppqJoI/lx5nFMEe3l3cSO2IZBcuFW/8SXkuD1jzCbPKV4bm4mqBBYQdEHp6lbgPuyJct0jNA+yMeGtACBjEVZS0CJJIV7lDjE527oS86Q7O7eUJl6XMoX//GPcgUWMfFtHKursoeBnRI0iYslXWj5fXpcbxcUQ5DEh97RTacunaTWG8V6kj7ObtrY3EYREWZISL5/qP6rJFCaLFxrzyWdvHVnjWahNqNfZfgQBewy4qeMHst2vujGYLWGLqtqSrZlw5VTnu2qqWdFyEP2W4tdi6kIGTQPi8D2koaj7uD1iL545FHiQlZP6xfpv3ABxROJxdDxsblsGMpUo6TRe1UnS+59hEvZifCoECbgQlwJgMAVfQ4+ykKbIpbdWyDWl6AJybpHC1Veu6+MBkzD2tYIBuZSP73l3xdOWb+miHKKKSjrdVQgYjJHDfqAoLUFMGwqJbD+B1tzxiDB5qgoGA4y45yu5cqKq9BBn2HvLNhxLEGnO5elrYpt122hjHYJ0VwjEToAK1Xe15DytORl/9pAAT9ccX80uG9p5JLBqLei41qgMYS0hO1+B7Pek4=
+#sbux
+upp.ratioA = 1
+#sec
+secret = 0
+upp.checkSign.switch = false
+
+upp.publicKey.1744 = JTRlDQ+kVUL4BOLBrzVHwCK9MLWQO/i37aATcv1jA8waQw8Qct05C16lIBndATUEnTRyoqsYP/QX29eecdyK79QIjVbATOOMxrIwi9w7uTbdQKlZ6tg0igjSFSUtujrL80SMEesdcymiQVv+G4mAyHY/0Z4G4bETdtFdesESCi6mh4IqQehk3zPhq3mxMA0mGr/Q9ksRXnsgrfnhRW7lybgnKLngJaGEufURpvEH5LUbOuTviFVi2hoVgp5PDROLaX2rTqWDq8pBVdKtxCXuwC6ckD0d1rXdP/z4bj9Rp4Y=
+adapter.privateKey.1744 = L1UMxDAllBXFhcFP2YRyJPMrPRnD9a4XtrfYR+NyRySTGGI8g2VCUGG+Vb+RJWUlsEFbCCjn/owulmwBRC2tHJ3yK7s9QB/c7NgHC9Y4450HmPZoVnxpH71rGANMztut5kSfE15uFe1hUeGKhObuBxthS3Rz5nDCiq8zLy0HgAkptOrlov7vyUUCjHguKCcHvVIrCqpKy++2h4xprHA+aktEJEgELCw6oOeXGzCrqL/qW53nOBFqStgIC1i16YFbWHOUte+ickHteUYzWiKN7/jFBr9C9GsX8rW96Ohm2B0hehjtWZXrWpDUGM0QOqNOXBPpgBmm31HKMwqHfKKfsXyF0k6sTsBmzGIQ3zgiDhznwV8jcjcdvaFi81x0VVVhcYn4PlvCYvv89d7byBQCuuyyrRvo2UZxkrzRkPPblZL5D62DgGV0S0qU4DFlWvILnyYwqZL+2RrrYvlu7Vq+u9pnsIkPlte6BduPZFDXbQvEUFv+CXxXRYDeqV+Qg39yW1EPDlSTrG6qwk/3KSS+mRDeZRPOYq74/MhMRuFPHnt1Y6uOppqJoI/lx5nFMEe3l3cSO2IZBcuFW/8SXkuD1jzCbPKV4bm4mqBBYQdEHp6lbgPuyJct0jNA+yMeGtACBjEVZS0CJJIV7lDjE527oS86Q7O7eUJl6XMoX//GPcgUWMfFtHKursoeBnRI0iYslXWj5fXpcbxcUQ5DEh97RTacunaTWG8V6kj7ObtrY3EYREWZISL5/qP6rJFCaLFxrzyWdvHVnjWahNqNfZfgQBewy4qeMHst2vujGYLWGLqtqSrZlw5VTnu2qqWdFyEP2W4tdi6kIGTQPi8D2koaj7uD1iL545FHiQlZP6xfpv3ABxROJxdDxsblsGMpUo6TRe1UnS+59hEvZifCoECbgQlwJgMAVfQ4+ykKbIpbdWyDWl6AJybpHC1Veu6+MBkzD2tYIBuZSP73l3xdOWb+miHKKKSjrdVQgYjJHDfqAoLUFMGwqJbD+B1tzxiDB5qgoGA4y45yu5cqKq9BBn2HvLNhxLEGnO5elrYpt122hjHYJ0VwjEToAK1Xe15DytORl/9pAAT9ccX80uG9p5JLBqLei41qgMYS0hO1+B7Pek4=
+upp.publicKey.1768 = JTRlDQ+kVUL4BOLBrzVHwCK9MLWQO/i37aATcv1jA8waQw8Qct05C16lIBndATUEnTRyoqsYP/QX29eecdyK79QIjVbATOOMxrIwi9w7uTbdQKlZ6tg0igjSFSUtujrL80SMEesdcymiQVv+G4mAyHY/0Z4G4bETdtFdesESCi6mh4IqQehk3zPhq3mxMA0mGr/Q9ksRXnsgrfnhRW7lybgnKLngJaGEufURpvEH5LUbOuTviFVi2hoVgp5PDROLaX2rTqWDq8pBVdKtxCXuwC6ckD0d1rXdP/z4bj9Rp4Y=
+adapter.privateKey.1768 = L1UMxDAllBXFhcFP2YRyJPMrPRnD9a4XtrfYR+NyRySTGGI8g2VCUGG+Vb+RJWUlsEFbCCjn/owulmwBRC2tHJ3yK7s9QB/c7NgHC9Y4450HmPZoVnxpH71rGANMztut5kSfE15uFe1hUeGKhObuBxthS3Rz5nDCiq8zLy0HgAkptOrlov7vyUUCjHguKCcHvVIrCqpKy++2h4xprHA+aktEJEgELCw6oOeXGzCrqL/qW53nOBFqStgIC1i16YFbWHOUte+ickHteUYzWiKN7/jFBr9C9GsX8rW96Ohm2B0hehjtWZXrWpDUGM0QOqNOXBPpgBmm31HKMwqHfKKfsXyF0k6sTsBmzGIQ3zgiDhznwV8jcjcdvaFi81x0VVVhcYn4PlvCYvv89d7byBQCuuyyrRvo2UZxkrzRkPPblZL5D62DgGV0S0qU4DFlWvILnyYwqZL+2RrrYvlu7Vq+u9pnsIkPlte6BduPZFDXbQvEUFv+CXxXRYDeqV+Qg39yW1EPDlSTrG6qwk/3KSS+mRDeZRPOYq74/MhMRuFPHnt1Y6uOppqJoI/lx5nFMEe3l3cSO2IZBcuFW/8SXkuD1jzCbPKV4bm4mqBBYQdEHp6lbgPuyJct0jNA+yMeGtACBjEVZS0CJJIV7lDjE527oS86Q7O7eUJl6XMoX//GPcgUWMfFtHKursoeBnRI0iYslXWj5fXpcbxcUQ5DEh97RTacunaTWG8V6kj7ObtrY3EYREWZISL5/qP6rJFCaLFxrzyWdvHVnjWahNqNfZfgQBewy4qeMHst2vujGYLWGLqtqSrZlw5VTnu2qqWdFyEP2W4tdi6kIGTQPi8D2koaj7uD1iL545FHiQlZP6xfpv3ABxROJxdDxsblsGMpUo6TRe1UnS+59hEvZifCoECbgQlwJgMAVfQ4+ykKbIpbdWyDWl6AJybpHC1Veu6+MBkzD2tYIBuZSP73l3xdOWb+miHKKKSjrdVQgYjJHDfqAoLUFMGwqJbD+B1tzxiDB5qgoGA4y45yu5cqKq9BBn2HvLNhxLEGnO5elrYpt122hjHYJ0VwjEToAK1Xe15DytORl/9pAAT9ccX80uG9p5JLBqLei41qgMYS0hO1+B7Pek4=swagger2.website = http://www.freemud.cn
+swagger2.module.description = svc API DOC
+swagger2.email = support@freemud.cn
+swagger2.module.serviceUrl = http://www.freemud.cn
+swagger2.module.version = V1.0
+swagger2.module.base-package = cn.freemud.svc.adapter.controller
+swagger2.module.title = svc API
+swagger2.converter = freemud
+whiteIP.instances = 127.0.0.1,192.168.1.4
+spring.profiles.active = pro
+system.freemud.security.key = version2#8hmZVX1r+fiFz3Pfb0BxFA==;version1#Tg4fVg9N55TSbP5dEdclzA==
+#制卡申请
+zuul.routes.card_apply_add.path = /add_card_apply/**
+zuul.routes.card_apply_add.url = forward:/card/add_card_apply
+#生卡激活并充值
+zuul.routes.create_card_active.path = /create_card_active/**
+zuul.routes.create_card_active.url = forward:/card/create_card_active
+#卡激活
+zuul.routes.card_active.path = /card_active/**
+zuul.routes.card_active.url = forward:/card/card_active
+#卡交易码获取
+zuul.routes.get_trade_no.path = /get_trade_no/**
+zuul.routes.get_trade_no.url = forward:/card/get_trade_no
+#卡取消激活
+zuul.routes.card_active_cancel.path = /card_active_cancel/**
+zuul.routes.card_active_cancel.url = forward:/card/card_active_cancel
+#批量声卡
+zuul.routes.batch_create_card.path = /batch_create_card/**
+zuul.routes.batch_create_card.url = forward:/card/batch_create_card
+#卡状态交易查询
+zuul.routes.trade_status.path = /trade_status/**
+zuul.routes.trade_status.url = forward:/order/trade_status
+#卡交易明细查询
+zuul.routes.search_detail.path = /search_detail/**
+zuul.routes.search_detail.url = forward:/order/search_detail
+#卡信息查询
+zuul.routes.card_info.path = /card_info/**
+zuul.routes.card_info.url = forward:/order/card_info
+#卡单笔交易查询
+zuul.routes.search_order.path = /search_order/**
+zuul.routes.search_order.url = forward:/order/search_order
+#卡充值
+zuul.routes.recharge.path = /recharge/**
+zuul.routes.recharge.url = forward:/payment/recharge
+#卡取消充值
+zuul.routes.recharge_cancel.path = /recharge_cancel/**
+zuul.routes.recharge_cancel.url = forward:/payment/recharge_cancel
+#消费
+zuul.routes.consume.path = /consume/**
+zuul.routes.consume.url = forward:/payment/consume
+#消费退款
+zuul.routes.consume_refund.path = /consume_refund/**
+zuul.routes.consume_refund.url = forward:/payment/consume_refund
+#冲正
+zuul.routes.card_correct.path = /card_correct/**
+zuul.routes.card_correct.url = forward:/payment/card_correct
+#注册
+zuul.routes.register_wx_user.path = /register_wx_user/**
+zuul.routes.register_wx_user.url = forward:/membercard/register_wx_user
+#绑定
+zuul.routes.bind_card.path = /bind_card/**
+zuul.routes.bind_card.url = forward:/membercard/bind_card
+#卡列表
+zuul.routes.query_member_card_list.path = /query_member_card_list/**
+zuul.routes.query_member_card_list.url = forward:/membercard/query_member_card_list
+#批量生卡导出
+zuul.routes.batch_create_export.path = /batch_create_export/**
+zuul.routes.batch_create_export.url = forward:/card/batch_create_export
+ribbon.ReadTimeout = 5000
+ribbon.ConnectTimeout = 5000
+zuul.host.connect-timeout-millis = 10000
+zuul.host.socket-timeout-millis = 60000
+#hystrix
+hystrix.threadpool.default.coreSize = 20
+hystrix.threadpool.default.maximumSize = 50
+hystrix.threadpool.default.allowMaximumSizeToDivergeFromCoreSize = true
+hystrix.command.default.execution.timeout.enabled = false
+hystrix.command.default.execution.isolation.thread.interruptOnTimeout = false
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds = 10000
+
+svc.admin.url = http://svc-saas-admin.freemud-svc-saas.svc:8891
+svc.platform.url = http://svc-saas-platform.freemud-svc-saas.svc:8888
+#svc.admin.url = http://139.196.195.9:8021
+#svc.platform.url = http://172.31.2.13
+svc.platform.name = svc-service
+
+consume.type.cardno.partnerid = 
+consume.type.dynamic.partnerid = 1744,1768
+consume.type.nopaymentcode.partnerid = 
+#单位是秒second
+paymentcode.limittime.default = 120
+paymentcode.limittime.1744 = 120
+giftcard.send.updateuser.1744 = http://212.129.230.212/svc/thor/giftcard/update-user-card-balance
+giftcard.send.updateuser.1768 = http://212.129.230.212/svc/thor/giftcard/update-user-card-balance
