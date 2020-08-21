@@ -88,7 +88,7 @@
 <meta property="og:site_name" content="10buns">
 <meta property="og:description" content="部署 ElasticSearch 构建 elasticsearch  12docker pull elasticsearch:7.8.0docker run -d -v /Users/summer/dev/docker_volume/es:/-data --name es --net staticnet --ip 192.168.0.2 -p 9200:9200 -p 9300:9300 -e E">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-08-21T08:51:13.125Z">
+<meta property="og:updated_time" content="2020-08-21T08:55:10.808Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="docker安装部署elk">
 <meta name="twitter:description" content="部署 ElasticSearch 构建 elasticsearch  12docker pull elasticsearch:7.8.0docker run -d -v /Users/summer/dev/docker_volume/es:/-data --name es --net staticnet --ip 192.168.0.2 -p 9200:9200 -p 9300:9300 -e E">
@@ -353,7 +353,7 @@
 <ul>
 <li>设置跨域</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it es /bin/bash</span><br><span class="line">cd config/</span><br><span class="line">vi elasticsearch.yml</span><br><span class="line"></span><br><span class="line">cluster.name: &quot;docker-cluster&quot;</span><br><span class="line">http.cors.enabled: true</span><br><span class="line">http.cors.allow-origin: &quot;*&quot;</span><br><span class="line">discovery.zen.minimum_master_nodes: 1</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it es /bin/bash</span><br><span class="line">cd config/</span><br><span class="line">vi elasticsearch.yml</span><br><span class="line">## 配置跨域的内容</span><br><span class="line">cluster.name: &quot;docker-cluster&quot;</span><br><span class="line">http.cors.enabled: true</span><br><span class="line">http.cors.allow-origin: &quot;*&quot;</span><br><span class="line">discovery.zen.minimum_master_nodes: 1</span><br></pre></td></tr></table></figure>
 <ul>
 <li>重启验证</li>
 </ul>
