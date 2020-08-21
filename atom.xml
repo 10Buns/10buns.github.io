@@ -5,9 +5,9 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://10buns.com/"/>
+  <link href="http://10buns.cn/"/>
   <updated>2020-08-21T08:51:13.125Z</updated>
-  <id>http://10buns.com/</id>
+  <id>http://10buns.cn/</id>
   
   <author>
     <name>10buns</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>docker安装部署elk</title>
-    <link href="http://10buns.com/2020/08/14/docker%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2elk/"/>
-    <id>http://10buns.com/2020/08/14/docker安装部署elk/</id>
+    <link href="http://10buns.cn/2020/08/14/docker%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2elk/"/>
+    <id>http://10buns.cn/2020/08/14/docker安装部署elk/</id>
     <published>2020-08-14T08:01:06.000Z</published>
     <updated>2020-08-21T08:51:13.125Z</updated>
     
@@ -40,8 +40,8 @@
   
   <entry>
     <title>ddd 学习笔记</title>
-    <link href="http://10buns.com/2020/07/07/ddd-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    <id>http://10buns.com/2020/07/07/ddd-学习笔记/</id>
+    <link href="http://10buns.cn/2020/07/07/ddd-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    <id>http://10buns.cn/2020/07/07/ddd-学习笔记/</id>
     <published>2020-07-07T09:41:34.000Z</published>
     <updated>2020-07-09T07:23:17.755Z</updated>
     
@@ -58,14 +58,14 @@
     </summary>
     
     
-      <category term="DDD" scheme="http://10buns.com/tags/DDD/"/>
+      <category term="DDD" scheme="http://10buns.cn/tags/DDD/"/>
     
   </entry>
   
   <entry>
     <title>maven 项目构建优化</title>
-    <link href="http://10buns.com/2020/05/13/maven-%E9%A1%B9%E7%9B%AE%E6%9E%84%E5%BB%BA%E4%BC%98%E5%8C%96/"/>
-    <id>http://10buns.com/2020/05/13/maven-项目构建优化/</id>
+    <link href="http://10buns.cn/2020/05/13/maven-%E9%A1%B9%E7%9B%AE%E6%9E%84%E5%BB%BA%E4%BC%98%E5%8C%96/"/>
+    <id>http://10buns.cn/2020/05/13/maven-项目构建优化/</id>
     <published>2020-05-13T03:34:00.000Z</published>
     <updated>2020-07-07T09:43:06.811Z</updated>
     
@@ -82,14 +82,14 @@
     </summary>
     
     
-      <category term="Maven" scheme="http://10buns.com/tags/Maven/"/>
+      <category term="Maven" scheme="http://10buns.cn/tags/Maven/"/>
     
   </entry>
   
   <entry>
     <title>Git Commmit mesagge 和 Change log 使用</title>
-    <link href="http://10buns.com/2019/11/28/Git-Commmit-mesagge-%E5%92%8C-Change-log-%E4%BD%BF%E7%94%A8/"/>
-    <id>http://10buns.com/2019/11/28/Git-Commmit-mesagge-和-Change-log-使用/</id>
+    <link href="http://10buns.cn/2019/11/28/Git-Commmit-mesagge-%E5%92%8C-Change-log-%E4%BD%BF%E7%94%A8/"/>
+    <id>http://10buns.cn/2019/11/28/Git-Commmit-mesagge-和-Change-log-使用/</id>
     <published>2019-11-28T08:30:25.000Z</published>
     <updated>2019-12-16T06:52:48.091Z</updated>
     
@@ -104,17 +104,17 @@
     
     </summary>
     
-      <category term="Git" scheme="http://10buns.com/categories/Git/"/>
+      <category term="Git" scheme="http://10buns.cn/categories/Git/"/>
     
     
-      <category term="Git" scheme="http://10buns.com/tags/Git/"/>
+      <category term="Git" scheme="http://10buns.cn/tags/Git/"/>
     
   </entry>
   
   <entry>
     <title>Feign读取apollo配置无效问题</title>
-    <link href="http://10buns.com/2019/11/12/Feign%E8%AF%BB%E5%8F%96apollo%E9%85%8D%E7%BD%AE%E6%97%A0%E6%95%88%E9%97%AE%E9%A2%98/"/>
-    <id>http://10buns.com/2019/11/12/Feign读取apollo配置无效问题/</id>
+    <link href="http://10buns.cn/2019/11/12/Feign%E8%AF%BB%E5%8F%96apollo%E9%85%8D%E7%BD%AE%E6%97%A0%E6%95%88%E9%97%AE%E9%A2%98/"/>
+    <id>http://10buns.cn/2019/11/12/Feign读取apollo配置无效问题/</id>
     <published>2019-11-12T06:28:19.000Z</published>
     <updated>2019-12-16T06:53:02.210Z</updated>
     
@@ -129,17 +129,17 @@
     
     </summary>
     
-      <category term="Spring" scheme="http://10buns.com/categories/Spring/"/>
+      <category term="Spring" scheme="http://10buns.cn/categories/Spring/"/>
     
     
-      <category term="Spring" scheme="http://10buns.com/tags/Spring/"/>
+      <category term="Spring" scheme="http://10buns.cn/tags/Spring/"/>
     
   </entry>
   
   <entry>
     <title>TestNG 测试 ABC</title>
-    <link href="http://10buns.com/2019/07/18/TestNG-%E6%B5%8B%E8%AF%95-ABC/"/>
-    <id>http://10buns.com/2019/07/18/TestNG-测试-ABC/</id>
+    <link href="http://10buns.cn/2019/07/18/TestNG-%E6%B5%8B%E8%AF%95-ABC/"/>
+    <id>http://10buns.cn/2019/07/18/TestNG-测试-ABC/</id>
     <published>2019-07-18T15:22:56.000Z</published>
     <updated>2019-12-16T06:53:15.851Z</updated>
     
@@ -154,17 +154,17 @@
     
     </summary>
     
-      <category term="测试" scheme="http://10buns.com/categories/%E6%B5%8B%E8%AF%95/"/>
+      <category term="测试" scheme="http://10buns.cn/categories/%E6%B5%8B%E8%AF%95/"/>
     
     
-      <category term="测试" scheme="http://10buns.com/tags/%E6%B5%8B%E8%AF%95/"/>
+      <category term="测试" scheme="http://10buns.cn/tags/%E6%B5%8B%E8%AF%95/"/>
     
   </entry>
   
   <entry>
     <title>【实践】Docker安装Hadoop集群</title>
-    <link href="http://10buns.com/2019/05/22/%E3%80%90%E5%AE%9E%E8%B7%B5%E3%80%91Docker%E5%AE%89%E8%A3%85Hadoop%E9%9B%86%E7%BE%A4/"/>
-    <id>http://10buns.com/2019/05/22/【实践】Docker安装Hadoop集群/</id>
+    <link href="http://10buns.cn/2019/05/22/%E3%80%90%E5%AE%9E%E8%B7%B5%E3%80%91Docker%E5%AE%89%E8%A3%85Hadoop%E9%9B%86%E7%BE%A4/"/>
+    <id>http://10buns.cn/2019/05/22/【实践】Docker安装Hadoop集群/</id>
     <published>2019-05-21T16:28:27.000Z</published>
     <updated>2019-11-28T03:26:43.169Z</updated>
     
@@ -183,14 +183,14 @@
     </summary>
     
     
-      <category term="Hadoop" scheme="http://10buns.com/tags/Hadoop/"/>
+      <category term="Hadoop" scheme="http://10buns.cn/tags/Hadoop/"/>
     
   </entry>
   
   <entry>
     <title>SpringBoot 处理 POST Json 传参枚举</title>
-    <link href="http://10buns.com/2019/05/09/SpringBoot-%E5%A4%84%E7%90%86-POST-Json-%E4%BC%A0%E5%8F%82%E6%9E%9A%E4%B8%BE/"/>
-    <id>http://10buns.com/2019/05/09/SpringBoot-处理-POST-Json-传参枚举/</id>
+    <link href="http://10buns.cn/2019/05/09/SpringBoot-%E5%A4%84%E7%90%86-POST-Json-%E4%BC%A0%E5%8F%82%E6%9E%9A%E4%B8%BE/"/>
+    <id>http://10buns.cn/2019/05/09/SpringBoot-处理-POST-Json-传参枚举/</id>
     <published>2019-05-09T15:13:03.000Z</published>
     <updated>2019-12-16T06:53:33.872Z</updated>
     
@@ -207,17 +207,17 @@
     
     </summary>
     
-      <category term="Spring" scheme="http://10buns.com/categories/Spring/"/>
+      <category term="Spring" scheme="http://10buns.cn/categories/Spring/"/>
     
     
-      <category term="Spring" scheme="http://10buns.com/tags/Spring/"/>
+      <category term="Spring" scheme="http://10buns.cn/tags/Spring/"/>
     
   </entry>
   
   <entry>
     <title>【转载】高可用分布式存储 etcd 的实现原理</title>
-    <link href="http://10buns.com/2019/03/07/%E3%80%90%E8%BD%AC%E8%BD%BD%E3%80%91%E9%AB%98%E5%8F%AF%E7%94%A8%E5%88%86%E5%B8%83%E5%BC%8F%E5%AD%98%E5%82%A8-etcd-%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/"/>
-    <id>http://10buns.com/2019/03/07/【转载】高可用分布式存储-etcd-的实现原理/</id>
+    <link href="http://10buns.cn/2019/03/07/%E3%80%90%E8%BD%AC%E8%BD%BD%E3%80%91%E9%AB%98%E5%8F%AF%E7%94%A8%E5%88%86%E5%B8%83%E5%BC%8F%E5%AD%98%E5%82%A8-etcd-%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/"/>
+    <id>http://10buns.cn/2019/03/07/【转载】高可用分布式存储-etcd-的实现原理/</id>
     <published>2019-03-07T15:49:29.000Z</published>
     <updated>2019-12-16T06:56:45.297Z</updated>
     
@@ -235,14 +235,14 @@
     </summary>
     
     
-      <category term="ETCD" scheme="http://10buns.com/tags/ETCD/"/>
+      <category term="ETCD" scheme="http://10buns.cn/tags/ETCD/"/>
     
   </entry>
   
   <entry>
     <title>再谈Java反射</title>
-    <link href="http://10buns.com/2019/03/03/%E5%86%8D%E8%B0%88Java%E5%8F%8D%E5%B0%84/"/>
-    <id>http://10buns.com/2019/03/03/再谈Java反射/</id>
+    <link href="http://10buns.cn/2019/03/03/%E5%86%8D%E8%B0%88Java%E5%8F%8D%E5%B0%84/"/>
+    <id>http://10buns.cn/2019/03/03/再谈Java反射/</id>
     <published>2019-03-03T07:44:10.000Z</published>
     <updated>2019-12-16T06:53:50.772Z</updated>
     
@@ -257,17 +257,17 @@
     
     </summary>
     
-      <category term="JAVA" scheme="http://10buns.com/categories/JAVA/"/>
+      <category term="JAVA" scheme="http://10buns.cn/categories/JAVA/"/>
     
     
-      <category term="JAVA" scheme="http://10buns.com/tags/JAVA/"/>
+      <category term="JAVA" scheme="http://10buns.cn/tags/JAVA/"/>
     
   </entry>
   
   <entry>
     <title>在MyBatis中如何优雅的处理枚举</title>
-    <link href="http://10buns.com/2019/02/24/%E5%9C%A8MyBatis%E4%B8%AD%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E5%A4%84%E7%90%86%E6%9E%9A%E4%B8%BE/"/>
-    <id>http://10buns.com/2019/02/24/在MyBatis中如何优雅的处理枚举/</id>
+    <link href="http://10buns.cn/2019/02/24/%E5%9C%A8MyBatis%E4%B8%AD%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E5%A4%84%E7%90%86%E6%9E%9A%E4%B8%BE/"/>
+    <id>http://10buns.cn/2019/02/24/在MyBatis中如何优雅的处理枚举/</id>
     <published>2019-02-24T14:42:14.000Z</published>
     <updated>2019-03-03T07:44:52.865Z</updated>
     
@@ -284,17 +284,17 @@
     
     </summary>
     
-      <category term="MyBatis" scheme="http://10buns.com/categories/MyBatis/"/>
+      <category term="MyBatis" scheme="http://10buns.cn/categories/MyBatis/"/>
     
     
-      <category term="MyBatis" scheme="http://10buns.com/tags/MyBatis/"/>
+      <category term="MyBatis" scheme="http://10buns.cn/tags/MyBatis/"/>
     
   </entry>
   
   <entry>
     <title>简述设计模式</title>
-    <link href="http://10buns.com/2019/02/13/%E7%AE%80%E8%BF%B0%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
-    <id>http://10buns.com/2019/02/13/简述设计模式/</id>
+    <link href="http://10buns.cn/2019/02/13/%E7%AE%80%E8%BF%B0%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    <id>http://10buns.cn/2019/02/13/简述设计模式/</id>
     <published>2019-02-13T09:38:28.000Z</published>
     <updated>2019-02-13T10:00:53.191Z</updated>
     
@@ -309,17 +309,17 @@
     
     </summary>
     
-      <category term="设计模式" scheme="http://10buns.com/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+      <category term="设计模式" scheme="http://10buns.cn/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
     
     
-      <category term="设计模式" scheme="http://10buns.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+      <category term="设计模式" scheme="http://10buns.cn/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
     
   </entry>
   
   <entry>
     <title>Java 运行时的内存划分</title>
-    <link href="http://10buns.com/2019/01/15/Java-%E8%BF%90%E8%A1%8C%E6%97%B6%E7%9A%84%E5%86%85%E5%AD%98%E5%88%92%E5%88%86/"/>
-    <id>http://10buns.com/2019/01/15/Java-运行时的内存划分/</id>
+    <link href="http://10buns.cn/2019/01/15/Java-%E8%BF%90%E8%A1%8C%E6%97%B6%E7%9A%84%E5%86%85%E5%AD%98%E5%88%92%E5%88%86/"/>
+    <id>http://10buns.cn/2019/01/15/Java-运行时的内存划分/</id>
     <published>2019-01-15T15:18:53.000Z</published>
     <updated>2019-12-16T06:55:55.601Z</updated>
     
@@ -337,14 +337,14 @@
     </summary>
     
     
-      <category term="JAVA" scheme="http://10buns.com/tags/JAVA/"/>
+      <category term="JAVA" scheme="http://10buns.cn/tags/JAVA/"/>
     
   </entry>
   
   <entry>
     <title>Docker 安装 Redis&amp;Mysql&amp;portainer</title>
-    <link href="http://10buns.com/2019/01/01/Docker-%E5%AE%89%E8%A3%85-Redis-Mysql-portainer/"/>
-    <id>http://10buns.com/2019/01/01/Docker-安装-Redis-Mysql-portainer/</id>
+    <link href="http://10buns.cn/2019/01/01/Docker-%E5%AE%89%E8%A3%85-Redis-Mysql-portainer/"/>
+    <id>http://10buns.cn/2019/01/01/Docker-安装-Redis-Mysql-portainer/</id>
     <published>2019-01-01T07:58:11.000Z</published>
     <updated>2019-02-21T09:07:45.212Z</updated>
     
@@ -359,17 +359,17 @@
     
     </summary>
     
-      <category term="Docker" scheme="http://10buns.com/categories/Docker/"/>
+      <category term="Docker" scheme="http://10buns.cn/categories/Docker/"/>
     
     
-      <category term="Docker" scheme="http://10buns.com/tags/Docker/"/>
+      <category term="Docker" scheme="http://10buns.cn/tags/Docker/"/>
     
   </entry>
   
   <entry>
     <title>Spring Security Oauth2 入门</title>
-    <link href="http://10buns.com/2018/12/15/Spring-Security-Oauth2-%E5%85%A5%E9%97%A8/"/>
-    <id>http://10buns.com/2018/12/15/Spring-Security-Oauth2-入门/</id>
+    <link href="http://10buns.cn/2018/12/15/Spring-Security-Oauth2-%E5%85%A5%E9%97%A8/"/>
+    <id>http://10buns.cn/2018/12/15/Spring-Security-Oauth2-入门/</id>
     <published>2018-12-15T03:35:29.000Z</published>
     <updated>2019-01-24T08:19:17.685Z</updated>
     
@@ -384,19 +384,19 @@
     
     </summary>
     
-      <category term="后端" scheme="http://10buns.com/categories/%E5%90%8E%E7%AB%AF/"/>
+      <category term="后端" scheme="http://10buns.cn/categories/%E5%90%8E%E7%AB%AF/"/>
     
     
-      <category term="Spring" scheme="http://10buns.com/tags/Spring/"/>
+      <category term="Spring" scheme="http://10buns.cn/tags/Spring/"/>
     
-      <category term="Oauth2" scheme="http://10buns.com/tags/Oauth2/"/>
+      <category term="Oauth2" scheme="http://10buns.cn/tags/Oauth2/"/>
     
   </entry>
   
   <entry>
     <title>主键与唯一索引区别</title>
-    <link href="http://10buns.com/2018/12/14/%E4%B8%BB%E9%94%AE%E4%B8%8E%E5%94%AF%E4%B8%80%E7%B4%A2%E5%BC%95%E5%8C%BA%E5%88%AB/"/>
-    <id>http://10buns.com/2018/12/14/主键与唯一索引区别/</id>
+    <link href="http://10buns.cn/2018/12/14/%E4%B8%BB%E9%94%AE%E4%B8%8E%E5%94%AF%E4%B8%80%E7%B4%A2%E5%BC%95%E5%8C%BA%E5%88%AB/"/>
+    <id>http://10buns.cn/2018/12/14/主键与唯一索引区别/</id>
     <published>2018-12-14T14:11:50.000Z</published>
     <updated>2019-12-16T06:56:07.740Z</updated>
     
@@ -417,14 +417,14 @@
     </summary>
     
     
-      <category term="MySQL" scheme="http://10buns.com/tags/MySQL/"/>
+      <category term="MySQL" scheme="http://10buns.cn/tags/MySQL/"/>
     
   </entry>
   
   <entry>
     <title>【Java笔记】死锁条件</title>
-    <link href="http://10buns.com/2018/11/29/%E3%80%90Java%E7%AC%94%E8%AE%B0%E3%80%91%E6%AD%BB%E9%94%81%E6%9D%A1%E4%BB%B6/"/>
-    <id>http://10buns.com/2018/11/29/【Java笔记】死锁条件/</id>
+    <link href="http://10buns.cn/2018/11/29/%E3%80%90Java%E7%AC%94%E8%AE%B0%E3%80%91%E6%AD%BB%E9%94%81%E6%9D%A1%E4%BB%B6/"/>
+    <id>http://10buns.cn/2018/11/29/【Java笔记】死锁条件/</id>
     <published>2018-11-29T15:57:17.000Z</published>
     <updated>2019-12-16T06:54:02.691Z</updated>
     
@@ -441,17 +441,17 @@
     
     </summary>
     
-      <category term="JAVA" scheme="http://10buns.com/categories/JAVA/"/>
+      <category term="JAVA" scheme="http://10buns.cn/categories/JAVA/"/>
     
     
-      <category term="JAVA" scheme="http://10buns.com/tags/JAVA/"/>
+      <category term="JAVA" scheme="http://10buns.cn/tags/JAVA/"/>
     
   </entry>
   
   <entry>
     <title>centos 安装 redis</title>
-    <link href="http://10buns.com/2018/10/05/centos-%E5%AE%89%E8%A3%85-redis/"/>
-    <id>http://10buns.com/2018/10/05/centos-安装-redis/</id>
+    <link href="http://10buns.cn/2018/10/05/centos-%E5%AE%89%E8%A3%85-redis/"/>
+    <id>http://10buns.cn/2018/10/05/centos-安装-redis/</id>
     <published>2018-10-05T02:35:04.000Z</published>
     <updated>2019-01-24T08:18:52.297Z</updated>
     
@@ -467,17 +467,17 @@
     
     </summary>
     
-      <category term="服务器" scheme="http://10buns.com/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+      <category term="服务器" scheme="http://10buns.cn/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
     
     
-      <category term="服务器" scheme="http://10buns.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+      <category term="服务器" scheme="http://10buns.cn/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
     
   </entry>
   
   <entry>
     <title>【 浅析 Spring WebFlux 】什么是响应式编程 ( 一 )</title>
-    <link href="http://10buns.com/2018/08/07/%E4%BB%80%E4%B9%88%E6%98%AF%E5%93%8D%E5%BA%94%E5%BC%8F%E7%BC%96%E7%A8%8B/"/>
-    <id>http://10buns.com/2018/08/07/什么是响应式编程/</id>
+    <link href="http://10buns.cn/2018/08/07/%E4%BB%80%E4%B9%88%E6%98%AF%E5%93%8D%E5%BA%94%E5%BC%8F%E7%BC%96%E7%A8%8B/"/>
+    <id>http://10buns.cn/2018/08/07/什么是响应式编程/</id>
     <published>2018-08-06T16:29:53.000Z</published>
     <updated>2019-12-16T06:55:18.546Z</updated>
     
@@ -494,19 +494,19 @@
     
     </summary>
     
-      <category term="后端" scheme="http://10buns.com/categories/%E5%90%8E%E7%AB%AF/"/>
+      <category term="后端" scheme="http://10buns.cn/categories/%E5%90%8E%E7%AB%AF/"/>
     
     
-      <category term="Spring" scheme="http://10buns.com/tags/Spring/"/>
+      <category term="Spring" scheme="http://10buns.cn/tags/Spring/"/>
     
-      <category term="响应式编程" scheme="http://10buns.com/tags/%E5%93%8D%E5%BA%94%E5%BC%8F%E7%BC%96%E7%A8%8B/"/>
+      <category term="响应式编程" scheme="http://10buns.cn/tags/%E5%93%8D%E5%BA%94%E5%BC%8F%E7%BC%96%E7%A8%8B/"/>
     
   </entry>
   
   <entry>
     <title>Spring事务配置</title>
-    <link href="http://10buns.com/2018/07/23/Spring%E4%BA%8B%E5%8A%A1%E9%85%8D%E7%BD%AE/"/>
-    <id>http://10buns.com/2018/07/23/Spring事务配置/</id>
+    <link href="http://10buns.cn/2018/07/23/Spring%E4%BA%8B%E5%8A%A1%E9%85%8D%E7%BD%AE/"/>
+    <id>http://10buns.cn/2018/07/23/Spring事务配置/</id>
     <published>2018-07-23T07:49:53.000Z</published>
     <updated>2019-01-24T08:19:26.656Z</updated>
     
@@ -523,10 +523,10 @@
     
     </summary>
     
-      <category term="后端" scheme="http://10buns.com/categories/%E5%90%8E%E7%AB%AF/"/>
+      <category term="后端" scheme="http://10buns.cn/categories/%E5%90%8E%E7%AB%AF/"/>
     
     
-      <category term="Spring" scheme="http://10buns.com/tags/Spring/"/>
+      <category term="Spring" scheme="http://10buns.cn/tags/Spring/"/>
     
   </entry>
   
