@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon.png?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="DDD,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="10buns" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="原文 https://juejin.im/post/5ef1d99a6fb9a0589364a69d通过一系列合理的代码结构、框架和约束，来降低 DDD 的实践门槛，提升代码质量、可测试性、安全性、健壮性  DDD 概念解释 Domain Primitive应用架构Repository模式 Domain Primitive（DP） 不从任何其他事物发展而来 初级的形成或生长的早期阶段  在 DD">
+<meta name="keywords" content="DDD">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ddd 学习笔记">
+<meta property="og:url" content="http://10buns.com/2020/07/07/ddd-学习笔记/index.html">
+<meta property="og:site_name" content="10buns">
+<meta property="og:description" content="原文 https://juejin.im/post/5ef1d99a6fb9a0589364a69d通过一系列合理的代码结构、框架和约束，来降低 DDD 的实践门槛，提升代码质量、可测试性、安全性、健壮性  DDD 概念解释 Domain Primitive应用架构Repository模式 Domain Primitive（DP） 不从任何其他事物发展而来 初级的形成或生长的早期阶段  在 DD">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-07-09T07:23:17.755Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ddd 学习笔记">
+<meta name="twitter:description" content="原文 https://juejin.im/post/5ef1d99a6fb9a0589364a69d通过一系列合理的代码结构、框架和约束，来降低 DDD 的实践门槛，提升代码质量、可测试性、安全性、健壮性  DDD 概念解释 Domain Primitive应用架构Repository模式 Domain Primitive（DP） 不从任何其他事物发展而来 初级的形成或生长的早期阶段  在 DD">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://10buns.com/2020/07/07/ddd-学习笔记/">
+
+
+
+
+
+  <title>ddd 学习笔记 | 10buns</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c873067502e43c16757b0901e5bb26c2";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">10buns</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://10buns.com/2020/07/07/ddd-学习笔记/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="10buns">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="10buns">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ddd 学习笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-07-07T17:41:34+08:00">
+                2020-07-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>原文 <a href="https://juejin.im/post/5ef1d99a6fb9a0589364a69d" target="_blank" rel="noopener">https://juejin.im/post/5ef1d99a6fb9a0589364a69d</a><br>通过一系列合理的代码结构、框架和约束，来降低 <code>DDD</code> 的实践门槛，提升代码质量、可测试性、安全性、健壮性</p>
+</blockquote>
+<p><a href="https://medium.com/@Alibaba_Cloud/an-alibaba-cloud-technical-experts-insight-into-domain-driven-design-domain-primitive-c569986cebcd" target="_blank" rel="noopener">DDD 概念解释</a></p>
+<p><a href="https://juejin.im/post/5ef1d99a6fb9a0589364a69d" target="_blank" rel="noopener">Domain Primitive</a><br><a href="https://juejin.im/post/5ef8429b6fb9a07ea019f843" target="_blank" rel="noopener">应用架构</a><br><a href="https://juejin.im/post/5efc4b40f265da22ad19e2f4?utm_source=gold_browser_extension" target="_blank" rel="noopener">Repository模式</a></p>
+<h2 id="Domain-Primitive（DP）"><a href="#Domain-Primitive（DP）" class="headerlink" title="Domain Primitive（DP）"></a>Domain Primitive（DP）</h2><ul>
+<li>不从任何其他事物发展而来</li>
+<li>初级的形成或生长的早期阶段</li>
+</ul>
+<p>在 DDD 里，DP 可以说是一切模型、方法、架构的基础，而就像 Integer、String 一样， DP 又是无所不在的。</p>
+<p><strong>DP 三原则:</strong></p>
+<ul>
+<li>让隐性的概念显性化</li>
+<li>让隐性的<code>上下文</code>显性化</li>
+<li>封装<code>多对象</code>行为</li>
+</ul>
+<p><strong>定义</strong></p>
+<ol>
+<li>DP 是一个传统意义上的 Value Object ，拥 Immutable (不可变) 的特性</li>
+<li>DP 是一个完整的概念整体，拥有精准定义</li>
+<li>DP 使用业务域中的原生语言</li>
+<li>DP 可以是业务域的最小组成部分、也可以构建复杂组合</li>
+</ol>
+<h4 id="Domain-Primitive-和-DDD-里-Value-Object-及-Data-Transfer-Object-DTO-的区别"><a href="#Domain-Primitive-和-DDD-里-Value-Object-及-Data-Transfer-Object-DTO-的区别" class="headerlink" title="Domain Primitive 和 DDD 里 Value Object 及 Data Transfer Object (DTO) 的区别"></a>Domain Primitive 和 DDD 里 Value Object 及 Data Transfer Object (DTO) 的区别</h4><table>
+<thead>
+<tr>
+<th></th>
+<th>DTO</th>
+<th>DP</th>
+<th>VO</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>功能</td>
+<td>数据传输</td>
+<td>代表业务域中的概念</td>
+<td>非 entity 的值对象</td>
+</tr>
+<tr>
+<td>数据的关联</td>
+<td>一堆数据集合，不一定有关联</td>
+<td>数据之间高相关性</td>
+<td>不一定有关联</td>
+</tr>
+<tr>
+<td>行为</td>
+<td>无行为</td>
+<td>丰富的行为和业务逻辑</td>
+<td>无行为</td>
+</tr>
+</tbody>
+</table>
+<h4 id="常见的-DP-的使用场景"><a href="#常见的-DP-的使用场景" class="headerlink" title="常见的 DP 的使用场景"></a>常见的 DP 的使用场景</h4><ol>
+<li>有格式限制的 String：比如Name，PhoneNumber，OrderNumber，ZipCode，Address等</li>
+<li>有限制的Integer：比如OrderId（&gt;0），Percentage（0-100%），Quantity（&gt;=0）等</li>
+<li>可枚举的 int ：比如 Status（一般不用Enum因为反序列化问题）</li>
+<li>Double 或 BigDecimal：一般用到的 Double 或 BigDecimal 都是有业务含义的，比如 Temperature、Money、Amount、ExchangeRate、Rating 等</li>
+<li>复杂的数据结构：比如 Map&lt;String, List&gt; 等，尽量能把 Map 的所有操作包装掉，仅暴露必要行为</li>
+</ol>
+<h3 id="项目重构引入-DP-流程"><a href="#项目重构引入-DP-流程" class="headerlink" title="项目重构引入 DP 流程"></a>项目重构引入 DP 流程</h3><blockquote>
+<p>以用户注册为例，通过<code>name</code>、<code>phone</code>、<code>address</code>三个元素进行用户注册</p>
+</blockquote>
+<p><strong>一、创建 Domain Primitive，收集所有 DP 行为</strong><br>通过分析发现，三个元素都是包含格式、长度等限制。</p>
+<ol>
+<li><code>name</code> 需要限制长度、非法字符、全英文等</li>
+<li><code>phone</code> 需要限制区号、长度、全数字</li>
+<li><code>address</code> 需要校验有效性及长度限制</li>
+</ol>
+<p><strong>二、替换数据校验和无状态逻辑</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> User <span class="title">register</span><span class="params">(String name, String phone, String address)</span></span></span><br><span class="line"><span class="function">        <span class="keyword">throws</span> ValidationException </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (name == <span class="keyword">null</span> || name.length() == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> ValidationException(<span class="string">"name"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (phone == <span class="keyword">null</span> || !isValidPhoneNumber(phone)) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> ValidationException(<span class="string">"phone"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    String areaCode = <span class="keyword">null</span>;</span><br><span class="line">    String[] areas = <span class="keyword">new</span> String[]&#123;<span class="string">"021"</span>, <span class="string">"0516"</span>&#125;;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; phone.length(); i++) &#123;</span><br><span class="line">        String prefix = phone.substring(<span class="number">0</span>, i);</span><br><span class="line">        <span class="keyword">if</span> (Arrays.asList(areas).contains(prefix)) &#123;</span><br><span class="line">            areaCode = prefix;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    SalesRep rep = salesRepRepo.findRep(areaCode);</span><br><span class="line">    <span class="comment">// 其他代码...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过替换DP后</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> User <span class="title">register</span><span class="params">(@notnull String name, String phone, String address)</span></span></span><br><span class="line"><span class="function">        <span class="keyword">throws</span> ValidationException </span>&#123;</span><br><span class="line">    </span><br><span class="line">    Name _name = <span class="keyword">new</span> Name(name);</span><br><span class="line">    PhoneNumber _phone = <span class="keyword">new</span> PhoneNumber(phone);</span><br><span class="line">    Address _address = <span class="keyword">new</span> Address(address);</span><br><span class="line">    </span><br><span class="line">    SalesRep rep = salesRepRepo.findRep(_phone.getAreaCode());</span><br><span class="line">    <span class="comment">// 其他代码...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>三、创建新接口</strong></p>
+<p>创建新接口，将DP的代码提升到接口参数层</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> User <span class="title">register</span><span class="params">(Name name, PhoneNumber phone, Address address)</span> </span>&#123;</span><br><span class="line">    SalesRep rep = salesRepRepo.findRep(phone.getAreaCode());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>四、修改外部调用</strong></p>
+<p>外部调用方需要修改调用链路，比如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service.register(<span class="string">"张三"</span>, <span class="string">"010-123456789"</span>, <span class="string">"地球村"</span>);</span><br></pre></td></tr></table></figure>
+<p>复制代码改为：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">service.register(<span class="keyword">new</span> Name(<span class="string">"张三"</span>), </span><br><span class="line">                 <span class="keyword">new</span> PhoneNumber(<span class="string">"010-123456789"</span>),</span><br><span class="line">                 <span class="keyword">new</span> Address(<span class="string">"地球村"</span>));</span><br></pre></td></tr></table></figure>
+<p>通过以上 4 步，就能让代码变得更加简洁、优雅、健壮、安全。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/DDD/" rel="tag"><i class="fa fa-tag"></i> DDD</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/05/13/maven-项目构建优化/" rel="next" title="maven 项目构建优化">
+                <i class="fa fa-chevron-left"></i> maven 项目构建优化
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/08/14/docker安装部署elk/" rel="prev" title="docker安装部署elk">
+                docker安装部署elk <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="10buns">
+            
+              <p class="site-author-name" itemprop="name">10buns</p>
+              <p class="site-description motion-element" itemprop="description">Study hard and make progress every day</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/10Buns" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.weibo.com/loverichy" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-Weibo"></i>Weibo</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Domain-Primitive（DP）"><span class="nav-number">1.</span> <span class="nav-text">Domain Primitive（DP）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Domain-Primitive-和-DDD-里-Value-Object-及-Data-Transfer-Object-DTO-的区别"><span class="nav-number">1.0.1.</span> <span class="nav-text">Domain Primitive 和 DDD 里 Value Object 及 Data Transfer Object (DTO) 的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常见的-DP-的使用场景"><span class="nav-number">1.0.2.</span> <span class="nav-text">常见的 DP 的使用场景</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#项目重构引入-DP-流程"><span class="nav-number">1.1.</span> <span class="nav-text">项目重构引入 DP 流程</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">10buns</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+<div class="powered-by">
+	<i class="fa fa-user-md"></i>
+	<span id="busuanzi_container_site_uv">
+		本站访客数:<span id="busuanzi_value_site_uv"></span>
+	</span>
+	<span class="post-meta-divider">|</span>
+	<span id="busuanzi_container_site_pv">
+		本站访问量<span id="busuanzi_value_site_pv"></span>
+	</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
