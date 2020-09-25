@@ -274,7 +274,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2018/07/18/SpringMVC请求处理流程/">
+    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2020/09/23/study-golang-1-安装与配置/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="10buns">
@@ -293,7 +293,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/18/SpringMVC请求处理流程/" itemprop="url">SpringMVC请求处理流程</a></h1>
+                <a class="post-title-link" href="/2020/09/23/study-golang-1-安装与配置/" itemprop="url">[study golang] 1.安装与配置</a></h1>
         
 
         <div class="post-meta">
@@ -305,8 +305,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-18T15:37:42+08:00">
-                2018-07-18
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-09-23T11:20:02+08:00">
+                2020-09-23
               </time>
             
 
@@ -315,28 +315,6 @@
             
           </span>
 
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/后端/" itemprop="url" rel="index">
-                    <span itemprop="name">后端</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -367,14 +345,13 @@
       
         
           
-          
-Spring MVC请求处理流程
-客户端发送请求 -&gt; DispatcherServlet ，前端控制器收到请求后自己不进行处理，而是委托给其他的解析器进行处理，作为统一访问点，进行全局的流程控制
-DispatcherServlet —&gt; HandlerMapping ，Handler
+          下载安装Mac OS 从 https://golang.org/dl/ 下载osx安装程序。双击启动安装。最终安装在/usr/local/go，并且还会在将 /usr/local/go/bin 添加到PATH环境变量中。
+在 terminal 中进行验证是否成功安装
+12$ go versiongo
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/07/18/SpringMVC请求处理流程/#more" rel="contents">
+            <a class="btn" href="/2020/09/23/study-golang-1-安装与配置/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -425,7 +402,7 @@ DispatcherServlet —&gt; HandlerMapping ，Handler
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2018/07/11/可能把Java注解讲的最清楚的一篇文章/">
+    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2020/08/14/docker安装部署elk/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="10buns">
@@ -444,7 +421,7 @@ DispatcherServlet —&gt; HandlerMapping ，Handler
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/11/可能把Java注解讲的最清楚的一篇文章/" itemprop="url">可能把Java注解讲的最清楚的一篇文章</a></h1>
+                <a class="post-title-link" href="/2020/08/14/docker安装部署elk/" itemprop="url">docker安装部署elk</a></h1>
         
 
         <div class="post-meta">
@@ -456,8 +433,8 @@ DispatcherServlet —&gt; HandlerMapping ，Handler
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-11T15:09:31+08:00">
-                2018-07-11
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-08-14T16:01:06+08:00">
+                2020-08-14
               </time>
             
 
@@ -466,28 +443,6 @@ DispatcherServlet —&gt; HandlerMapping ，Handler
             
           </span>
 
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/后端/" itemprop="url" rel="index">
-                    <span itemprop="name">后端</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -518,17 +473,14 @@ DispatcherServlet —&gt; HandlerMapping ，Handler
       
         
           
-          什么是注解
-在 Java 中 Annotation是一个很重要的知识点 , 中文翻译过来就是注解 、批注的意思 。
+          部署 ElasticSearch
+构建 elasticsearch
 
-第一次学习注解的时候 , 看了很多文章解释一堆 , 但是感觉太抽象 ,  对初学者不是很友好 。
-之前一直在思考怎么才能浅显易懂的介绍注解 ,  我就想啊想 。。。
-。。。
-终于想到
+12docker pull elasticsearch:7.8.0docker run -d -v /Users/summer/dev/docker_volume/es:/-data --name es --net staticn
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/07/11/可能把Java注解讲的最清楚的一篇文章/#more" rel="contents">
+            <a class="btn" href="/2020/08/14/docker安装部署elk/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -579,7 +531,7 @@ DispatcherServlet —&gt; HandlerMapping ，Handler
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2018/06/29/Swagger聚合微服务的API接口文档/">
+    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2020/07/07/ddd-学习笔记/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="10buns">
@@ -598,7 +550,7 @@ DispatcherServlet —&gt; HandlerMapping ，Handler
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/06/29/Swagger聚合微服务的API接口文档/" itemprop="url">Swagger聚合微服务的API接口文档</a></h1>
+                <a class="post-title-link" href="/2020/07/07/ddd-学习笔记/" itemprop="url">ddd 学习笔记</a></h1>
         
 
         <div class="post-meta">
@@ -610,8 +562,8 @@ DispatcherServlet —&gt; HandlerMapping ，Handler
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-29T16:55:07+08:00">
-                2018-06-29
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-07-07T17:41:34+08:00">
+                2020-07-07
               </time>
             
 
@@ -620,28 +572,6 @@ DispatcherServlet —&gt; HandlerMapping ，Handler
             
           </span>
 
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/后端/" itemprop="url" rel="index">
-                    <span itemprop="name">后端</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -673,13 +603,15 @@ DispatcherServlet —&gt; HandlerMapping ，Handler
         
           
           
-团队中大量使用 Swagger 为项目中的接口生成 API 文档，但这些 API 文档都分散在各个微服务中，是否可以通过聚合这些 API 文档在一起呢？在阅读 Swagger 源码后, 发现可以通过 SwaggerResourcesProvider 接口实现添加多个资源文档来源
+原文 https://juejin.im/post/5ef1d99a6fb9a0589364a69d通过一系列合理的代码结构、框架和约束，来降低 DDD 的实践门槛，提升代码质量、可测试性、安全性、健壮性
 
-0x01 基础环
+DDD 概念解释
+Domain Primitive应用架构Repository模式
+Dom
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/06/29/Swagger聚合微服务的API接口文档/#more" rel="contents">
+            <a class="btn" href="/2020/07/07/ddd-学习笔记/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -730,7 +662,7 @@ DispatcherServlet —&gt; HandlerMapping ，Handler
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2018/06/28/解决-ignored-tracked-with-git/">
+    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2020/05/13/maven-项目构建优化/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="10buns">
@@ -749,7 +681,7 @@ DispatcherServlet —&gt; HandlerMapping ，Handler
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/06/28/解决-ignored-tracked-with-git/" itemprop="url">解决 .ignored tracked with git</a></h1>
+                <a class="post-title-link" href="/2020/05/13/maven-项目构建优化/" itemprop="url">maven 项目构建优化</a></h1>
         
 
         <div class="post-meta">
@@ -761,8 +693,8 @@ DispatcherServlet —&gt; HandlerMapping ，Handler
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-28T15:07:02+08:00">
-                2018-06-28
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-13T11:34:00+08:00">
+                2020-05-13
               </time>
             
 
@@ -771,28 +703,6 @@ DispatcherServlet —&gt; HandlerMapping ，Handler
             
           </span>
 
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/工具/" itemprop="url" rel="index">
-                    <span itemprop="name">工具</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -823,12 +733,13 @@ DispatcherServlet —&gt; HandlerMapping ，Handler
       
         
           
-          1234$ git rm -r --cached . $ git add .$ git commit -am &quot;Remove ignored files&quot;$ git push -u origin master
+          Maven 是3.×以上版本，可以增加 -T 1C 参数，表示使用每个 CPU 核心跑一个工程
+1mvn clean package -T 1C -Dmaven.test.skip=true -Dmaven.compile.fork=true
 
           
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/06/28/解决-ignored-tracked-with-git/#more" rel="contents">
+            <a class="btn" href="/2020/05/13/maven-项目构建优化/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -879,7 +790,7 @@ DispatcherServlet —&gt; HandlerMapping ，Handler
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2018/06/26/Spring-MyBatis-动态数据源切换/">
+    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2019/11/28/Git-Commmit-mesagge-和-Change-log-使用/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="10buns">
@@ -898,7 +809,7 @@ DispatcherServlet —&gt; HandlerMapping ，Handler
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/06/26/Spring-MyBatis-动态数据源切换/" itemprop="url">Spring MyBatis 动态数据源切换</a></h1>
+                <a class="post-title-link" href="/2019/11/28/Git-Commmit-mesagge-和-Change-log-使用/" itemprop="url">Git Commmit mesagge 和 Change log 使用</a></h1>
         
 
         <div class="post-meta">
@@ -910,8 +821,8 @@ DispatcherServlet —&gt; HandlerMapping ，Handler
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-26T09:14:51+08:00">
-                2018-06-26
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-28T16:30:25+08:00">
+                2019-11-28
               </time>
             
 
@@ -933,8 +844,8 @@ DispatcherServlet —&gt; HandlerMapping ，Handler
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/后端/" itemprop="url" rel="index">
-                    <span itemprop="name">后端</span>
+                  <a href="/categories/Git/" itemprop="url" rel="index">
+                    <span itemprop="name">Git</span>
                   </a>
                 </span>
 
@@ -972,12 +883,18 @@ DispatcherServlet —&gt; HandlerMapping ，Handler
       
         
           
-          项目开发中有一个需求，需要根据商户类型决定是否使用独立的数据库，即要动态的切换数据源。系统技术栈是 spring boot + mybatis, 常见的思路是基于不同的数据库创建不同的 bean 。
-大体流程: 创建多个 Configuration 以及多个Bean,因为设为 @Configurat
+          一、规范的 Commit message 作用
+方便快速浏览 格式化 message , 每行头部信息即可知道 commit 意义
+ 1git log &lt;last tag&gt; HEAD --pretty=format:%s
+
+
+
+快速查找 查找本次修复的提交
+ 1git log &lt;l
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/06/26/Spring-MyBatis-动态数据源切换/#more" rel="contents">
+            <a class="btn" href="/2019/11/28/Git-Commmit-mesagge-和-Change-log-使用/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1028,7 +945,7 @@ DispatcherServlet —&gt; HandlerMapping ，Handler
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2018/06/20/微服务杂谈/">
+    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2019/11/12/Feign读取apollo配置无效问题/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="10buns">
@@ -1047,7 +964,7 @@ DispatcherServlet —&gt; HandlerMapping ，Handler
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/06/20/微服务杂谈/" itemprop="url">微服务杂谈</a></h1>
+                <a class="post-title-link" href="/2019/11/12/Feign读取apollo配置无效问题/" itemprop="url">Feign读取apollo配置无效问题</a></h1>
         
 
         <div class="post-meta">
@@ -1059,8 +976,8 @@ DispatcherServlet —&gt; HandlerMapping ，Handler
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-20T14:18:29+08:00">
-                2018-06-20
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-12T14:28:19+08:00">
+                2019-11-12
               </time>
             
 
@@ -1082,8 +999,8 @@ DispatcherServlet —&gt; HandlerMapping ，Handler
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/后端/" itemprop="url" rel="index">
-                    <span itemprop="name">后端</span>
+                  <a href="/categories/Spring/" itemprop="url" rel="index">
+                    <span itemprop="name">Spring</span>
                   </a>
                 </span>
 
@@ -1121,19 +1038,13 @@ DispatcherServlet —&gt; HandlerMapping ，Handler
       
         
           
-          微服务与分布式
-微服务目前这么火，很多的文章拿它和分布式系统比较，但其实之间还是有很多的相同点
-
-
-相同点
-都需要来实现动态的服务注册发现机制
-都需要考虑分布式下面的事务一致性，CAP原则下两段式提交不能保证性能，还需要考虑事务补偿机制
-如何保证消息可靠性
-都需要统一的网关来聚合、编排接口，实现统一
+          问题描述接手一个项目，需要做服务器迁移，之前配置的 feign client url 为IP，配置迁移 apollo 读取失败
+原因分析项目启动时候，会扫描@FeignClient注解，此时会注入url的值。但apollo配置是在@FeignClient扫描后才加载。
+问题原因找到，解决方法其实也挺
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/06/20/微服务杂谈/#more" rel="contents">
+            <a class="btn" href="/2019/11/12/Feign读取apollo配置无效问题/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1184,7 +1095,7 @@ DispatcherServlet —&gt; HandlerMapping ，Handler
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2018/05/03/java-多线程-一/">
+    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2019/07/18/TestNG-测试-ABC/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="10buns">
@@ -1203,7 +1114,7 @@ DispatcherServlet —&gt; HandlerMapping ，Handler
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/03/java-多线程-一/" itemprop="url">java 多线程(一)</a></h1>
+                <a class="post-title-link" href="/2019/07/18/TestNG-测试-ABC/" itemprop="url">TestNG 测试 ABC</a></h1>
         
 
         <div class="post-meta">
@@ -1215,8 +1126,8 @@ DispatcherServlet —&gt; HandlerMapping ，Handler
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-03T22:57:16+08:00">
-                2018-05-03
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-18T23:22:56+08:00">
+                2019-07-18
               </time>
             
 
@@ -1238,8 +1149,8 @@ DispatcherServlet —&gt; HandlerMapping ，Handler
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/后端/" itemprop="url" rel="index">
-                    <span itemprop="name">后端</span>
+                  <a href="/categories/测试/" itemprop="url" rel="index">
+                    <span itemprop="name">测试</span>
                   </a>
                 </span>
 
@@ -1277,13 +1188,13 @@ DispatcherServlet —&gt; HandlerMapping ，Handler
       
         
           
-          1. 什么是线程线程是操作系统能够执行运算调度的最小单位，被包含在进程中，是进程的实际执行单位。
-2. 什么是线程安全和不安全线程安不安全主要区别就是是否加锁
-线程安全问题都是由全局变量及静态变量引起的。 若每个线程中对全局变量、静态变量只有读操作，而无写操作，一般来说，这个全局变量是线程安全的；若
+          前言单元测试不仅可以检查代码中是否存在缺陷漏洞，也可以降低bug修复、需求变更等引发的代码风险。良好的单元测试对产品开发维护和技术提升有着积极而重大的意义。
+如何开始单元测试1.1 开发环境IDEA 启用 TestNG 插件
+1.2 maven 依赖123456&lt;dependency&gt; 
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/05/03/java-多线程-一/#more" rel="contents">
+            <a class="btn" href="/2019/07/18/TestNG-测试-ABC/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1334,7 +1245,7 @@ DispatcherServlet —&gt; HandlerMapping ，Handler
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2018/03/19/Proxy 代理模式/">
+    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2019/05/22/【实践】Docker安装Hadoop集群/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="10buns">
@@ -1353,7 +1264,7 @@ DispatcherServlet —&gt; HandlerMapping ，Handler
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/03/19/Proxy 代理模式/" itemprop="url">Proxy 代理模式</a></h1>
+                <a class="post-title-link" href="/2019/05/22/【实践】Docker安装Hadoop集群/" itemprop="url">【实践】Docker安装Hadoop集群</a></h1>
         
 
         <div class="post-meta">
@@ -1365,8 +1276,8 @@ DispatcherServlet —&gt; HandlerMapping ，Handler
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-19T00:09:16+08:00">
-                2018-03-19
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-22T00:28:27+08:00">
+                2019-05-22
               </time>
             
 
@@ -1375,28 +1286,6 @@ DispatcherServlet —&gt; HandlerMapping ，Handler
             
           </span>
 
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/设计模式/" itemprop="url" rel="index">
-                    <span itemprop="name">设计模式</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -1428,12 +1317,13 @@ DispatcherServlet —&gt; HandlerMapping ，Handler
         
           
           
-代理模式给某一个对象提供一个代理对象，并由代理对象控制对原对象的引用。所谓代理，就是一个人或者一个机构代表另一个人或者另一个机构采取行动。在一些情况下，一个客户不想或者不能够直接引用一个对象，而代理对象可以在客户端和目标对象之间起到中介的作用。
-代理模式和适配器模式的区别：适配器模式的用意是要改变
+之前断断续续看了两个多月的书，先把基础理论熟悉了解。发现大数据可以概括几类：精通基础组件，精通数仓设计/业务分析，精通高级分析。目标能精通基础组件，围绕这一块做一些解决实际问题的工具。
+
+安装 CentOS1234$ docker search centos$ docker pull centos
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/03/19/Proxy 代理模式/#more" rel="contents">
+            <a class="btn" href="/2019/05/22/【实践】Docker安装Hadoop集群/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1484,7 +1374,7 @@ DispatcherServlet —&gt; HandlerMapping ，Handler
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2018/02/15/Spring-常见问题/">
+    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2019/05/09/SpringBoot-处理-POST-Json-传参枚举/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="10buns">
@@ -1503,7 +1393,7 @@ DispatcherServlet —&gt; HandlerMapping ，Handler
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/02/15/Spring-常见问题/" itemprop="url">Spring 常见问题</a></h1>
+                <a class="post-title-link" href="/2019/05/09/SpringBoot-处理-POST-Json-传参枚举/" itemprop="url">SpringBoot 处理 POST Json 传参枚举</a></h1>
         
 
         <div class="post-meta">
@@ -1515,8 +1405,8 @@ DispatcherServlet —&gt; HandlerMapping ，Handler
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-15T00:15:22+08:00">
-                2018-02-15
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-09T23:13:03+08:00">
+                2019-05-09
               </time>
             
 
@@ -1538,8 +1428,8 @@ DispatcherServlet —&gt; HandlerMapping ，Handler
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/后端/" itemprop="url" rel="index">
-                    <span itemprop="name">后端</span>
+                  <a href="/categories/Spring/" itemprop="url" rel="index">
+                    <span itemprop="name">Spring</span>
                   </a>
                 </span>
 
@@ -1577,13 +1467,13 @@ DispatcherServlet —&gt; HandlerMapping ，Handler
       
         
           
-          IOC和DI是什么控制反转是就是应用本身不负责依赖对象的创建和维护,依赖对象的创建及维护是由外部容器负责的,这样控制权就有应用转移到了外部容器,控制权的转移就是控制反转。
-依赖注入是指:在程序运行期间,由外部容器动态地将依赖对象注入到组件中 如：一般，通过构造函数注入或者setter注入。
-Spri
+          在 Spring 框架中对枚举类型的序列化/反序列化是有限制的。
+假设如下面这样在某些情况下就不能正常工作:
+123456789public enum PayChannelEnum implements BaseEnum&lt;Integer&gt; &#123;    ALIPAY(20),   
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/02/15/Spring-常见问题/#more" rel="contents">
+            <a class="btn" href="/2019/05/09/SpringBoot-处理-POST-Json-传参枚举/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1634,7 +1524,7 @@ Spri
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2018/02/08/CentOS-安装-JDK/">
+    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2019/03/07/【转载】高可用分布式存储-etcd-的实现原理/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="10buns">
@@ -1653,7 +1543,7 @@ Spri
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/02/08/CentOS-安装-JDK/" itemprop="url">CentOS 安装 JDK</a></h1>
+                <a class="post-title-link" href="/2019/03/07/【转载】高可用分布式存储-etcd-的实现原理/" itemprop="url">【转载】高可用分布式存储 etcd 的实现原理</a></h1>
         
 
         <div class="post-meta">
@@ -1665,8 +1555,8 @@ Spri
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-08T22:17:31+08:00">
-                2018-02-08
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-07T23:49:29+08:00">
+                2019-03-07
               </time>
             
 
@@ -1675,28 +1565,6 @@ Spri
             
           </span>
 
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/服务器/" itemprop="url" rel="index">
-                    <span itemprop="name">服务器</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -1728,17 +1596,13 @@ Spri
         
           
           
-上传 jdk 压缩包
+原文链接：高可用分布式存储 etcd 的实现原理 · 面向信仰编程
 
-1$ scp ~/Downloads/jdk-8u191-linux-x64.tar.gz root@ip:/var/local
-
-服务器操作
-
-1234$ tar -zxvf jdk-8u152-linux-x64.tar.gz # 在/etc/profile.d/路径下
+etcd 是一个定可信赖的分布式键值存储服务，它能够为整个分布式集群存储一些关键数据，协助分布式集群的正常运转。这篇文章将会介绍 etcd 的实现原理，其中包括 Raft 协议、存储两大模块，在最后我们也会简单介绍 etcd 一
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/02/08/CentOS-安装-JDK/#more" rel="contents">
+            <a class="btn" href="/2019/03/07/【转载】高可用分布式存储-etcd-的实现原理/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1780,7 +1644,7 @@ Spri
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1828,7 +1692,7 @@ Spri
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-count">64</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1850,7 +1714,7 @@ Spri
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

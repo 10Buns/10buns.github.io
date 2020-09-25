@@ -274,7 +274,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2020/08/14/docker安装部署elk/">
+    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2020/09/25/study-golang-21-mutex/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="10buns">
@@ -293,7 +293,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/08/14/docker安装部署elk/" itemprop="url">docker安装部署elk</a></h1>
+                <a class="post-title-link" href="/2020/09/25/study-golang-21-mutex/" itemprop="url">[study golang] 21.mutex</a></h1>
         
 
         <div class="post-meta">
@@ -305,8 +305,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-08-14T16:01:06+08:00">
-                2020-08-14
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-09-25T16:34:46+08:00">
+                2020-09-25
               </time>
             
 
@@ -345,14 +345,12 @@
       
         
           
-          部署 ElasticSearch
-构建 elasticsearch
-
-12docker pull elasticsearch:7.8.0docker run -d -v /Users/summer/dev/docker_volume/es:/-data --name es --net staticn
+          MutexMutex 用于提供一种加锁机制（Locking Mechanism），可确保在某时刻只有一个协程在临界区运行，以防止出现竞态条件。
+Mutex 可以在 sync 包内找到。Mutex 定义了两个方法：Lock 和 Unlock。所有在 Lock 和 Unlock 之间的代码，都只能由一个
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2020/08/14/docker安装部署elk/#more" rel="contents">
+            <a class="btn" href="/2020/09/25/study-golang-21-mutex/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -403,7 +401,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2020/07/07/ddd-学习笔记/">
+    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2020/09/25/study-golang-20-select/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="10buns">
@@ -422,7 +420,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/07/07/ddd-学习笔记/" itemprop="url">ddd 学习笔记</a></h1>
+                <a class="post-title-link" href="/2020/09/25/study-golang-20-select/" itemprop="url">[study golang] 20.select</a></h1>
         
 
         <div class="post-meta">
@@ -434,8 +432,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-07-07T17:41:34+08:00">
-                2020-07-07
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-09-25T16:34:35+08:00">
+                2020-09-25
               </time>
             
 
@@ -475,15 +473,10 @@
         
           
           
-原文 https://juejin.im/post/5ef1d99a6fb9a0589364a69d通过一系列合理的代码结构、框架和约束，来降低 DDD 的实践门槛，提升代码质量、可测试性、安全性、健壮性
-
-DDD 概念解释
-Domain Primitive应用架构Repository模式
-Dom
-          ...
+          
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2020/07/07/ddd-学习笔记/#more" rel="contents">
+            <a class="btn" href="/2020/09/25/study-golang-20-select/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -534,7 +527,7 @@ Dom
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2020/05/13/maven-项目构建优化/">
+    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2020/09/24/study-golang-19-并发/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="10buns">
@@ -553,7 +546,7 @@ Dom
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/05/13/maven-项目构建优化/" itemprop="url">maven 项目构建优化</a></h1>
+                <a class="post-title-link" href="/2020/09/24/study-golang-19-并发/" itemprop="url">[study golang] 19.并发</a></h1>
         
 
         <div class="post-meta">
@@ -565,8 +558,8 @@ Dom
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-13T11:34:00+08:00">
-                2020-05-13
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-09-24T14:38:13+08:00">
+                2020-09-24
               </time>
             
 
@@ -605,13 +598,12 @@ Dom
       
         
           
-          Maven 是3.×以上版本，可以增加 -T 1C 参数，表示使用每个 CPU 核心跑一个工程
-1mvn clean package -T 1C -Dmaven.test.skip=true -Dmaven.compile.fork=true
-
-          
+          并发是指立即处理多个任务的能力。并行是指同时处理多个任务。Go 编程语言原生支持并发。Go 使用 Go 协程（Goroutine） 和信道（Channel）来处理并发。
+Go 协程是什么？Go 协程是与其他函数或方法一起并发运行的函数或方法。Go 协程可以看作是轻量级线程。与线程相比，创建一个 Go
+          ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2020/05/13/maven-项目构建优化/#more" rel="contents">
+            <a class="btn" href="/2020/09/24/study-golang-19-并发/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -662,7 +654,7 @@ Dom
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2019/11/28/Git-Commmit-mesagge-和-Change-log-使用/">
+    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2020/09/24/study-golang-18-接口/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="10buns">
@@ -681,7 +673,7 @@ Dom
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/11/28/Git-Commmit-mesagge-和-Change-log-使用/" itemprop="url">Git Commmit mesagge 和 Change log 使用</a></h1>
+                <a class="post-title-link" href="/2020/09/24/study-golang-18-接口/" itemprop="url">[study golang] 18.接口</a></h1>
         
 
         <div class="post-meta">
@@ -693,8 +685,8 @@ Dom
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-28T16:30:25+08:00">
-                2019-11-28
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-09-24T14:20:39+08:00">
+                2020-09-24
               </time>
             
 
@@ -703,28 +695,6 @@ Dom
             
           </span>
 
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Git/" itemprop="url" rel="index">
-                    <span itemprop="name">Git</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -755,18 +725,12 @@ Dom
       
         
           
-          一、规范的 Commit message 作用
-方便快速浏览 格式化 message , 每行头部信息即可知道 commit 意义
- 1git log &lt;last tag&gt; HEAD --pretty=format:%s
-
-
-
-快速查找 查找本次修复的提交
- 1git log &lt;l
+          在面向对象的领域里，接口一般这样定义：接口定义一个对象的行为。接口只指定了对象应该做什么，至于如何实现这个行为（即实现细节），则由对象本身去确定。
+在 Go 语言中，接口就是方法签名（Method Signature）的集合。当一个类型定义了接口中的所有方法，我们称它实现了该接口。这与面向对象编程（
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/11/28/Git-Commmit-mesagge-和-Change-log-使用/#more" rel="contents">
+            <a class="btn" href="/2020/09/24/study-golang-18-接口/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -817,7 +781,7 @@ Dom
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2019/11/12/Feign读取apollo配置无效问题/">
+    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2020/09/24/study-golang-17-方法/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="10buns">
@@ -836,7 +800,7 @@ Dom
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/11/12/Feign读取apollo配置无效问题/" itemprop="url">Feign读取apollo配置无效问题</a></h1>
+                <a class="post-title-link" href="/2020/09/24/study-golang-17-方法/" itemprop="url">[study golang] 17.方法</a></h1>
         
 
         <div class="post-meta">
@@ -848,8 +812,8 @@ Dom
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-12T14:28:19+08:00">
-                2019-11-12
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-09-24T13:58:28+08:00">
+                2020-09-24
               </time>
             
 
@@ -858,28 +822,6 @@ Dom
             
           </span>
 
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Spring/" itemprop="url" rel="index">
-                    <span itemprop="name">Spring</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -910,13 +852,14 @@ Dom
       
         
           
-          问题描述接手一个项目，需要做服务器迁移，之前配置的 feign client url 为IP，配置迁移 apollo 读取失败
-原因分析项目启动时候，会扫描@FeignClient注解，此时会注入url的值。但apollo配置是在@FeignClient扫描后才加载。
-问题原因找到，解决方法其实也挺
+          方法其实就是一个函数，在 func 这个关键字和方法名中间加入了一个特殊的接收器类型。接收器可以是结构体类型或者是非结构体类型。接收器是可以在方法的内部访问的。
+1func (t Type) methodName(parameter list) &#123;&#125;
+用例如下:
+12345678
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/11/12/Feign读取apollo配置无效问题/#more" rel="contents">
+            <a class="btn" href="/2020/09/24/study-golang-17-方法/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -967,7 +910,7 @@ Dom
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2019/07/18/TestNG-测试-ABC/">
+    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2020/09/24/study-golang-16-结构体/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="10buns">
@@ -986,7 +929,7 @@ Dom
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/07/18/TestNG-测试-ABC/" itemprop="url">TestNG 测试 ABC</a></h1>
+                <a class="post-title-link" href="/2020/09/24/study-golang-16-结构体/" itemprop="url">[study golang] 16.结构体</a></h1>
         
 
         <div class="post-meta">
@@ -998,8 +941,8 @@ Dom
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-18T23:22:56+08:00">
-                2019-07-18
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-09-24T10:56:03+08:00">
+                2020-09-24
               </time>
             
 
@@ -1008,28 +951,6 @@ Dom
             
           </span>
 
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/测试/" itemprop="url" rel="index">
-                    <span itemprop="name">测试</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -1060,13 +981,13 @@ Dom
       
         
           
-          前言单元测试不仅可以检查代码中是否存在缺陷漏洞，也可以降低bug修复、需求变更等引发的代码风险。良好的单元测试对产品开发维护和技术提升有着积极而重大的意义。
-如何开始单元测试1.1 开发环境IDEA 启用 TestNG 插件
-1.2 maven 依赖123456&lt;dependency&gt; 
+          结构体是用户定义的类型，表示若干个字段（Field）的集合。有时应该把数据整合在一起，而不是让这些数据没有联系。这种情况下可以使用结构体。
+结构体是值类型。如果它的每一个字段都是可比较的，则该结构体也是可比较的。如果两个结构体变量的对应字段相等，则这两个变量也是相等的。
+12345type Empl
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/07/18/TestNG-测试-ABC/#more" rel="contents">
+            <a class="btn" href="/2020/09/24/study-golang-16-结构体/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1117,7 +1038,7 @@ Dom
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2019/05/22/【实践】Docker安装Hadoop集群/">
+    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2020/09/24/study-golang-15-指针/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="10buns">
@@ -1136,7 +1057,7 @@ Dom
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/22/【实践】Docker安装Hadoop集群/" itemprop="url">【实践】Docker安装Hadoop集群</a></h1>
+                <a class="post-title-link" href="/2020/09/24/study-golang-15-指针/" itemprop="url">[study golang] 15.指针</a></h1>
         
 
         <div class="post-meta">
@@ -1148,8 +1069,8 @@ Dom
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-22T00:28:27+08:00">
-                2019-05-22
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-09-24T10:41:26+08:00">
+                2020-09-24
               </time>
             
 
@@ -1188,14 +1109,12 @@ Dom
       
         
           
-          
-之前断断续续看了两个多月的书，先把基础理论熟悉了解。发现大数据可以概括几类：精通基础组件，精通数仓设计/业务分析，精通高级分析。目标能精通基础组件，围绕这一块做一些解决实际问题的工具。
-
-安装 CentOS1234$ docker search centos$ docker pull centos
+          指针是一种存储变量内存地址（Memory Address）的变量。其变量的类型为 *T，该指针指向一个 T 类型的变量。&amp; 操作符用于获取变量的地址
+1234b := 100var a *int = &amp;bfmt.Printf(&quot;type of a is %T&quot;, 
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/05/22/【实践】Docker安装Hadoop集群/#more" rel="contents">
+            <a class="btn" href="/2020/09/24/study-golang-15-指针/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1246,7 +1165,7 @@ Dom
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2019/05/09/SpringBoot-处理-POST-Json-传参枚举/">
+    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2020/09/24/study-golang-14-字符串/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="10buns">
@@ -1265,7 +1184,7 @@ Dom
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/09/SpringBoot-处理-POST-Json-传参枚举/" itemprop="url">SpringBoot 处理 POST Json 传参枚举</a></h1>
+                <a class="post-title-link" href="/2020/09/24/study-golang-14-字符串/" itemprop="url">[study golang] 14.字符串</a></h1>
         
 
         <div class="post-meta">
@@ -1277,8 +1196,8 @@ Dom
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-09T23:13:03+08:00">
-                2019-05-09
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-09-24T10:19:49+08:00">
+                2020-09-24
               </time>
             
 
@@ -1287,28 +1206,6 @@ Dom
             
           </span>
 
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Spring/" itemprop="url" rel="index">
-                    <span itemprop="name">Spring</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -1339,13 +1236,12 @@ Dom
       
         
           
-          在 Spring 框架中对枚举类型的序列化/反序列化是有限制的。
-假设如下面这样在某些情况下就不能正常工作:
-123456789public enum PayChannelEnum implements BaseEnum&lt;Integer&gt; &#123;    ALIPAY(20),   
+          Go 语言中的字符串是一个字节切片。
+12345678910111213141516171819func printBytes(s string)&#123; //打印字节	for i:=0; i &lt; len(s); i++&#123;		fmt.Printf(&quot;%x &quot;,
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/05/09/SpringBoot-处理-POST-Json-传参枚举/#more" rel="contents">
+            <a class="btn" href="/2020/09/24/study-golang-14-字符串/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1396,7 +1292,7 @@ Dom
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2019/03/07/【转载】高可用分布式存储-etcd-的实现原理/">
+    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2020/09/24/study-golang-13-Maps/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="10buns">
@@ -1415,7 +1311,7 @@ Dom
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/03/07/【转载】高可用分布式存储-etcd-的实现原理/" itemprop="url">【转载】高可用分布式存储 etcd 的实现原理</a></h1>
+                <a class="post-title-link" href="/2020/09/24/study-golang-13-Maps/" itemprop="url">[study golang] 13.Maps</a></h1>
         
 
         <div class="post-meta">
@@ -1427,8 +1323,8 @@ Dom
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-07T23:49:29+08:00">
-                2019-03-07
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-09-24T10:08:14+08:00">
+                2020-09-24
               </time>
             
 
@@ -1467,14 +1363,13 @@ Dom
       
         
           
-          
-原文链接：高可用分布式存储 etcd 的实现原理 · 面向信仰编程
-
-etcd 是一个定可信赖的分布式键值存储服务，它能够为整个分布式集群存储一些关键数据，协助分布式集群的正常运转。这篇文章将会介绍 etcd 的实现原理，其中包括 Raft 协议、存储两大模块，在最后我们也会简单介绍 etcd 一
+          map 是在 Go 中将值（value）与键（key）关联的内置类型。通过相应的键可以获取到值。
+通过向 make 函数传入键和值的类型，可以创建 map。make(map[type of key]type of value) 是创建 map 的语法。
+12345persons := make(ma
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/03/07/【转载】高可用分布式存储-etcd-的实现原理/#more" rel="contents">
+            <a class="btn" href="/2020/09/24/study-golang-13-Maps/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1525,7 +1420,7 @@ etcd 是一个定可信赖的分布式键值存储服务，它能够为整个分
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2019/03/03/再谈Java反射/">
+    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2020/09/24/study-golang-12-可变参数函数/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="10buns">
@@ -1544,7 +1439,7 @@ etcd 是一个定可信赖的分布式键值存储服务，它能够为整个分
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/03/03/再谈Java反射/" itemprop="url">再谈Java反射</a></h1>
+                <a class="post-title-link" href="/2020/09/24/study-golang-12-可变参数函数/" itemprop="url">[study golang] 12.可变参数函数</a></h1>
         
 
         <div class="post-meta">
@@ -1556,8 +1451,8 @@ etcd 是一个定可信赖的分布式键值存储服务，它能够为整个分
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-03T15:44:10+08:00">
-                2019-03-03
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-09-24T10:06:03+08:00">
+                2020-09-24
               </time>
             
 
@@ -1566,28 +1461,6 @@ etcd 是一个定可信赖的分布式键值存储服务，它能够为整个分
             
           </span>
 
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/JAVA/" itemprop="url" rel="index">
-                    <span itemprop="name">JAVA</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -1618,12 +1491,13 @@ etcd 是一个定可信赖的分布式键值存储服务，它能够为整个分
       
         
           
-          反射定义反射 (Reflection) 允许运行中的Java程序获取自身的信息，并可以操作类或对象的内部属性。一般对象的类型都是在编译期已确定下来。但通过反射机制我们就可以创建对象，即使对象的类型在编译期是未知的。
-反射的核心是JVM在运行时才动态加载类或调用方法、访问属性，它不需要事先（写代码的时
-          ...
+          可变参数函数的工作原理是把可变参数转换为一个新的切片。
+有一个可以直接将切片传入可变参数函数的语法糖，可以在在切片后加上 ...后缀。如果这样做，切片将直接传入函数，不再创建新的切片。
+
+          
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/03/03/再谈Java反射/#more" rel="contents">
+            <a class="btn" href="/2020/09/24/study-golang-12-可变参数函数/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1665,7 +1539,7 @@ etcd 是一个定可信赖的分布式键值存储服务，它能够为整个分
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1713,7 +1587,7 @@ etcd 是一个定可信赖的分布式键值存储服务，它能够为整个分
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-count">64</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1735,7 +1609,7 @@ etcd 是一个定可信赖的分布式键值存储服务，它能够为整个分
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

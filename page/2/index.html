@@ -274,7 +274,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2019/02/24/在MyBatis中如何优雅的处理枚举/">
+    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2020/09/23/study-golang-11-数组和切片/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="10buns">
@@ -293,7 +293,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/02/24/在MyBatis中如何优雅的处理枚举/" itemprop="url">在MyBatis中如何优雅的处理枚举</a></h1>
+                <a class="post-title-link" href="/2020/09/23/study-golang-11-数组和切片/" itemprop="url">[study golang] 11.数组和切片</a></h1>
         
 
         <div class="post-meta">
@@ -305,8 +305,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-24T22:42:14+08:00">
-                2019-02-24
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-09-23T18:11:04+08:00">
+                2020-09-23
               </time>
             
 
@@ -315,28 +315,6 @@
             
           </span>
 
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/MyBatis/" itemprop="url" rel="index">
-                    <span itemprop="name">MyBatis</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -367,13 +345,13 @@
       
         
           
-          在实际开发中，我们经常需要用数字来表示某种类型、状态等，比如性别、用户等级、交易状态等。
-假设有如下的枚举:
-123456789101112131415161718192021public enum UserLevelEnum implements IUserLevelEnum &#123;    
+          数组数组是同一类型元素的集合。例如，整数集合 1~10 形成一个数组。Go 语言中不允许混合不同类型的元素，例如包含字符串和整数的数组。
+一个数组的表示形式为 [n]T。n 表示数组中元素的数量，T 代表每个元素的类型。元素的数量 n 也是该类型的一部分
+1234567var a [5]inta[0
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/02/24/在MyBatis中如何优雅的处理枚举/#more" rel="contents">
+            <a class="btn" href="/2020/09/23/study-golang-11-数组和切片/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -424,7 +402,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2019/02/13/简述设计模式/">
+    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2020/09/23/study-golang-10-switch语句/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="10buns">
@@ -443,7 +421,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/02/13/简述设计模式/" itemprop="url">简述设计模式</a></h1>
+                <a class="post-title-link" href="/2020/09/23/study-golang-10-switch语句/" itemprop="url">[study golang] 10.switch语句</a></h1>
         
 
         <div class="post-meta">
@@ -455,8 +433,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-13T17:38:28+08:00">
-                2019-02-13
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-09-23T17:52:45+08:00">
+                2020-09-23
               </time>
             
 
@@ -465,28 +443,6 @@
             
           </span>
 
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/设计模式/" itemprop="url" rel="index">
-                    <span itemprop="name">设计模式</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -517,15 +473,12 @@
       
         
           
-          设计模式是什么设计模式（Design pattern）代表最佳实践，是在软件开发过程中面临的一般问题的解决方案，目的是为了重用代码，同时也能保证代码的可靠性。
-设计模式类型
-创建型 
-
-提供一种在创建对象的同时隐藏创建逻辑的方式，而不是使用 new 运算符直接实例化对象。这使得程序在判断针对某个给定
+          switch 是一个条件语句，用于将表达式的值与可能匹配的选项列表进行比较，并根据匹配情况执行相应的代码块。它可以被认为是替代多个 if else 子句的常用方式。
+12345678910111213func testSwitch()&#123;	age := 18	switch age &#123
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/02/13/简述设计模式/#more" rel="contents">
+            <a class="btn" href="/2020/09/23/study-golang-10-switch语句/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -576,7 +529,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2019/01/15/Java-运行时的内存划分/">
+    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2020/09/23/study-golang-9-循环语句/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="10buns">
@@ -595,7 +548,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/01/15/Java-运行时的内存划分/" itemprop="url">Java 运行时的内存划分</a></h1>
+                <a class="post-title-link" href="/2020/09/23/study-golang-9-循环语句/" itemprop="url">[study golang] 9.循环语句</a></h1>
         
 
         <div class="post-meta">
@@ -607,8 +560,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-15T23:18:53+08:00">
-                2019-01-15
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-09-23T17:45:38+08:00">
+                2020-09-23
               </time>
             
 
@@ -647,18 +600,13 @@
       
         
           
-          
-
-程序计数器记录当前线程所执行的字节码行号，用于获取下一条执行的字节码。
-当多线程运行时，每个线程切换后需要知道上一次所运行的状态、位置。
-程序计数器是每个线程私有的。
-堆Java 堆是整个虚拟机所管理的最大内存区域，所有的对象创建都是在这个区域进行内存分配。
-这块内存属于线程共享区域。
-由于大多
+          for 循环语法如下:
+12for initialisation; condition; post &#123;  &#125;
+1234567891011package mainimport (      &quot;fmt&quot;)func main() &#123;      for i 
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/01/15/Java-运行时的内存划分/#more" rel="contents">
+            <a class="btn" href="/2020/09/23/study-golang-9-循环语句/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -709,7 +657,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2019/01/01/Docker-安装-Redis-Mysql-portainer/">
+    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2020/09/23/study-golang-8-if-else语句/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="10buns">
@@ -728,7 +676,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/01/01/Docker-安装-Redis-Mysql-portainer/" itemprop="url">Docker 安装 Redis&Mysql&portainer</a></h1>
+                <a class="post-title-link" href="/2020/09/23/study-golang-8-if-else语句/" itemprop="url">[study golang] 8.if/else语句</a></h1>
         
 
         <div class="post-meta">
@@ -740,8 +688,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-01T15:58:11+08:00">
-                2019-01-01
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-09-23T17:39:59+08:00">
+                2020-09-23
               </time>
             
 
@@ -750,28 +698,6 @@
             
           </span>
 
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Docker/" itemprop="url" rel="index">
-                    <span itemprop="name">Docker</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -802,11 +728,14 @@
       
         
           
-          Portainer12345678$ docker pull portainer$ docker volume create ~/dev/docker_volume/data$ docker run -d -p 9000:9000 \    --restart=always \    -v /var
+          语法如下:
+1234if condition &#123;  &#125; else if condition &#123;&#125; else &#123;&#125;
+不同于其他语言，Go 语言里的 { } 是必要的，即使在 { } 之间只有一条语句。
+1234567891011121314p
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/01/01/Docker-安装-Redis-Mysql-portainer/#more" rel="contents">
+            <a class="btn" href="/2020/09/23/study-golang-8-if-else语句/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -857,7 +786,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2018/12/15/Spring-Security-Oauth2-入门/">
+    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2020/09/23/study-golang-7-包/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="10buns">
@@ -876,7 +805,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/12/15/Spring-Security-Oauth2-入门/" itemprop="url">Spring Security Oauth2 入门</a></h1>
+                <a class="post-title-link" href="/2020/09/23/study-golang-7-包/" itemprop="url">[study golang] 7.包</a></h1>
         
 
         <div class="post-meta">
@@ -888,8 +817,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-15T11:35:29+08:00">
-                2018-12-15
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-09-23T16:59:44+08:00">
+                2020-09-23
               </time>
             
 
@@ -898,28 +827,6 @@
             
           </span>
 
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/后端/" itemprop="url" rel="index">
-                    <span itemprop="name">后端</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -950,20 +857,12 @@
       
         
           
-          前言当我们提供对外的HTTP服务时，需要有一套机制来保证服务的安全。此时可以选择使用aouth2作为一种方案。
-概述使用Spring Security Oauth2主要包含三个步骤:
-
-配置 Security
-配置认证服务器
-配置资源服务器
-
-oauth2提供了四种模式来应对不同的使用场景:
-
-授权
+          包用于组织 Go 源代码，提供了更好的可重用性与可读性。所有可执行的 Go 程序都必须包含一个 main 函数。这个函数是程序运行的入口。main 函数应该放置于 main 包中。package packagename 这行代码指定了某一源文件属于一个包。它应该放在每一个源文件的第一行。
+12345
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/12/15/Spring-Security-Oauth2-入门/#more" rel="contents">
+            <a class="btn" href="/2020/09/23/study-golang-7-包/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1014,7 +913,7 @@ oauth2提供了四种模式来应对不同的使用场景:
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2018/12/14/主键与唯一索引区别/">
+    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2020/09/23/study-golang-6-函数/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="10buns">
@@ -1033,7 +932,7 @@ oauth2提供了四种模式来应对不同的使用场景:
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/12/14/主键与唯一索引区别/" itemprop="url">主键与唯一索引区别</a></h1>
+                <a class="post-title-link" href="/2020/09/23/study-golang-6-函数/" itemprop="url">[study golang] 6.函数</a></h1>
         
 
         <div class="post-meta">
@@ -1045,8 +944,8 @@ oauth2提供了四种模式来应对不同的使用场景:
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-14T22:11:50+08:00">
-                2018-12-14
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-09-23T16:47:28+08:00">
+                2020-09-23
               </time>
             
 
@@ -1085,19 +984,14 @@ oauth2提供了四种模式来应对不同的使用场景:
       
         
           
-          
-
-主键一定会创建一个唯一索引，但是有唯一索引的列不一定是主键
-主键不允许为空值，唯一索引列允许空值
-一个表只能有一个主键，但是可以有多个唯一索引
-主键可以被其他表引用为外键，唯一索引列不可以
-主键是一种约束，而唯一索引是一种索引，是表的冗余数据结构，两者有本质的差别
-
-
-          
+          函数是一块执行特定任务的代码。一个函数是在输入源基础上，通过执行一系列的算法，生成预期的输出。
+123func functionname(parametername type) returntype &#123;      // 函数体（具体实现的功能）&#125;
+例子
+123456func ca
+          ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/12/14/主键与唯一索引区别/#more" rel="contents">
+            <a class="btn" href="/2020/09/23/study-golang-6-函数/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1148,7 +1042,7 @@ oauth2提供了四种模式来应对不同的使用场景:
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2018/11/29/【Java笔记】死锁条件/">
+    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2020/09/23/study-golang-5-常量/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="10buns">
@@ -1167,7 +1061,7 @@ oauth2提供了四种模式来应对不同的使用场景:
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/29/【Java笔记】死锁条件/" itemprop="url">【Java笔记】死锁条件</a></h1>
+                <a class="post-title-link" href="/2020/09/23/study-golang-5-常量/" itemprop="url">[study golang] 5.常量</a></h1>
         
 
         <div class="post-meta">
@@ -1179,8 +1073,8 @@ oauth2提供了四种模式来应对不同的使用场景:
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-29T23:57:17+08:00">
-                2018-11-29
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-09-23T16:10:04+08:00">
+                2020-09-23
               </time>
             
 
@@ -1189,28 +1083,6 @@ oauth2提供了四种模式来应对不同的使用场景:
             
           </span>
 
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/JAVA/" itemprop="url" rel="index">
-                    <span itemprop="name">JAVA</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -1241,19 +1113,14 @@ oauth2提供了四种模式来应对不同的使用场景:
       
         
           
-          
-产生死锁的主要原因是
-因为系统资源不足。
-进程运行推进的顺序不合适。
-资源分配不当等。
-
-如果系统资源充足，进程的资源请求都能够得到满足，死锁出现的可能性就很低，否则就会因争夺有限的资源而陷入死锁。其次，进程运行推进顺序与速度不同，也可能产生死锁。
-产生死锁的四个必要条件：
-互斥条件：一个资源每次
+          关键字 const 被用于表示常量，顾名思义，常量不能再重新赋值为其他的值。因此下面的程序将不能正常工作，它将出现一个编译错误: cannot assign to a.。
+字符串常量无类型的字符串属于字符串常量
+1const hello = &quot;hello world&quot;
+布尔常量数
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/11/29/【Java笔记】死锁条件/#more" rel="contents">
+            <a class="btn" href="/2020/09/23/study-golang-5-常量/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1304,7 +1171,7 @@ oauth2提供了四种模式来应对不同的使用场景:
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2018/10/05/centos-安装-redis/">
+    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2020/09/23/study-golang-4-类型/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="10buns">
@@ -1323,7 +1190,7 @@ oauth2提供了四种模式来应对不同的使用场景:
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/05/centos-安装-redis/" itemprop="url">centos 安装 redis</a></h1>
+                <a class="post-title-link" href="/2020/09/23/study-golang-4-类型/" itemprop="url">[study golang] 4.类型</a></h1>
         
 
         <div class="post-meta">
@@ -1335,8 +1202,8 @@ oauth2提供了四种模式来应对不同的使用场景:
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-05T10:35:04+08:00">
-                2018-10-05
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-09-23T15:04:59+08:00">
+                2020-09-23
               </time>
             
 
@@ -1345,28 +1212,6 @@ oauth2提供了四种模式来应对不同的使用场景:
             
           </span>
 
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/服务器/" itemprop="url" rel="index">
-                    <span itemprop="name">服务器</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -1397,16 +1242,25 @@ oauth2提供了四种模式来应对不同的使用场景:
       
         
           
-          安装 gcc 和 make
-1$ yum install gcc make
-下载压缩包
-12$ curl http://download.redis.io/releases/redis-3.0.4.tar.gz -o redis-3.0.4.tar.gz
-解压缩
-1$ tar zxvf redis-
+          GO 支持如下基本类型
+
+bool
+数字类型
+int8, int16, int32, int64, int
+uint8, uint16, uint32, uint64, uint
+float32, float64
+complex64, complex128
+byte
+rune
+
+
+string
+
+b
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/10/05/centos-安装-redis/#more" rel="contents">
+            <a class="btn" href="/2020/09/23/study-golang-4-类型/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1457,7 +1311,7 @@ oauth2提供了四种模式来应对不同的使用场景:
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2018/08/07/什么是响应式编程/">
+    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2020/09/23/study-golang-3-变量/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="10buns">
@@ -1476,7 +1330,7 @@ oauth2提供了四种模式来应对不同的使用场景:
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/08/07/什么是响应式编程/" itemprop="url">【 浅析 Spring WebFlux 】什么是响应式编程 ( 一 )</a></h1>
+                <a class="post-title-link" href="/2020/09/23/study-golang-3-变量/" itemprop="url">[study golang] 3.变量</a></h1>
         
 
         <div class="post-meta">
@@ -1488,8 +1342,8 @@ oauth2提供了四种模式来应对不同的使用场景:
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-07T00:29:53+08:00">
-                2018-08-07
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-09-23T11:20:24+08:00">
+                2020-09-23
               </time>
             
 
@@ -1498,28 +1352,6 @@ oauth2提供了四种模式来应对不同的使用场景:
             
           </span>
 
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/后端/" itemprop="url" rel="index">
-                    <span itemprop="name">后端</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -1550,13 +1382,14 @@ oauth2提供了四种模式来应对不同的使用场景:
       
         
           
-          什么是响应式编程开始之前 ，我们举一个例子——购物车。
-
-我们经常网上购物 ，购物车中添加了各种想买的和不确定是否必须买的商品 。以我自己来说 ，只有在平台搞活动才会购物车清空 ，但是每次购买都是有预算的 ，遇到商家的各种满减 、优惠券等怎么才能最大限度的买自己想买的东西呢 ？常见的电商购物车都有商
+          变量指定了某存储单元（Memory Location）的名称，该存储单元会存储特定类型的值。在 Go 中，有多种语法用于声明变量。
+声明变量var name type
+1234var age intage = 29var age2 int = 29var age3 = 29
+类型推断如果变量有初始值
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/08/07/什么是响应式编程/#more" rel="contents">
+            <a class="btn" href="/2020/09/23/study-golang-3-变量/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1607,7 +1440,7 @@ oauth2提供了四种模式来应对不同的使用场景:
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2018/07/23/Spring事务配置/">
+    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2020/09/23/study-golang-2-hello-world/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="10buns">
@@ -1626,7 +1459,7 @@ oauth2提供了四种模式来应对不同的使用场景:
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/23/Spring事务配置/" itemprop="url">Spring事务配置</a></h1>
+                <a class="post-title-link" href="/2020/09/23/study-golang-2-hello-world/" itemprop="url">[study golang] 2.hello world</a></h1>
         
 
         <div class="post-meta">
@@ -1638,8 +1471,8 @@ oauth2提供了四种模式来应对不同的使用场景:
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-23T15:49:53+08:00">
-                2018-07-23
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-09-23T11:20:13+08:00">
+                2020-09-23
               </time>
             
 
@@ -1648,28 +1481,6 @@ oauth2提供了四种模式来应对不同的使用场景:
             
           </span>
 
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/后端/" itemprop="url" rel="index">
-                    <span itemprop="name">后端</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -1700,15 +1511,13 @@ oauth2提供了四种模式来应对不同的使用场景:
       
         
           
-          
-
-Spring 配置文件中关于事务配置总是由三个组成部分，分别是 DataSource 、TransactionManager 和代理机制这三部分，无论哪种配置方式，一般变化的只是代理机制这部分 。
-
-Spring 声明式事务让我们从复杂的事务处理中得到解脱 。使得无需要去处理获得连接、关闭连接、
+          环境变量简介GOROOTgolang 安装路径
+GOPATH工作目录或工作，可以是一个或多个。每个目录代表一个工作区，用于存放源代码文件(src), 安装(go install)后的归档文件(pkg目录) 和 可执行文件(bin目录)
+GOBINgoroot目录下的可执行文件放置目录，一般指 bin
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/07/23/Spring事务配置/#more" rel="contents">
+            <a class="btn" href="/2020/09/23/study-golang-2-hello-world/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1750,7 +1559,7 @@ Spring 声明式事务让我们从复杂的事务处理中得到解脱 。使得
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1798,7 +1607,7 @@ Spring 声明式事务让我们从复杂的事务处理中得到解脱 。使得
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-count">64</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1820,7 +1629,7 @@ Spring 声明式事务让我们从复杂的事务处理中得到解脱 。使得
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
