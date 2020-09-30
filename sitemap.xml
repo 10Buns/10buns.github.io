@@ -2,149 +2,170 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://10buns.cn/2020/09/28/study-golang-26-panic-recover/</loc>
+    
+    <lastmod>2020-09-28T09:43:04.221Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://10buns.cn/2020/09/28/study-golang-24-defer/</loc>
+    
+    <lastmod>2020-09-28T07:21:57.529Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://10buns.cn/2020/09/28/study-golang-23-%E5%A4%9A%E6%80%81/</loc>
+    
+    <lastmod>2020-09-28T06:47:23.629Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://10buns.cn/2020/09/25/study-golang-21-mutex/</loc>
     
-    <lastmod>2020-09-25T09:50:25.490Z</lastmod>
+    <lastmod>2020-09-28T06:46:33.168Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://10buns.cn/2020/09/25/study-golang-20-select/</loc>
     
-    <lastmod>2020-09-25T09:49:53.039Z</lastmod>
+    <lastmod>2020-09-28T06:46:27.530Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://10buns.cn/2020/09/24/study-golang-19-%E5%B9%B6%E5%8F%91/</loc>
     
-    <lastmod>2020-09-25T08:29:22.905Z</lastmod>
+    <lastmod>2020-09-28T06:46:23.219Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://10buns.cn/2020/09/24/study-golang-18-%E6%8E%A5%E5%8F%A3/</loc>
     
-    <lastmod>2020-09-24T06:36:31.064Z</lastmod>
+    <lastmod>2020-09-28T06:46:17.407Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://10buns.cn/2020/09/24/study-golang-17-%E6%96%B9%E6%B3%95/</loc>
     
-    <lastmod>2020-09-24T06:17:52.099Z</lastmod>
+    <lastmod>2020-09-28T06:46:14.547Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://10buns.cn/2020/09/24/study-golang-16-%E7%BB%93%E6%9E%84%E4%BD%93/</loc>
     
-    <lastmod>2020-09-24T05:56:30.177Z</lastmod>
+    <lastmod>2020-09-28T06:46:11.308Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://10buns.cn/2020/09/24/study-golang-15-%E6%8C%87%E9%92%88/</loc>
     
-    <lastmod>2020-09-24T02:45:56.729Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://10buns.cn/2020/09/24/study-golang-12-%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E5%87%BD%E6%95%B0/</loc>
-    
-    <lastmod>2020-09-24T02:34:29.677Z</lastmod>
+    <lastmod>2020-09-28T06:46:08.807Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://10buns.cn/2020/09/24/study-golang-14-%E5%AD%97%E7%AC%A6%E4%B8%B2/</loc>
     
-    <lastmod>2020-09-24T02:33:22.793Z</lastmod>
+    <lastmod>2020-09-28T06:46:05.548Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://10buns.cn/2020/09/24/study-golang-13-Maps/</loc>
     
-    <lastmod>2020-09-24T02:17:51.231Z</lastmod>
+    <lastmod>2020-09-28T06:46:01.934Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://10buns.cn/2020/09/24/study-golang-12-%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E5%87%BD%E6%95%B0/</loc>
+    
+    <lastmod>2020-09-28T06:45:59.143Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://10buns.cn/2020/09/23/study-golang-11-%E6%95%B0%E7%BB%84%E5%92%8C%E5%88%87%E7%89%87/</loc>
     
-    <lastmod>2020-09-24T01:59:10.586Z</lastmod>
+    <lastmod>2020-09-28T06:45:55.708Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://10buns.cn/2020/09/23/study-golang-10-switch%E8%AF%AD%E5%8F%A5/</loc>
     
-    <lastmod>2020-09-23T10:10:40.383Z</lastmod>
+    <lastmod>2020-09-28T06:45:52.168Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://10buns.cn/2020/09/23/study-golang-9-%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5/</loc>
     
-    <lastmod>2020-09-23T09:52:20.282Z</lastmod>
+    <lastmod>2020-09-28T06:45:49.111Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://10buns.cn/2020/09/23/study-golang-8-if-else%E8%AF%AD%E5%8F%A5/</loc>
     
-    <lastmod>2020-09-23T09:42:57.433Z</lastmod>
+    <lastmod>2020-09-28T06:45:45.488Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://10buns.cn/2020/09/23/study-golang-7-%E5%8C%85/</loc>
     
-    <lastmod>2020-09-23T09:39:33.163Z</lastmod>
+    <lastmod>2020-09-28T06:45:42.185Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://10buns.cn/2020/09/23/study-golang-6-%E5%87%BD%E6%95%B0/</loc>
     
-    <lastmod>2020-09-23T08:59:21.261Z</lastmod>
+    <lastmod>2020-09-28T06:45:36.288Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://10buns.cn/2020/09/23/study-golang-5-%E5%B8%B8%E9%87%8F/</loc>
     
-    <lastmod>2020-09-23T08:47:55.215Z</lastmod>
+    <lastmod>2020-09-28T06:45:31.825Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://10buns.cn/2020/09/23/study-golang-4-%E7%B1%BB%E5%9E%8B/</loc>
     
-    <lastmod>2020-09-23T07:18:12.553Z</lastmod>
+    <lastmod>2020-09-28T06:45:29.490Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://10buns.cn/2020/09/23/study-golang-3-%E5%8F%98%E9%87%8F/</loc>
     
-    <lastmod>2020-09-23T07:04:27.128Z</lastmod>
+    <lastmod>2020-09-28T06:45:26.749Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://10buns.cn/2020/09/23/study-golang-2-hello-world/</loc>
     
-    <lastmod>2020-09-23T06:53:32.661Z</lastmod>
+    <lastmod>2020-09-28T06:45:23.499Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://10buns.cn/2020/09/23/study-golang-1-%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/</loc>
     
-    <lastmod>2020-09-23T03:48:53.562Z</lastmod>
+    <lastmod>2020-09-28T06:45:18.640Z</lastmod>
     
   </url>
   
