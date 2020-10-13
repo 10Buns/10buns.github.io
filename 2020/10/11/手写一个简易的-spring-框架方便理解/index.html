@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon.png?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Spring,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="10buns" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="在 Java 开发中， Spring 是用的最多的一个框架，不管是为了加强技术深度还是为了面试，总会多少阅读点 Spring 的源码。但随着迭代，Spring 代码越来越庞杂，不利于理解其核心思想。 之前就想通过手写一个简易版的 demo，进行梳理下Spring的工作流程，抽丝剥茧的方式方便理解。 节前看 Java Guide 的博客，实现了比较完整的 spring boot，但为了避免抄袭(才不">
+<meta name="keywords" content="Spring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="手写一个简易的 spring 框架方便理解">
+<meta property="og:url" content="http://10buns.cn/2020/10/11/手写一个简易的-spring-框架方便理解/index.html">
+<meta property="og:site_name" content="10buns">
+<meta property="og:description" content="在 Java 开发中， Spring 是用的最多的一个框架，不管是为了加强技术深度还是为了面试，总会多少阅读点 Spring 的源码。但随着迭代，Spring 代码越来越庞杂，不利于理解其核心思想。 之前就想通过手写一个简易版的 demo，进行梳理下Spring的工作流程，抽丝剥茧的方式方便理解。 节前看 Java Guide 的博客，实现了比较完整的 spring boot，但为了避免抄袭(才不">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-10-13T02:28:39.921Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="手写一个简易的 spring 框架方便理解">
+<meta name="twitter:description" content="在 Java 开发中， Spring 是用的最多的一个框架，不管是为了加强技术深度还是为了面试，总会多少阅读点 Spring 的源码。但随着迭代，Spring 代码越来越庞杂，不利于理解其核心思想。 之前就想通过手写一个简易版的 demo，进行梳理下Spring的工作流程，抽丝剥茧的方式方便理解。 节前看 Java Guide 的博客，实现了比较完整的 spring boot，但为了避免抄袭(才不">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://10buns.cn/2020/10/11/手写一个简易的-spring-框架方便理解/">
+
+
+
+
+
+  <title>手写一个简易的 spring 框架方便理解 | 10buns</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c873067502e43c16757b0901e5bb26c2";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">10buns</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2020/10/11/手写一个简易的-spring-框架方便理解/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="10buns">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="10buns">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">手写一个简易的 spring 框架方便理解</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-10-11T17:50:33+08:00">
+                2020-10-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在 Java 开发中， Spring 是用的最多的一个框架，不管是为了加强技术深度还是为了面试，总会多少阅读点 Spring 的源码。但随着迭代，Spring 代码越来越庞杂，不利于理解其核心思想。</p>
+<p>之前就想通过手写一个简易版的 demo，进行梳理下Spring的工作流程，抽丝剥茧的方式方便理解。</p>
+<p>节前看 <code>Java Guide</code> 的博客，实现了比较完整的 spring boot，但为了避免抄袭(才不是能力不行)，只实现spring简单的接口访问，包括如下:</p>
+<ol>
+<li>自动装配</li>
+<li>包扫描</li>
+<li>request 注解</li>
+<li>controller 注解</li>
+<li>service 注解</li>
+</ol>
+<p>最小化演示 Spring 框架如何运行起来，web容器基于 <code>jetty</code>，简化操作。</p>
+<h2 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">├── src</span><br><span class="line">│   └── main</span><br><span class="line">│       ├── java</span><br><span class="line">│       │   └── com</span><br><span class="line">│       │       └── summer</span><br><span class="line">│       │           ├── framework</span><br><span class="line">│       │           │   ├── annotation</span><br><span class="line">│       │           │   │   ├── SummerAutowired.java</span><br><span class="line">│       │           │   │   ├── SummerController.java</span><br><span class="line">│       │           │   │   ├── SummerRequestMapping.java</span><br><span class="line">│       │           │   │   ├── SummerRequestParam.java</span><br><span class="line">│       │           │   │   └── SummerService.java</span><br><span class="line">│       │           │   └── servlet</span><br><span class="line">│       │           │       └── SummerDispatcherServlet.java</span><br><span class="line">│       │           └── sample</span><br><span class="line">│       │               └── controller</span><br><span class="line">│       │                   └── TestController.java</span><br><span class="line">│       ├── resources</span><br><span class="line">│       │   └── application.properties</span><br><span class="line">│       └── webapp</span><br><span class="line">│           └── WEB-INF</span><br><span class="line">│               └── web.xml</span><br></pre></td></tr></table></figure>
+<ol>
+<li>由于是自己实现Spring，所以无任何Spring依赖</li>
+<li>依赖 servelet-api 创建web项目(Spring也是基于servlet)</li>
+<li>简化操作，sample包下为测试</li>
+</ol>
+<h3 id="自定义servlet并继承方法"><a href="#自定义servlet并继承方法" class="headerlink" title="自定义servlet并继承方法"></a>自定义servlet并继承方法</h3><p>是为了接收所有的请求进行处理</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public class SummerDispatcherServlet extends HttpServlet &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException &#123;</span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void init(ServletConfig config) throws &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="web-xml中配置servlet"><a href="#web-xml中配置servlet" class="headerlink" title="web.xml中配置servlet"></a>web.xml中配置servlet</h3><ol>
+<li>启动就加载这个servlet</li>
+<li>所有的请求都由这个servlet处理</li>
+<li>设置参数配置配置文件</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;servlet&gt;</span><br><span class="line">  &lt;servlet-name&gt;summersvc&lt;/servlet-name&gt;</span><br><span class="line">  &lt;servlet-class&gt;com.summer.framework.servlet.SummerDispatcherServlet&lt;/servlet-class&gt;</span><br><span class="line">  &lt;init-param&gt;</span><br><span class="line">    &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;</span><br><span class="line">    &lt;param-value&gt;application.properties&lt;/param-value&gt;</span><br><span class="line">  &lt;/init-param&gt;</span><br><span class="line">  &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;</span><br><span class="line">&lt;/servlet&gt;</span><br><span class="line">&lt;servlet-mapping&gt;</span><br><span class="line">  &lt;servlet-name&gt;summersvc&lt;/servlet-name&gt;</span><br><span class="line">  &lt;url-pattern&gt;/*&lt;/url-pattern&gt;</span><br><span class="line">&lt;/servlet-mapping&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="配置文件配置参数"><a href="#配置文件配置参数" class="headerlink" title="配置文件配置参数"></a>配置文件配置参数</h3><p>添加一个 application.properties 文件，并设置如下配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scanPackage=com.summer.sample.controller</span><br></pre></td></tr></table></figure>
+<p>熟悉spring boot的都知道有个包扫描的配置</p>
+<h3 id="定义需要实现的注解"><a href="#定义需要实现的注解" class="headerlink" title="定义需要实现的注解"></a>定义需要实现的注解</h3><p> 简化操作，get/post 都交由post处理，不实现requestbody注解，直接利用HttpServletResponse处理返回结果，使用Map实现一个简易的IOC</p>
+<ol>
+<li>SummerAutowired</li>
+<li>SummerController</li>
+<li>SummerRequestMapping</li>
+<li>SummerRequestParam</li>
+<li>SummerService </li>
+</ol>
+<h3 id="完善servlet功能"><a href="#完善servlet功能" class="headerlink" title="完善servlet功能"></a>完善servlet功能</h3><p>Spring框架简化分析有如下几个操作</p>
+<ol>
+<li>扫描加载配置文件</li>
+<li>类扫描</li>
+<li>初始化类，并保存在IOC容器里面</li>
+<li>执行依赖注入</li>
+<li>构造HandlerMapping，关联url和class.method</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">  public void init(ServletConfig config) throws ServletException &#123;</span><br><span class="line">      System.out.println(&quot;==============summer spring start init==============&quot;);</span><br><span class="line">      // 扫描配置文件</span><br><span class="line">      loadConfig(config.getInitParameter(&quot;contextConfigLocation&quot;));</span><br><span class="line">      // 扫描类 </span><br><span class="line">      scanner(contextConfig.getProperty(&quot;scanPackage&quot;));</span><br><span class="line">      //初始化类并保存至IOC容器</span><br><span class="line">      initInstance();</span><br><span class="line">      //依赖注入执行</span><br><span class="line">      execAutowired();</span><br><span class="line">      // 构造HandlerMapping</span><br><span class="line">      initHandlerMapping();</span><br><span class="line">      System.out.println(&quot;==============summer spring initialized==============&quot;);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="扫描加载配置文件"><a href="#扫描加载配置文件" class="headerlink" title="扫描加载配置文件"></a>扫描加载配置文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">private void loadConfig(String contextConfigLocation) &#123;</span><br><span class="line">    InputStream is = this.getClass().getClassLoader().getResourceAsStream(contextConfigLocation);</span><br><span class="line">    try &#123;</span><br><span class="line">        contextConfig.load(is);</span><br><span class="line">    &#125; catch (IOException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;finally &#123;</span><br><span class="line">        if (null != is)&#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                is.close();</span><br><span class="line">            &#125; catch (IOException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="类扫描"><a href="#类扫描" class="headerlink" title="类扫描"></a>类扫描</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">private void scanner(String scanPackage) &#123;</span><br><span class="line">        //包名替换按照文件目录访问</span><br><span class="line">        URL url = this.getClass().getClassLoader().getResource(&quot;/&quot; + scanPackage.replaceAll(&quot;\\.&quot;, &quot;/&quot;));</span><br><span class="line">        File dir = new File(url.getFile());</span><br><span class="line">        for (File file : dir.listFiles())&#123;</span><br><span class="line">            if (file.isDirectory())&#123;</span><br><span class="line">                scanner(scanPackage + &quot;.&quot; + file.getName());</span><br><span class="line">            &#125;else &#123;</span><br><span class="line">                String className = scanPackage + &quot;.&quot; + file.getName().replace(&quot;.class&quot;, &quot;&quot;);</span><br><span class="line">                classNames.add(className);</span><br><span class="line">                System.out.println(&quot;scan class:&quot; + className);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="初始化类"><a href="#初始化类" class="headerlink" title="初始化类"></a>初始化类</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">private void initInstance() &#123;</span><br><span class="line">        if (classNames.isEmpty())&#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        for (String className : classNames)&#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                Class&lt;?&gt; clazz = Class.forName(className);</span><br><span class="line">                if (clazz.isAnnotationPresent(SummerController.class))&#123;</span><br><span class="line">                    Object instance = clazz.newInstance();</span><br><span class="line">                    String beanName = lowerFirstCase(clazz.getSimpleName());</span><br><span class="line">                    ioc.put(beanName,instance);</span><br><span class="line">                &#125;else if (clazz.isAnnotationPresent(SummerService.class))&#123;</span><br><span class="line">                    SummerService service = clazz.getAnnotation(SummerService.class);</span><br><span class="line">                    String beanName = service.value();</span><br><span class="line">                    if(&quot;&quot;.equals(beanName))&#123;</span><br><span class="line">                        beanName = lowerFirstCase(clazz.getSimpleName());</span><br><span class="line">                    &#125;</span><br><span class="line">                    Object instance = clazz.newInstance();</span><br><span class="line">                    ioc.put(beanName, instance);</span><br><span class="line">                    Class&lt;?&gt;[] interfaces = clazz.getInterfaces();</span><br><span class="line">                    for (Class&lt;?&gt; c : interfaces)&#123;</span><br><span class="line">                        ioc.put(c.getName(), instance);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    private String lowerFirstCase(String str) &#123;</span><br><span class="line">        char[] chars = str.toCharArray();</span><br><span class="line">        chars[0] += 32;</span><br><span class="line">        return String.valueOf(chars);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="执行依赖注入"><a href="#执行依赖注入" class="headerlink" title="执行依赖注入"></a>执行依赖注入</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">private void execAutowired() &#123;</span><br><span class="line">       if (ioc.isEmpty())&#123;</span><br><span class="line">           return;</span><br><span class="line">       &#125;</span><br><span class="line">       for (Map.Entry&lt;String, Object&gt; entry: ioc.entrySet())&#123;</span><br><span class="line">           //访问所有的字段进行赋值</span><br><span class="line">           Field[] fields = entry.getValue().getClass().getFields();</span><br><span class="line">           for (Field f : fields)&#123;</span><br><span class="line">               if (!f.isAnnotationPresent(SummerAutowired.class))&#123;</span><br><span class="line">                   continue;</span><br><span class="line">               &#125;</span><br><span class="line">               SummerAutowired summerAutowired = f.getAnnotation(SummerAutowired.class);</span><br><span class="line">               String beanName = summerAutowired.value();</span><br><span class="line">               if (&quot;&quot;.equals(beanName))&#123;</span><br><span class="line">                   beanName = f.getType().getName();</span><br><span class="line">               &#125;</span><br><span class="line">               f.setAccessible(true);</span><br><span class="line">               try &#123;</span><br><span class="line">                   f.set(entry.getValue(), ioc.get(beanName));</span><br><span class="line">               &#125; catch (IllegalAccessException e) &#123;</span><br><span class="line">                   e.printStackTrace();</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="构造HandlerMapping"><a href="#构造HandlerMapping" class="headerlink" title="构造HandlerMapping"></a>构造HandlerMapping</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">private void initHandlerMapping() &#123;</span><br><span class="line">        if (ioc.isEmpty())&#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        for (Map.Entry&lt;String, Object&gt; entry : ioc.entrySet())&#123;</span><br><span class="line">            Class&lt;?&gt; clazz = entry.getValue().getClass();</span><br><span class="line">            if (!clazz.isAnnotationPresent(SummerController.class))&#123;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line">            String baseUrl = &quot;&quot;;</span><br><span class="line">            if (clazz.isAnnotationPresent(SummerRequestMapping.class))&#123;</span><br><span class="line">                SummerRequestMapping requestMapping = clazz.getAnnotation(SummerRequestMapping.class);</span><br><span class="line">                baseUrl = requestMapping.value();</span><br><span class="line">            &#125;</span><br><span class="line">            Method[] methods = clazz.getMethods();</span><br><span class="line">            for (Method m : methods)&#123;</span><br><span class="line">                if (!m.isAnnotationPresent(SummerRequestMapping.class))&#123;</span><br><span class="line">                    continue;</span><br><span class="line">                &#125;</span><br><span class="line">                SummerRequestMapping requestMapping = m.getAnnotation(SummerRequestMapping.class);</span><br><span class="line">                String regex = requestMapping.value();</span><br><span class="line">                regex = (baseUrl + regex).replace(&quot;/+&quot;, &quot;/&quot;);</span><br><span class="line">                Pattern pattern = Pattern.compile(regex);</span><br><span class="line">                handlerMapping.add(new Handler(entry.getValue(), m, pattern));</span><br><span class="line">                System.out.println(&quot;Mapping:&quot; + regex + &quot;,&quot; + m.getName());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="处理-doPost-doGet-方法"><a href="#处理-doPost-doGet-方法" class="headerlink" title="处理 doPost /doGet 方法"></a>处理 doPost /doGet 方法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException &#123;</span><br><span class="line">        this.doPost(req, resp);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            doDispatch(req, resp);</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            resp.getWriter().write(&quot;500 system error, msg:\r\n&quot; + Arrays.toString(e.getStackTrace()));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">private void doDispatch(HttpServletRequest req, HttpServletResponse resp)throws Exception&#123;</span><br><span class="line">        Handler handler = getHandler(req);</span><br><span class="line">        if (null == handler)&#123;</span><br><span class="line">            resp.getWriter().write(&quot;404 not found, msg:\r\n&quot; + req.getRequestURI());</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        Class[] paramTypes = handler.method.getParameterTypes();</span><br><span class="line">        Object[] paramValues = new Object[paramTypes.length];</span><br><span class="line">        Map&lt;String, String[]&gt; params = req.getParameterMap();</span><br><span class="line">        for (Map.Entry&lt;String, String[]&gt; entry: params.entrySet())&#123;</span><br><span class="line">            String value = Arrays.toString(entry.getValue()).replaceAll(&quot;\\[|\\]&quot;, &quot;&quot;).replaceAll(&quot;,\\s&quot;, &quot;&quot;);</span><br><span class="line">            //如果找到匹配的对象，则开始填充参数值</span><br><span class="line">            if(!handler.paramIndexMapping.containsKey(entry.getKey()))&#123;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line">            int index = handler.paramIndexMapping.get(entry.getKey());</span><br><span class="line">            paramValues[index] = convert(paramTypes[index], value);</span><br><span class="line">        &#125;</span><br><span class="line">        //设置方法中的request和response对象</span><br><span class="line">        int reqIndex = handler.paramIndexMapping.get(HttpServletRequest.class.getName());</span><br><span class="line">        paramValues[reqIndex] = req;</span><br><span class="line"></span><br><span class="line">        int respIndex = handler.paramIndexMapping.get(HttpServletResponse.class.getName());</span><br><span class="line">        paramValues[respIndex] = resp;</span><br><span class="line">        handler.method.invoke(handler.controller, paramValues);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="验证注解"><a href="#验证注解" class="headerlink" title="验证注解"></a>验证注解</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">@SummerController</span><br><span class="line">@SummerRequestMapping(&quot;/test&quot;)</span><br><span class="line">public class TestController &#123;</span><br><span class="line"></span><br><span class="line">    @SummerAutowired</span><br><span class="line">    private TestService testService;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    @SummerRequestMapping(&quot;/find&quot;)</span><br><span class="line">    public void find(HttpServletRequest req, HttpServletResponse resp,</span><br><span class="line">                     @SummerRequestParam(&quot;id&quot;) String id)&#123;</span><br><span class="line">        System.out.println(&quot;id:&quot; + id);</span><br><span class="line">        try &#123;</span><br><span class="line">            String result = testService.find(id);</span><br><span class="line">            resp.getWriter().write(result);</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@SummerService</span><br><span class="line">public class TestServiceImpl implements TestService&#123;</span><br><span class="line"></span><br><span class="line">    public String find(String id) &#123;</span><br><span class="line">        return &quot;id=&quot;+id;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="设置jetty"><a href="#设置jetty" class="headerlink" title="设置jetty"></a>设置jetty</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;plugin&gt;</span><br><span class="line">    &lt;groupId&gt;org.eclipse.jetty&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;jetty-maven-plugin&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;9.3.7.v20160115&lt;/version&gt;</span><br><span class="line">&lt;/plugin&gt;</span><br></pre></td></tr></table></figure>
+<p>terminal 启动服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn jetty:run</span><br></pre></td></tr></table></figure>
+<p>访问测试地址</p>
+<p><a href="http://localhost:8080/test/find?id=123" target="_blank" rel="noopener">http://localhost:8080/test/find?id=123</a></p>
+<p>浏览器返回</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=123</span><br></pre></td></tr></table></figure>
+<p>项目启动后输出如下内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">==============summer spring start init==============</span><br><span class="line">com.summer.sample.TestController</span><br><span class="line">com.summer.sample.TestService</span><br><span class="line">com.summer.sample.TestServiceImpl</span><br><span class="line">Mapping:/test/find,find</span><br><span class="line">==============summer spring initialized==============</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Spring/" rel="tag"><i class="fa fa-tag"></i> Spring</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/09/28/study-golang-26-panic-recover/" rel="next" title="[study golang] 26.panic&recover">
+                <i class="fa fa-chevron-left"></i> [study golang] 26.panic&recover
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="10buns">
+            
+              <p class="site-author-name" itemprop="name">10buns</p>
+              <p class="site-description motion-element" itemprop="description">Study hard and make progress every day</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">68</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/10Buns" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.weibo.com/loverichy" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-Weibo"></i>Weibo</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#项目结构"><span class="nav-number">1.</span> <span class="nav-text">项目结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义servlet并继承方法"><span class="nav-number">1.1.</span> <span class="nav-text">自定义servlet并继承方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web-xml中配置servlet"><span class="nav-number">1.2.</span> <span class="nav-text">web.xml中配置servlet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置文件配置参数"><span class="nav-number">1.3.</span> <span class="nav-text">配置文件配置参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定义需要实现的注解"><span class="nav-number">1.4.</span> <span class="nav-text">定义需要实现的注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#完善servlet功能"><span class="nav-number">1.5.</span> <span class="nav-text">完善servlet功能</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#扫描加载配置文件"><span class="nav-number">1.5.1.</span> <span class="nav-text">扫描加载配置文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类扫描"><span class="nav-number">1.5.2.</span> <span class="nav-text">类扫描</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#初始化类"><span class="nav-number">1.5.3.</span> <span class="nav-text">初始化类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#执行依赖注入"><span class="nav-number">1.5.4.</span> <span class="nav-text">执行依赖注入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#构造HandlerMapping"><span class="nav-number">1.5.5.</span> <span class="nav-text">构造HandlerMapping</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#处理-doPost-doGet-方法"><span class="nav-number">1.5.6.</span> <span class="nav-text">处理 doPost /doGet 方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#验证注解"><span class="nav-number">1.5.7.</span> <span class="nav-text">验证注解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置jetty"><span class="nav-number">1.5.8.</span> <span class="nav-text">设置jetty</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">10buns</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+<div class="powered-by">
+	<i class="fa fa-user-md"></i>
+	<span id="busuanzi_container_site_uv">
+		本站访客数:<span id="busuanzi_value_site_uv"></span>
+	</span>
+	<span class="post-meta-divider">|</span>
+	<span id="busuanzi_container_site_pv">
+		本站访问量<span id="busuanzi_value_site_pv"></span>
+	</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
