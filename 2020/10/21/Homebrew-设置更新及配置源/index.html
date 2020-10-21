@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="golang,">
+  <meta name="keywords" content="Homebrew,">
 
 
 
@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="Study hard and make progress every day">
-<meta name="keywords" content="golang">
+<meta name="description" content="Homebrew 默认源国内访问很慢，经常导致执行 update 操作卡住。因此可以设置替换为国内镜像源。 在使用 Homebrew 安装软件时，主要涉及使用如下三个仓库:  brew.git homebrew-core.git homebrew-bottles  但实际只需要替换前两个即可，将默认源替换为中科大的源 源替换与恢复替换中科源12345cd &amp;quot;$(brew --repo)&amp;">
+<meta name="keywords" content="Homebrew">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[study golang] 26.panic&amp;recover">
-<meta property="og:url" content="http://10buns.cn/2020/09/28/study-golang-26-panic-recover/index.html">
+<meta property="og:title" content="Homebrew 设置更新及配置源">
+<meta property="og:url" content="http://10buns.cn/2020/10/21/Homebrew-设置更新及配置源/index.html">
 <meta property="og:site_name" content="10buns">
-<meta property="og:description" content="Study hard and make progress every day">
+<meta property="og:description" content="Homebrew 默认源国内访问很慢，经常导致执行 update 操作卡住。因此可以设置替换为国内镜像源。 在使用 Homebrew 安装软件时，主要涉及使用如下三个仓库:  brew.git homebrew-core.git homebrew-bottles  但实际只需要替换前两个即可，将默认源替换为中科大的源 源替换与恢复替换中科源12345cd &amp;quot;$(brew --repo)&amp;">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-09-28T09:43:04.221Z">
+<meta property="og:updated_time" content="2020-10-21T03:01:50.793Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="[study golang] 26.panic&amp;recover">
-<meta name="twitter:description" content="Study hard and make progress every day">
+<meta name="twitter:title" content="Homebrew 设置更新及配置源">
+<meta name="twitter:description" content="Homebrew 默认源国内访问很慢，经常导致执行 update 操作卡住。因此可以设置替换为国内镜像源。 在使用 Homebrew 安装软件时，主要涉及使用如下三个仓库:  brew.git homebrew-core.git homebrew-bottles  但实际只需要替换前两个即可，将默认源替换为中科大的源 源替换与恢复替换中科源12345cd &amp;quot;$(brew --repo)&amp;">
 
 
 
@@ -122,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://10buns.cn/2020/09/28/study-golang-26-panic-recover/">
+  <link rel="canonical" href="http://10buns.cn/2020/10/21/Homebrew-设置更新及配置源/">
 
 
 
 
 
-  <title>[study golang] 26.panic&recover | 10buns</title>
+  <title>Homebrew 设置更新及配置源 | 10buns</title>
   
 
 
@@ -275,7 +275,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2020/09/28/study-golang-26-panic-recover/">
+    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2020/10/21/Homebrew-设置更新及配置源/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="10buns">
@@ -292,7 +292,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">[study golang] 26.panic&recover</h1>
+          <h1 class="post-title" itemprop="name headline">Homebrew 设置更新及配置源</h1>
         
 
         <div class="post-meta">
@@ -304,8 +304,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-09-28T17:42:54+08:00">
-                2020-09-28
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-10-21T10:55:26+08:00">
+                2020-10-21
               </time>
             
 
@@ -314,28 +314,6 @@
             
           </span>
 
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/golang/" itemprop="url" rel="index">
-                    <span itemprop="name">golang</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -369,7 +347,20 @@
       
 
       
-        
+        <p>Homebrew 默认源国内访问很慢，经常导致执行 update 操作卡住。因此可以设置替换为国内镜像源。</p>
+<p>在使用 Homebrew 安装软件时，主要涉及使用如下三个仓库:</p>
+<ol>
+<li>brew.git</li>
+<li>homebrew-core.git</li>
+<li>homebrew-bottles</li>
+</ol>
+<p>但实际只需要替换前两个即可，将默认源替换为中科大的源</p>
+<h2 id="源替换与恢复"><a href="#源替换与恢复" class="headerlink" title="源替换与恢复"></a>源替换与恢复</h2><h3 id="替换中科源"><a href="#替换中科源" class="headerlink" title="替换中科源"></a>替换中科源</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd &quot;$(brew --repo)&quot;</span><br><span class="line">git remote set-url origin https://mirrors.ustc.edu.cn/brew.git</span><br><span class="line"></span><br><span class="line">cd &quot;$(brew --repo)/Library/Taps/homebrew/homebrew-core&quot;</span><br><span class="line">git remote set-url origin https://mirrors.ustc.edu.cn/homebrew-core.git</span><br></pre></td></tr></table></figure>
+<h3 id="恢复默认源"><a href="#恢复默认源" class="headerlink" title="恢复默认源"></a>恢复默认源</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cd &quot;$(brew --repo)&quot;</span><br><span class="line">git remote set-url origin https://github.com/Homebrew/brew.git</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cd &quot;$(brew --repo)/Library/Taps/homebrew/homebrew-core&quot;</span><br><span class="line">git remote set-url origin https://github.com/Homebrew/homebrew-core.git</span><br></pre></td></tr></table></figure>
+<h2 id="brew-update-报错问题"><a href="#brew-update-报错问题" class="headerlink" title="brew update 报错问题"></a>brew update 报错问题</h2><p>terminal 终端强行终止 <code>brew update</code> 后，执行任意命令报错如下:<br><strong>Another active Homebrew update process is already in progress</strong></p>
+<p>可以通过删除锁来释放:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -rf /usr/local/var/homebrew/locks</span><br></pre></td></tr></table></figure>
+
       
     </div>
     
@@ -386,7 +377,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/golang/" rel="tag"><i class="fa fa-tag"></i> golang</a>
+            <a href="/tags/Homebrew/" rel="tag"><i class="fa fa-tag"></i> Homebrew</a>
           
         </div>
       
@@ -399,8 +390,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/09/28/study-golang-24-defer/" rel="next" title="[study golang] 24.defer">
-                <i class="fa fa-chevron-left"></i> [study golang] 24.defer
+              <a href="/2020/10/15/Activiti-学习笔记/" rel="next" title="Activiti 学习笔记">
+                <i class="fa fa-chevron-left"></i> Activiti 学习笔记
               </a>
             
           </div>
@@ -408,10 +399,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/10/11/手写一个简易的-spring-框架方便理解/" rel="prev" title="手写一个简易的 spring 框架方便理解">
-                手写一个简易的 spring 框架方便理解 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -463,8 +450,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -549,6 +545,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#源替换与恢复"><span class="nav-number">1.</span> <span class="nav-text">源替换与恢复</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#替换中科源"><span class="nav-number">1.1.</span> <span class="nav-text">替换中科源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#恢复默认源"><span class="nav-number">1.2.</span> <span class="nav-text">恢复默认源</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#brew-update-报错问题"><span class="nav-number">2.</span> <span class="nav-text">brew update 报错问题</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
