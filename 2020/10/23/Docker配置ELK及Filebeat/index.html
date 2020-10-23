@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="10buns">
 <meta property="og:description" content="[TOC] 配置 elk 环境是为了方便本地测试使用，所以寻求简化配置，因此采用 sebp/elk 镜像。 安装ELK下载镜像1docker pull sebp/elk:792 配置持久化 宿主机创建如下文件夹  123cd ~/dev/docker_volume/elk-datamkdir -p kibana/configmkdir -p logstash/config  启动容器并copy配置">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-10-23T06:00:39.206Z">
+<meta property="og:updated_time" content="2020-10-23T06:02:36.907Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Docker配置ELK及Filebeat">
 <meta name="twitter:description" content="[TOC] 配置 elk 环境是为了方便本地测试使用，所以寻求简化配置，因此采用 sebp/elk 镜像。 安装ELK下载镜像1docker pull sebp/elk:792 配置持久化 宿主机创建如下文件夹  123cd ~/dev/docker_volume/elk-datamkdir -p kibana/configmkdir -p logstash/config  启动容器并copy配置">
@@ -349,8 +349,8 @@
       
         <p>[TOC]</p>
 <p>配置 elk 环境是为了方便本地测试使用，所以寻求简化配置，因此采用 <code>sebp/elk</code> 镜像。</p>
-<h2 id="安装ELK"><a href="#安装ELK" class="headerlink" title="安装ELK"></a>安装ELK</h2><h3 id="下载镜像"><a href="#下载镜像" class="headerlink" title="下载镜像"></a>下载镜像</h3><pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull sebp/elk:792</span><br></pre></td></tr></table></figure>
-</code></pre><h3 id="配置持久化"><a href="#配置持久化" class="headerlink" title="配置持久化"></a>配置持久化</h3><ol>
+<h2 id="安装ELK"><a href="#安装ELK" class="headerlink" title="安装ELK"></a>安装ELK</h2><h3 id="下载镜像"><a href="#下载镜像" class="headerlink" title="下载镜像"></a>下载镜像</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull sebp/elk:792</span><br></pre></td></tr></table></figure>
+<h3 id="配置持久化"><a href="#配置持久化" class="headerlink" title="配置持久化"></a>配置持久化</h3><ol>
 <li><p>宿主机创建如下文件夹</p>
  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd ~/dev/docker_volume/elk-data</span><br><span class="line">mkdir -p kibana/config</span><br><span class="line">mkdir -p logstash/config</span><br></pre></td></tr></table></figure>
 </li>
@@ -372,7 +372,7 @@
 </li>
 </ol>
 <h2 id="启动并测试ELK"><a href="#启动并测试ELK" class="headerlink" title="启动并测试ELK"></a>启动并测试ELK</h2><h3 id="启动ELK"><a href="#启动ELK" class="headerlink" title="启动ELK"></a>启动ELK</h3>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker run -tid -p 5601:5601 -p 5044:5044 -p 9200:9200 -p 9300:9300 \</span><br><span class="line">   -v /Users/summer/dev/docker_volume/elk-data/kibana/config/kibana.yml:/opt/kibana/config/kibana.yml \</span><br><span class="line">   -v /Users/summer/dev/docker_volume/elk-data:/var/lib/elasticsearch \</span><br><span class="line">   -v /Users/summer/dev/docker_volume/elk-data/logstash/config:/opt/logstash/config \</span><br><span class="line">   --name elk sebp/elk:792</span><br></pre></td></tr></table></figure>
-<h3 id="查看运行日志"><a href="#查看运行日志" class="headerlink" title="查看运行日志"></a>查看运行日志</h3>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker logs -f elk --tail=50</span><br></pre></td></tr></table></figure>
+<h3 id="查看运行日志"><a href="#查看运行日志" class="headerlink" title="查看运行日志"></a>查看运行日志</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker logs -f elk --tail=50</span><br></pre></td></tr></table></figure>
 <ul>
 <li><p>QA.1 Native controller process has stopped - no new native processes can be started 错误</p>
 <p>如果日志显示如上错误，则放大 Docker 可用内存。<br>  详见 <a href="https://github.com/elastic/elasticsearch/issues/25067" target="_blank" rel="noopener">es crashes with “Native controller process has stopped - no new native processes can be started”</a></p>
