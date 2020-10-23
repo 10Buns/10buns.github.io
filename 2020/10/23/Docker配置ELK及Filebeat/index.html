@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon.png?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Docker,ELK,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="10buns" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="[TOC] 配置 elk 环境是为了方便本地测试使用，所以寻求简化配置，因此采用 sebp/elk 镜像。 安装ELK下载镜像1docker pull sebp/elk:792 配置持久化 宿主机创建如下文件夹  123cd ~/dev/docker_volume/elk-datamkdir -p kibana/configmkdir -p logstash/config  启动容器并copy配置">
+<meta name="keywords" content="Docker,ELK">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker配置ELK及Filebeat">
+<meta property="og:url" content="http://10buns.cn/2020/10/23/Docker配置ELK及Filebeat/index.html">
+<meta property="og:site_name" content="10buns">
+<meta property="og:description" content="[TOC] 配置 elk 环境是为了方便本地测试使用，所以寻求简化配置，因此采用 sebp/elk 镜像。 安装ELK下载镜像1docker pull sebp/elk:792 配置持久化 宿主机创建如下文件夹  123cd ~/dev/docker_volume/elk-datamkdir -p kibana/configmkdir -p logstash/config  启动容器并copy配置">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-10-23T04:06:16.280Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Docker配置ELK及Filebeat">
+<meta name="twitter:description" content="[TOC] 配置 elk 环境是为了方便本地测试使用，所以寻求简化配置，因此采用 sebp/elk 镜像。 安装ELK下载镜像1docker pull sebp/elk:792 配置持久化 宿主机创建如下文件夹  123cd ~/dev/docker_volume/elk-datamkdir -p kibana/configmkdir -p logstash/config  启动容器并copy配置">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://10buns.cn/2020/10/23/Docker配置ELK及Filebeat/">
+
+
+
+
+
+  <title>Docker配置ELK及Filebeat | 10buns</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c873067502e43c16757b0901e5bb26c2";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">10buns</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://10buns.cn/2020/10/23/Docker配置ELK及Filebeat/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="10buns">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="10buns">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Docker配置ELK及Filebeat</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-10-23T11:42:23+08:00">
+                2020-10-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>  阅读数
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>[TOC]</p>
+<p>配置 elk 环境是为了方便本地测试使用，所以寻求简化配置，因此采用 <code>sebp/elk</code> 镜像。</p>
+<h2 id="安装ELK"><a href="#安装ELK" class="headerlink" title="安装ELK"></a>安装ELK</h2><h3 id="下载镜像"><a href="#下载镜像" class="headerlink" title="下载镜像"></a>下载镜像</h3><pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull sebp/elk:792</span><br></pre></td></tr></table></figure>
+</code></pre><h3 id="配置持久化"><a href="#配置持久化" class="headerlink" title="配置持久化"></a>配置持久化</h3><ol>
+<li><p>宿主机创建如下文件夹</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd ~/dev/docker_volume/elk-data</span><br><span class="line">mkdir -p kibana/config</span><br><span class="line">mkdir -p logstash/config</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动容器并copy配置至<code>步骤1</code>的文件夹内</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker run -tid --name elk sebp/elk:792</span><br><span class="line">docker cp -a elk:/opt/kibana/config/kibana.yml ~/dev/docker_volume/elk-data/kibana/config/</span><br><span class="line">docker cp -a elk:/opt/logstash/config ~/dev/docker_volume/elk-data/logstash/config</span><br><span class="line">docker rm -f elk #删除容器</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="修改-ELK-配置"><a href="#修改-ELK-配置" class="headerlink" title="修改 ELK 配置"></a>修改 ELK 配置</h3><ol>
+<li><p>修改 logstash 的 <code>pilelines.yml</code></p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- pipeline.id: main</span><br><span class="line">  #path.config: &quot;/etc/logstash/conf.d/*.conf&quot;</span><br><span class="line">  path.config: &quot;/opt/logstash/config/*.conf&quot;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改 logstash 的 *.conf</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">input &#123;</span><br><span class="line">  beats &#123;</span><br><span class="line">    port =&gt; 5044</span><br><span class="line">    ssl =&gt; false</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">output &#123;</span><br><span class="line">  elasticsearch &#123;</span><br><span class="line">    hosts =&gt; [&quot;http://127.0.0.1:9200&quot;]</span><br><span class="line">    index =&gt; &quot;%&#123;[@metadata][beat]&#125;-%&#123;[@metadata][version]&#125;-%&#123;+YYYY.MM.dd&#125;&quot;</span><br><span class="line">    #user =&gt; &quot;elastic&quot;</span><br><span class="line">    #password =&gt; &quot;changeme&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol start="3">
+<li><p>修改 kibana 支持中文</p>
+<p>在 <code>kibana.yml</code> 追加 i18n.locale: “zh-CN”</p>
+</li>
+</ol>
+<p>##启动并测试 ELK</p>
+<h3 id="启动-ELK"><a href="#启动-ELK" class="headerlink" title="启动 ELK"></a>启动 ELK</h3>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">  docker run -tid -p 5601:5601 -p 5044:5044 -p 9200:9200 -p 9300:9300 \</span><br><span class="line">     -v /Users/summer/dev/docker_volume/elk-data/kibana/config/kibana.yml:/opt/kibana/config/kibana.yml \</span><br><span class="line">     -v /Users/summer/dev/docker_volume/elk-data:/var/lib/elasticsearch \</span><br><span class="line">     -v /Users/summer/dev/docker_volume/elk-data/logstash/config:/opt/logstash/config \</span><br><span class="line">     --name elk sebp/elk:792</span><br><span class="line">  ```   </span><br><span class="line">  </span><br><span class="line">### 查看运行日志</span><br></pre></td></tr></table></figure>
+<p>  docker logs -f elk –tail=50<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">  </span><br><span class="line">* QA.1 Native controller process has stopped - no new native processes can be started 错误</span><br><span class="line">  </span><br><span class="line">  如果日志显示如上错误，则放大 Docker 可用内存。</span><br><span class="line">    详见 [es crashes with &quot;Native controller process has stopped - no new native processes can be started&quot;](https://github.com/elastic/elasticsearch/issues/25067)</span><br><span class="line">  </span><br><span class="line">### 测试</span><br><span class="line"></span><br><span class="line">访问如下地址进行访问</span><br><span class="line">    </span><br><span class="line">**ES**</span><br><span class="line">http://127.0.0.1:9200</span><br><span class="line">http://127.0.0.1:9200/_search?pretty</span><br><span class="line">    </span><br><span class="line">**Kibana**</span><br><span class="line">http://127.0.0.1:5601</span><br><span class="line"></span><br><span class="line">## 使用Filebeat采集日志</span><br><span class="line"></span><br><span class="line">### 安装配置Filebeat</span><br><span class="line"></span><br><span class="line">&gt; 注意 elk 与 filebeat 版本务必保持一致</span><br></pre></td></tr></table></figure></p>
+<p>docker pull elastic/filebeat:7.9.2<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 配置日志采集</span><br><span class="line"></span><br><span class="line">在 `elk-data` 创建 `filebeat/config/filebeat.yml`，并配置如下</span><br></pre></td></tr></table></figure></p>
+<p>output:<br>  logstash:<br>    enabled: true<br>    hosts:</p>
+<pre><code>  - 172.17.0.1:5044 #宿主机IP
+timeout: 15
+</code></pre><p>filebeat:<br>  inputs:<br>    -<br>      paths:</p>
+<pre><code>    - /var/log/syslog
+    - /var/log/auth.log
+  document_type: syslog
+-
+  paths:
+    - &quot;/logs/*.log&quot;
+  fields_under_root: true
+  fields:
+    type: app-log
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 启动 Filebeat</span><br></pre></td></tr></table></figure>
+<p>docker run –log-driver json-file –log-opt max-size=100m<br>    –log-opt max-file=2 \<br>    –name filebeat –user=root -d  \<br>    -v /Users/summer/logs/:/logs/ \<br>    -v /Users/summer/dev/docker_volume/elk-data/filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml \<br>    elastic/filebeat:7.9.2<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 观察日志采集</span><br></pre></td></tr></table></figure></p>
+<p>docker logs -f filebeat –tail=100<br><code>`</code></p>
+<h2 id="搜索查询日志"><a href="#搜索查询日志" class="headerlink" title="搜索查询日志"></a>搜索查询日志</h2><p>访问 kibana，创建索引并搜索日志</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Docker/" rel="tag"><i class="fa fa-tag"></i> Docker</a>
+          
+            <a href="/tags/ELK/" rel="tag"><i class="fa fa-tag"></i> ELK</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/10/21/Homebrew-设置更新及配置源/" rel="next" title="Homebrew 设置更新及配置源">
+                <i class="fa fa-chevron-left"></i> Homebrew 设置更新及配置源
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="10buns">
+            
+              <p class="site-author-name" itemprop="name">10buns</p>
+              <p class="site-description motion-element" itemprop="description">Study hard and make progress every day</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">70</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/10Buns" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.weibo.com/loverichy" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-Weibo"></i>Weibo</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装ELK"><span class="nav-number">1.</span> <span class="nav-text">安装ELK</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载镜像"><span class="nav-number">1.1.</span> <span class="nav-text">下载镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置持久化"><span class="nav-number">1.2.</span> <span class="nav-text">配置持久化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改-ELK-配置"><span class="nav-number">1.3.</span> <span class="nav-text">修改 ELK 配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动-ELK"><span class="nav-number">1.4.</span> <span class="nav-text">启动 ELK</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搜索查询日志"><span class="nav-number">2.</span> <span class="nav-text">搜索查询日志</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">10buns</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人
+    </span>
+  
+
+  
+    <span class="site-pv">
+      总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
